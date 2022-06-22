@@ -1,0 +1,12 @@
+CREATE TABLE `adminlogs` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`PlayerName` VARCHAR(50) NOT NULL,
+	`PlayerHex` VARCHAR(100) NOT NULL,
+	`Module` VARCHAR(100) NOT NULL,
+	`Title` TEXT NOT NULL,
+	`MetaData` TEXT NULL,
+	`DTInserted` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8mb3_general_ci'
+;
