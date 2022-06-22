@@ -1,0 +1,49 @@
+.stocks-container {
+    height: 102%;
+    padding-top: 2%;
+}
+
+.stocks-entries-wrapper {
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+    width: 95%;
+}
+
+.stocks-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    border: none;
+}
+
+.stocks-header {
+    color: white;
+    background-color: #31465e;
+    border: none;
+}
+
+.stocks-body {
+    background-color: #31465e;
+    border: none;
+}
+
+.stocks-collection {
+    background-color: #242831;
+    color: white;
+}
+
+.stocks-collection .collection-item {
+    background-color: #242831;
+    border-bottom: 0px solid #e0e0e0
+}
+
+.stocks-button {
+    color: black;
+    background-color: #ec8e48;
+}
+
+.stocks-button:hover {
+    background-color: #eb8539;
+}

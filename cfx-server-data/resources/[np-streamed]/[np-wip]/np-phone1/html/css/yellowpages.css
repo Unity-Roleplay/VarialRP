@@ -1,0 +1,69 @@
+.yellow-pages-container {
+    height: 102%;
+    padding-top: 5px;
+}
+
+.yellow-pages-entries-wrapper {
+    overflow-y: auto;
+    height: 87.5%;
+    position: relative;
+}
+
+.yellow-pages-header {
+    position: relative;
+    margin-top: 2.5%;
+    margin-left: 65%;
+    height: 7.5%;
+    width: 100%;
+    display: flex;
+}
+
+.yellow-pages-entries {
+    margin: 0px;
+}
+
+.yellow-page-entry {
+    padding: 0px;
+}
+
+.yellow-page-body {
+    padding: 7px !important;
+    white-space: normal;
+    word-wrap: break-word;
+    font-size: 0.8em;
+}
+
+.yellow-page-poster {
+    padding: 7px !important;
+    font-size: 10px;
+}
+
+.yellow-page-button {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.yellow-page-button:hover {
+    color: rgb(200, 200, 200);
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.yellow-page-button:active {
+    color: rgb(190, 190, 190);
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.yellow-page-button:focus {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}

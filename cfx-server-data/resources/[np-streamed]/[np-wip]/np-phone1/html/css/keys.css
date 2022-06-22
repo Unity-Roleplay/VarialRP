@@ -1,0 +1,94 @@
+/* Keys */
+
+.keys-container {
+    height: 102%;
+    padding-top: 2%;
+}
+
+.keys-entries-header {
+    padding-top: 10px;
+    height: 25%;
+    border: none;
+}
+
+.keys-entries-wrapper {
+    overflow-y: auto;
+    height: 75%;
+    width: 95%;
+    position: relative;
+    border: none;
+}
+
+.keys-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    border: none;
+}
+
+.keys-header {
+    color: white;
+    background-color: #253955;
+    border: none;
+    height: 50%;
+}
+
+.keys-button {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.keys-button:hover {
+    color: rgb(200, 200, 200);
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.keys-button:active {
+    color: rgb(190, 190, 190);
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.keys-button:focus {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+/* Manage Keys */
+
+.manage-keys-container {
+    height: 102%;
+    padding-top: 2%;
+}
+
+.manage-keys-entries-header {
+    padding-top: 10px;
+    height: 20%;
+    border: none;
+}
+
+.manage-keys-entries-wrapper {
+    overflow-y: auto;
+    height: 75%;
+    width: 95%;
+    position: relative;
+    border: none;
+}
+
+.manage-keys-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    border-color: #1c1d1d;
+}
