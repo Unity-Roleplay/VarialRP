@@ -1,0 +1,18 @@
+RegisterServerEvent("dark-vaultrob:upper:particleserver")
+AddEventHandler("dark-vaultrob:upper:particleserver", function(method)
+    TriggerClientEvent("dark-vaultrob:upper:ptfxparticle", -1, method)
+end)
+
+RegisterServerEvent("dark-vaultrob:upper:particleserversec")
+AddEventHandler("dark-vaultrob:upper:particleserversec", function(method)
+    TriggerClientEvent("dark-vaultrob:upper:ptfxparticlesec", -1, method)
+end)
+RegisterServerEvent("dark-vaultrob:upper:particleserverthird")
+AddEventHandler("dark-vaultrob:upper:particleserverthird", function(method)
+    TriggerClientEvent("dark-vaultrob:upper:ptfxparticlethird", -1, method)
+end)
+
+RegisterServerEvent("dark-vaultrob:upper:openvault")
+AddEventHandler("dark-vaultrob:upper:openvault", function(method)
+    TriggerClientEvent("dark-vaultrob:upper:openvault_c", -1, method)
+end)
