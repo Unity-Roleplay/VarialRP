@@ -1,0 +1,243 @@
+
+
+
+.corridas {
+    padding: 0px 13px;
+}
+
+/* Racing App */
+
+.racing-container {
+    height: calc(100% + 17px);
+}
+
+.racing-entries-wrapper {
+    
+    height: 90%;
+    position: relative;
+}
+
+.racing-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.racing-entries-body {
+    padding: 5px !important;
+    margin-bottom:0px;
+    background-color: white;
+}
+
+.racing-footer {
+    position: relative;
+    bottom: 692px;
+    height: 0%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+/* Racing Create Container */
+
+.racing-create-container {
+    height: 100%;
+    padding-top: 5px;
+}
+
+.racing-create {
+    visibility: hidden;
+}
+
+.racing-create-entries-wrapper {
+    overflow-y: auto;
+    height: 90%;
+    position: relative;
+}
+
+.racing-entries-header {
+    height: 20%;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+
+.racing-create-footer {
+    position: relative;
+    bottom: 0px;
+    height: 10%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+/* Racing Start Container */
+
+.racing-start-container {
+    height: calc(100% + 5px);
+}
+
+.racing-start-entries-wrapper {
+    height: 75%;
+    padding: 50px;
+    position: relative;
+}
+
+.racing-start-footer {
+    position: relative;
+    bottom: 0px;
+    height: 10%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+/* Racing Highscore Container */
+
+.racing-highscore-container {
+    height: calc(100% + 5px);
+}
+
+.racing-highscore-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.racing-highscore-body {
+    padding: 5px !important;
+    margin-bottom:0px;
+    background-color: white;
+}
+
+.racing-highscore-entries-wrapper {
+    height: 90%;
+    position: relative;
+}
+
+
+
+
+
+.pendente-racing {
+    color: white;
+    margin-top: 99px;
+    margin-right: 182px;
+    position: absolute;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+    font-weight: 500;
+  }
+
+  .voltas-racing {
+    word-break: break-word;
+    color: white;
+    margin-left: -8px;
+    margin-top: 7px;
+    width: 169px;
+    font-size: 15px;
+    display: block;
+  }
+
+
+  .estado-racing {
+    display: block;
+    word-break: break-word;
+    color: white;
+    margin-left: -8px;
+    margin-top: 7px;
+    width: 169px;
+    font-size: 15px;
+  }
+
+  .longe-racing {
+    word-break: break-word;
+    color: white;
+    margin-left: 118px;
+    margin-top: 13px;
+    width: 169px;
+    font-size: 15px;
+    display: block
+  }
+
+  
+ 
+
+
+  .racing-start-timer {
+    word-break: break-word;
+    color: white;
+    margin-left: 118px;
+    margin-top: -17px;
+    width: 169px;
+    font-size: 15px;
+    display: block;
+  }
+
+  .name-racing{
+    word-break: break-word;
+    color: white;
+    margin-left: -8px;
+    margin-top: 0px;
+    width: 169px;
+    font-size: 15px;
+  }
+
+  #hovercorridas {
+    padding: 3px 5px;
+  }
+
+  .racing-text {
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.racing-text-current-lap {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.racing-text-best-lap {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.racing-text-total-time {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.race-teste {
+  margin-left: 178px;
+  margin-right: 11px;
+  margin-top: -39px;
+}
+
+
+#racing-hud {
+  position:absolute;
+  top: 39%;
+  left: 2%;
+  height: 21%;
+  letter-spacing:3px;
+  font-size: 24px;
+  display:none;
+  color:white;
+  letter-spacing: 1.1px;
+  font-weight: 400;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: all-petite-caps;
+  text-transform: none;
+  text-shadow: 1px 1px 1px rgba(1,1,1,1);
+  background-color: #0000006e;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  /* letter-spacing: inherit; */
+  /* font-weight: 500; */
+  border-radius: 3px;
+}   
+
+

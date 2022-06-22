@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Novel City UI</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" integrity="sha512-jQqzj2vHVxA/yCojT8pVZjKGOe9UmoYvnOuM/2sQ110vxiajBU+4WkyRs1ODMmd4AfntwUEV4J+VfM6DkfjLRg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/e4d3bd0601.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+
+    <!-- Eye -->
+    <div class="target-wrapper" style="display: none;">
+        <image class="interact-eye" id="eyeactive" src='images/eye_active.png' style="display: none;"></image>
+        <image class="interact-eye" id="eyenonactive" src='images/eye_notactive.png' style="display: none;"></image>
+        <div class="target-label-wrapper">
+            <div class="target-label"></div>
+        </div>
+    </div>
+    <!-- Eye -->
+
+    <!-- Interactions -->
+    <div id="container-interactions" style="display: none;">
+        <div id="box-interactions">
+            <div id="text-interactions">
+                Press E Garages
+            </div>
+        </div>
+    </div>
+    <!-- Interactions -->
+
+    <!-- Sniper Scope -->
+    <div class="scopecontainer" style="display: none;"></div>
+
+    <!-- TextBox -->
+    <div class="root-wrapper-textbox" style="display: none;">
+        <div class="main-wrapper-textbox">
+            <div class="body-textbox">
+            </div>
+            <div class="footer-textbox">
+                <button type="button" class="new-button-submit" id="textbox_submit">Submit</button>
+            </div>
+        </div>
+    </div>
+    <!-- TextBox -->
+
+    <!-- Context -->
+    <div class="container-context context-menu-right" style="display: none;">
+        <div class="buttons-context">
+        </div>
+    </div>
+    <!-- Context -->
+
+    <!-- ProgressBar -->
+    <div class="progress-container" style="display: none;">
+		<div class="progress-wrap progresstaskbar" data-progress-percent="100">
+			<div id="progress-bar" class="progresstaskbar"></div>
+		</div>
+		<div class="nicesexytext">Test</div>
+	</div>
+
+    <!-- Hud UI -->
+    <div class="hud-container">
+
+        <div class="radar-map" style="display: none;">
+            <center>
+                <div class="map-border"></div>
+            </center>
+        </div>
+
+        <svg class="radial-progress voice" width="50" height="50">
+            <circle class="voice-background" cx="26" cy="26" r="24"/>
+            <circle class="incomplete-voice" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#ffffff"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/voice.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress health" width="50" height="50" style="display: none;">
+            <circle class="health-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-health" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#3ac180"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/health.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress armor" width="50" height="50" style="display: none;">
+            <circle class="armor-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-armor" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#2a7ae0"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/armor.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress hunger" width="50" height="50" style="display: none;">
+            <circle class="hunger-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-food" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#ff6d00"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/hunger.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress thirst" width="50" height="50" style="display: none;">
+            <circle class="thirst-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-water" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#0277bd"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/thirst.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress oxygen" width="50" height="50" style="display: none;">
+            <circle class="oxygen-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-oxygen" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#909ba3"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/oxygen.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress stress" width="50" height="50" style="display: none;">
+            <circle class="stress-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-stress" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#c00710"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/stress.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress mana" width="50" height="50" style="display: none;">
+            <circle class="mana-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-mana" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#68e3ca"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/mana.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress harness" width="50" height="50" style="display: none;">
+            <circle class="harness-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-harnessDurability" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#be68e3"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/harness.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress nitrous" width="50" height="50" style="display: none;">
+            <circle class="nitrous-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-nitrous" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#e368ce"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/nitrous.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress pursuit" width="50" height="50" style="display: none;">
+            <circle class="pursuit-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete-pursuit" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="66" stroke-width="14" stroke="#ff6b81"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/pursuit.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress parachute" width="50" height="50" style="display: none;">
+            <circle class="parachute-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="0" stroke-width="14" stroke="black"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/parachute.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress dev" width="50" height="50" style="display: none;">
+            <circle class="dev-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="0" stroke-width="14" stroke="black"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/dev.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+
+        <svg class="radial-progress debug" width="50" height="50" style="display: none;">
+            <circle class="debug-background" cx="26" cy="26" r="24"></circle>
+            <circle class="incomplete" cx="26" cy="26" r="16" stroke-dasharray="100" stroke-dashoffset="0" stroke-width="14" stroke="black"/>
+            <circle class="inside-background" cx="26" cy="26" r="17" fill="rgb(42, 40, 40)"/>
+            <image href="images/debug.svg" height="18.4" width="18.4" x="17.2" y="15.2"></image>
+        </svg>
+    </div>
+    <!-- Hud UI -->
+
+    <!-- Compass -->
+    <div class="compass-wrapper flex-column hidden">
+        <div class="compass-indicator"></div>
+        <div class="compass-time"></div>
+        <div class="compas-area flex-row">
+            <div class="compass-area"></div>
+            <div class="compass-image">
+                <div id="compass" class="compass">
+                    <div class="compass-image">
+                        <div class="compass-image-main"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="compass-street"></div>
+        </div>
+    </div>
+    <!-- Compass -->
+    
+    <!-- Hud Vehicle -->
+
+    <!-- Status Hud -->
+    <div id="container-status" style="display: none;">
+        <div class="status-title"></div>
+        <div class="status-values"></div>
+    </div>
+
+    <!-- Status Hud -->
+	
+    <!-- Minigames Numbers -->
+    <div class="minigamenumbers hidden">
+        <div class="splashnumbers">
+            <div class="fa hacker">&#xf21b;</div>Input password as shown</div>
+        <div class="numbers hidden">012345678901</div>
+        <div class="inputnumbers hidden">
+            <div class="answernumbers">
+                <div class="answer-wrappernumbers">
+                    <label for="answernumbers">Password</label>
+                    <input id="answernumbers" type="text" autocomplete="off" autofocus="" value="" maxlength="20">
+                </div>
+            </div>
+            <div class="solution"></div>
+        </div>
+    </div>
+    <!-- Minigames Numbers -->
+
+    <!-- Minigame Captcha -->
+    <div class="minigamecaptcha hidden">
+        <div class="splashcaptcha">
+            <div class="icon">
+                <div class="fa hacker">&#xf21b;</div>
+            </div>
+            
+            <span class="message">Captcha Minigame</span>
+            <audio preload="auto">
+                <source src="./media/audio_splash.ogg" type="audio/ogg">
+            </audio>
+        </div>
+        <div class="groupscaptcha hidden">
+
+        </div>
+        <div class="inputs hidden">
+            <div class="timer">
+                <div class="progress active"><div class="progress-bar timer-progress"></div></div>
+                <audio preload="auto" loop>
+                    <source src="./media/audio_timer.ogg" type="audio/ogg">
+                </audio>
+            </div>
+            <div class="question">
+                ENTER THE <span class="quiz1">$nbsp;</span> AND <span class="quiz2">$nbsp;</span>
+            </div>
+            <div class="answer">
+                <div class="answer-wrapper">
+                    <label for="answer">Answer</label>
+                    <input id="answer" type="text" autocomplete="off" placeholder="answer" autofocus>
+                </div>
+            </div>
+            <div class="solution hidden">
+                Real numbers: <span class="real_numbers">&nbsp;</span><br>
+                Solution: <span class="solution_text">&nbsp;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minigame Thermite -->
+    <div class="minigame_memory hidden">
+        <div class="splash_memory">Remote Sequencing Required</div>
+        <div class="groups_memory hidden"></div>
+    </div>
+
+    <!-- Skillbar UI -->
+    <div class="skillbar" style="margin-top: 63vh;display: none;">
+        <canvas id="skillbarcanvas" width="300" height="300"></canvas>
+    </div>
+
+    <!-- Browser UI -->
+    <div class="browser-wrapper hidden"></div>
+
+    <!-- Badge UI -->
+    <div class="badge-app-wrapper hidden">
+        <div class="exterior-wrapper" >
+            <div class="interior-wrapper" >
+                <div class="row">
+                    <div class="column">
+                        <div class="left-column" >
+                            <div class="information-wrapper">
+                                <div class="information">
+                                    <div class="profile-image-holder">
+                                        <img src="./images/badge/testchar.png" alt="">
+                                    </div>
+                                    <div class="name-info">
+                                        <div class="banner">Los Santos PD</div>
+                                        <div class="name-info-wrap">
+                                            <p>Chief</p>
+                                            <p>Trexze</p>
+                                        </div>
+                                        <div class="callsign">
+                                            <p>#Novel City</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="right-column">
+                            <div class="badge-wrapper">
+                                <div class="badge"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Radio UI -->
+    <div class="radio-container hidden">
+        <div class="radio-image-container">
+            <div class="on-off-wrapper" ></div>
+            <div class="vol-up-wrapper"></div>
+            <div class="vol-down-wrapper"></div>
+            <div class="nopixel-tag">
+                <p>Novel City</p>
+            </div>
+            <div class="other-tag"></div>
+            <div class="text-wrapper">
+                <div class="text-input-wrapper">
+                    <input type="text" id="cradio" name="channel"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Showroom UI -->
+    <div class="showroom-wrapper hidden">
+        <div class="spinner-container hidden">
+            <div class="spinner-wrapper">
+                <div class="lds-spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="start-container">
+            <div class="ltr">
+                <div class="watermark">
+                    <p>Trexze</p>
+                </div>
+            </div>
+            <div class="rtl">
+                TC Script On Top
+            </div>
+        </div>
+        <div class="main">
+
+            <!-- Vehicle Information Selected -->
+            <div class="stats">
+                <div class="make-model selector-container">
+                    <div class="brand-container">
+                        <div class="veh-class">B</div>
+                        <div class="brand">Nagasaki</div>
+                        <div class="name">Chimera</div>
+                    </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="personalization"></div>
+                <div class="breakdowns">
+                    <div class="breakdown">
+                        <div class="name">ACCELERATION</div>
+                        <div class="value">
+                            <div class="bg">
+                                <div class="fill" style="width: 41%;"></div>
+                            </div>
+                            <div class="actual">4.1</div>
+                        </div>
+                    </div>
+
+                    <div class="breakdown">
+                        <div class="name">SPEED</div>
+                        <div class="value">
+                            <div class="bg">
+                                <div class="fill" style="width: 9%;"></div>
+                            </div>
+                            <div class="actual">0.9</div>
+                        </div>
+                    </div>
+
+                    <div class="breakdown">
+                        <div class="name">HANDLING</div>
+                        <div class="value">
+                            <div class="bg">
+                                <div class="fill" style="width: 87%;"></div>
+                            </div>
+                            <div class="actual">8.7</div>
+                        </div>
+                    </div>
+
+                    <div class="breakdown">
+                        <div class="name">BRAKING</div>
+                        <div class="value">
+                            <div class="bg">
+                                <div class="fill" style="width: 8%;"></div>
+                            </div>
+                            <div class="actual">0.8</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features hidden">
+                    <div class="feature">
+                        <div class="value" ></div>
+                        <div class="title">asasas</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Category Selector, price and Stock -->
+            <div class="selector-container">
+                <div class="class-selector">
+                    <div class="available-classes"></div>
+                    <div class="price">$165,000.00</div>
+                </div>
+                <div class="selector-spacer"></div>
+                <div class="selector">
+                    <div class="position-container" id="available-stock">6/64</div>
+                    <div class="mclass-selector">
+                        <div class="mclass  mclass-selected" onclick="vehmenuselect()">Motorcycles</div>
+                        <div class="mclass">Muscle</div>
+                        <div class="mclass">Off-Road</div>
+                        <div class="mclass">SUVs</div>
+                        <div class="mclass">Sports</div>
+                        <div class="mclass">Sports Classics</div>
+                        <div class="mclass">Super</div>
+                        <div class="mclass">Vans</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List Car In Category -->
+        <div class="showcase" role="listbox">
+            <div class="car-container car-container-selected">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+
+            <div class="car-container ">
+                <div class="top">$165,000.00</div>
+                <div class="middle"></div>
+                <div class="bottom">Chimera</div>
+            </div>
+        </div>
+
+        <!-- Btn Next and Prev -->
+        <div class="actions">
+            <div class="btn prev" >PREVIOUS</div>
+            <div class="btn next" >NEXT</div>
+        </div>
+    </div>
+
+    <div class="newspaper-wrapper hidden">
+        <div class="newspaper">
+            <div class="content">
+                <div class="header">
+                    <div class="alert-box">New Information</div>
+                    <div class="title">NEWSPAPPER</div>
+                </div>
+                <div class="subhead">
+                    <div class="taxes">
+                        <span>Edition: 1</span>
+                    </div>
+                    <div class="taxes">
+                        <span>Best Newspapper in the world</span>
+                    </div>
+                    <div class="taxes">
+                        <span>Current News</span>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column-dbl"></div>
+                    <div class="column" id="upcomingnews">
+                        <div class="headline">UPCOMING ELECTIONS</div>
+                        <div class="subheadline">Give Them Hope</div>
+                        
+                    </div>
+
+                    <div class="column" id="electionsnews">
+                        <div class="headline">RECENT ELECTIONS</div>
+                        <div class="subheadline">Destroy Their Hope</div>
+                        <div class="column-content">
+
+                            <div class="election">
+                                <span>Test This Election</span>
+                            </div>
+
+                            <div class="election">
+                                <span>Test This Election</span>
+                            </div>
+
+                            <div class="election">
+                                <span>Test This Election</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column" id="lockpicknews">
+                        <div class="headline">LOCKUPS</div>
+                        <div class="subheadline">PD Gang W's</div>
+                        <div class="column-content" id="contentlockups">
+                            <div class="lockup">
+                                <span>Test This Lockup</span>
+                            </div>
+                            <div class="lockup">
+                                <span>Test This Lockup</span>
+                            </div>
+                            <div class="lockup">
+                                <span>Test This Lockup</span>
+                            </div>
+                            <div class="lockup">
+                                <span>Test This Lockup</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column" id="drugnews">
+                        <div class="headline">Drugs</div>
+                        <div class="subheadline">by Chips Ahoy</div>
+                        <div class="column-content">
+                            Tsahalsjlakjkajsljsa
+                        </div>
+
+                        <div class="headline">Drugs</div>
+                        <div class="subheadline">by Chips Ahoy</div>
+                        <div class="column-content">
+                            Tsahalsjlakjkajsljsa
+                        </div>
+
+                        <div class="headline">Drugs</div>
+                        <div class="subheadline">by Chips Ahoy</div>
+                        <div class="column-content">
+                            Tsahalsjlakjkajsljsa
+                        </div>
+
+                        
+                    </div>
+
+                    
+                </div>
+
+                <div class="subhead">
+                    <div class="taxes">
+                        <span>RECENT TAX CHANGES: NO TAX-0%</span>
+                        <span>SERVICES-15%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hud-settings-wrapper" style="display: none;">
+        <div class="hud-settings">
+            <div class="setting-menu">
+                <div class="boxs-menu" id="hudmenu">
+                    <span class="title">Hud</span>
+                </div>
+                <div class="boxs-menu" id="phonemenu">
+                    <span class="title">Phone</span>
+                </div>
+                <div class="boxs-menu" id="radiomenu">
+                    <span class="title">Radio / RTC</span>
+                </div>
+            </div>
+            <div class="settings-panel">
+                <div class="setting-panel">
+                    <div class="hud-settings-menu" style="display: none;">
+                        <div class="column">
+                            <div class="header">Preset</div>
+                            <div class="row">
+                                <div class="left-menu" style="font-size: 0.8rem;">Number
+                                    <div class="preset-menu">
+                                        <select>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                                <div class="right-menu" style="left: 45%;">
+                                    <button type="button" class="button-save" id="setting_hud_save">Save</button>
+                                </div>
+                            </div>
+                            
+                            <p>Save settings for the selected preset and then use /hud [number] where number is the selected preset Currenly /hud 1</p>
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="column">
+                            <div class="header" style="margin-top: 0.5%;">Status</div>
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" id="showheath" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Health</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu hidden" id="valhealthmenu" style="left: 5.5%;">
+                                    <div class="column">
+                                        <p style="font-size: 0.8rem; padding-left: 2px; padding-top: 8px;">Hide when more than.. (100 = never hide)</p>
+                                        <div class="row">
+                                            <i class="fas fa-percent" style="position: absolute;"></i>
+                                            <input type="text" id="valhealth">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" id="showarmor" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Armor</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu hidden" id="valarmormenu" style="left: 5.5%;">
+                                    <div class="column">
+                                        <p style="font-size: 0.8rem; padding-left: 2px; padding-top: 8px;">Hide when more than.. (100 = never hide)</p>
+                                        <div class="row">
+                                            <i class="fas fa-percent" style="position: absolute;"></i>
+                                            <input type="text" id="valarmor">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" id="showfood" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Food</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu hidden" id="valfoodmenu" style="left: 5.5%;">
+                                    <div class="column">
+                                        <p style="font-size: 0.8rem; padding-left: 2px; padding-top: 8px;">Hide when more than.. (100 = never hide)</p>
+                                        <div class="row">
+                                            <i class="fas fa-percent" style="position: absolute;"></i>
+                                            <input type="text" id="valfood">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" id="showwater" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px;padding-top: 8px;">Show Water</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu hidden" id="valwatermenu" style="left: 5.5%;">
+                                    <div class="column">
+                                        <p style="font-size: 0.8rem; padding-left: 2px; padding-top: 8px;">Hide when more than.. (100 = never hide)</p>
+                                        <div class="row">
+                                            <i class="fas fa-percent" style="position: absolute;"></i>
+                                            <input type="text" id="valwater">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" id="showstress" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Stress when relevand</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu" style="left: 5%;">
+                                    <div class="row">
+                                        <input type="checkbox" id="showoxygen">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Oxygen when relevand</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="spacer"></div>
+
+                        <div class="column">
+                            <div class="header" style="margin-top: 0.5%;">Vehicle</div>
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" class="showminimap" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Minimap Enabled</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu" style="left: 5.5%;">
+                                    <div class="column">
+                                        <label>Speedometer FPS</label>
+                                        <div class="preset-menu" style="width: 350px;">
+                                            <select>
+                                                <option>15</option>
+                                                <option>30</option>
+                                                <option>60</option>
+                                                <option>120</option>
+                                            </select>
+                                        </div>
+                                        <span>The higher the FPS, the more demanding this is on your machine</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" class="showharness" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Harness durability</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="row">
+                                        <input type="checkbox" class="shownitrolevel" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Nitrous levels</p>
+                                    </div>
+                                </div>
+                                <div class="right-menu" style="left: 5%;">
+                                    <div class="row">
+                                        <input type="checkbox" class="shownitrotrail" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show Nitrous trail</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="column">
+                            <div class="header" style="margin-top: 0.5%;">Compass</div>
+                            <div class="row">
+                                <div class="left-menu">
+                                    <div class="column">
+                                        <div class="row" style="width: 110%;">
+                                            <input type="checkbox" class="showcompass" style="margin-bottom: 25px;">
+                                            <p style="padding-left: 2px;padding-top: 8px;">Enabled</p>
+                                        </div>
+                                        <p style="margin-bottom: 25px;">Disabling the compass entirely can vastly improve performance</p>
+                                    </div>
+
+                                    <div class="row">
+                                        <input type="checkbox" class="showtimecompass" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show the current time with compass</p>
+                                    </div>
+
+                                    <div class="row" style="width: 110%;">
+                                        <input type="checkbox" class="showstreetcompass" style="margin-bottom: 25px;">
+                                        <p style="padding-left: 2px; padding-top: 8px;">Show street names when in a vehicle</p>
+                                        <p style="margin-bottom: 25px;">Disabling the can help improve performance</p>
+                                    </div>
+
+                                </div>
+                                <div class="right-menu" style="left: 5.5%;">
+                                    <div class="column">
+                                        <label>Compass FPS</label>
+                                        <div class="preset-menu" style="width: 350px;">
+                                            <select>
+                                                <option>15</option>
+                                                <option>30</option>
+                                                <option>60</option>
+                                                <option>120</option>
+                                            </select>
+                                        </div>
+                                        <span>The higher the FPS, the more demanding this is on your machine</span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="column">
+                            <div class="header" style="margin-top: 0.5%;">Black Bars</div>
+
+                            <div class="row">
+                                <input type="checkbox" class="showblackbars" style="margin-bottom: 25px;">
+                                <p style="padding-left: 2px; padding-top: 8px;">Enabled</p>
+                            </div>
+
+                            <div class="column">
+                                <p style="padding-left: 2px; padding-top: 8px;">Percentage of screen</p>
+                                <div class="row">
+                                    <i class="fas fa-mask" style="position: absolute;"></i>
+                                    <input type="text" id="blackbars" style="width: 90%; padding: 10px;">
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="column">
+                            <div class="header" style="margin-top: 0.5%;">Crosshair</div>
+                            <div class="row">
+                                <input type="checkbox" class="showcrosshair" style="margin-bottom: 25px;">
+                                
+                                <p style="padding-left: 2px; padding-top: 8px;">Enabled</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="phone-setting-menu">
+
+                    </div>
+
+                    <div class="radio-setting-menu">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- Financials -->
+    <div class="financials-container" style="display: none;">
+        <div class="financials-wrapper">
+            <i class="fas fa-university"></i>
+            <div class="financials-cash">Cash: $31.00</div>
+            <div class="financials-title">Chafe Bank</div>
+            <h1 class="accounts-title">Accounts</h1>
+            <h1 class="transaction-title">Transaction History</h1>
+    
+            <div class="accounts-box">
+                <div class="account-text">Personal Account / 123456</div>
+                <div class="account-type">Default</div>
+                <div class="account-name">Chen Chen</div>
+                <div class="account-balance">$00,000.00</div>
+                <div class="account-balance-text">Available Balance</div>
+                
+                <button class="withdraw-button">WITHDRAW</button>
+                <button class="deposit-button">DEPOSIT</button>
+                <button class="transfer-button">TRANSFER</button>
+            </div>
+
+            <div class="transaction-box">
+                <div class="transaction-header"> 
+                    <h1>Personal Account / 123456 [GGGG]</h1>
+                </div>
+        
+                <div class="transaction-middle">
+                    <div class="transaction-money">$1000.00</div>
+                    <div class="transaction-name">Chen Chen</div>
+                    <div class="transaction-clock">a few seconds ago</div>
+                </div>
+        
+                <div class="transaction-middle-two">
+                    <div class="transaction-name-bottom">Chen Chen</div>
+                    <div class="transaction-bottom">
+                        <div class="transaction-message">Message</div>
+                        <div class="transaction-message-text">
+                            <h2>Trexze ChenG Kosta !</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="withdraw-box" style="display: none;">
+                <div class="withdraw-header">
+                    <h3>Personal Account / 123456</h3>
+                </div>
+        
+                <div class="withdraw-wrapper">
+                    <div class="withdraw-amount">
+                        <p class="financials-dolar">$</p>
+                        <label class="financials-label">Amount</label>
+                        <input class="financials input"></input>
+                    </div>
+        
+                    <div class="withdraw-comment">
+                        <p class="financials-comment">//</p>
+                        <label class="financials-label">Comment</label>
+                        <input class="financials input"></input>
+                    </div>
+                </div>
+                    <button class="withdraw-cancel">CANCEL</button>
+                    <button class="withdraw-confirm">WITHDRAW</button>
+                </div>
+            
+            <div class="deposit-box" style="display: none;">
+                <div class="deposit-header">
+                    <h3>Personal Account / 123456</h3>
+                </div>
+        
+                <div class="deposit-wrapper">
+                    <div class="deposit-amount">
+                        <p class="financials-dolar">$</p>
+                        <label class="financials-label">Amount</label>
+                        <input class="financials input"></input>
+                    </div>
+        
+                    <div class="deposit-comment">
+                        <p class="financials-comment">//</p>
+                        <label class="financials-label">Comment</label>
+                        <input class="financials input"></input>
+                    </div>
+                </div>
+                    <button class="deposit-cancel">CANCEL</button>
+                    <button class="deposit-confirm">DEPOSIT</button>
+                </div>
+
+            <div class="transfer-box">
+                <div class="transfer-header">
+                    <h3>Personal Account / 123456</h3>
+                </div>
+        
+                <div class="transfer-wrapper">
+                    <div class="transfer-amount">
+                        <p class="financials-dolar">$</p>
+                        <label class="financials-label">Amount</label>
+                        <input class="financials input"></input>
+                    </div>
+        
+                    <div class="transfer-comment">
+                        <p class="financials-comment">//</p>
+                        <label class="financials-label">Comment</label>
+                        <input class="financials input"></input>
+                    </div>
+
+                    <div class="transfer-state">
+                        <p class="financials-state">#</p>
+                        <label class="financials-label">State ID...</label>
+                        <input class="financials input"></input>
+                    </div>
+
+                    <div class="transfer-account">
+                        <p class="financials-account">#</p>
+                        <label class="financials-label">...or Account ID</label>
+                        <input class="financials input"></input>
+                    </div>
+
+                </div>
+                    <button class="transfer-cancel">CANCEL</button>
+                    <button class="transfer-confirm">TRANSFER</button>
+                </div>
+            </div>
+
+        </div> 
+    </div>
+    <!-- Financials -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+    <script defer src="./js/script.js"></script>
+</body>
+</html>

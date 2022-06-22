@@ -1,0 +1,72 @@
+body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  }
+  
+
+  
+  #display {
+    margin: 0px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 80px;
+    text-align: right;
+    padding-top: 110px;
+    padding-bottom: 10px;
+    margin-left: -10px;
+    font-weight: lighter;
+    width: 99%;
+  }
+  
+  #display:focus {
+    outline: none;
+  }
+  
+  ::placeholder {
+    color: white;
+  }
+  
+  .button {
+    font-size: 25px;
+    border: none;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 8px;
+  }
+  
+  .button:active {
+    background-color: #bbb;
+  }
+  
+  .button:focus {
+    outline:0;
+  }
+  
+  .operator {
+    background-color: #CD7702;
+    font-weight: light;
+    color:white;
+  }
+  
+  .number {
+    background-color: #333333;
+    color: white;
+    font-weight: light;
+  }
+  
+  .action {
+    background-color: #A8A8A8;
+  }
+  
+  #zero {
+    width: 135px;
+    border-radius: 28px;
+    text-align: left;
+    padding-left: 23px
+  }

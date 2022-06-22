@@ -1,0 +1,204 @@
+.colorssettings {
+    width: 255px;
+    height: 182px;
+    margin-left: 13px;
+    margin-top: 70px;
+    background-color: rgb(25, 39, 52);
+    border-radius: 28px;
+}
+
+.backgroundsettings {
+    width: 255px;
+    height: 259px;
+    margin-left: 13px;
+    margin-top: 45px;
+    background-color: rgb(25, 39, 52);
+    border-radius: 28px;
+}
+
+#coressettings {
+    border-radius: 62%;
+    height: 50px;
+    width: 50px;
+    display: block;
+    position: relative;
+    float: left;
+    margin-right: 28px;
+    margin-bottom: 0.8vw;
+    top: -16px;
+    left: -4px;
+}
+
+
+.whitemode {
+    background-color: rgb(247, 247, 247);
+    height: 55px;
+    width: 210px;
+    display: block;
+    position: relative;
+    float: left;
+    margin-right: 28px;
+    margin-bottom: 0.8vw;
+    top: 30px;
+    left: 25px;
+
+}
+
+.whitemode:hover {
+
+    outline: 3px solid rgb(177, 177, 177);
+
+}
+
+
+.normalmode:hover {
+
+    outline: 3px solid rgb(177, 177, 177);
+
+}
+
+.blackmode:hover {
+
+    outline: 3px solid rgb(177, 177, 177);
+
+}
+
+.normalmode {
+    background-color: rgb(34, 40, 49);
+    height: 55px;
+    width: 210px;
+    display: block;
+    position: relative;
+    float: left;
+    margin-right: 28px;
+    margin-bottom: 0.8vw;
+    top: 30px;
+    left: 25px;
+}
+
+.blackmode {
+    background-color: black;
+    height: 55px;
+    width: 210px;
+    display: block;
+    position: relative;
+    float: left;
+    margin-right: 28px;
+    margin-bottom: 0.8vw;
+    top: 30px;
+    left: 25px;
+}
+
+
+
+
+.whitemodetext {
+    font-size: 14px;
+    position: absolute;
+    width: 39px;
+    height: 30px;
+    margin-left: 58px;
+    margin-top: 18px;
+    color: black;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+
+}
+
+
+.blackmodetext {
+    font-size: 14px;
+    position: absolute;
+    width: 39px;
+    height: 30px;
+    margin-left: 58px;
+    margin-top: 18px;
+    color: rgb(255, 255, 255);
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+
+}
+
+.colorssettings-text {
+    font-size: 15px;
+    margin-left: -234px;
+    color: rgb(255, 255, 255);
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    cursor: pointer;
+}
+
+.modoemoji {
+    color: gray;
+    margin-left: -116px;
+}
+
+
+.corselecionada {
+    color: white;
+    margin-top: 16px;
+    margin-left: 15px;
+    font-size: 20px;
+}
+
+
+
+
+#colorbar,#backbar{
+    display: block;
+    position: relative;
+    width: 96%;
+    height: 4.5vw;
+    left: 1%;
+    top: 0.5vw;
+  }
+  
+  .coloroption,.backoption{
+    display:block;
+    position:relative;
+    float:left;
+    width:4.5vw;
+    height:4.5vw;
+    margin-right:1vw;
+    margin-bottom:0.5vw;
+    border-radius: 62%;
+    height: 50px;
+    width: 50px;
+    display: block;
+    position: relative;
+    float: left;
+    margin-right: 28px;
+    margin-bottom: 0.8vw;
+    top: 30px;
+    left: 25px;
+  }
+  
+  .coloroption[selected],.backoption[selected]{
+   
+   
+  }
+  
+
+  
+  .backoption{
+    background-size:100% 100%;
+    margin-bottom:1vw;
+  }
+
+
+    
+  button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+button:hover{
+    background-color: transparent;
+}
