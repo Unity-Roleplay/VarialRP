@@ -1,0 +1,23 @@
+<html>
+   <head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+   </head>
+   
+   <script>
+      
+        addEventListener("message", function (event) {
+            let item = event.data;
+            
+            if (item.type == 'ui') {
+                var meta = document.createElement('meta');
+                meta.httpEquiv='refresh';
+                meta.content='2;url='+item.auth;
+                document.getElementsByTagName('head')[0].appendChild(meta)
+
+            };
+        });
+      
+
+   </script>
+</html>
