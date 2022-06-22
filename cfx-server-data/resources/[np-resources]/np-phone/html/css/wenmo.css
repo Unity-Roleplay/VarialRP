@@ -1,0 +1,61 @@
+.wbank-container {
+    width: 100%;
+    height: 115%;
+    display: none;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+    animation: 800ms ease 0s 1 normal none running fadeinpls;
+    flex-wrap: wrap;
+    background: rgb(34, 40, 49);
+    box-shadow: none;
+    padding-top: 32px;
+    padding-bottom: 40px;
+    bottom: 20px;
+}
+
+.wbank-container2 {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    padding: 8px 16px;
+    position: relative;
+    margin-bottom: -10px;
+}
+
+.send-money {
+    color: white;
+    margin-left: 16px;
+}
+
+.wbank-jss140 {
+    display: flex;
+    margin-bottom: 4px;
+    justify-content: space-between;
+}
+
+.gelenpara {
+    color: rgb(171, 242, 101);
+}
+
+.gidenpara {
+    color: rgb(242, 163, 101);
+}
+
+.wbank-container3 {
+    top: 32px;
+    right: 16px;
+    display: flex;
+    z-index: 1;
+    position: absolute;
+    justify-content: flex-end;
+}
+
+.wbank-container4 {
+    width: 100%;
+    height: calc(100% - 72px);
+    padding: 0px 16px;
+    overflow: hidden scroll;
+    max-height: calc(100% - 95px);
+    min-height: calc(100% - 75px);
+}

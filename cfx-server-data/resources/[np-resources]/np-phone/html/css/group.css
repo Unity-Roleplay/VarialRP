@@ -1,0 +1,54 @@
+
+
+
+#group-pay {
+    padding: 12px 27px;
+    left: -52px;
+    border: solid 1px #5ce179;
+    color: white;
+    border-radius: 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+#group-addmoney {
+    padding: 12px 27px;
+    left: 12px;
+    border: solid 1px #e79f41;
+    color: white;
+    border-radius: 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+#group-pay:hover {
+   
+    background-color: #5ce179;
+  
+}
+
+#group-addmoney:hover {
+  
+    background-color:  #e79f41;
+    
+}
+
+#group-cards {
+    background-color: #35455a;
+    border-bottom: 1px solid white;
+}
+
+#group-money {
+    position: absolute;
+    text-align: right;
+    margin-left: 134px;
+    top: 47px;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+

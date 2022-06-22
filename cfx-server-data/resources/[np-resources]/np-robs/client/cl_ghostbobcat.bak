@@ -1,0 +1,705 @@
+
+---------------------------------------------------------------------------------
+--  
+--           Animations Below
+--
+---------------------------------------------------------------------------------
+
+function FirstDoorBobcatAnim() -- First Door Bag animation
+    RequestAnimDict("anim@heists@ornate_bank@thermal_charge")
+    RequestModel("hei_p_m_bag_var22_arm_s")
+    RequestNamedPtfxAsset("scr_ornate_heist")
+    while not HasAnimDictLoaded("anim@heists@ornate_bank@thermal_charge") and not HasModelLoaded("hei_p_m_bag_var22_arm_s") and not HasNamedPtfxAssetLoaded("scr_ornate_heist") do
+        Citizen.Wait(50)
+    end
+    local ped = PlayerPedId()
+
+    SetEntityHeading(ped, 170.52)
+    Citizen.Wait(100)
+    local rotx, roty, rotz = table.unpack(vec3(GetEntityRotation(PlayerPedId())))
+    local bagscene = NetworkCreateSynchronisedScene(882.1660, -2258.35, 32.461, rotx, roty, rotz + 1.1, 2, false, false, 1065353216, 0, 1.3)
+    local bag = CreateObject(GetHashKey("hei_p_m_bag_var22_arm_s"), 882.1660, -2258.35, 32.461,  true,  true, false)
+
+    SetEntityCollision(bag, false, true)
+    NetworkAddPedToSynchronisedScene(ped, bagscene, "anim@heists@ornate_bank@thermal_charge", "thermal_charge", 1.2, -4.0, 1, 16, 1148846080, 0)
+    NetworkAddEntityToSynchronisedScene(bag, bagscene, "anim@heists@ornate_bank@thermal_charge", "bag_thermal_charge", 4.0, -8.0, 1)
+    SetPedComponentVariation(ped, 5, 0, 0, 0)
+    NetworkStartSynchronisedScene(bagscene)
+    Citizen.Wait(1500)
+    local x, y, z = table.unpack(GetEntityCoords(ped))
+    local bomba = CreateObject(GetHashKey("hei_prop_heist_thermite"), x, y, z + 0.3,  true,  true, true)
+
+    SetEntityCollision(bomba, false, true)
+    AttachEntityToEntity(bomba, ped, GetPedBoneIndex(ped, 28422), 0, 0, 0, 0, 0, 200.0, true, true, false, true, 1, true)
+    Citizen.Wait(2000)
+    DeleteObject(bag)
+    SetPedComponentVariation(ped, 5, 45, 0, 0)
+    DetachEntity(bomba, 1, 1)
+    FreezeEntityPosition(bomba, true)
+    TriggerServerEvent("ghost:particleserver", method)
+    SetPtfxAssetNextCall("scr_ornate_heist")
+    local effect = StartParticleFxLoopedAtCoord("scr_heist_ornate_thermal_burn", ptfx, 0.0, 0.0, 0.0, 1.0, false, false, false, false)
+
+    NetworkStopSynchronisedScene(bagscene)
+    TaskPlayAnim(ped, "anim@heists@ornate_bank@thermal_charge", "cover_eyes_intro", 8.0, 8.0, 1000, 36, 1, 0, 0, 0)
+    TaskPlayAnim(ped, "anim@heists@ornate_bank@thermal_charge", "cover_eyes_loop", 8.0, 8.0, 3000, 49, 1, 0, 0, 0)
+    Citizen.Wait(5000)
+    ClearPedTasks(ped)
+    DeleteObject(bomba)
+    StopParticleFxLooped(effect, 0)
+    TriggerEvent("ghost:changeLocksFirstDoor")
+end
+
+function Number2DoorAnimation() -- Second Door Bag Animation
+    RequestAnimDict("anim@heists@ornate_bank@thermal_charge")
+    RequestModel("hei_p_m_bag_var22_arm_s")
+    RequestNamedPtfxAsset("scr_ornate_heist")
+    while not HasAnimDictLoaded("anim@heists@ornate_bank@thermal_charge") and not HasModelLoaded("hei_p_m_bag_var22_arm_s") and not HasNamedPtfxAssetLoaded("scr_ornate_heist") do
+        Citizen.Wait(50)
+    end
+    local ped = PlayerPedId()
+
+    SetEntityHeading(ped, 170.52)
+    Citizen.Wait(100)
+    local rotx, roty, rotz = table.unpack(vec3(GetEntityRotation(PlayerPedId())))
+    local bagscene = NetworkCreateSynchronisedScene(880.4080, -2264.50, 32.441, rotx, roty, rotz + 1.1, 2, false, false, 1065353216, 0, 1.3)
+    local bag = CreateObject(GetHashKey("hei_p_m_bag_var22_arm_s"), 880.4080, -2264.50, 32.441,  true,  true, false)
+
+    SetEntityCollision(bag, false, true)
+    NetworkAddPedToSynchronisedScene(ped, bagscene, "anim@heists@ornate_bank@thermal_charge", "thermal_charge", 1.2, -4.0, 1, 16, 1148846080, 0)
+    NetworkAddEntityToSynchronisedScene(bag, bagscene, "anim@heists@ornate_bank@thermal_charge", "bag_thermal_charge", 4.0, -8.0, 1)
+    SetPedComponentVariation(ped, 5, 0, 0, 0)
+    NetworkStartSynchronisedScene(bagscene)
+    Citizen.Wait(1500)
+    local x, y, z = table.unpack(GetEntityCoords(ped))
+    local bomba = CreateObject(GetHashKey("hei_prop_heist_thermite"), x, y, z + 0.4,  true,  true, true)
+
+    SetEntityCollision(bomba, false, true)
+    AttachEntityToEntity(bomba, ped, GetPedBoneIndex(ped, 28422), 0, 0, 0, 0, 0, 200.0, true, true, false, true, 1, true)
+    Citizen.Wait(2000)
+    DeleteObject(bag)
+    SetPedComponentVariation(ped, 5, 45, 0, 0)
+    DetachEntity(bomba, 1, 1)
+    FreezeEntityPosition(bomba, true)
+    TriggerServerEvent("ghost:particleserversec", method)
+    SetPtfxAssetNextCall("scr_ornate_heist")
+    local effect = StartParticleFxLoopedAtCoord("scr_heist_ornate_thermal_burn", ptfx, 0.0, 0.0, 0.0, 1.0, false, false, false, false)
+
+    NetworkStopSynchronisedScene(bagscene)
+    TaskPlayAnim(ped, "anim@heists@ornate_bank@thermal_charge", "cover_eyes_intro", 8.0, 8.0, 1000, 36, 1, 0, 0, 0)
+    TaskPlayAnim(ped, "anim@heists@ornate_bank@thermal_charge", "cover_eyes_loop", 8.0, 8.0, 3000, 49, 1, 0, 0, 0)
+    Citizen.Wait(5000)
+    ClearPedTasks(ped)
+    DeleteObject(bomba)
+    StopParticleFxLooped(effect, 0)
+end
+
+
+
+RegisterNetEvent("ghost:ptfxparticle")   --- Effects for thermite
+AddEventHandler("ghost:ptfxparticle", function(method)
+    local ptfx
+
+    RequestNamedPtfxAsset("scr_ornate_heist")
+    while not HasNamedPtfxAssetLoaded("scr_ornate_heist") do
+        Citizen.Wait(1)
+    end
+        ptfx = vector3(882.1320, -2257.34, 32.461)
+    SetPtfxAssetNextCall("scr_ornate_heist")
+    local effect = StartParticleFxLoopedAtCoord("scr_heist_ornate_thermal_burn", ptfx, 0.0, 0.0, 0.0, 1.0, false, false, false, false)
+    Citizen.Wait(4000)
+    StopParticleFxLooped(effect, 0)
+end)
+
+RegisterNetEvent("ghost:ptfxparticlesec")      --- Effects for thermite
+AddEventHandler("ghost:ptfxparticlesec", function(method)
+    local ptfx
+
+    RequestNamedPtfxAsset("scr_ornate_heist")
+    while not HasNamedPtfxAssetLoaded("scr_ornate_heist") do
+        Citizen.Wait(1)
+    end
+        ptfx = vector3(880.49, -2263.60, 32.441)
+    SetPtfxAssetNextCall("scr_ornate_heist")
+    local effect = StartParticleFxLoopedAtCoord("scr_heist_ornate_thermal_burn", ptfx, 0.0, 0.0, 0.0, 1.0, false, false, false, false)
+    Citizen.Wait(4000)
+    StopParticleFxLooped(effect, 0)
+end)
+
+
+
+
+---------------------------------------------------------------------------------
+--  
+--           Events Below
+--
+---------------------------------------------------------------------------------
+
+
+RegisterNetEvent('ghost:ThermiteFirstDoor') -- Very first door
+AddEventHandler('ghost:ThermiteFirstDoor', function()
+    local pCoords = GetEntityCoords(PlayerPedId())
+    local vDoor = GetClosestObjectOfType(pCoords["x"], pCoords["y"], pCoords["z"], 3.0, -1259801187, 0, 0, 0)
+    local thermite = exports["drp-inventory"]:hasEnoughOfItem("thermite",1,false)
+    if thermite then
+    if vDoor ~= 0 then
+	if exports["isPed"]:isPed("countpolice") >= 0 then
+    exports["memorygame"]:thermiteminigame(1, 3, 2, 1,
+    function()
+        TriggerEvent("inventory:removeItem","thermite",1)
+        AlertBobCat()
+        TriggerServerEvent('startcooldown:fixhopefully') 
+        FirstDoorBobcatAnim()
+    end,
+    function()
+        TriggerEvent('DoLongHudText', 'Failed.')
+        TriggerEvent("inventory:removeItem","thermite",1)
+        end)
+    else
+        TriggerEvent('DoLongHudText', 'Not enough cops!',2)
+    end
+end
+else
+    TriggerEvent('DoLongHudText', 'Missing Something !',2)
+end
+end)    
+
+RegisterNetEvent('ghost:secondoor') -- Second door thermite
+AddEventHandler('ghost:secondoor', function()
+    local pCoords = GetEntityCoords(PlayerPedId())
+    local vDoor = GetClosestObjectOfType(pCoords["x"], pCoords["y"], pCoords["z"], 3.0, -551608542, 0, 0, 0)
+    local thermite = exports["drp-inventory"]:hasEnoughOfItem("thermite",1,false)
+    if thermite then
+    if vDoor ~=        0 then
+    exports["memorygame"]:thermiteminigame(1, 4, 2, 6,
+    function() 
+        TriggerEvent("ghost:unlockSecondDoor")
+        TriggerEvent("inventory:removeItem","thermite",1)
+    end,
+    function()
+        TriggerEvent('DoLongHudText', 'Failed.')
+        TriggerEvent("inventory:removeItem","thermite",1)
+    end)
+
+end
+else
+TriggerEvent('DoLongHudText', 'Missing Something !',2)
+end
+end)
+
+RegisterNetEvent('ghost:keypad') -- third set of doors
+AddEventHandler('ghost:keypad', function()
+    local pCoords = GetEntityCoords(PlayerPedId())
+    local ped = PlayerPedId()
+            if exports['drp-inventory']:hasEnoughOfItem('securitycard', 1) then
+                --AlertBobCat()
+                TriggerEvent("inventory:removeItem","securitycard", 1)
+                FreezeEntityPosition(ped, true)
+                RequestAnimDict("anim@amb@business@meth@meth_monitoring_cooking@monitoring@")
+                while not HasAnimDictLoaded("anim@amb@business@meth@meth_monitoring_cooking@monitoring@") do Citizen.Wait(0) end
+                TaskPlayAnim(ped, "anim@amb@business@meth@meth_monitoring_cooking@monitoring@", "look_around_v5_monitor", 8.0, 8.0, 1.0, 48, -1, 0, 0, 0)
+                local finished = exports["drp-taskbar"]:taskBar(10000,"Pressing Buttons...",false,true)
+                if finished == 100 then
+                FreezeEntityPosition(ped, false)
+                TriggerEvent("DoLongHudText", "Access Granted")
+				TriggerEvent("ghost:pedicreatele")
+                TriggerServerEvent('drp-doors:change-lock-state', 271, false) 
+                TriggerServerEvent('drp-doors:change-lock-state', 272, false)
+                end
+            else
+                TriggerEvent('DoLongHudText', 'Access Denied !',2)
+            end
+    end)
+
+
+---------------------------------------------------------------------------------
+--  
+--           Door states n shit Below
+--
+---------------------------------------------------------------------------------
+RegisterNetEvent('ghost:unlockSecondDoor')
+AddEventHandler('ghost:unlockSecondDoor', function()
+	Number2DoorAnimation()
+	TriggerServerEvent('drp-doors:change-lock-state', 270, false)
+end)
+
+
+RegisterNetEvent('ghost:changeLocksFirstDoor') 
+AddEventHandler('ghost:changeLocksFirstDoor', function()
+    TriggerServerEvent('drp-doors:change-lock-state', 269, false) --  Door on left  fuck locks 
+    TriggerServerEvent('drp-doors:change-lock-state', 268, false) --  Door on right
+end)
+
+RegisterNetEvent('ghost:changeseconddoorlocks') -- Second Door 
+AddEventHandler('ghost:changeseconddoorlocks', function()
+	TriggerServerEvent('drp-doors:change-lock-state', 272, false)
+end)
+
+
+
+    function AlertBobCat()
+        local street1 = GetStreetAndZone()
+        local gender = IsPedMale(PlayerPedId())
+        local plyPos = GetEntityCoords(PlayerPedId(), true)
+
+      
+        local dispatchCode = "10-90A"
+
+      
+        TriggerServerEvent('dispatch:svNotify', {
+          dispatchCode = dispatchCode,
+          firstStreet = street1,
+          gender = gender,
+
+          isImportant = true,
+              priority = 3,
+          dispatchMessage = "Robbery Reported At Bobcat Security",
+          recipientList = {
+            police = "police"
+          },
+          origin = {
+            x = plyPos.x,
+            y = plyPos.y,
+            z = plyPos.z
+          }
+        })
+      
+        TriggerEvent('drp-dispatch:dispatchBobcat')
+--        Wait(math.random(5000,15000))
+
+      end
+
+
+    
+function GetStreetAndZone()
+    local plyPos = GetEntityCoords(PlayerPedId(),  true)
+    local s1, s2 = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, plyPos.x, plyPos.y, plyPos.z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
+    local street1 = GetStreetNameFromHashKey(s1)
+    local street2 = GetStreetNameFromHashKey(s2)
+    zone = tostring(GetNameOfZone(plyPos.x, plyPos.y, plyPos.z))
+    local playerStreetsLocation = GetLabelText(zone)
+    local street = street1 .. ", " .. playerStreetsLocation
+    return street
+end
+
+RegisterNetEvent('ghost:createCrates')
+AddEventHandler('ghost:createCrates', function(toggle)
+    if toggle == true then
+     weaponbox = CreateObject(GetHashKey("ex_prop_crate_ammo_sc"), 888.0774, -2287.33, 31.441, true,  true, true)
+    CreateObject(weaponbox)
+    SetEntityHeading(weaponbox, 176.02)
+    FreezeEntityPosition(weaponbox, true)
+
+     weaponbox4 = CreateObject(GetHashKey("ex_prop_crate_ammo_bc"), 881.4557, -2282.61, 31.441, true,  true, true)
+    CreateObject(weaponbox4)
+    SetEntityHeading(weaponbox4, 52.02)
+    FreezeEntityPosition(weaponbox4, true)
+
+    elseif toggle == false then
+        DeleteObject(weaponbox)
+        DeleteObject(weaponbox4)
+        DeleteObject(weaponbox3)
+    end
+end)
+
+
+function CreatenBrakeCrates()
+    local ped = PlayerPedId()
+
+    TriggerEvent('ghost:CleanClientVaultD')
+    TriggerEvent("ghost:createCrates" ,true)
+
+    TriggerEvent('DoLongHudText', 'The crates will be destroyed in 5 minutes be fast.. ' ,ped)
+    Citizen.Trace("Crates Spawned :  Sucess")
+    Citizen.Wait(240000) -- 4 mins 
+    TriggerEvent('DoLongHudText', 'The crates will be destroyed in 1 minute' ,ped)
+    Citizen.Wait(60000) -- 1 min warning then delete 
+    TriggerEvent("ghost:createCrates" ,false)
+    Citizen.Trace("Crates Remove :  Timer Complete Removed")
+  end
+
+RegisterNetEvent('ghost:changeVaultDoorState')
+AddEventHandler('ghost:changeVaultDoorState', function()
+	local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
+	ActivateInteriorEntitySet(interiorid, "np_prolog_broken")
+    Citizen.Trace("ActivateInterior : Broken ")
+	RemoveIpl(interiorid, "np_prolog_broken")
+	DeactivateInteriorEntitySet(interiorid, "np_prolog_clean")
+	RefreshInterior(interiorid)
+end)
+
+
+local searched = true
+local searchedSecond = true
+
+RegisterNetEvent('ghost:searchCrate') -- Searching crate 
+AddEventHandler('ghost:searchCrate', function()
+    if searchedSecond == true then
+    TriggerServerEvent( 'mission:completed', math.random(900, 6783))
+    TriggerServerEvent('drp-bobcat:reward')
+    searchedSecond = false
+    if math.random(4) == 3 then
+		TriggerEvent("player:receiveItem", "1593441988",math.random(1,1)) 
+        TriggerEvent("player:receiveItem", "band",math.random(10,20))
+        TriggerEvent("player:receiveItem", "ifak",math.random(10,20))
+    end
+    searchedSecond = false
+    else
+        TriggerEvent('DoLongHudText', 'Already Searched !',2)
+    end
+end)
+
+RegisterNetEvent('ghost:searchCrate2') -- Searching crate 
+AddEventHandler('ghost:searchCrate2', function()
+    if searched == true then
+        searched = false
+        TriggerServerEvent('drp-bobcat:reward')
+        if math.random(4) == 3 then
+            TriggerEvent("player:receiveItem", "handcuffs",math.random(2,4)) 
+            TriggerEvent("player:receiveItem", "oxy",math.random(10,20)) -- tec 9
+            TriggerEvent("player:receiveItem", "band",math.random(10,25))
+            searched = false
+        end
+else
+    TriggerEvent('DoLongHudText', 'Already Searched !',2)
+end
+end)
+
+RegisterNetEvent('ghost:CleanClientVaultD')
+AddEventHandler('ghost:CleanClientVaultD', function()
+	local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
+	ActivateInteriorEntitySet(interiorid, "np_prolog_clean")
+	RemoveIpl(interiorid, "np_prolog_broken")
+	DeactivateInteriorEntitySet(interiorid, "np_prolog_broken")
+	RefreshInterior(interiorid)
+end)
+
+
+function loadAnimDict( dict )
+    while ( not HasAnimDictLoaded( dict ) ) do
+        RequestAnimDict( dict )
+        Citizen.Wait( 5 )
+    end
+end
+
+Citizen.CreateThread(function()
+    local hash = GetHashKey("s_m_m_armoured_01")
+    while not HasModelLoaded(hash) do
+    RequestModel(hash)
+    Wait(20)
+end
+    gaurdped = CreatePed("PED_TYPE_CIVFEMALE", "s_m_m_armoured_01", 870.1760, -2288.20, 31.441, 175.21, false, false)
+    SetBlockingOfNonTemporaryEvents(gaurdped, true)
+    SetPedDiesWhenInjured(gaurdped, false)
+    SetPedCanPlayAmbientAnims(gaurdped, true)
+    SetPedCanRagdollFromPlayerImpact(gaurdped, false)
+	SetEntityInvincible(gaurdped, false)
+    local animLength = GetAnimDuration("random@arrests@busted", "idle_a")
+    TaskPlayAnim(gaurdped, "random@arrests@busted", "idle_a", 1.0, 4.0, animLength, 2, 0, 0, 0, 0)
+end)
+
+RegisterNetEvent('ghost:pedblowtheDoorStart')
+AddEventHandler('ghost:pedblowtheDoorStart', function()
+	ClearPedTasks(gaurdped)
+	TaskGoStraightToCoord(gaurdped, 869.2078, -2292.60, 32.441, 150.0, -1, 265.61, 0)
+	Citizen.Wait(5000)
+	TaskGoStraightToCoord(gaurdped, 893.3309, -2294.90, 32.441, 150.0, -1, 350.61, 0)
+	Citizen.Wait(13000)
+	TriggerEvent('ghost:ghostpedStage3')
+end)
+
+
+RegisterNetEvent('ghost:ghostpedStage3')
+AddEventHandler('ghost:ghostpedStage3', function()
+	TaskGoStraightToCoord(gaurdped, 894.6337, -2284.97, 32.441, 150.0, -1, 82.56, 0)
+	Citizen.Wait(5500)
+
+    GiveWeaponToPed(gaurdped, 741814745, 1, false, true)
+    SetCurrentPedWeapon(gaurdped, 741814745, true)
+    Citizen.Wait(1000)
+    ClearPedTasksImmediately(gaurdped)
+    TaskThrowProjectile(gaurdped, vector3(890.518, -2285.068, 31.62272))
+	Citizen.Wait(1000)
+    GhostBoom()
+end)
+
+         
+RegisterNetEvent('ghost:resetvault')
+AddEventHandler('ghost:resetvault', function()
+    TriggerServerEvent('ghost:serverResetDoorVault')
+    end)
+
+
+RegisterNetEvent('ghost:createenemybot')
+AddEventHandler('ghost:createenemybot', function()
+    RequestModel(-1275859404)
+    RequestModel(2047212121)
+    RequestModel(1349953339)
+
+	AddRelationshipGroup('ghost')
+
+		bobcatped1 = CreatePed(30, -1275859404, 878.0915, -2297.23, 30.467, 30.568, 88.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped1, false)
+        SetEntityMaxHealth(bobcatped1, 2000)
+        SetEntityHealth(bobcatped1, 2000)
+        SetPedArmour(bobcatped1, 1000)      
+		SetPedAsEnemy(bobcatped1, true)
+        SetCanAttackFriendly(bobcatped1, false, true)
+        SetPedCombatMovement(bobcatped1, 3)
+        SetPedCombatRange(bobcatped1, 2)
+        SetPedCombatAttributes(bobcatped1, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped1, 'ghost')
+		GiveWeaponToPed(bobcatped1, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped1, false)
+        SetPedRandomComponentVariation(bobcatped1, true)
+        SetPedSeeingRange(bobcatped1, 150.0)
+        SetPedHearingRange(bobcatped1, 150.0)
+        SetPedAlertness(bobcatped1, 3)
+        TaskCombatPed(bobcatped1, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped1, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped1, false)
+		
+		bobcatped2 = CreatePed(30, -1275859404, 873.6958, -2296.59, 30.467, 360.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped2, false)
+        SetEntityMaxHealth(bobcatped2, 2000)
+        SetEntityHealth(bobcatped2, 2000)
+        SetPedArmour(bobcatped2, 1000)      
+		SetPedAsEnemy(bobcatped2, true)
+        SetCanAttackFriendly(bobcatped2, false, true)
+        SetPedCombatMovement(bobcatped2, 3)
+        SetPedCombatRange(bobcatped2, 2)
+        SetPedCombatAttributes(bobcatped2, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped2, 'ghost')
+		GiveWeaponToPed(bobcatped2, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped2, false)
+        SetPedRandomComponentVariation(bobcatped2, true)
+        SetPedSeeingRange(bobcatped2, 150.0)
+        SetPedHearingRange(bobcatped2, 150.0)
+        SetPedAlertness(bobcatped2, 3)
+		TaskCombatPed(bobcatped2, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped2, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped2, false)
+
+		bobcatped3 = CreatePed(30, -1275859404, 873.0935, -2292.35, 30.467, 350.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped3, false)
+        SetEntityMaxHealth(bobcatped3, 2000)
+        SetEntityHealth(bobcatped3, 2000)
+        SetPedArmour(bobcatped3, 1000)      
+		SetPedAsEnemy(bobcatped3, true)
+        SetCanAttackFriendly(bobcatped3, false, true)
+        SetPedCombatMovement(bobcatped3, 3)
+        SetPedCombatRange(bobcatped3, 2)
+        SetPedCombatAttributes(bobcatped3, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped3, 'ghost')
+		GiveWeaponToPed(bobcatped3, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped3, false)
+        SetPedRandomComponentVariation(bobcatped3, true)
+        SetPedSeeingRange(bobcatped3, 150.0)
+        SetPedHearingRange(bobcatped3, 150.0)
+        SetPedAlertness(bobcatped3, 3)
+		TaskCombatPed(bobcatped3, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped3, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped3, false)
+
+		bobcatped4 = CreatePed(30, 2047212121, 878.4496, -2291.53, 30.474, 350.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped4, false)
+        SetEntityMaxHealth(bobcatped4, 2000)
+        SetEntityHealth(bobcatped4, 2000)
+        SetPedArmour(bobcatped4, 1000)      
+		SetPedAsEnemy(bobcatped4, true)
+        SetCanAttackFriendly(bobcatped4, false, true)
+        SetPedCombatMovement(bobcatped4, 3)
+        SetPedCombatRange(bobcatped4, 2)
+        SetPedCombatAttributes(bobcatped4, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped4, 'ghost')
+		GiveWeaponToPed(bobcatped4, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped4, false)
+        SetPedRandomComponentVariation(bobcatped4, true)
+        SetPedSeeingRange(bobcatped4, 150.0)
+        SetPedHearingRange(bobcatped4, 150.0)
+        SetPedAlertness(bobcatped4, 3)
+		TaskCombatPed(bobcatped4, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped4, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped4, false)
+
+		bobcatped5 = CreatePed(30, 2047212121, 883.3175, -2294.66, 30.467, 300.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped5, false)
+        SetEntityMaxHealth(bobcatped5, 2000)
+        SetEntityHealth(bobcatped5, 2000)
+        SetPedArmour(bobcatped5, 1000)      
+		SetPedAsEnemy(bobcatped5, true)
+        SetCanAttackFriendly(bobcatped5, false, true)
+        SetPedCombatMovement(bobcatped5, 3)
+        SetPedCombatRange(bobcatped5, 2)
+        SetPedCombatAttributes(bobcatped5, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped5, 'ghost')
+		GiveWeaponToPed(bobcatped5, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped5, false)
+        SetPedRandomComponentVariation(bobcatped5, true)
+        SetPedSeeingRange(bobcatped5, 150.0)
+        SetPedHearingRange(bobcatped5, 150.0)
+        SetPedAlertness(bobcatped5, 3)
+		TaskCombatPed(bobcatped5, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped5, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped5, false)
+
+
+		bobcatped6 = CreatePed(30, 2047212121, 888.6503, -2294.50, 30.467, 266.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped6, false)
+        SetEntityMaxHealth(bobcatped6, 2000)
+        SetEntityHealth(bobcatped6, 2000)
+        SetPedArmour(bobcatped6, 1000)      
+		SetPedAsEnemy(bobcatped6, true)
+        SetCanAttackFriendly(bobcatped6, false, true)
+        SetPedCombatMovement(bobcatped6, 3)
+        SetPedCombatRange(bobcatped6, 2)
+        SetPedCombatAttributes(bobcatped6, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped6, 'ghost')
+		GiveWeaponToPed(bobcatped6, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped6, false)
+        SetPedRandomComponentVariation(bobcatped6, true)
+        SetPedSeeingRange(bobcatped6, 150.0)
+        SetPedHearingRange(bobcatped6, 150.0)
+        SetPedAlertness(bobcatped6, 3)
+		TaskCombatPed(bobcatped6, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped6, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped6, false)
+
+		bobcatped7 = CreatePed(30, 1349953339, 893.6617, -2294.54, 30.467, 298.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped7, false)
+        SetEntityMaxHealth(bobcatped7, 2000)
+        SetEntityHealth(bobcatped7, 2000)
+        SetPedArmour(bobcatped7, 1000)      
+		SetPedAsEnemy(bobcatped7, true)
+        SetCanAttackFriendly(bobcatped7, false, true)
+        SetPedCombatMovement(bobcatped7, 3)
+        SetPedCombatRange(bobcatped7, 2)
+        SetPedCombatAttributes(bobcatped7, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped7, 'ghost')
+		GiveWeaponToPed(bobcatped7, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped7, false)
+        SetPedRandomComponentVariation(bobcatped7, true)
+        SetPedSeeingRange(bobcatped7, 150.0)
+        SetPedHearingRange(bobcatped7, 150.0)
+        SetPedAlertness(bobcatped7, 3)
+		TaskCombatPed(bobcatped7, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped7, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped7, false)
+
+		bobcatped8 = CreatePed(30, 1349953339, 879.1893, 894.2161, -2290.80, 30.467, true, true)
+        SetPedSuffersCriticalHits(bobcatped8, false)
+        SetEntityMaxHealth(bobcatped8, 2000)
+        SetEntityHealth(bobcatped8, 2000)
+        SetPedArmour(bobcatped8, 1000)      
+		SetPedAsEnemy(bobcatped8, true)
+        SetCanAttackFriendly(bobcatped8, false, true)
+        SetPedCombatMovement(bobcatped8, 3)
+        SetPedCombatRange(bobcatped8, 2)
+        SetPedCombatAttributes(bobcatped8, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped8, 'ghost')
+		GiveWeaponToPed(bobcatped8, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped8, false)
+        SetPedRandomComponentVariation(bobcatped8, true)
+        SetPedSeeingRange(bobcatped8, 150.0)
+        SetPedHearingRange(bobcatped8, 150.0)
+        SetPedAlertness(bobcatped8, 3)
+		TaskCombatPed(bobcatped8, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped8, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped8, false)
+        
+        bobcatped9 = CreatePed(30, 1349953339, 879.1893, 891.4326, -2287.57, 30.492, true, true)
+        SetPedSuffersCriticalHits(bobcatped9, false)
+        SetEntityMaxHealth(bobcatped9, 2000)
+        SetEntityHealth(bobcatped9, 2000)
+        SetPedArmour(bobcatped9, 1000)      
+		SetPedAsEnemy(bobcatped9, true)
+        SetCanAttackFriendly(bobcatped9, false, true)
+        SetPedCombatMovement(bobcatped9, 3)
+        SetPedCombatRange(bobcatped9, 2)
+        SetPedCombatAttributes(bobcatped9, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped9, 'ghost')
+		GiveWeaponToPed(bobcatped9, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped9, false)
+        SetPedRandomComponentVariation(bobcatped9, true)
+        SetPedSeeingRange(bobcatped9, 150.0)
+        SetPedHearingRange(bobcatped9, 150.0)
+        SetPedAlertness(bobcatped9, 3)
+		TaskCombatPed(bobcatped9, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped9, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped9, false)
+
+        bobcatped10 = CreatePed(30, 1349953339, 893.5341, -2282.84, 30.508, 266.00, true, true)
+        SetPedSuffersCriticalHits(bobcatped10, false)
+        SetEntityMaxHealth(bobcatped10, 2000)
+        SetEntityHealth(bobcatped10, 2000)
+        SetPedArmour(bobcatped10, 1000)      
+		SetPedAsEnemy(bobcatped10, true)
+        SetCanAttackFriendly(bobcatped10, false, true)
+        SetPedCombatMovement(bobcatped10, 3)
+        SetPedCombatRange(bobcatped10, 2)
+        SetPedCombatAttributes(bobcatped10, 5000, 1)
+		SetPedRelationshipGroupHash(bobcatped10, 'ghost')
+		GiveWeaponToPed(bobcatped10, GetHashKey('WEAPON_CARBINERIFLE'), 9999, false, true)
+        SetPedDropsWeaponsWhenDead(bobcatped10, false)
+        SetPedRandomComponentVariation(bobcatped10, true)
+        SetPedSeeingRange(bobcatped10, 150.0)
+        SetPedHearingRange(bobcatped10, 150.0)
+        SetPedAlertness(bobcatped10, 3)
+		TaskCombatPed(bobcatped10, PlayerPedId(), 0, 16)
+		SetPedAccuracy(bobcatped10, 100)
+		SetPedDropsWeaponsWhenDead(bobcatped10, false)
+end)
+
+
+RegisterCommand("lolcreatele", function ()
+    TriggerEvent("ghost:createenemybot")
+end)
+
+RegisterNetEvent('ghost:pedicreatele') 
+AddEventHandler('ghost:pedicreatele', function()
+    TriggerEvent("ghost:createenemybot")
+end)
+
+function GhostBoom()
+	local ped = PlayerPedId()
+    local coords = vector3(889.5819, -2284.789, 32.44141)
+
+	RequestWeaponAsset(GetHashKey("WEAPON_RPG")) 
+    while not HasWeaponAssetLoaded(GetHashKey("WEAPON_RPG")) do
+        Wait(0)
+    end
+	ShootSingleBulletBetweenCoords( 
+		coords.x,
+        coords.y,
+        coords.z, 
+	    coords.x,
+        coords.y,
+        coords.z,  
+		500,
+		true,
+		GetHashKey("WEAPON_RPG"),
+		ped,
+		true,
+		true,
+		-1.0
+    )
+    TriggerServerEvent("ghost:serverchangeVaultDoorState")
+    CreatenBrakeCrates()
+	while true do 
+		Citizen.Wait(5)
+		StopFireInRange(coords.x,coords.y,coords.z, 300.0)
+	end
+end
+
+
+RegisterNetEvent('bobcat:fullrestart')
+AddEventHandler('bobcat:fullrestart', function()
+  TriggerEvent("ghost:resetvault") -- Resets back to orginal state unbroken
+  TriggerServerEvent("drp-doors:change-lock-state", 268, true)
+  TriggerServerEvent("drp-doors:change-lock-state", 269, true)
+  TriggerServerEvent('drp-doors:change-lock-state', 270, true) 
+  TriggerServerEvent('drp-doors:change-lock-state', 271, true)
+  TriggerServerEvent("drp-doors:change-lock-state", 272, true)
+  searched = true
+  searchedSecond = true
+end)

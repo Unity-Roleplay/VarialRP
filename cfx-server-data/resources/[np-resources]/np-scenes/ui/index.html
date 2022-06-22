@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./main.css" />
+	<script src="./main.js" defer></script>
+</head>
+
+<body>
+	<div class="root-wrapper">
+		<div class="main-wrapper">
+			<div class="header"><h1>Scenes<h1></div>
+			<div class="body">
+				<label for="usr">Text</label>
+				<input type="text" class="form-control" id="txtText"/>
+				<label for="usr">Colour</label>
+				<select id="optColour" class="form-control">
+					<option value="white" selected>White</option>
+					<option value="red">Red</option>
+					<option value="green">Green</option>
+					<option value="yellow">Yellow</option>
+					<option value="blue">Blue</option>
+					<option value="purple">Purple</option>
+					<option value="black">Black</option>
+				</select>
+				<label for="usr">Distance (0.1 - 10)</label>
+				<input type="text" class="form-control" id="txtDistance" value="4"/>
+				<label for="usr">Font</label>
+				<select id="optFont" class="form-control">
+					<option value="0" selected>Default</option>
+					<option value="1">Fancy</option>
+					<option value="2">Monospace</option>
+					<option value="4">Comprime</option>
+					<option value="7">GTA</option>
+				</select>
+				<label for="usr">White BG (Peek Only)</label>
+				<input type="checkbox" class="form-control" id="cbkPeekOnly"/>
+			</div>
+			<div class="footer"><button type="button" class="btn btn-success" id="submit">Submit</button></div>
+		</div>
+		<div class="background"></div>
+	</div>
+</body>
+
+</html>
