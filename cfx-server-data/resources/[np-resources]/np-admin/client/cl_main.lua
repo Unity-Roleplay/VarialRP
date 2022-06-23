@@ -29,6 +29,14 @@ function noclip()
     end
 end
 
+function openMenu()
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        if exports['np-admin']:DevMode() then
+            TriggerEvent('np-admin-AttemptOpen', true) 
+        end
+    end
+end
+
 RegisterCommand('tpm', function()
     if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
         TriggerEvent('Admin:Teleport:Marker')
@@ -36,8 +44,11 @@ RegisterCommand('tpm', function()
 end)
 
 Citizen.CreateThread(function()
-    exports["np-keybinds"]:registerKeyMapping("", "Admin", "No Clip", "+noclip", "-noclip", "F2")
+    exports["np-keybinds"]:registerKeyMapping("", "Admin", "No Clip (Devmode)", "+noclip", "-noclip", "")
     RegisterCommand('+noclip', noclip)
+
+    exports["np-keybinds"]:registerKeyMapping("", "Admin", "Open Menu (Devmode)", "+openmenu", "-noclip", "")
+    RegisterCommand('+openmenu', openMenu)
 end)
 
 -- [ Events ] --
