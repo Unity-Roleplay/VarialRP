@@ -155,5 +155,5 @@ RegisterCommand('+evan_shift_pursuit_mode', function()
 end)
 
 Citizen.CreateThread(function()
-    exports["np-binds"]:registerKeyMapping("", "Pursuit Modes", "Change Mode", "+evan_shift_pursuit_mode", "")
+    exports["np-keybinds"]:registerKeyMapping("", "Pursuit Modes", "Change Mode", "+evan_shift_pursuit_mode", "")
 end)
