@@ -2484,13 +2484,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2507,13 +2500,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2530,13 +2516,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2553,13 +2532,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2576,13 +2548,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2599,13 +2564,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2622,13 +2580,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2645,13 +2596,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
@@ -2668,13 +2612,6 @@ function bankList() {
                 <span class="new-badge">
                     <i class="" style="font-size: 13px; margin-left: 170px; margin-bottom: 140px;">Available</i>
                 </span>
-                <span class="nnew-badge">
-                    <i class="" style="font-size: 13px; margin-left: -60px; width: 100px; margin-top: 32px">Expires in:</i>
-                </span>
-                    <div class="collapsible-body garage-body">
-                    <div class="collapsible-body garage-body">
-                    <div class="row">
-                </div>
             </div>
         </li>
     `
