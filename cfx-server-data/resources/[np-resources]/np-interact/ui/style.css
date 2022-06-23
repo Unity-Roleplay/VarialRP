@@ -1,0 +1,35 @@
+.target-wrapper {
+    display: none;
+    user-select: none;
+}
+
+.target-label-wrapper {
+    padding-top: 0.5rem;
+    position: absolute;
+    right: 81vh;
+    top: 52vh;
+    margin-top: -13px;
+    width: 11vh;
+}
+
+.target-label {
+    list-style: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.7vh;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.7px;
+  
+    font-weight: bold;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
+    text-shadow: 1px 1px 1px rgba(1,1,1,1);
+    user-select: none;
+    white-space: nowrap;
+}
+
+.target-icon {
+    color: rgba(0, 255, 171, 0.85);
+    font-size: 2vh;
+}
