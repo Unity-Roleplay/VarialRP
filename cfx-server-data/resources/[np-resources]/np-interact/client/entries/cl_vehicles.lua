@@ -375,7 +375,7 @@ Entries[#Entries + 1] = {
     options = {
         distance = { radius = 1.8 },
         isEnabled = function(pEntity, pContext)
-            return hasKeys(pEntity)
+            return
         end
     }
 }

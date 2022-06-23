@@ -214,16 +214,6 @@ local HasKeysCache = {}
 local HasJobPermission = {}
 local VehicleOwnerShipCache = {}
 
-function hasKeys(pEntity)
-    if HasKeysCache[pEntity] then return HasKeysCache[pEntity] end
-
-    local hasKeys = exports['np-vehicles']:HasVehicleKey(pEntity)
-
-    HasKeysCache[pEntity] = hasKeys
-
-    return hasKeys
-end
-
 function hasJobPermission(pJob, pPermission)
   if not pPermission then
     pPermission = "employee"
