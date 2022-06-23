@@ -1943,6 +1943,7 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
         --TaskItem("amb@world_human_drinking@coffee@male@idle_a", "idle_c", 49,6000,"Drink","changethirst",true,itemid)
         AttachPropAndPlayAnimation("amb@world_human_drinking@beer@female@idle_a", "idle_e", 49,4500,"Drink","ChangeThirst",true,itemid,playerVeh)
         TriggerEvent('np-hud:ChangeThirst', 30)
+        TriggerEvent('thirstbuff')
     end
 
     if (itemid == "softdrink") then
@@ -1950,6 +1951,7 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
         --TaskItem("amb@world_human_drinking@coffee@male@idle_a", "idle_c", 49,6000,"Drink","changethirst",true,itemid)
         AttachPropAndPlayAnimation("amb@world_human_drinking@beer@female@idle_a", "idle_e", 49,6000,"Drink","ChangeThirst",true,itemid,playerVeh)
         TriggerEvent('np-hud:ChangeThirst', 69)
+        TriggerEvent('thirstbuff')
     end
 
 
@@ -1958,11 +1960,13 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
         --attachPropsToAnimation(itemid, 6000)
         TaskItem("mp_player_inteat@burger", "mp_player_int_eat_burger", 49, 6000, "Eating", "inv:wellfed", true,itemid)
         TriggerEvent('np-hud:ChangeHunger', 69)
+        TriggerEvent('hungerbuff')
     end
 
     if (itemid == "oxy") then
         TriggerEvent("animation:PlayAnimation","pill")
         TriggerEvent("healed:useOxy", true)
+        TriggerEvent('healthregen')
         remove = true
     end
 
