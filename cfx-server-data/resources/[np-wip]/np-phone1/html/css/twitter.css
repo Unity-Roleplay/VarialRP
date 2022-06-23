@@ -1,0 +1,48 @@
+.twatter-container {
+    height: 102%;
+}
+
+.twatter-header {
+    font-size: 1.3em;
+}
+
+.twatter-entries-header {
+    height: 10%;
+}
+
+.twatter-entries-wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 90%;
+    position: relative;
+}
+
+.twatter-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.twatter-content {
+    padding: 10px !important;
+    word-break: break-word;
+}
+
+.twatter-title {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+}
+
+.twatter-send {
+    background-color: transparent;
+    color: white;
+}
+
+.twatter-send:hover {
+    color: rgb(200, 200, 200);
+}
+
+.twatter-send:active {
+    color: rgb(190, 190, 190);
+}

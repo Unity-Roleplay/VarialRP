@@ -1,0 +1,22 @@
+.account-information-container {
+    height: 102%;
+}
+
+.account-information-wrapper {
+    padding-top: 5%;
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+}
+
+.account-information-primary-job {
+    text-transform: capitalize;
+}
+
+.account-information-secondary-job {
+    text-transform: capitalize;
+}
+
+.license-table td {
+    padding-top: 2px;
+}

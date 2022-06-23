@@ -1,3 +1,5 @@
+local toggled = false
+
 RegisterServerEvent('chat:init')
 RegisterServerEvent('chat:addTemplate')
 RegisterServerEvent('chat:addMessage')
@@ -17,8 +19,6 @@ AddEventHandler('_chat:messageEntered', function(author, color, message)
     if not WasEventCanceled() then
         TriggerClientEvent('chatMessage', -1, author,  { 255, 255, 255 }, message)
     end
- 
-    print(author .. '^7: ' .. message .. '^7')
 end)
 
 AddEventHandler("chatMessage", function(source, args, raw)
@@ -31,10 +31,10 @@ end)
 AddEventHandler('__cfx_internal:commandFallback', function(command)
     local name = GetPlayerName(source)
 
-    TriggerEvent('chatMessage', source, name, '' .. command)
+    TriggerEvent('chatMessage', source, name, '/' .. command)
 
     if not WasEventCanceled() then
-        TriggerClientEvent('chatMessage', -1, name, { 255, 255, 255 }, '' .. command) 
+        TriggerClientEvent('chatMessage', -1, name, { 255, 255, 255 }, '/' .. command) 
     end
 
     CancelEvent()
@@ -51,7 +51,7 @@ local function refreshCommands(player)
         for _, command in ipairs(registeredCommands) do
             if IsPlayerAceAllowed(player, ('command.%s'):format(command.name)) then
                 table.insert(suggestions, {
-                    name = '' .. command.name,
+                    name = '/' .. command.name,
                     help = ''
                 })
             end
@@ -80,7 +80,7 @@ RegisterCommand('ooc', function(source, args)
     for i = 1, #args do
       msg = msg .. " " .. args[i]
     end
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    local user = exports["arp-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
     local name = char.first_name .. " " .. char.last_name
     if not toggled then
@@ -104,19 +104,18 @@ end)
 
 RegisterCommand("clearall", function(source)
     local steamIdentifier = GetPlayerIdentifiers(source)[1]
-    exports.ghmattimysql:execute("SELECT rank FROM users WHERE hex_id = ?", {steamIdentifier}, function(data)
+    exports.oxmysql:execute("SELECT rank FROM users WHERE hex_id = ?", {steamIdentifier}, function(data)
         if data[1].rank ~= "user" then
             TriggerClientEvent("chat:clear", -1)
         end
     end)
 end)
 
-
 RegisterCommand("disable", function(source, args)
     local pSrc = source
     local command = string.lower(args[1])
     local steamIdentifier = GetPlayerIdentifiers(source)[1]
-    exports.ghmattimysql:execute("SELECT rank FROM users WHERE hex_id = ?", {steamIdentifier}, function(data)
+    exports.oxmysql:execute("SELECT rank FROM users WHERE hex_id = ?", {steamIdentifier}, function(data)
         if data[1].rank ~= "user" then
             if command == "ooc" then
                 toggled = not toggled
@@ -126,3 +125,20 @@ RegisterCommand("disable", function(source, args)
     end)
 end)
 
+local Me_ERP_Log = "https://discord.com/api/webhooks/960185458359402517/TDqaQ4Y_2dQS0xGNp0bnYZi_A0itGNW1WeNThEPKt8P1ca4E80uUvI1q3CUTVkauXPsj"
+
+RegisterServerEvent('chat:me_log')
+AddEventHandler('chat:me_log', function(pMeText)
+    local pName = GetPlayerName(source)
+    local connect = {
+        {
+            ["color"] = "255",
+            ["title"] = "/me Log From: ".. pName,
+            ["description"] = "Text: "..pMeText,
+	        ["footer"] = {
+                ["text"] = "[Chat] /me Log",
+            },
+        }
+    }
+    PerformHttpRequest(Me_ERP_Log, function(err, text, headers) end, 'POST', json.encode({username = "VoidRP",  avatar_url = "https://cdn.discordapp.com/attachments/928946993840132116/930453062403899472/Untitled-1.png",embeds = connect}), { ['Content-Type'] = 'application/json' })
+end)

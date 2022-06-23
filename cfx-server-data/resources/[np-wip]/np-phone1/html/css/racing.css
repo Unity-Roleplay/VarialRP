@@ -1,0 +1,159 @@
+/* Racing App */
+
+.racing-container {
+    height: 102%;
+    padding-top: 2%;
+}
+
+.racing-entries-wrapper {
+    overflow-y: auto;
+    height: 90%;
+    width: 95%;
+    position: relative;
+    border: none;
+}
+
+.racing-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    border: none;
+}
+
+.racing-entries-header {
+    color: white;
+    background-color: #253955;
+    border: none;
+}
+
+.racing-entries-body {
+    padding: 5px !important;
+    margin-bottom:0px;
+    color: white;
+    background-color: #253955;
+    border: none;
+}
+
+.racing-footer {
+    position: relative;
+    bottom: 0px;
+    height: 10%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.racing-button {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.racing-button:hover {
+    color: rgb(200, 200, 200);
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.racing-button:active {
+    color: rgb(190, 190, 190);
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.racing-button:focus {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+/* Racing Create Container */
+
+.racing-create-container {
+    height: 102%;
+    padding-top: 2%;
+}
+
+.racing-create {
+    visibility: hidden;
+}
+
+.racing-create-entries-wrapper {
+    overflow-y: auto;
+    height: 90%;
+    position: relative;
+}
+
+.racing-create-footer {
+    position: relative;
+    bottom: 0px;
+    height: 10%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+/* Racing Start Container */
+
+.racing-start-container {
+    height: 102%;
+    padding-top: 2%;
+}
+
+.racing-start-entries-wrapper {
+    overflow-y: auto;
+    height: 90%;
+    position: relative;
+}
+
+.racing-start-footer {
+    position: relative;
+    bottom: 0%;
+    height: 7.5%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+/* Racing Highscore Container */
+
+.racing-highscore-container {
+    height: 102%;
+    padding-top: 2%;
+}
+
+.racing-highscore-entries {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    border: none;
+}
+
+.racing-highscore-header {
+    color: white;
+    background-color: #253955;
+    border: none;
+}
+
+.racing-highscore-body {
+    padding: 5px !important;
+    margin-bottom: 0px;
+    color: white;
+    background-color: #253955;
+    border: none;
+}
+
+.racing-highscore-entries-wrapper {
+    overflow-y: auto;
+    width: 95%;
+    height: 97.5%;
+    position: relative;
+}

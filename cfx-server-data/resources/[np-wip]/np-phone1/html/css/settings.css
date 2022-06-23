@@ -1,0 +1,134 @@
+/* Settings */
+
+.settings-container {
+    height: 102%;
+}
+
+.settings-wrapper {
+    height: calc(100% + 5px);
+    position: relative;
+
+}
+
+.settings-switchBorder {
+    margin-top: 5%;
+      border-left:3px solid rgba(71, 71, 71, 0.3);
+      background-color: rgba(124, 115, 115, 0.05);
+}
+
+.settings-footer {
+    position: absolute;
+    bottom: 0px;
+    height: 10%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 20%;
+}
+
+.lockedText {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+    border-color: rgba(201, 44, 44, 0.6);
+}
+
+.toggleSwitch {
+   float: right;
+   margin-right: -10%;
+}
+
+.toggleText {
+   float: left;
+   font-weight: 500;
+   font-size: 16px;
+   text-shadow: 1px 1px 2px #000;
+   padding-top: 1%;
+   vertical-align: bottom;
+}
+
+.notingText {
+   float: left;
+   font-weight: 500;
+   font-size: 12px;
+   text-shadow: 1px 1px 2px #000;
+   padding-top: 1%;
+   vertical-align: bottom;
+}
+
+/* Ranges */
+
+.rangeHeading {
+   font-weight: 500;
+   font-size: 14px;
+   text-shadow: 1px 1px 2px #000;
+   padding-top: 1%;
+   position: absolute;
+}
+
+.rangeSlide {
+    margin-bottom: -4%;
+}
+
+/* switches*/
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #c3ccd9;
+    padding: 3px 0 0 10px;
+}
+
+.switch label .lever {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 21px;
+    background-color: rgba(0,0,0,0.38);
+    border-radius: 0;
+    margin-right: 10px;
+    transition: background 0.3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+}
+
+.switch label .lever:before, .switch label .lever:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 0;
+    left: 0;
+    top: -1px;
+    transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease, transform .1s ease;
+    background-color: #636664;
+}
+
+.switch label input[type=checkbox]:checked+.lever:before, .switch label input[type=checkbox]:checked+.lever:after {
+    left: 37px;
+}
+
+.switch label input[type=checkbox]+.lever span.off, .switch label input[type=checkbox]+.lever span.off {
+    display: none;
+}
+
+.switch label input[type=checkbox]+.lever span.on, .switch label input[type=checkbox]+.lever span.on {
+    display: inline-block;
+    padding: 0 0 0 15px;
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: #636664;
+}
+
+.switch label input[type=checkbox]:checked+.lever span.on, .switch label input[type=checkbox]:checked+.lever span.on {
+    display: none;
+}
+
+.switch label input[type=checkbox]:checked+.lever span.off, .switch label input[type=checkbox]:checked+.lever span.off {
+    display: inline-block;
+}
+
+.switch label input[type=checkbox]+.lever {
+    background-color: #111;
+    padding: 3px 0 0 15px;
+}

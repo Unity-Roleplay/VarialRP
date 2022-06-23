@@ -1,10 +1,73 @@
+-- local isInVehicle = false
+-- local isEnteringVehicle = false
+-- local currentVehicle = 0
+-- local currentSeat = 0
+
+-- Citizen.CreateThread(function()
+-- 	while true do
+-- 		Citizen.Wait(0)
+
+-- 		local ped = PlayerPedId()
+
+-- 		if not isInVehicle and not IsPlayerDead(PlayerId()) then
+-- 			if DoesEntityExist(GetVehiclePedIsTryingToEnter(ped)) and not isEnteringVehicle then
+-- 				-- trying to enter a vehicle!
+-- 				local vehicle = GetVehiclePedIsTryingToEnter(ped)
+-- 				local seat = GetSeatPedIsTryingToEnter(ped)
+-- 				local netId = VehToNet(vehicle)
+-- 				isEnteringVehicle = true
+-- 				TriggerServerEvent('baseevents:enteringVehicle', vehicle, seat, GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)), netId)
+-- 			elseif not DoesEntityExist(GetVehiclePedIsTryingToEnter(ped)) and not IsPedInAnyVehicle(ped, true) and isEnteringVehicle then
+-- 				-- vehicle entering aborted
+-- 				TriggerServerEvent('baseevents:enteringAborted')
+-- 				isEnteringVehicle = false
+-- 			elseif IsPedInAnyVehicle(ped, false) then
+-- 				-- suddenly appeared in a vehicle, possible teleport
+-- 				isEnteringVehicle = false
+-- 				isInVehicle = true
+-- 				currentVehicle = GetVehiclePedIsUsing(ped)
+-- 				currentSeat = GetPedVehicleSeat(ped)
+-- 				local model = GetEntityModel(currentVehicle)
+-- 				local name = GetDisplayNameFromVehicleModel()
+-- 				local netId = VehToNet(currentVehicle)
+-- 				TriggerServerEvent('baseevents:enteredVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
+-- 			end
+-- 		elseif isInVehicle then
+-- 			if not IsPedInAnyVehicle(ped, false) or IsPlayerDead(PlayerId()) then
+-- 				-- bye, vehicle
+-- 				local model = GetEntityModel(currentVehicle)
+-- 				local name = GetDisplayNameFromVehicleModel()
+-- 				local netId = VehToNet(currentVehicle)
+-- 				TriggerServerEvent('baseevents:leftVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
+-- 				isInVehicle = false
+-- 				currentVehicle = 0
+-- 				currentSeat = 0
+-- 			end
+-- 		end
+-- 		Citizen.Wait(50)
+-- 	end
+-- end)
+
+-- function GetPedVehicleSeat(ped)
+--     local vehicle = GetVehiclePedIsIn(ped, false)
+--     for i=-2,GetVehicleMaxNumberOfPassengers(vehicle) do
+--         if(GetPedInVehicleSeat(vehicle, i) == ped) then return i end
+--     end
+--     return -2
+-- end
+
 local Player, PlayerPed, IsDead
 
-local CurrentVehicle, PreviousVehicle, CurrentSeat, PreviousSeat, IsEnteringVehicle, IsInVehicle, IsEngineOn = nil
+local CurrentVehicle, PreviousVehicle, CurrentSeat, PreviousSeat, IsEnteringVehicle, IsInVehicle, IsEngineOn, IsSpeeding = nil
 
 local CurrentBodyHealth, PreviousBodyHealth, CurrentSpeed, PreviousSpeed, CurrentVelocity, PreviousVelocity
 
+local hotreload, res, evname = 'on', 'baseevents:', 'hotreload'
+
+hotreload = hotreload .. 'Client'
+
 Citizen.CreateThread(function()
+
     while true do
         Player = PlayerId()
         PlayerPed = PlayerPedId()
@@ -13,6 +76,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(1500)
     end
 end)
+
+hotreload = hotreload .. 'Resource'
 
 Citizen.CreateThread(function()
     while true do
@@ -27,10 +92,10 @@ Citizen.CreateThread(function()
                 local seat = GetSeatPedIsTryingToEnter(PlayerPed)
                 local netId = NetworkGetNetworkIdFromEntity(vehicleIsTryingToEnter)
                 local model = GetEntityModel(vehicleIsTryingToEnter)
-				local name = GetDisplayNameFromVehicleModel(model)
+				local class = GetVehicleClass(vehicleIsTryingToEnter)
 
-                TriggerEvent('baseevents:enteringVehicle', vehicleIsTryingToEnter, seat, name, model)
-                TriggerServerEvent('baseevents:enteringVehicle', netId, seat, name, model)
+                TriggerEvent('baseevents:enteringVehicle', vehicleIsTryingToEnter, seat, class, model)
+                TriggerServerEvent('baseevents:enteringVehicle', netId, seat, class, model)
             elseif IsEnteringVehicle and vehicleIsTryingToEnter == 0 and vehicle == 0 then
                 -- Vehicle entering aborted
                 IsEnteringVehicle = false
@@ -112,18 +177,22 @@ Citizen.CreateThread(function()
             elseif IsLeavingVehicle and not GetIsTaskActive(PlayerPed, 2) then
                 IsLeavingVehicle = false
                 TriggerEvent('baseevents:leavingAborted', CurrentVehicle, CurrentSeat)
-            end        
+            end
         end
 
         Citizen.Wait(100)
     end
 end)
 
+hotreload = hotreload .. 'Stop'
+
 Citizen.CreateThread(function()
+    local airTime = 0
+
     while true do
         local idle = 1000
 
-        if CurrentVehicle and CurrentVehicle ~= 0 and CurrentSeat == -1 then
+        if CurrentVehicle and CurrentVehicle ~= 0 and CurrentSeat == -1 and not IsThisModelABicycle(GetEntityModel(CurrentVehicle)) then
             PreviousSpeed = CurrentSpeed
             PreviousVelocity = CurrentVelocity
             PreviousBodyHealth = CurrentBodyHealth
@@ -133,11 +202,28 @@ Citizen.CreateThread(function()
             CurrentBodyHealth = GetVehicleBodyHealth(CurrentVehicle)
 
             local healthChange = PreviousBodyHealth ~= nil and (PreviousBodyHealth - CurrentBodyHealth) or 0.0
+            local heavyImpact = (PreviousSpeed and PreviousSpeed > 25.0 and CurrentSpeed < (PreviousSpeed * 0.75))
+            local minorImpact = ((healthChange >= 4 or CurrentBodyHealth < 150.0) and HasEntityCollidedWithAnything(CurrentVehicle))
 
-            if (healthChange >= 15 and PreviousSpeed > 30.0 and CurrentSpeed < (PreviousSpeed * 0.75)) or healthChange >= 4 and HasEntityCollidedWithAnything(CurrentVehicle) then
+            if IsEntityInAir(CurrentVehicle) and (IsThisModelABike(GetEntityModel(CurrentVehicle)) or IsThisModelAQuadbike(GetEntityModel(CurrentVehicle))) then                
+                airTime = airTime + 1
+
+                heavyImpact = (PreviousSpeed and PreviousSpeed > 25.0 and CurrentSpeed < (PreviousSpeed * 0.75) and airTime > 40)
+            elseif airTime ~= 0 then
+                airTime = 0
+            end
+
+            if heavyImpact or minorImpact then
                 local velocity = { x = PreviousVelocity.x, y = PreviousVelocity.y, z = PreviousVelocity.z }
+                TriggerEvent('baseevents:vehicleCrashed', CurrentVehicle, CurrentSeat, CurrentSpeed, PreviousSpeed, velocity, healthChange, heavyImpact, minorImpact)
+            end
 
-                TriggerEvent('baseevents:vehicleCrashed', CurrentVehicle, CurrentSeat, CurrentSpeed, PreviousSpeed, velocity)
+            if CurrentSpeed > 28 and not IsSpeeding then
+                IsSpeeding = true
+                TriggerEvent('baseevents:vehicleSpeeding', true, CurrentVehicle, CurrentSeat, CurrentSpeed)
+            elseif IsSpeeding and CurrentSpeed < 28 then
+                IsSpeeding = false
+                TriggerEvent('baseevents:vehicleSpeeding', false, CurrentVehicle, CurrentSeat, CurrentSpeed)
             end
 
             idle = 100
@@ -157,4 +243,10 @@ end
 
 AddEventHandler("onResourceStart", function(resource)
     TriggerEvent('baseevents:vehicleHotreload', CurrentVehicle, CurrentSeat, IsEngineOn)
+    TriggerServerEvent('baseevents:vehicleHotreload', CurrentVehicle, CurrentSeat, IsEngineOn)
+end)
+
+AddEventHandler(hotreload, function(resource)
+    TriggerEvent(res .. evname, resource)
+    TriggerServerEvent(res .. evname, resource)
 end)

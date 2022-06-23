@@ -22,8 +22,8 @@ protobuf.load(GetResourcePath(GetCurrentResourceName()) + "/rline.proto", functi
 		return;
 	}
 	
-	const RPCMessage = root.lookupType("rline.RPCMessage");
-	const RPCResponseMessage = root.lookupType("rline.RPCResponseMessage");
+	const RpcMessage = root.lookupType("rline.RpcMessage");
+	const RpcResponseMessage = root.lookupType("rline.RpcResponseMessage");
 	const InitSessionResponse = root.lookupType("rline.InitSessionResponse");
 	const InitPlayer2_Parameters = root.lookupType("rline.InitPlayer2_Parameters");
 	const InitPlayerResult = root.lookupType("rline.InitPlayerResult");
@@ -53,7 +53,7 @@ protobuf.load(GetResourcePath(GetCurrentResourceName()) + "/rline.proto", functi
 		const stuff = {};
 		stuff[cmdname] = msg;
 	
-		emitMsg(target, RPCMessage.encode({
+		emitMsg(target, RpcMessage.encode({
 			Header: {
 				MethodName: 'scmds'
 			},
@@ -191,7 +191,7 @@ protobuf.load(GetResourcePath(GetCurrentResourceName()) + "/rline.proto", functi
 			playerDatas[source].slot = assignSlotId();
 
 			setTimeout(() => {
-				emitMsg(source, RPCMessage.encode({
+				emitMsg(source, RpcMessage.encode({
 					Header: {
 						MethodName: 'QueueEntered'
 					},
@@ -206,7 +206,7 @@ protobuf.load(GetResourcePath(GetCurrentResourceName()) + "/rline.proto", functi
 					hostIndex = playerDatas[source].slot | 0;
 				}
 
-				emitMsg(source, RPCMessage.encode({
+				emitMsg(source, RpcMessage.encode({
 					Header: {
 						MethodName: 'TransitionReady_PlayerQueue'
 					},
@@ -297,7 +297,7 @@ protobuf.load(GetResourcePath(GetCurrentResourceName()) + "/rline.proto", functi
 		const s = source;
 		
 		try {
-			const message = RPCMessage.decode(new Uint8Array(data));
+			const message = RpcMessage.decode(new Uint8Array(data));
 			const response = await handleMessage(s, message.Header.MethodName, message.Content);
 			
 			if (!response || !response.Header) {
@@ -306,7 +306,7 @@ protobuf.load(GetResourcePath(GetCurrentResourceName()) + "/rline.proto", functi
 			
 			response.Header.RequestId = message.Header.RequestId;
 			
-			emitMsg(s, RPCResponseMessage.encode(response).finish());
+			emitMsg(s, RpcResponseMessage.encode(response).finish());
 		} catch (e) {
 			console.log(e);
 			console.log(e.stack);

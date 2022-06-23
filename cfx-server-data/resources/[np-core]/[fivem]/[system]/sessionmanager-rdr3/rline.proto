@@ -1,7 +1,7 @@
 syntax = "proto3";
 package rline;
 
-message RPCErrorData {
+message RpcErrorData {
 	string ErrorCodeString = 1;
 	int32 ErrorCode = 2;
 	string DomainString = 3;
@@ -9,31 +9,31 @@ message RPCErrorData {
 	bytes DataEx = 5;
 };
 
-message RPCError {
+message RpcError {
 	int32 ErrorCode = 1;
 	string ErrorMessage = 2;
-	RPCErrorData Data = 3;
+	RpcErrorData Data = 3;
 };
 
-message RPCHeader {
+message RpcHeader {
 	string RequestId = 1;
 	string MethodName = 2;
-	RPCError Error = 3;
+	RpcError Error = 3;
 	string srcTid = 4;
 };
 
-message RPCMessage {
-	RPCHeader Header = 1;
+message RpcMessage {
+	RpcHeader Header = 1;
 	bytes Content = 2;
 };
 
-message RPCResponseContainer {
+message RpcResponseContainer {
 	bytes Content = 1;
 };
 
-message RPCResponseMessage {
-	RPCHeader Header = 1;
-	RPCResponseContainer Container = 2;
+message RpcResponseMessage {
+	RpcHeader Header = 1;
+	RpcResponseContainer Container = 2;
 };
 
 message TokenStuff {

@@ -287,7 +287,7 @@ function spawnPlayer(spawnIdx, cb)
 
         NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
 
-        -- gamedreams-style cleanup stuff
+        -- gameVoid-style cleanup stuff
         ClearPedTasksImmediately(ped)
         --SetEntityHealth(ped, 300) -- TODO: allow configuration of this?
         RemoveAllPedWeapons(ped) -- TODO: make configurable (V behavior?)
