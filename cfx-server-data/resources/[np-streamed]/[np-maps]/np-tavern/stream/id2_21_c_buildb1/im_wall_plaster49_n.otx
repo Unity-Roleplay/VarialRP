@@ -1,0 +1,10 @@
+Version 13 30
+{
+	Image im_wall_plaster49_n.dds
+	Type Regular
+	PixelFormat DXT1
+	Levels 9
+	Usage NORMAL
+	UsageFlags  NOT_HALF
+	ExtraFlags 0
+}

@@ -1,0 +1,291 @@
+Version 165 30
+{
+	Attribute
+	{
+		Position -7.8149409 14.8725004 2.3353119
+		Color 136 248 114
+		Flashiness 0
+		Intensity 0.5
+		Flags 0
+		BoneTag 0
+		LightType 1
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 2.5
+		FalloffExponent 8.0
+		CullingPlane 0.9659258 -0.2588193 -0.0000002 2.5000000
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 109
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction -0.9659258 0.2588193 0.0000002
+		Tangent -0.9659258 -0.0000002 0.2588193
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 1.0000000 1.0000000 1.0000000
+		ProjectedTextureHash 0
+	}
+	Attribute
+	{
+		Position -5.1269531 18.1740093 2.3353119
+		Color 136 248 114
+		Flashiness 0
+		Intensity 0.5
+		Flags 262144
+		BoneTag 0
+		LightType 1
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 2.5
+		FalloffExponent 8.0
+		CullingPlane 0.5000005 -0.8660251 -0.0000003 1.0750270
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 160
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction -0.5000005 0.8660251 0.0000003
+		Tangent -0.5000005 -0.0000003 0.8660251
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 1.0000000 1.0000000 1.0000000
+		ProjectedTextureHash 0
+	}
+	Attribute
+	{
+		Position 1.9208980 17.7835102 2.3353119
+		Color 136 248 114
+		Flashiness 0
+		Intensity 0.5
+		Flags 262144
+		BoneTag 0
+		LightType 1
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 2.5
+		FalloffExponent 8.0
+		CullingPlane -0.2588195 -0.9659258 -0.0000002 1.7225370
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 35
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction 0.2588195 0.9659258 0.0000002
+		Tangent 0.2588195 -0.0000002 0.9659258
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 1.0000000 1.0000000 1.0000000
+		ProjectedTextureHash 0
+	}
+	Attribute
+	{
+		Position -1.1838380 18.6503296 2.3353119
+		Color 136 248 114
+		Flashiness 0
+		Intensity 0.5
+		Flags 262144
+		BoneTag 0
+		LightType 1
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 2.5
+		FalloffExponent 8.0
+		CullingPlane -0.2588195 -0.9659258 -0.0000002 1.7225630
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 122
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction 0.2588195 0.9659258 0.0000002
+		Tangent 0.2588195 -0.0000002 0.9659258
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 1.0000000 1.0000000 1.0000000
+		ProjectedTextureHash 0
+	}
+	Attribute
+	{
+		Position -8.5385742 11.1729698 2.3353119
+		Color 136 248 114
+		Flashiness 0
+		Intensity 0.5
+		Flags 262144
+		BoneTag 0
+		LightType 1
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 3.0
+		FalloffExponent 8.0
+		CullingPlane 0.9659258 -0.2588193 -0.0000002 0.7519560
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 37
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction -0.9659258 0.2588193 0.0000002
+		Tangent -0.9659258 -0.0000002 0.2588193
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 1.0000000 1.0000000 1.0000000
+		ProjectedTextureHash 0
+	}
+	Attribute
+	{
+		Position 6.2407231 16.4743996 -0.0755768
+		Color 255 255 255
+		Flashiness 0
+		Intensity 0.5
+		Flags 262144
+		BoneTag 0
+		LightType 1
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 3.0
+		FalloffExponent 8.0
+		CullingPlane -0.2588195 -0.9659258 -0.0000002 1.7225370
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 15
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction 0.2588195 0.9659258 0.0000002
+		Tangent 0.2588195 -0.0000002 0.9659258
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 1.0000000 1.0000000 1.0000000
+		ProjectedTextureHash 0
+	}
+	Attribute
+	{
+		Position -12.5888700 -8.5221558 -1.6452180
+		Color 182 226 106
+		Flashiness 0
+		Intensity 5.0
+		Flags 0
+		BoneTag 0
+		LightType 1
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 3.5
+		FalloffExponent 100.0
+		CullingPlane -0.9659278 0.2588118 0.0000029 3.5000000
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 7
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction 0.9659278 -0.2588118 -0.0000029
+		Tangent 0.9659278 0.0000029 -0.2588118
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 1.0000000 1.0000000 1.0000000
+		ProjectedTextureHash 0
+	}
+	Attribute
+	{
+		Position -13.4033203 -7.0419312 0.7158661
+		Color 255 255 255
+		Flashiness 0
+		Intensity 5.0
+		Flags 8192
+		BoneTag 0
+		LightType 4
+		GroupId 0
+		TimeFlags 14680191
+		Falloff 1.0
+		FalloffExponent 16.0
+		CullingPlane -0.2588190 -0.9659259 0.0000011 1.0000000
+		ShadowBlur 0
+		VolumeIntensity 1.0
+		VolumeSizeScale 1.0
+		VolumeOuterColor 255 255 255
+		LightHash 202
+		VolumeOuterIntensity 1.0
+		CoronaSize 0.0
+		VolumeOuterExponent 1.0
+		LightFadeDistance 0
+		ShadowFadeDistance 0
+		SpecularFadeDistance 0
+		VolumetricFadeDistance 0
+		ShadowNearClip 0.01
+		CoronaIntensity 1.0
+		CoronaZBias 0.1
+		Direction 0.2588190 0.9659259 -0.0000011
+		Tangent 0.2588190 0.0000011 0.9659259
+		ConeInnerAngle 10.0
+		ConeOuterAngle 25.0
+		Extents 9.0000000 9.0000000 9.0000000
+		ProjectedTextureHash 0
+	}
+}
