@@ -1,12 +1,7 @@
-
-
-
-
-
-
 fx_version 'cerulean'
 game 'gta5'
 
+author ''
 description 'Admin Menu'
 
 ui_page "nui/index.html"
@@ -38,3 +33,7 @@ dependencies {
 }
 
 lua54 'yes'
+
+exports {
+    'DevMode'
+}

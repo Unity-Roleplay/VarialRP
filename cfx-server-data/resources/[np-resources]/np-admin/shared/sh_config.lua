@@ -21,40 +21,6 @@ Config.AdminMenus = {
                 ['Collapse'] = false,
             },
             {
-                ['Id'] = 'debug',
-                ['Name'] = 'Debug',
-                ['Event'] = 'Admin:Toggle:Debug',
-                ['EventType'] = 'Client',
-                ['Collapse'] = false,
-            },
-            ----- Give car command
-            {
-                ['Id'] = 'giveCar',
-                ['Name'] = 'Give Car',
-                ['Event'] = 'Admin:GiveCar',
-                ['Collapse'] = true,
-                ['Options'] = {
-                    {
-                        ['Id'] = 'player',
-                        ['Name'] = 'Player',
-                        ['Type'] = 'input-choice',
-                        ['PlayerList'] = true,
-                    },
-                    {
-                        ['Id'] = 'model',
-                        ['Name'] = 'Model',
-                        ['Type'] = 'input',
-                        ['Value'] = '',
-                    },
-                    {
-                        ['Id'] = 'plate',
-                        ['Name'] = 'Custom Plate (Leave empty for random plate)',
-                        ['Type'] = 'input',
-                        ['Value'] = '',
-                    },
-                },
-            },
-            {
                 ['Id'] = 'changeModel',
                 ['Name'] = 'Change Model',
                 ['Event'] = 'Admin:Change:Model',
@@ -75,9 +41,9 @@ Config.AdminMenus = {
                 },
             },
             {
-                ['Id'] = 'rmodel',
-                ['Name'] = 'Reset Model',
-                ['Event'] = 'Admin:Reset:Model',
+                ['Id'] = 'clothing',
+                ['Name'] = 'Clothing',
+                ['Event'] = 'Admin:Open:Clothing',
                 ['Collapse'] = true,
                 ['Options'] = {
                     {
@@ -89,9 +55,9 @@ Config.AdminMenus = {
                 },
             },
             {
-                ['Id'] = 'clothing',
-                ['Name'] = 'Clothing',
-                ['Event'] = 'Admin:Open:Clothing',
+                ['Id'] = 'barber',
+                ['Name'] = 'BarberShop',
+                ['Event'] = 'Admin:Open:BarberShop',
                 ['Collapse'] = true,
                 ['Options'] = {
                     {
@@ -118,7 +84,7 @@ Config.AdminMenus = {
             },
             {
                 ['Id'] = 'food-drink',
-                ['Name'] = 'Food & Drink',
+                ['Name'] = 'Max Stats',
                 ['Event'] = 'Admin:Food:Drink',
                 ['Collapse'] = true,
                 ['Options'] = {
@@ -199,67 +165,26 @@ Config.AdminMenus = {
         ['Id'] = 'utility',
         ['Name'] = 'Utility',
         ['Items'] = {
-            -- {
-            --     ['Id'] = 'playerblips',
-            --     ['Name'] = 'Player Blips',
-            --     ['Event'] = 'Admin:Toggle:PlayerBlips',
-            --     ['EventType'] = 'Client',
-            --     ['Collapse'] = false,
-            -- },
+            {
+                ['Id'] = 'playerblips',
+                ['Name'] = 'Player Blips',
+                ['Event'] = 'Admin:Toggle:PlayerBlips',
+                ['EventType'] = 'Client',
+                ['Collapse'] = false,
+            },
+			{
+                ['Id'] = 'Debug',
+                ['Name'] = 'Debug',
+                ['Event'] = 'np-admin/client/toggle-debug',
+                ['EventType'] = 'Client',
+                ['Collapse'] = false,
+            },
             {
                 ['Id'] = 'playernames',
                 ['Name'] = 'Player Names',
                 ['Event'] = 'Admin:Toggle:PlayerNames',
                 ['EventType'] = 'Client',
                 ['Collapse'] = false,
-            },
-
-            {
-                ['Id'] = 'weathertime',
-                ['Name'] = 'Weather/Time',
-                ['Event'] = 'Admin:WeatherAndTime:Change',
-                ['Collapse'] = true,
-                ['Options'] = {
-                    {
-                        ['Id'] = 'weather',
-                        ['Name'] = 'Weather',
-                        ['Type'] = 'text-choice',
-                        ['Choices'] = {
-                            {
-                                Text = 'EXTRASUNNY'
-                            },
-                            {
-                                Text = 'CLEAR'
-                            },
-                            {
-                                Text = 'CLEARING'
-                            },
-                            {
-                                Text = 'CLOUDS'
-                            },
-                            {
-                                Text = 'OVERCAST'
-                            },
-                            {
-                                Text = 'FOGGY'
-                            },
-                            {
-                                Text = 'SMOG'
-                            },
-                            {
-                                Text = 'RAIN'
-                            },
-                            {
-                                Text = 'THUNDER'
-                            },
-                        },
-                    },
-                    {
-                        ['Id'] = 'time',
-                        ['Name'] = 'Time (0 -24)',
-                        ['Type'] = 'text-choice',
-                    },
-                },
             },
             {
                 ['Id'] = 'deleteVehicle',
@@ -290,7 +215,7 @@ Config.AdminMenus = {
                     {
                         ['Id'] = 'plate',
                         ['Name'] = 'Plate',
-                        ['Type'] = 'input-choice',
+                        ['Type'] = 'text-choice',
                     },
                 },
             },
@@ -443,10 +368,9 @@ Config.AdminMenus = {
             },
         }
     },
-
     {
-        ['Id'] = 'fun',
-        ['Name'] = 'Fun',
+        ['Id'] = 'user',
+        ['Name'] = 'User',
         ['Items'] = {
             {
                 ['Id'] = 'flingPlayer',
@@ -531,12 +455,6 @@ Config.AdminMenus = {
                     },
                 },
             },
-        }
-    },
-    {
-        ['Id'] = 'user',
-        ['Name'] = 'User',
-        ['Items'] = {
             {
                 ['Id'] = 'setjob',
                 ['Name'] = 'Request Job',
@@ -553,66 +471,7 @@ Config.AdminMenus = {
                         ['Id'] = 'job',
                         ['Name'] = 'Job',
                         ['Type'] = 'text-choice',
-                        ['Choices'] = {
-                            {
-                                Text = 'police'
-                            },
-                            {
-                                Text = 'ems'
-                            },
-                            {
-                                Text = 'burger_shot'
-                            },
-                            {
-                                Text = 'uwu_cafe'
-                            },
-                            {
-                                Text = 'tuner_carshop'
-                            },
-                            {
-                                Text = 'hayes_autos'
-                            },
-                            {
-                                Text = 'black_mafia'
-                            },
-                            {
-                                Text = 'the_family'
-                            },
-                            {
-                                Text = 'sosa_family'
-                            },
-                            {
-                                Text = 'mandem'
-                            },
-                            {
-                                Text = 'gambinos'
-                            },
-                        },
-                    },
-                },
-            },
-            {
-                ['Id'] = 'setgang',
-                ['Name'] = 'Set Gang',
-                ['Event'] = 'Admin:Request:Gang',
-                ['Collapse'] = true,
-                ['Options'] = {
-                    {
-                        ['Id'] = 'player',
-                        ['Name'] = 'Player',
-                        ['Type'] = 'input-choice',
-                        ['PlayerList'] = true,
-                    },
-                    {
-                        ['Id'] = 'gang',
-                        ['Name'] = 'Gang',
-                        ['Type'] = 'text-choice',
-                        ['Choices'] = GetGangs()
-                    },
-                    {
-                        ['Id'] = 'rank',
-                        ['Name'] = 'Rank ( 5 is the boos rank )',
-                        ['Type'] = 'input',
+                        ['Choices'] = GetJobs()
                     },
                 },
             },
@@ -631,7 +490,7 @@ Config.AdminMenus = {
                     {
                         ['Id'] = 'item',
                         ['Name'] = 'Item',
-                        ['Type'] = 'input',
+                        ['Type'] = 'text-choice',
                         -- ['Choices'] = GetInventoryItems()
                     },
                     {

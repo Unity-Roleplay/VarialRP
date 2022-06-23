@@ -10,9 +10,13 @@ function ToggleDevMode(Bool)
     devmodeToggle = Bool
 end
 
-function IsPlayerAdmin() 
-
-    return true
+function IsPlayerAdmin()
+    print(exports["np-base"]:getModule("LocalPlayer"):getVar("rank"))
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        return true
+    else
+        return false
+    end
 end
 
 function DebugLog(Message)
@@ -148,18 +152,6 @@ function GetPlayers()
         return (Players)
 end
 
-function GetPlayersss()
-    local players = {}
-
-    for i = 0, 255 do
-        if NetworkIsPlayerActive(i) then
-            players[#players+1]= i
-        end
-    end
-
-    return players
-end
-
 function GetJobs()
     local JobList = {
         [1] = 'state',
@@ -181,18 +173,6 @@ function GetAddonVehicles()
         [5] = 'lp700'
     }
     return AddonVehicles
-end
-
-AvailableGangs = {}
-function GetGangs()
-    local data = exports["np-gangsnew"]:GetAvailableGangs()
-    for k,v in pairs(data) do
-        local toinset = {
-            Text = v
-        }
-        table.insert(AvailableGangs,toinset)
-    end
-    return AvailableGangs
 end
 
 -- Generate
@@ -353,7 +333,7 @@ end)
 RegisterNetEvent("np-admin:ReviveInDistance")
 AddEventHandler("np-admin:ReviveInDistance", function()
     local playerList = {}
-    local players = GetPlayersss()
+    local players = GetPlayers()
     local ply = PlayerPedId()
     local plyCoords = GetEntityCoords(ply, 0)
 
@@ -363,14 +343,15 @@ AddEventHandler("np-admin:ReviveInDistance", function()
         local targetCoords = GetEntityCoords(GetPlayerPed(value), 0)
         local distance = #(vector3(targetCoords["x"], targetCoords["y"], targetCoords["z"]) - vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
         if(distance < 50) then
+            TriggerServerEvent("admin:reviveAreaFromClient",playerList)
             playerList[index] = GetPlayerServerId(value)
         end
     end
 
     if playerList ~= {} and playerList ~= nil then
-        TriggerServerEvent("admin:reviveAreaFromClient",playerList)
 
         for k,v in pairs(playerList) do
+            TriggerServerEvent("np-death:reviveSV", v)
             TriggerServerEvent("reviveGranted", v)
             TriggerEvent("Hospital:HealInjuries",true) 
             TriggerServerEvent("ems:healplayer", v)
@@ -505,9 +486,6 @@ AddEventHandler("np-admin:dv", function()
       end 
   end 
 end )
-
-
-
 
 function DeleteGivenVehicle(veh, timeoutMax)
   local timeout = 0 

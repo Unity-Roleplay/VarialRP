@@ -13,29 +13,38 @@ AddEventHandler('onResourceStop', function (resourceName)
     if resourceName == GetCurrentResourceName() then
         LoggedIn = false
     end
-end)
+  end)
   
-
-function openadminfunction()
-    TriggerServerEvent('np-admin/server/open-menu')
-end
-Citizen.CreateThread(function()
-    exports["np-keybinds"]:registerKeyMapping("", "adminmenu", "Open Admin Menu", "+openadminfunction", "-openadminfunction")
-    RegisterCommand('+openadminfunction', openadminfunction, false)
-    RegisterCommand('-openadminfunction', function() end, false)
-end)
+  
 
 -- [ Code ] --
 
 -- [ Mapping ] --
 
-RegisterKeyMapping('adminmenu', 'Open Admin Menu', 'keyboard', 'INSERT')
+function noclip()
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        if exports['np-admin']:DevMode() then
+            TriggerEvent('Admin:Toggle:Noclip')
+        end
+    end
+end
+
+RegisterCommand('tpm', function()
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        TriggerEvent('Admin:Teleport:Marker')
+    end
+end)
+
+Citizen.CreateThread(function()
+    exports["np-keybinds"]:registerKeyMapping("", "Admin", "No Clip", "+noclip", "-noclip", "F2")
+    RegisterCommand('+noclip', noclip)
+end)
 
 -- [ Events ] --
 
 RegisterNetEvent('np-admin-AttemptOpen', function(OnPress)
     local Players = GetPlayers()
-    SetCursorLocation(0.5, 0.5)
+    SetCursorLocation(0.87, 0.15)
     SetNuiFocus(true, true)
     SendNUIMessage({
         Action = 'Open',
@@ -88,6 +97,11 @@ end)
 
 RegisterNUICallback("Admin/DevMode", function(Data, Cb)
     local Bool = Data.Toggle
+    if Bool then
+        pDevMode = 1
+    else
+        pDevMode = 0
+    end
     ToggleDevMode(Bool)
     Cb('Ok')
 end)
@@ -106,3 +120,12 @@ RegisterNUICallback('Admin/TriggerAction', function(Data, Cb)
     end
     Cb('Ok')
 end)
+
+function DevMode()
+    if pDevMode == 1 then
+      pDevMode = true
+    elseif pDevMode == 0 then
+      pDevMode = false
+    end
+    return pDevMode
+end
