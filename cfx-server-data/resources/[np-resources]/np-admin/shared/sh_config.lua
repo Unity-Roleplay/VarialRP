@@ -4,6 +4,12 @@ Config.FavoritedItems = {}
 Config.PinnedTargets = {}
 Config.AdminSettings = {}
 
+Inventory = {}
+
+function GetItems()
+    return Inventory
+end
+
 -- Customizable
 
 Config.MenuDebug = false
@@ -490,8 +496,8 @@ Config.AdminMenus = {
                     {
                         ['Id'] = 'item',
                         ['Name'] = 'Item',
-                        ['Type'] = 'text-choice',
-                        -- ['Choices'] = GetInventoryItems()
+                        ['Type'] = 'input-choice',
+                        ['Choices'] = GetItems(),
                     },
                     {
                         ['Id'] = 'amount',

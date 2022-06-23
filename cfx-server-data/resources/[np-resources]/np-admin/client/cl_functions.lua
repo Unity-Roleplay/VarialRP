@@ -25,6 +25,20 @@ function DebugLog(Message)
     end
 end
 
+Citizen.CreateThread(function()
+    GetInventoryItems()
+end)
+
+function GetInventoryItems()
+    local items = exports["np-inventory"]:getFullItemList()
+    for k, v in pairs(items) do
+        table.insert(Inventory, {
+            Text = k
+        });
+    end
+    return Inventory
+end
+
 function DeletePlayerBlips()
     if AllPlayerBlips ~= nil then
         for k, v in pairs(AllPlayerBlips) do
