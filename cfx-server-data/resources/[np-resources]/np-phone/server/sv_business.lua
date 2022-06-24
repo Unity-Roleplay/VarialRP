@@ -1,7 +1,7 @@
 
 
 RegisterNetEvent('np-phone:fireEmp')
-AddEventHandler('np-phone:fireEmp', function(id,job,name)
+AddEventHandler('np-phone:fireEmp', function(id, job, name)
   local src = source
   local user = exports["np-base"]:getModule("Player"):GetUser(src)
   local char = user:getCurrentCharacter()
@@ -19,7 +19,7 @@ RegisterServerEvent('np-phone:business_hired', function(StateID, Rank, pBusiness
     local user = exports["np-base"]:getModule("Player"):GetUser(source)
     local ply = user:getCurrentCharacter()
     local pHiringName = ply.first_name .. " " ..ply.last_name
-
+    
     exports.oxmysql:execute("INSERT INTO character_passes (cid, rank, name, giver, pass_type, business_name) VALUES (@cid, @rank, @name, @giver, @pass_type, @business_name)",
     {
         ['@cid'] = StateID,
@@ -112,9 +112,7 @@ RegisterServerEvent('np-phone:business_fire', function(pBusinessName, pStateID)
     local char = user:getCurrentCharacter()
     local cid = char.id
 
-    exports.ghmattimysql:execute("DELETE FROM character_passes WHERE cid = @cid AND pass_type = @pass_type", {['@cid'] = pStateID, ['@pass_type'] = pBusinessName}, function()
-    end)
-    print('')
+    exports.ghmattimysql:execute("DELETE FROM character_passes WHERE cid = @cid AND pass_type = @pass_type", {['@cid'] = pStateID, ['@pass_type'] = pBusinessName}, function()end)
 end)
 
 function getFullname(cid)

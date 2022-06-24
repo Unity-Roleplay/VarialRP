@@ -43,7 +43,7 @@ RegisterNUICallback('fireEmployee', function(data)
       })   
       return
     end
-    RPC.execute('np-phone:business_fire', business, cid)
+      TriggerServerEvent('np-phone:business_fire', business, cid)
 end)
 
 RegisterNUICallback('payCheckEmployee', function(data)
