@@ -12512,7 +12512,7 @@ itemList['newaccountbox'] = {
   nonStack: false,
   model: '',
   image: 'np_box.png',
-  information: 'Welcome to Novel City!',
+  information: 'Welcome to Dares FiveM Leaks!',
 };
 
 itemList['pimpcane'] = {

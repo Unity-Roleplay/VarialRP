@@ -911,9 +911,6 @@ Entries[#Entries + 1] = {
     }
 }
 
-
-
-
 local validAnimalModels = {
     [`a_c_chop`] = true,
     [`a_c_husky`] = true,
@@ -965,8 +962,6 @@ local validAnimalModels = {
       TriggerEvent("client:newStress", false, 250)
     end
   end)
-  
-  
 
 
 Citizen.CreateThread(function()

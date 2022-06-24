@@ -46,7 +46,7 @@ local os_time = os.time
 local table_insert = table.insert
 local table_remove = table.remove
 
-Queue.InitHostName = Queue.InitHostName ~= "Novel City | Development" and Queue.InitHostName or false
+Queue.InitHostName = Queue.InitHostName ~= "Dares FiveM Leaks" and Queue.InitHostName or false
 
 for id, power in pairs(Config.Priority) do
     _Queue.Priority[string_lower(id)] = power
@@ -699,7 +699,7 @@ Citizen.CreateThread(function()
                 SetConvar("sv_hostname", (qCount > 0 and "[Q : " .. tostring(qCount) .. "] " or "") .. Queue.InitHostName)
             else
                 Queue.InitHostName = GetConvar("sv_hostname")
-                Queue.InitHostName = Queue.InitHostName ~= "Novel City | Development" and Queue.InitHostName or false
+                Queue.InitHostName = Queue.InitHostName ~= "Dares FiveM Leaks" and Queue.InitHostName or false
             end
         end
     end
