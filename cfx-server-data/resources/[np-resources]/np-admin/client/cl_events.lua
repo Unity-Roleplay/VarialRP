@@ -471,3 +471,7 @@ RegisterNetEvent('np-admin:setvehstate',function (data)
         TriggerEvent('DoShortHudText', 'Nothing inputted aborting..',2)
     end
 end)
+
+RegisterNetEvent('Admin:GiveCash', function(money)
+    TriggerServerEvent('np-adminmenu:server:GiveCash', money['amount'], money['player'])
+end)

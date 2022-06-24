@@ -145,6 +145,25 @@ Config.AdminMenus = {
                 },
             },
             {
+                ['Id'] = 'give_cash',
+                ['Name'] = 'Give Cash',
+                ['Event'] = 'Admin:GiveCash',
+                ['Collapse'] = true,
+                ['Options'] = {
+                    {
+                        ['Id'] = 'player',
+                        ['Name'] = 'Player',
+                        ['Type'] = 'input-choice',
+                        ['PlayerList'] = true,
+                    },
+                    {
+                        ['Id'] = 'amount',
+                        ['Name'] = 'Amount',
+                        ['Type'] = 'text-choice',
+                    },
+                },
+            },
+            {
                 ['Id'] = 'reviveRadius',
                 ['Name'] = 'Revive in Radius',
                 ['Event'] = 'np-admin:ReviveInDistance',

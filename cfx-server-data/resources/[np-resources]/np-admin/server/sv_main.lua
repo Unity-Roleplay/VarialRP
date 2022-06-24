@@ -423,3 +423,10 @@ AddEventHandler("np-adminmenu:CheckInventory", function(target)
     end
 end)
 
+RegisterServerEvent('np-adminmenu:server:GiveCash')
+AddEventHandler('np-adminmenu:server:GiveCash', function(pAmt, target)
+    local src = source
+    local user = exports['np-base']:getModule("Player"):GetUser(tonumber(target))
+
+    user:addMoney(tonumber(pAmt))
+end)
