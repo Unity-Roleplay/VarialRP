@@ -115,7 +115,7 @@ RegisterNetEvent('Admin:Open:Clothing', function(Result)
         SendNUIMessage({
             Action = 'Close',
         })
-        TriggerEvent("raid_clothes:openClothing", true, true, false)
+        TriggerServerEvent('np-admin/server/give-clothing', Result['player'])
     end
 end)
 

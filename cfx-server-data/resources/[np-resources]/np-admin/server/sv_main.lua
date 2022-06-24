@@ -210,10 +210,8 @@ end)
 
 RegisterNetEvent("np-admin/server/give-item", function(ServerId, ItemName, ItemAmount)
     local src = source
-print(ServerId, ItemName, ItemAmount)
 
-    TriggerClientEvent('player:receiveItem',ServerId,ItemName, ItemAmount)
-    TriggerClientEvent('DoLongHudText', src, 'Successfully gave player x'..ItemAmount..' of '..ItemName..'.', 1)
+    TriggerClientEvent('player:receiveItem', ServerId,ItemName, ItemAmount)
 end)
 
 RegisterNetEvent("np-admin/server/request-job", function(ServerId, JobName)
@@ -347,6 +345,12 @@ RegisterNetEvent("np-admin/server/remove-stress", function(ServerId)
 
     TriggerClientEvent("client:newStress", ServerId, removeAll, 0)
     TriggerClientEvent('DoLongHudText', src, 'Successfully removed stress of player.', 1)
+end)
+
+RegisterNetEvent("np-admin/server/give-clothing", function(ServerId)
+    local src = source
+
+    TriggerClientEvent("raid_clothes:openClothing", ServerId, true, true, false)
 end)
 
 RegisterNetEvent("np-admin/server/set-armor", function(ServerId)
