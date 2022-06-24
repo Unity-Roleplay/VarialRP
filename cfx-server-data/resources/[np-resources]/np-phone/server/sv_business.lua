@@ -15,57 +15,20 @@ AddEventHandler('np-phone:fireEmp', function(id,job,name)
   end)
 end)
 
-RPC.register('np-phone:business_hired', function(pCid, pRank, pPassType)
-    -- local src = source
-    -- local bId = bus.param
-    -- local cid = p.param
-    -- local rank = r.param
-    -- local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    -- local ply = user:getCurrentCharacter()
-    -- local SrcName = ply.first_name .. " " ..ply.last_name
-    -- local status = true
-    -- local fullName = getFullname(cid)
-    -- local bName = getBusinessName(bId)
+RegisterServerEvent('np-phone:business_hired', function(StateID, Rank, pBusiness)
+    local user = exports["np-base"]:getModule("Player"):GetUser(source)
+    local ply = user:getCurrentCharacter()
+    local pHiringName = ply.first_name .. " " ..ply.last_name
 
-    -- local result = MySQL.query.await([[
-    --     SELECT * FROM character_passes
-    --     WHERE cid = ? AND pass_type = ?
-    -- ]],
-    -- { cid, bId })
-
-    -- if not result[1] then 
-    --     if cidExist(cid) then
-    --         local insertEmployee = MySQL.insert.await([[
-    --             INSERT INTO character_passes (pass_type, cid, rank, name, giver, business_name)
-    --             VALUES (?, ?, ?, ?, ?, ?)
-    --         ]],
-    --         { bId, cid, rank, fullName, SrcName, bName})
-    --         if insertEmployee > 0 then
-    --             status = true
-    --         else
-    --             print("Database Error")
-    --         end
-    --         return status
-    --     else
-    --         TriggerClientEvent('DoLongHudText', src,"CID is not valid.", 2)
-    --     end
-    -- end
-    -- status = false
-    
-    -- return status
-    print('CID: '..pCid)
-    print('RANK: '..pRank)
-    print('Business Name: '..pPassType)
     exports.oxmysql:execute("INSERT INTO character_passes (cid, rank, name, giver, pass_type, business_name) VALUES (@cid, @rank, @name, @giver, @pass_type, @business_name)",
-        {
-            ['@cid'] = pCid,
-            ['@rank'] = pRank,
-            ['@name'] = 'Aspect Test',
-            ['@giver'] = 'Aspect Test',
-            ['@pass_type'] = pPassType,
-            ['@business_name'] = pPassType,
-        }
-    )
+    {
+        ['@cid'] = StateID,
+        ['@rank'] = Rank,
+        ['@name'] = 'Aspect Test',
+        ['@giver'] = pHiringName,
+        ['@pass_type'] = pBusiness,
+        ['@business_name'] = pBusiness,
+    })
 end)
 
 RPC.register('np-phone:business_edit', function(source,bus,p,r)
@@ -143,19 +106,15 @@ RPC.register('np-phone:bus_addBank', function(source,id,a)
     end
 end)
 
-RPC.register('np-phone:business_fire', function(source,bus,p)
+RegisterServerEvent('np-phone:business_fire', function(pBusinessName, pStateID)
     local src = source
-    local bId = bus.param
-    local cid = p.param
-    local affectedRows = MySQL.update.await([[
-        DELETE FROM character_passes
-        WHERE cid = ? AND pass_type = ?
-    ]],
-    { cid, bId })
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    local char = user:getCurrentCharacter()
+    local cid = char.id
 
-    if affectedRows and affectedRows ~= 0 then
-        return true
-    end
+    exports.ghmattimysql:execute("DELETE FROM character_passes WHERE cid = @cid AND pass_type = @pass_type", {['@cid'] = pStateID, ['@pass_type'] = pBusinessName}, function()
+    end)
+    print('')
 end)
 
 function getFullname(cid)

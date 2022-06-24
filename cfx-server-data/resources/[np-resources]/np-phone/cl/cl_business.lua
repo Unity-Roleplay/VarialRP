@@ -10,19 +10,9 @@ function GroupName(groupid)
   end
 
 RegisterNUICallback('addEmployee', function(data)
-    local business = data.business
-    local cid = data.state_id
-    local rankid = data.rank
-    local rank = GroupRank(business)
-    -- local complete = RPC.execute('np-phone:business_hired', business, cid, rankid)
-    -- if not complete then
-    --     TriggerEvent('DoLongHudText', "You succesffu.",2)
-    -- end
-    RPC.execute('np-phone:business_hired', cid, rank, business)
+    local rank = GroupRank(data.business)
 
-    print('Business Name: '..business)
-    print('StateID: '..cid)
-    print('Rank: '..rankid)
+    TriggerServerEvent('np-phone:business_hired', data.state_id, data.rank, data.business)
 end)
 
 RegisterNUICallback('editEmployee', function(data)
@@ -53,10 +43,7 @@ RegisterNUICallback('fireEmployee', function(data)
       })   
       return
     end
-    local complete = RPC.execute('np-phone:business_fire', business,cid)
-    if not complete then
-        TriggerEvent('DoLongHudText', "This Person is already Employee.",2)
-    end
+    RPC.execute('np-phone:business_fire', business, cid)
 end)
 
 RegisterNUICallback('payCheckEmployee', function(data)
