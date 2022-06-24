@@ -1,5 +1,3 @@
-
-
 RegisterNetEvent('np-phone:fireEmp')
 AddEventHandler('np-phone:fireEmp', function(id, job, name)
   local src = source
@@ -19,12 +17,12 @@ RegisterServerEvent('np-phone:business_hired', function(StateID, Rank, pBusiness
     local user = exports["np-base"]:getModule("Player"):GetUser(source)
     local ply = user:getCurrentCharacter()
     local pHiringName = ply.first_name .. " " ..ply.last_name
-    
+
     exports.oxmysql:execute("INSERT INTO character_passes (cid, rank, name, giver, pass_type, business_name) VALUES (@cid, @rank, @name, @giver, @pass_type, @business_name)",
     {
         ['@cid'] = StateID,
         ['@rank'] = Rank,
-        ['@name'] = 'Aspect Test',
+        ['@name'] = 'NEEDS FIXING',
         ['@giver'] = pHiringName,
         ['@pass_type'] = pBusiness,
         ['@business_name'] = pBusiness,

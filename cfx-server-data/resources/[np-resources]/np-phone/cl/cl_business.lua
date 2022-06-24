@@ -10,8 +10,6 @@ function GroupName(groupid)
   end
 
 RegisterNUICallback('addEmployee', function(data)
-    local rank = GroupRank(data.business)
-
     TriggerServerEvent('np-phone:business_hired', data.state_id, data.rank, data.business)
 end)
 
