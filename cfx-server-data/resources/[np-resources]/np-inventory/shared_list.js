@@ -797,7 +797,7 @@ itemList['-90637530'] = {
 itemList['-1074790547'] = {
   fullyDegrades: false,
   decayrate: 2.0,
-  displayname: 'AK 47',
+  displayname: 'AK 74',
   price: 250,
   craft: [
     [
@@ -814,7 +814,7 @@ itemList['-1074790547'] = {
   weight: 25,
   nonStack: true,
   model: '',
-  image: 'np_assault-rifle.png',
+  image: 'np_ak74.png',
   weapon: true,
 };
 
