@@ -31,21 +31,16 @@ RegisterServerEvent('np-phone:business_hired', function(StateID, Rank, pBusiness
     })
 end)
 
-RPC.register('np-phone:business_edit', function(source,bus,p,r)
-    local src = source
-    local bId = bus.param
-    local cid = p.param
-    local rank = r.param
-    local affectedRows = MySQL.update.await([[
-        UPDATE character_passes
-        SET rank = ?
-        WHERE cid = ? AND pass_type = ?
-    ]],
-    { rank, cid, bId })
-
-    -- if affectedRows and affectedRows ~= 0 then
-    --     updateBalance(1, "+", amount)
-    -- end
+RegisterServerEvent('np-phone:business_edit', function(pRank, pStateID, pPassType)
+    exports.oxmysql:execute('UPDATE character_passes SET rank = @rank WHERE cid = @cid and pass_type = @pass_type',
+    {
+        ['@rank'] = pRank,
+        ['@cid'] = pStateID,
+        ['@pass_type'] = pPassType,
+    })
+    print('Rank: '..pRank)
+    print('StateID: '..pStateID)
+    print('Business: '..pPassType)
 end)
 
 RPC.register('np-phone:business_paycheck', function(source,bus,p,a)

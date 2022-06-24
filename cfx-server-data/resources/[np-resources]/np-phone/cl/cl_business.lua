@@ -16,20 +16,10 @@ RegisterNUICallback('addEmployee', function(data)
 end)
 
 RegisterNUICallback('editEmployee', function(data)
-  local business = data.business
-  local cid = data.state_id
-  local rankid = data.rank
-  -- print("EDIOT EMPLOYEE",business,cid,rankid)
-  local rank = GroupRank(business)
-  if rank < 4 then
-    SendNUIMessage({
-      openSection = "error",
-      textmessage = "Permission Error",
-    })   
-    return
-  end
-  local complete = RPC.execute('np-phone:business_edit', business,cid,rankid)
-
+  TriggerServerEvent('np-phone:business_edit', data.rank, data.state_id, data.business)
+  print('New Rank: ' .. data.rank)
+  print('StateID: ' .. data.state_id)
+  print('Business: ' .. data.business)
 end)
 
 RegisterNUICallback('fireEmployee', function(data)
