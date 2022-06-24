@@ -38,9 +38,6 @@ RegisterServerEvent('np-phone:business_edit', function(pRank, pStateID, pPassTyp
         ['@cid'] = pStateID,
         ['@pass_type'] = pPassType,
     })
-    print('Rank: '..pRank)
-    print('StateID: '..pStateID)
-    print('Business: '..pPassType)
 end)
 
 RPC.register('np-phone:business_paycheck', function(source,bus,p,a)

@@ -17,9 +17,6 @@ end)
 
 RegisterNUICallback('editEmployee', function(data)
   TriggerServerEvent('np-phone:business_edit', data.rank, data.state_id, data.business)
-  print('New Rank: ' .. data.rank)
-  print('StateID: ' .. data.state_id)
-  print('Business: ' .. data.business)
 end)
 
 RegisterNUICallback('fireEmployee', function(data)
