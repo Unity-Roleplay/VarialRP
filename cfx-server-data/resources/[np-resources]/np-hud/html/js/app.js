@@ -907,7 +907,7 @@ function setProgressNos(percent, element) {
     html.text(Math.round(percent));
 }
 
-function ChangePhoneWallpaper() {
+function SaveHudSettings() {
     var wallpaperURL = document.getElementById("wallpaper").value;
 
     $.post('https://np-hud/change_wallpaper', JSON.stringify({ wallpaperURL }));

@@ -133,23 +133,6 @@ AddEventHandler('police:getAnimData', function()
 	end)
 end)
 
-
-RegisterServerEvent('void:getmapprefrence')
-AddEventHandler('void:getmapprefrence', function()
-    local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local char = user:getCurrentCharacter()
-
-    exports.oxmysql:execute("SELECT minimap FROM characters WHERE id = @cid", {['cid'] = char.id}, function(result)
-        if result[1].minimap == 1 then
-			TriggerClientEvent('minimapchecked',src)
-			if result[1].minimap == 0 then
-				TriggerEvent('minimapunchecked',src)
-			end
-        end
-    end)
-end)
-
 RegisterNetEvent("np-hud:getping:sv")
 AddEventHandler("np-hud:getping:sv", function()
     local src = source 

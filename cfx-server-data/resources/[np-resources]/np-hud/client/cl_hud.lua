@@ -89,7 +89,7 @@ AddEventHandler('healthregen', function()
   while regentime > 0 do
     loops = loops + 1
     if loops > 10 then
-      SetPlayerHealthRechargeLimit(pId, 1.025)
+      SetEntityHealth(GetEntityHealth(PlayerPedId()) + 2)
     end
     Citizen.Wait(1000)
     regentime = regentime - 1.0
@@ -105,8 +105,7 @@ RegisterNetEvent('armorbuff')
 AddEventHandler('armorbuff', function()
   if armortime > 0 then return end
   SetPlayerMaxArmour(pId, 1.5)
-  armortime = math.random(2699, 2700)
-
+  armortime = math.random(100, 1000)
   
   local ped = PlayerPedId()
   local pId = PlayerId()
@@ -115,7 +114,10 @@ AddEventHandler('armorbuff', function()
   while armortime > 0 do
     loops = loops + 1
     if loops > 10 then
-      SetPlayerMaxArmour(pId, 1.5)
+      if not GetPedArmour(PlayerPedId()) == 60 then
+        print('Armor: ' ..GetPedArmour(PlayerPedId()))
+        SetPedArmour(PlayerPedId(), GetPedArmour(PlayerPedId()) + 0.5)
+      end
     end
     Citizen.Wait(1000)
     armortime = armortime - 1.0
