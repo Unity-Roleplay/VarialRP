@@ -277,13 +277,13 @@ input:checked + .slider:before{
 #boxinteractions{
     width:100%;
     background: #0985e3f8;
-    border-radius:5px;
+    border-radius: 2.5px;
     animation: slidein 0.5s forwards;
     -webkit-animation: slidein 0.5s forwards;
 }
 
 #textinteractions{
-    padding:10px;
+    padding: 15px;
     color:#fff;
     font-family: Arial, Helvetica, sans-serif;
     font-weight:600;
