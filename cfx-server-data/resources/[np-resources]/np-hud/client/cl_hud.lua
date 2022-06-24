@@ -1991,6 +1991,10 @@ AddEventHandler("client:newStress", function(status, amount)
         pStress = pStress - actualamount
         Wait(1000)
         TriggerServerEvent('np-hud:UpdateStress_SV', pStress)
+    elseif status == removeAll then
+      pStress = 0
+      Wait(1000)
+      TriggerServerEvent('np-hud:UpdateStress_SV', pStress)
     end
 end)
 
