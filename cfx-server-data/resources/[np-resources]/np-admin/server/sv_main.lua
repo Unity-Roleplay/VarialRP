@@ -345,12 +345,8 @@ end)
 RegisterNetEvent("np-admin/server/remove-stress", function(ServerId)
     local src = source
 
-    local TPlayer = GetPlayerrr(ServerId)
-    if TPlayer ~= nil then
-        TPlayer.Functions.SetMetaData('stress', 0)
-        TPlayer.Functions.Save();
-        TriggerClientEvent('DoLongHudText', src, 'Successfully removed stress of player.', 1)
-    end
+    TriggerClientEvent("client:newStress", ServerId, removeAll, 0)
+    TriggerClientEvent('DoLongHudText', src, 'Successfully removed stress of player.', 1)
 end)
 
 RegisterNetEvent("np-admin/server/set-armor", function(ServerId)
