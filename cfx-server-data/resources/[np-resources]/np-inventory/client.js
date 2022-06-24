@@ -532,12 +532,7 @@ on('inventory-open-request', async () => {
         let vehicleModel = GetEntityModel(vehicleFound);
         if (!IsThisModelABicycle(vehicleModel) && !IsThisModelABike(vehicleModel)) {
             let licensePlate = GetVehicleNumberPlateText(vehicleFound);
-            const vehId = exports['np-vehicles'].GetVehicleIdentifier(vehicleFound)
-            if (!vehId) {
-                TriggerEvent('DoLongHudText', 'The glovebox is locked.', 2);
-                return;
-            }
-            const gloveboxName = "Glovebox-" + vehId
+            const gloveboxName = "Glovebox-" + licensePlate
             emitNet('server-inventory-open', startPosition, cid, '1', gloveboxName);
         } else {
         }
