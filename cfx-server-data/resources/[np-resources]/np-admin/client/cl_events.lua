@@ -397,10 +397,6 @@ RegisterNetEvent('np-admin/client/set-model', function(Model)
     SetPedComponentVariation(PlayerPedId(), 0, 0, 0, 0)
 end)
 
-RegisterNetEvent('np-admin/client/armor-up', function()
-    SetPedArmour(PlayerPedId(), 100)
-end)
-
 RegisterNetEvent("np-admin/client/play-sound", function(Sound)
     local Soundfile = nil
     if Sound == 'Fart' then

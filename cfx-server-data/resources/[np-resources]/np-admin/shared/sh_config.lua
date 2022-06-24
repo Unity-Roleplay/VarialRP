@@ -75,20 +75,6 @@ Config.AdminMenus = {
                 },
             },
             {
-                ['Id'] = 'armor',
-                ['Name'] = 'Armor',
-                ['Event'] = 'np-admin/client/armor-up',
-                ['Collapse'] = true,
-                ['Options'] = {
-                    {
-                        ['Id'] = 'player',
-                        ['Name'] = 'Player',
-                        ['Type'] = 'input-choice',
-                        ['PlayerList'] = true,
-                    },
-                },
-            },
-            {
                 ['Id'] = 'food-drink',
                 ['Name'] = 'Max Stats',
                 ['Event'] = 'Admin:Food:Drink',
@@ -477,26 +463,6 @@ Config.AdminMenus = {
                                 Text = 'Wet Fart'
                             },
                         },
-                    },
-                },
-            },
-            {
-                ['Id'] = 'setjob',
-                ['Name'] = 'Request Job',
-                ['Event'] = 'Admin:Request:Job',
-                ['Collapse'] = true,
-                ['Options'] = {
-                    {
-                        ['Id'] = 'player',
-                        ['Name'] = 'Player',
-                        ['Type'] = 'input-choice',
-                        ['PlayerList'] = true,
-                    },
-                    {
-                        ['Id'] = 'job',
-                        ['Name'] = 'Job',
-                        ['Type'] = 'text-choice',
-                        ['Choices'] = GetJobs()
                     },
                 },
             },
