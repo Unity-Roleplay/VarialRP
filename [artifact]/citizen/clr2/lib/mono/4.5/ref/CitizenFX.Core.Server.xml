@@ -6758,6 +6758,7 @@
                 *   2189
                 *   2372
                 *   2545
+                *   2612
             *   RedM
                 *   1311
                 *   1355
@@ -6953,9 +6954,9 @@
         </member>
         <member name="F:CitizenFX.Core.Native.Hash.GET_VEHICLE_DOOR_LOCK_STATUS">
             <summary>
-            enum VehicleLockStatus = {
+            ```lua
+            enum_VehicleLockStatus = {
                 None = 0,
-                Unlocked = 1,
                 Locked = 2,
                 LockedForPlayer = 3,
                 StickPlayerInside = 4, -- Doesn't allow players to exit the vehicle with the exit vehicle key.
@@ -6963,6 +6964,11 @@
                 CanBeBrokenIntoPersist = 8, -- Can be broken into persist
                 CannotBeTriedToEnter = 10, -- Cannot be tried to enter (Nothing happens when you press the vehicle enter key).
             }
+            ```
+            
+            It should be [noted](https://forum.cfx.re/t/4863241) that while the [client-side command](#\_0x25BC98A59C2EA962) and its
+            setter distinguish between states 0 (unset) and 1 (unlocked), the game will synchronize both as state 0, so the server-side
+            command will return only '0' if unlocked.
             </summary>
         </member>
         <member name="F:CitizenFX.Core.Native.Hash.GET_VEHICLE_FLIGHT_NOZZLE_POSITION">
@@ -7741,20 +7747,23 @@
         </member>
         <member name="F:CitizenFX.Core.Native.Hash.SET_PED_HEAD_BLEND_DATA">
             <summary>
-            The "shape" parameters control the shape of the ped's face. The "skin" parameters control the skin tone. ShapeMix and skinMix control how much the first and second IDs contribute,(typically mother and father.) ThirdMix overrides the others in favor of the third IDs. IsParent is set for "children" of the player character's grandparents during old-gen character creation. It has unknown effect otherwise.  
-            The IDs start at zero and go Male Non-DLC, Female Non-DLC, Male DLC, and Female DLC.  
-            !!!Can someone add working example for this???  
-            try this:  
-            headBlendData headData;  
-            _GET_PED_HEAD_BLEND_DATA(PLAYER_PED_ID(), &amp;headData);  
-            SET_PED_HEAD_BLEND_DATA(PLAYER_PED_ID(), headData.shapeFirst, headData.shapeSecond, headData.shapeThird, headData.skinFirst, headData.skinSecond  
-            	, headData.skinThird, headData.shapeMix, headData.skinMix, headData.skinThird, 0);  
-            For more info please refer to this topic.   
-            gtaforums.com/topic/858970-all-gtao-face-ids-pedset-ped-head-blend-data-explained
+            For more info please refer to [this](https://gtaforums.com/topic/858970-all-gtao-face-ids-pedset-ped-head-blend-data-explained) topic.
+            
+            **Other information:**
+            
+            IDs start at zero and go Male Non-DLC, Female Non-DLC, Male DLC, and Female DLC.&lt;/br&gt;
+            
+            This native function is often called prior to calling natives such as:
+            
+            *   [`SetPedHairColor`](#0xBB43F090)
+            *   [`SetPedHeadOverlayColor`](#0x78935A27)
+            *   [`SetPedHeadOverlay`](#0xD28DBA90)
+            *   [`SetPedFaceFeature`](#0x6C8D4458)
             </summary>
         </member>
         <member name="F:CitizenFX.Core.Native.Hash.SET_PED_HEAD_OVERLAY">
             <summary>
+            ```
             OverlayID ranges from 0 to 12, index from 0 to _GET_NUM_OVERLAY_VALUES(overlayID)-1, and opacity from 0.0 to 1.0.   
             overlayID       Part                  Index, to disable  
             0               Blemishes             0 - 23, 255  
@@ -7769,7 +7778,12 @@
             9               Moles/Freckles        0 - 17, 255  
             10              Chest Hair            0 - 16, 255  
             11              Body Blemishes        0 - 11, 255  
-            12              Add Body Blemishes    0 - 1, 255
+            12              Add Body Blemishes    0 - 1, 255  
+            ```
+            
+            **Note:**
+            
+            You may need to call [`SetPedHeadBlendData`](#0x9414E18B9434C2FE) prior to calling this native in order for it to work.
             </summary>
         </member>
         <member name="F:CitizenFX.Core.Native.Hash.SET_PED_PROP_INDEX">
@@ -8208,31 +8222,36 @@
         </member>
         <member name="F:CitizenFX.Core.Native.Hash._SET_PED_FACE_FEATURE">
             <summary>
-            Sets the various freemode face features, e.g. nose length, chin shape. Scale ranges from -1.0 to 1.0.
-            Index can be 0 - 19
-            SET_PED_M*
-            Here is the list of names. It starts at 0 and runs in sequence
-            Face_Feature
-            Nose_Width
-            Nose_Peak_Hight
-            Nose_Peak_Lenght
-            Nose_Bone_High
-            Nose_Peak_Lowering
-            Nose_Bone_Twist
-            EyeBrown_High
-            EyeBrown_Forward
-            Cheeks_Bone_High
-            Cheeks_Bone_Width
-            Cheeks_Width
-            Eyes_Openning
-            Lips_Thickness
-            Jaw_Bone_Width: Bone size to sides
-            Jaw_Bone_Back_Lenght: Bone size to back
-            Chimp_Bone_Lowering: Go Down
-            Chimp_Bone_Lenght: Go forward
-            Chimp_Bone_Width
-            Chimp_Hole
-            Neck_Thikness
+            Sets the various freemode face features, e.g. nose length, chin shape.
+            
+            **Indexes (From 0 to 19):**
+            
+            Parentheses indicate morph scale/direction as in (-1.0 to 1.0)
+            
+            *   **0**: Nose Width (Thin/Wide)
+            *   **1**: Nose Peak (Up/Down)
+            *   **2**: Nose Length (Long/Short)
+            *   **3**: Nose Bone Curveness (Crooked/Curved)
+            *   **4**: Nose Tip (Up/Down)
+            *   **5**: Nose Bone Twist (Left/Right)
+            *   **6**: Eyebrow (Up/Down)
+            *   **7**: Eyebrow (In/Out)
+            *   **8**: Cheek Bones (Up/Down)
+            *   **9**: Cheek Sideways Bone Size (In/Out)
+            *   **10**: Cheek Bones Width (Puffed/Gaunt)
+            *   **11**: Eye Opening (Both) (Wide/Squinted)
+            *   **12**: Lip Thickness (Both) (Fat/Thin)
+            *   **13**: Jaw Bone Width (Narrow/Wide)
+            *   **14**: Jaw Bone Shape (Round/Square)
+            *   **15**: Chin Bone (Up/Down)
+            *   **16**: Chin Bone Length (In/Out or Backward/Forward)
+            *   **17**: Chin Bone Shape (Pointed/Square)
+            *   **18**: Chin Hole (Chin Bum)
+            *   **19**: Neck Thickness (Thin/Thick)
+            
+            **Note:**
+            
+            You may need to call [`SetPedHeadBlendData`](#0x9414E18B9434C2FE) prior to calling this native in order for it to work.
             </summary>
         </member>
         <member name="F:CitizenFX.Core.Native.Hash._SET_PED_HAIR_COLOR">
@@ -8242,9 +8261,14 @@
         </member>
         <member name="F:CitizenFX.Core.Native.Hash._SET_PED_HEAD_OVERLAY_COLOR">
             <summary>
-            Used for freemode (online) characters.  
-            ColorType is 1 for eyebrows, beards, and chest hair; 2 for blush and lipstick; and 0 otherwise, though not called in those cases.  
-            Called after SET_PED_HEAD_OVERLAY().
+            ```
+            Used for freemode (online) characters. 
+            Called after SET_PED_HEAD_OVERLAY().  
+            ```
+            
+            **Note:**
+            
+            You may need to call [`SetPedHeadBlendData`](#0x9414E18B9434C2FE) prior to calling this native in order for it to work.
             </summary>
         </member>
         <member name="M:CitizenFX.Core.Native.API.AddBlipForArea(System.Single,System.Single,System.Single,System.Single,System.Single)">
@@ -8829,6 +8853,7 @@
             *   2189
             *   2372
             *   2545
+            *   2612
             *   RedM
             *   1311
             *   1355
@@ -9113,7 +9138,7 @@
             The key to fetch
             </param>
             <returns>
-            A float that contains the value stored in the Kvp or nil/null if none.
+            The floating-point value stored under the specified key, or 0.0 if not found.
             </returns>
         </member>
         <member name="M:CitizenFX.Core.Native.API.GetResourceKvpInt(System.String)">
@@ -9124,7 +9149,7 @@
             The key to fetch
             </param>
             <returns>
-            A int that contains the value stored in the Kvp or nil/null if none.
+            The integer value stored under the specified key, or 0 if not found.
             </returns>
         </member>
         <member name="M:CitizenFX.Core.Native.API.GetResourceKvpString(System.String)">
@@ -9135,7 +9160,7 @@
             The key to fetch
             </param>
             <returns>
-            A string that contains the value stored in the Kvp or nil/null if none.
+            The string value stored under the specified key, or nil/null if not found.
             </returns>
         </member>
         <member name="M:CitizenFX.Core.Native.API.GetResourceMetadata(System.String,System.String,System.Int32)">
@@ -9196,9 +9221,9 @@
         </member>
         <member name="M:CitizenFX.Core.Native.API.GetVehicleDoorLockStatus(System.Int32)">
             <summary>
-            enum VehicleLockStatus = {
+            ```lua
+            enum_VehicleLockStatus = {
             None = 0,
-            Unlocked = 1,
             Locked = 2,
             LockedForPlayer = 3,
             StickPlayerInside = 4, -- Doesn't allow players to exit the vehicle with the exit vehicle key.
@@ -9206,7 +9231,17 @@
             CanBeBrokenIntoPersist = 8, -- Can be broken into persist
             CannotBeTriedToEnter = 10, -- Cannot be tried to enter (Nothing happens when you press the vehicle enter key).
             }
+            ```
+            It should be [noted](https://forum.cfx.re/t/4863241) that while the [client-side command](#\_0x25BC98A59C2EA962) and its
+            setter distinguish between states 0 (unset) and 1 (unlocked), the game will synchronize both as state 0, so the server-side
+            command will return only '0' if unlocked.
             </summary>
+            <param name="vehicle">
+            A vehicle handle.
+            </param>
+            <returns>
+            The door lock status for the specified vehicle.
+            </returns>
         </member>
         <member name="M:CitizenFX.Core.Native.API.GetVehicleDoorsLockedForPlayer(System.Int32)">
             <summary>
@@ -10240,32 +10275,41 @@
         </member>
         <member name="M:CitizenFX.Core.Native.API.SetPedFaceFeature(System.Int32,System.Int32,System.Single)">
             <summary>
-            Sets the various freemode face features, e.g. nose length, chin shape. Scale ranges from -1.0 to 1.0.
-            Index can be 0 - 19
-            SET_PED_M*
-            Here is the list of names. It starts at 0 and runs in sequence
-            Face_Feature
-            Nose_Width
-            Nose_Peak_Hight
-            Nose_Peak_Lenght
-            Nose_Bone_High
-            Nose_Peak_Lowering
-            Nose_Bone_Twist
-            EyeBrown_High
-            EyeBrown_Forward
-            Cheeks_Bone_High
-            Cheeks_Bone_Width
-            Cheeks_Width
-            Eyes_Openning
-            Lips_Thickness
-            Jaw_Bone_Width: Bone size to sides
-            Jaw_Bone_Back_Lenght: Bone size to back
-            Chimp_Bone_Lowering: Go Down
-            Chimp_Bone_Lenght: Go forward
-            Chimp_Bone_Width
-            Chimp_Hole
-            Neck_Thikness
+            Sets the various freemode face features, e.g. nose length, chin shape.
+            **Indexes (From 0 to 19):**
+            Parentheses indicate morph scale/direction as in (-1.0 to 1.0)
+            *   **0**: Nose Width (Thin/Wide)
+            *   **1**: Nose Peak (Up/Down)
+            *   **2**: Nose Length (Long/Short)
+            *   **3**: Nose Bone Curveness (Crooked/Curved)
+            *   **4**: Nose Tip (Up/Down)
+            *   **5**: Nose Bone Twist (Left/Right)
+            *   **6**: Eyebrow (Up/Down)
+            *   **7**: Eyebrow (In/Out)
+            *   **8**: Cheek Bones (Up/Down)
+            *   **9**: Cheek Sideways Bone Size (In/Out)
+            *   **10**: Cheek Bones Width (Puffed/Gaunt)
+            *   **11**: Eye Opening (Both) (Wide/Squinted)
+            *   **12**: Lip Thickness (Both) (Fat/Thin)
+            *   **13**: Jaw Bone Width (Narrow/Wide)
+            *   **14**: Jaw Bone Shape (Round/Square)
+            *   **15**: Chin Bone (Up/Down)
+            *   **16**: Chin Bone Length (In/Out or Backward/Forward)
+            *   **17**: Chin Bone Shape (Pointed/Square)
+            *   **18**: Chin Hole (Chin Bum)
+            *   **19**: Neck Thickness (Thin/Thick)
+            **Note:**
+            You may need to call [`SetPedHeadBlendData`](#0x9414E18B9434C2FE) prior to calling this native in order for it to work.
             </summary>
+            <param name="ped">
+            The ped entity
+            </param>
+            <param name="index">
+            An integer ranging from 0 to 19
+            </param>
+            <param name="scale">
+            A float ranging from -1.0 to 1.0
+            </param>
         </member>
         <member name="M:CitizenFX.Core.Native.API.SetPedHairColor(System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -10274,20 +10318,52 @@
         </member>
         <member name="M:CitizenFX.Core.Native.API.SetPedHeadBlendData(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Boolean)">
             <summary>
-            The "shape" parameters control the shape of the ped's face. The "skin" parameters control the skin tone. ShapeMix and skinMix control how much the first and second IDs contribute,(typically mother and father.) ThirdMix overrides the others in favor of the third IDs. IsParent is set for "children" of the player character's grandparents during old-gen character creation. It has unknown effect otherwise.
-            The IDs start at zero and go Male Non-DLC, Female Non-DLC, Male DLC, and Female DLC.
-            !!!Can someone add working example for this???
-            try this:
-            headBlendData headData;
-            _GET_PED_HEAD_BLEND_DATA(PLAYER_PED_ID(), &amp;headData);
-            SET_PED_HEAD_BLEND_DATA(PLAYER_PED_ID(), headData.shapeFirst, headData.shapeSecond, headData.shapeThird, headData.skinFirst, headData.skinSecond
-            , headData.skinThird, headData.shapeMix, headData.skinMix, headData.skinThird, 0);
-            For more info please refer to this topic.
-            gtaforums.com/topic/858970-all-gtao-face-ids-pedset-ped-head-blend-data-explained
+            For more info please refer to [this](https://gtaforums.com/topic/858970-all-gtao-face-ids-pedset-ped-head-blend-data-explained) topic.
+            **Other information:**
+            IDs start at zero and go Male Non-DLC, Female Non-DLC, Male DLC, and Female DLC.&lt;/br&gt;
+            This native function is often called prior to calling natives such as:
+            *   [`SetPedHairColor`](#0xBB43F090)
+            *   [`SetPedHeadOverlayColor`](#0x78935A27)
+            *   [`SetPedHeadOverlay`](#0xD28DBA90)
+            *   [`SetPedFaceFeature`](#0x6C8D4458)
             </summary>
+            <param name="ped">
+            The ped entity
+            </param>
+            <param name="shapeFirstID">
+            Controls the shape of the first ped's face
+            </param>
+            <param name="shapeSecondID">
+            Controls the shape of the second ped's face
+            </param>
+            <param name="shapeThirdID">
+            Controls the shape of the third ped's face
+            </param>
+            <param name="skinFirstID">
+            Controls the first id's skin tone
+            </param>
+            <param name="skinSecondID">
+            Controls the second id's skin tone
+            </param>
+            <param name="skinThirdID">
+            Controls the third id's skin tone
+            </param>
+            <param name="shapeMix">
+            0.0 - 1.0 Of whose characteristics to take Mother -&gt; Father (shapeFirstID and shapeSecondID)
+            </param>
+            <param name="skinMix">
+            0.0 - 1.0 Of whose characteristics to take Mother -&gt; Father (skinFirstID and skinSecondID)
+            </param>
+            <param name="thirdMix">
+            Overrides the others in favor of the third IDs.
+            </param>
+            <param name="isParent">
+            IsParent is set for "children" of the player character's grandparents during old-gen character creation. It has unknown effect otherwise.
+            </param>
         </member>
         <member name="M:CitizenFX.Core.Native.API.SetPedHeadOverlay(System.Int32,System.Int32,System.Int32,System.Single)">
             <summary>
+            ```
             OverlayID ranges from 0 to 12, index from 0 to _GET_NUM_OVERLAY_VALUES(overlayID)-1, and opacity from 0.0 to 1.0.
             overlayID       Part                  Index, to disable
             0               Blemishes             0 - 23, 255
@@ -10303,14 +10379,47 @@
             10              Chest Hair            0 - 16, 255
             11              Body Blemishes        0 - 11, 255
             12              Add Body Blemishes    0 - 1, 255
+            ```
+            **Note:**
+            You may need to call [`SetPedHeadBlendData`](#0x9414E18B9434C2FE) prior to calling this native in order for it to work.
             </summary>
+            <param name="ped">
+            The ped entity
+            </param>
+            <param name="overlayID">
+            The overlay id displayed up above.
+            </param>
+            <param name="index">
+            An integer representing the index (from 0 to `_GET_NUM_OVERLAY_VALUES(overlayID)-1`)
+            </param>
+            <param name="opacity">
+            A float ranging from 0.0 to 1.0
+            </param>
         </member>
         <member name="M:CitizenFX.Core.Native.API.SetPedHeadOverlayColor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
+            ```
             Used for freemode (online) characters.
-            ColorType is 1 for eyebrows, beards, and chest hair; 2 for blush and lipstick; and 0 otherwise, though not called in those cases.
             Called after SET_PED_HEAD_OVERLAY().
+            ```
+            **Note:**
+            You may need to call [`SetPedHeadBlendData`](#0x9414E18B9434C2FE) prior to calling this native in order for it to work.
             </summary>
+            <param name="ped">
+            The ped entity
+            </param>
+            <param name="overlayID">
+            An integer representing the overlay id
+            </param>
+            <param name="colorType">
+            1 for eyebrows, beards, and chest hair; 2 for blush and lipstick; and 0 otherwise, though not called in those cases.
+            </param>
+            <param name="colorID">
+            An integer representing the primary color id
+            </param>
+            <param name="secondColorID">
+            An integer representing the secondary color id
+            </param>
         </member>
         <member name="M:CitizenFX.Core.Native.API.SetPedPropIndex(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
             <summary>
