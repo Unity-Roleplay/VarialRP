@@ -260,9 +260,7 @@ $("#rank-submit-input").click(function (e) {
     var business_id = $("#business-id").val();
     var rank = $("#user-rank").val();
     var state_id = $("#state_id").val();
-    // console.log(business_id,rank,state_id)
     complateInputJustGreen();
-    // console.log("SUBMIT SHIT")
     setTimeout(() => {
         $.post('http://np-phone/addEmployee', JSON.stringify({
             business: business_id,

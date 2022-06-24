@@ -793,15 +793,15 @@ $(document).click(function(event){
             $(".buttoncontext").html("");
             $.each(menucontextdata, function (index1, item1) {
                 if (item1.children) {
-                    $(".buttoncontext").append('<div class="button-context" id="contextmenu-'+index1+'"><div class="titlecontext" id="contextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="contextmenu-'+index1+'">'+item1.description+'</div></div>');
-                    $("#contextmenu-"+index1).data("action",item1.action);
-                    $("#contextmenu-"+index1).data("key",item1.key);
-                    $("#contextmenu-"+index1).data("children",item1.children);
-                }else{
-                    $(".buttoncontext").append('<div class="button-context" id="contextmenu-'+index1+'"><div class="titlecontext" id="contextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="contextmenu-'+index1+'">'+item1.description+'</div></div>');
-                    $("#contextmenu-"+index1).data("action",item1.action);
-                    $("#contextmenu-"+index1).data("key",item1.key);
-                    $("#contextmenu-"+index1).data("children",null);
+                    $(".buttoncontext").append('<div class="button-context" id="contextmenu-' + index1 + '"><div class="titlecontext" id="contextmenu-' + index1 + '">' + item1.title + '</div>' + '<i class="fas fa-' + item1.icon + '" style="color: white; cellpadding: 10px; position: absolute; top: 30%; margin-bottom: 3px;"></i>' + '<i class="fas fa-chevron-right" style="position: absolute; color: white; margin-left: 92.5%; margin-buttom: 3px; top: 35%; right: 7%; float: right;"></i>' + '<div class="descriptioncontext" id="contextmenu-' + index1 + '">' + item1.description + '</div></div>');
+                    $("#contextmenu-" + index1).data("action", item1.action);
+                    $("#contextmenu-" + index1).data("key", item1.key);
+                    $("#contextmenu-" + index1).data("children", item1.children);
+                } else {
+                    $(".buttoncontext").append('<div class="button-context" id="contextmenu-' + index1 + '"><div class="titlecontext" id="contextmenu-' + index1 + '">' + item1.title + '</div><div class="descriptioncontext" id="contextmenu-' + index1 + '">' + item1.description + '</div></div>');
+                    $("#contextmenu-" + index1).data("action", item1.action);
+                    $("#contextmenu-" + index1).data("key", item1.key);
+                    $("#contextmenu-" + index1).data("children", null);
                 }
             })
         }else{
@@ -817,23 +817,23 @@ $(document).click(function(event){
                     $.each(children, function (index1, item1) {
                         if (item1.children) {
                             if (item1.description) {
-                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-'+index1+'"><div class="titlecontext" id="subcontextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="subcontextmenu-'+index1+'">'+item1.description+'</div></div>');
-                            }else{
-                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-'+index1+'"><div class="titlecontext" id="subcontextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="subcontextmenu-'+index1+'"></div></div>');
+                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-' + index1 + '"><div class="titlecontext" id="subcontextmenu-' + index1 + '">' + item1.title + '</div><div class="descriptioncontext" id="subcontextmenu-' + index1 + '">' + item1.description + '</div></div>');
+                            } else {
+                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-' + index1 + '"><div class="titlecontext" id="subcontextmenu-' + index1 + '">' + item1.title + '</div><div class="descriptioncontext" id="subcontextmenu-' + index1 + '"></div></div>');
                             }
-                            
-                            $("#subcontextmenu-"+index1).data("action",item1.action);
-                            $("#subcontextmenu-"+index1).data("key",item1.key);
-                            $("#subcontextmenu-"+index1).data("children",item1.children);
+
+                            $("#subcontextmenu-" + index1).data("action", item1.action);
+                            $("#subcontextmenu-" + index1).data("key", item1.key);
+                            $("#subcontextmenu-" + index1).data("children", item1.children);
                         }else{
                             if (item1.description) {
-                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-'+index1+'"><div class="titlecontext" id="subcontextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="subcontextmenu-'+index1+'">'+item1.description+'</div></div>');
-                            }else{
-                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-'+index1+'"><div class="titlecontext" id="subcontextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="subcontextmenu-'+index1+'"></div></div>');
+                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-' + index1 + '"><div class="titlecontext" id="subcontextmenu-' + index1 + '">' + item1.title + '</div><div class="descriptioncontext" id="subcontextmenu-' + index1 + '">' + item1.description + '</div></div>');
+                            } else {
+                                $(".buttoncontext").append('<div class="button-context" id="subcontextmenu-' + index1 + '"><div class="titlecontext" id="subcontextmenu-' + index1 + '">' + item1.title + '</div><div class="descriptioncontext" id="subcontextmenu-' + index1 + '"></div></div>');
                             }
-                            $("#subcontextmenu-"+index1).data("action",item1.action);
-                            $("#subcontextmenu-"+index1).data("key",item1.key);
-                            $("#subcontextmenu-"+index1).data("children",null);
+                            $("#subcontextmenu-" + index1).data("action", item1.action);
+                            $("#subcontextmenu-" + index1).data("key", item1.key);
+                            $("#subcontextmenu-" + index1).data("children", null);
                         }
                     })
                 }else{

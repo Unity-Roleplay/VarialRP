@@ -15,44 +15,57 @@ AddEventHandler('np-phone:fireEmp', function(id,job,name)
   end)
 end)
 
-RPC.register('np-phone:business_hired', function(source,bus,p,r)
-    local src = source
-    local bId = bus.param
-    local cid = p.param
-    local rank = r.param
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local ply = user:getCurrentCharacter()
-    local SrcName = ply.first_name .. " " ..ply.last_name
-    local status = true
-    local fullName = getFullname(cid)
-    local bName = getBusinessName(bId)
+RPC.register('np-phone:business_hired', function(pCid, pRank, pPassType)
+    -- local src = source
+    -- local bId = bus.param
+    -- local cid = p.param
+    -- local rank = r.param
+    -- local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    -- local ply = user:getCurrentCharacter()
+    -- local SrcName = ply.first_name .. " " ..ply.last_name
+    -- local status = true
+    -- local fullName = getFullname(cid)
+    -- local bName = getBusinessName(bId)
 
-    local result = MySQL.query.await([[
-        SELECT * FROM character_passes
-        WHERE cid = ? AND pass_type = ?
-    ]],
-    { cid, bId })
+    -- local result = MySQL.query.await([[
+    --     SELECT * FROM character_passes
+    --     WHERE cid = ? AND pass_type = ?
+    -- ]],
+    -- { cid, bId })
 
-    if not result[1] then 
-        if cidExist(cid) then
-            local insertEmployee = MySQL.insert.await([[
-                INSERT INTO character_passes (pass_type, cid, rank, name, giver, business_name)
-                VALUES (?, ?, ?, ?, ?, ?)
-            ]],
-            { bId, cid, rank, fullName, SrcName, bName})
-            if insertEmployee > 0 then
-                status = true
-            else
-                print("Database Error")
-            end
-            return status
-        else
-            TriggerClientEvent('DoLongHudText', src,"CID is not valid.", 2)
-        end
-    end
-    status = false
+    -- if not result[1] then 
+    --     if cidExist(cid) then
+    --         local insertEmployee = MySQL.insert.await([[
+    --             INSERT INTO character_passes (pass_type, cid, rank, name, giver, business_name)
+    --             VALUES (?, ?, ?, ?, ?, ?)
+    --         ]],
+    --         { bId, cid, rank, fullName, SrcName, bName})
+    --         if insertEmployee > 0 then
+    --             status = true
+    --         else
+    --             print("Database Error")
+    --         end
+    --         return status
+    --     else
+    --         TriggerClientEvent('DoLongHudText', src,"CID is not valid.", 2)
+    --     end
+    -- end
+    -- status = false
     
-    return status
+    -- return status
+    print('CID: '..pCid)
+    print('RANK: '..pRank)
+    print('Business Name: '..pPassType)
+    exports.oxmysql:execute("INSERT INTO character_passes (cid, rank, name, giver, pass_type, business_name) VALUES (@cid, @rank, @name, @giver, @pass_type, @business_name)",
+        {
+            ['@cid'] = pCid,
+            ['@rank'] = pRank,
+            ['@name'] = 'Aspect Test',
+            ['@giver'] = 'Aspect Test',
+            ['@pass_type'] = pPassType,
+            ['@business_name'] = pPassType,
+        }
+    )
 end)
 
 RPC.register('np-phone:business_edit', function(source,bus,p,r)

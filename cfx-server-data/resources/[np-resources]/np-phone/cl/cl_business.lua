@@ -10,22 +10,19 @@ function GroupName(groupid)
   end
 
 RegisterNUICallback('addEmployee', function(data)
-  -- print("TRIGGERED?")
     local business = data.business
     local cid = data.state_id
     local rankid = data.rank
     local rank = GroupRank(business)
-    if rank < 4 then
-      SendNUIMessage({
-        openSection = "error",
-        textmessage = "Permission Error",
-      })   
-      return
-    end
-    local complete = RPC.execute('np-phone:business_hired', business,cid,rankid)
-    if not complete then
-        TriggerEvent('DoLongHudText', "You succesffu.",2)
-    end
+    -- local complete = RPC.execute('np-phone:business_hired', business, cid, rankid)
+    -- if not complete then
+    --     TriggerEvent('DoLongHudText', "You succesffu.",2)
+    -- end
+    RPC.execute('np-phone:business_hired', cid, rank, business)
+
+    print('Business Name: '..business)
+    print('StateID: '..cid)
+    print('Rank: '..rankid)
 end)
 
 RegisterNUICallback('editEmployee', function(data)
