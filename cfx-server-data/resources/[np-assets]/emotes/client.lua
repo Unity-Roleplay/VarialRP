@@ -130,6 +130,13 @@ AddEventHandler("playerSpawned", function()
     TriggerServerEvent("stocks:retrieveclientstocks")
 end)
 
+local function SwitchAnimSet(animation)
+    RequestAnimSet(animation)
+    while not HasAnimSetLoaded(animation) do Citizen.Wait(1) end
+    SetPedMovementClipset(PlayerPedId(), animation, 0.2)
+    AnimSet = animation;
+    TriggerServerEvent("police:setAnimData", AnimSet)
+end
 
 RegisterNetEvent('AnimSet:Hurry');
 AddEventHandler('AnimSet:Hurry', function()
