@@ -2332,6 +2332,23 @@
       <ReloadData ref="RELOAD_DEFAULT_WITH_EMPTIES" />
     </Item>
 	
+	<Item type="CWeaponComponentInfo">
+      <Name>COMPONENT_AK74_CLIP_01</Name>
+	  <Model>w_ar_ak74_mag1</Model>
+      <LocName>WCT_CAMO_2</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone>AAPCamo</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+    </Item>
+	
   </Infos>
   <InfoBlobName>DLC - Christmas2017</InfoBlobName>
 </CWeaponComponentInfoBlob>

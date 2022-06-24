@@ -117,7 +117,7 @@
           <DropForwardVelocity value="0.000000" />
           <Speed value="2000.000000" />
           <BulletsInBatch value="8" />
-          <BatchSpread value="0.060000" />
+          <BatchSpread value="0.050000" />
           <ReloadTimeMP value="-1.000000" />
           <ReloadTimeSP value="-1.000000" />
           <VehicleReloadTime value="1.000000" />
@@ -188,14 +188,14 @@
           <NetworkPedDamageModifier value="1.000000" />
           <NetworkHeadShotPlayerDamageModifier value="0.000000" />
           <LockOnRange value="35.000000" />
-          <WeaponRange value="60.000000" />
+          <WeaponRange value="100.000000" />
           <BulletDirectionOffsetInDegrees value="0.000000" />
           <BulletDirectionPitchOffset value="0.000000" />
           <BulletDirectionPitchHomingOffset value="0.000000" />
           <AiSoundRange value="-1.000000" />
           <AiPotentialBlastEventRange value="-1.000000" />
-          <DamageFallOffRangeMin value="15.000000" />
-          <DamageFallOffRangeMax value="35.000000" />
+          <DamageFallOffRangeMin value="20.000000" />
+          <DamageFallOffRangeMax value="45.000000" />
           <DamageFallOffModifier value="0.600000" />
           <VehicleWeaponHash />
           <DefaultCameraHash>SHOTGUN_AIM_CAMERA</DefaultCameraHash>

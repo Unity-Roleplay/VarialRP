@@ -1174,7 +1174,7 @@
           <AmmoMaxMP value="250" />
           <AmmoMax50MP value="1000" />
           <AmmoMax100MP value="9999" />
-          <AmmoFlags />
+          <AmmoFlags>InfiniteAmmo</AmmoFlags>
         </Item>
         <Item type="CAmmoProjectileInfo">
           <Name>AMMO_GRENADELAUNCHER</Name>
@@ -4760,8 +4760,8 @@
           <MinTimeBetweenRecoilShakes value="150" />
           <RecoilShakeAmplitude value="1.000000" />
           <ExplosionShakeAmplitude value="-1.000000" />
-          <IkRecoilDisplacement value="0.01" />
-          <IkRecoilDisplacementScope value="0.005" />
+          <IkRecoilDisplacement value="0.0" />
+          <IkRecoilDisplacementScope value="0.0" />
           <IkRecoilDisplacementScaleBackward value="1.0" />
           <IkRecoilDisplacementScaleVertical value="0.4" />
           <ReticuleHudPosition x="0.000000" y="0.000000" />
@@ -6747,7 +6747,7 @@
         </Item>
         <Item type="CWeaponInfo">
           <Name>WEAPON_ASSAULTRIFLE</Name>
-          <Model>W_AR_ASSAULTRIFLE</Model>
+          <Model>W_AR_AK74</Model>
           <Audio>AUDIO_ITEM_ASSAULTRIFLE</Audio>
           <Slot>SLOT_ASSAULTRIFLE</Slot>
           <DamageType>BULLET</DamageType>
@@ -6990,15 +6990,15 @@
               <Components>
                 <Item>
                   <Name>COMPONENT_ASSAULTRIFLE_CLIP_01</Name>
-                  <Default value="true" />
+                  <Default value="false" />
                 </Item>
                 <Item>
                   <Name>COMPONENT_ASSAULTRIFLE_CLIP_02</Name>
                   <Default value="false" />
                 </Item>
                 <Item>
-                  <Name>COMPONENT_ASSAULTRIFLE_CLIP_03</Name>
-                  <Default value="false" />
+                  <Name>COMPONENT_AK74_CLIP_01</Name>
+                  <Default value="true" />
                 </Item>
               </Components>
             </Item>
@@ -7060,7 +7060,7 @@
           <GunFeedBone />
           <TargetSequenceGroup />
           <WeaponFlags>CarriedInHand Automatic Gun CanLockonOnFoot CanLockonInVehicle CanFreeAim TwoHanded AnimReload AnimCrouchFire UsableOnFoot UsableInCover AllowEarlyExitFromFireAnimAfterBulletFired NoLeftHandIKWhenBlocked AllowCloseQuarterKills HasLowCoverReloads HasLowCoverSwaps TorsoIKForWeaponBlock LongWeapon UseFPSAimIK UseFPSSecondaryMotion FPSOnlyExitFireAnimAfterRecoilEnds</WeaponFlags>
-          <TintSpecValues ref="TINT_DEFAULT" />
+          <TintSpecValues ref="TINT_GUNRUNNING" />
           <FiringPatternAliases ref="FIRING_PATTERN_RIFLE" />
           <ReloadUpperBodyFixupExpressionData ref="default" />
           <AmmoDiminishingRate value="3" />
@@ -7083,7 +7083,7 @@
         <Item type="CWeaponInfo">
           <Name>WEAPON_CARBINERIFLE</Name>
           <Model>W_AR_CARBINERIFLE</Model>
-          <Audio>AUDIO_ITEM_CARBINERIFLE</Audio>
+          <Audio>AUDIO_ITEM_COMBAT_PDW</Audio>
           <Slot>SLOT_CARBINERIFLE</Slot>
           <DamageType>BULLET</DamageType>
           <Explosion>
@@ -7097,7 +7097,7 @@
           <FireType>INSTANT_HIT</FireType>
           <WheelSlot>WHEEL_RIFLE</WheelSlot>
           <Group>GROUP_RIFLE</Group>
-          <AmmoInfo ref="AMMO_RIFLE" />
+          <AmmoInfo ref="AMMO_AIRSOFT" />
           <AimingInfo ref="PISTOL_FLAREGUN_BASE_STRAFE" />
           <ClipSize value="30" />
           <AccuracySpread value="3.000000" />
@@ -8415,7 +8415,7 @@
           <DropForwardVelocity value="0.000000" />
           <Speed value="2000.000000" />
           <BulletsInBatch value="8" />
-          <BatchSpread value="0.050000" />
+          <BatchSpread value="0.040000" />
           <ReloadTimeMP value="-1.000000" />
           <ReloadTimeSP value="-1.000000" />
           <VehicleReloadTime value="1.000000" />
@@ -8481,12 +8481,12 @@
           <NetworkPedDamageModifier value="1.000000" />
           <NetworkHeadShotPlayerDamageModifier value="2.000000" />
           <LockOnRange value="35.000000" />
-          <WeaponRange value="60.000000" />
+          <WeaponRange value="100.000000" />
           <BulletDirectionOffsetInDegrees value="0.000000" />
           <AiSoundRange value="-1.000000" />
           <AiPotentialBlastEventRange value="-1.000000" />
-          <DamageFallOffRangeMin value="15.000000" />
-          <DamageFallOffRangeMax value="35.000000" />
+          <DamageFallOffRangeMin value="20.000000" />
+          <DamageFallOffRangeMax value="45.000000" />
           <DamageFallOffModifier value="0.600000" />
           <VehicleWeaponHash />
           <DefaultCameraHash>SHOTGUN_AIM_CAMERA</DefaultCameraHash>
