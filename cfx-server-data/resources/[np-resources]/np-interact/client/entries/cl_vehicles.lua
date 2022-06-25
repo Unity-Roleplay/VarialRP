@@ -35,7 +35,7 @@ Entries[#Entries + 1] = {
     options = {
         distance = { radius = 1.2, boneId = 'wheel_lr' },
         isEnabled = function(pEntity, pContext)
-            return exports['np-fuel']:NearGasFn()
+            return exports['np-hud']:NearGasFn()
         end
     }
 }

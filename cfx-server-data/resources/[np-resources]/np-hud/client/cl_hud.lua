@@ -1454,37 +1454,37 @@ Citizen.CreateThread(function()
 
 
                     if updateLatestVehicle ~= veh then
-                        --if not DecorExistOn(veh, "GetVehicleCurrentFuel") then
-                        --    Fuel = math.random(80,100)
-                        --else
-                            Fuel = exports["np-vehicles"]:CurrentFuel()
-                        --end
+                        if not DecorExistOn(veh, "GetVehicleCurrentFuel") then
+                           Fuel = math.random(80,100)
+                        else
+                            Fuel = DecorGetInt(veh, "CurrentFuel")
+                        end
                     else
-                        Fuel = exports["np-vehicles"]:CurrentFuel()
+                        Fuel = DecorGetInt(veh, "CurrentFuel")
                     end
 
                     DivingStatus = true
                     updateLatestVehicle = veh
                     setLastUpdate = 0
 
-                    --if not DecorExistOn(veh, "GetVehicleCurrentFuel") then 
-                    --    Fuel = math.random(80,100)
-                    --    DecorSetInt(veh, "GetVehicleCurrentFuel", fRound(Fuel))
-                    --end
+                    if not DecorExistOn(veh, "GetVehicleCurrentFuel") then 
+                       Fuel = math.random(80,100)
+                       DecorSetInt(veh, "GetVehicleCurrentFuel", fRound(Fuel))
+                    end
 
                 else
 
                     if Fuel > 105 then
-                        Fuel = exports["np-vehicles"]:CurrentFuel()
+                        Fuel = DecorGetInt(veh, "CurrentFuel")
                     end                     
                     if Fuel == 101 then
-                        Fuel = exports["np-vehicles"]:CurrentFuel()
+                        Fuel = DecorGetInt(veh, "CurrentFuel")
                     end
 
                 end
 
                 if ( setLastUpdate > 300) then
-                  exports["np-vehicles"]:SetVehicleFuel(veh, fRound(Fuel))
+                  DecorSetInt(veh, "GetVehicleCurrentFuel", fRound(Fuel))
                   lasteupdate = 0
                 end
 
@@ -1540,7 +1540,7 @@ Citizen.CreateThread(function()
                 if Fuel < 1 then
                     if Fuel ~= 0 then
                         Fuel = 0
-                        exports["np-vehicles"]:SetVehicleFuel(veh, fRound(Fuel))
+                        DecorSetInt(veh, "GetVehicleCurrentFuel", fRound(Fuel))
                       end
 
                     if IsVehicleEngineOn(veh) or IsThisModelAHeli(GetEntityModel(veh)) then
@@ -1552,7 +1552,7 @@ Citizen.CreateThread(function()
         else
             if DivingStatus then
                 DivingStatus = false
-                exports["np-vehicles"]:SetVehicleFuel(updateLatestVehicle, fRound(Fuel))
+                DecorSetInt(updateLatestVehicle, "GetVehicleCurrentFuel", fRound(Fuel))
             end
             Citizen.Wait(1500)
         end
@@ -1627,7 +1627,7 @@ AddEventHandler('np-gas:checkpump', function()
     TaskTurnPedToFaceEntity(ped, vehicle, 1000)
     Wait(1600)
     if DoesEntityExist(veh) and IsEntityAVehicle(veh) and #(GetEntityCoords(veh) - GetEntityCoords(PlayerPedId())) < 5.0 then
-        vehicleCurrentFuel = exports["np-vehicles"]:CurrentFuel()
+        vehicleCurrentFuel = DecorGetInt(veh, "CurrentFuel")
         costs = (100 - vehicleCurrentFuel)
         if costs < 0 then
             costs = 0
@@ -1643,7 +1643,7 @@ AddEventHandler('np-gas:checkpump', function()
 end)
 
 exports("setFuel", function(veh, amt)
-  exports["np-vehicles"]:SetVehicleFuel(veh, amt)
+  DecorSetInt(veh, "GetVehicleCurrentFuel", amt)
 end)
 
 function getVehicleClosestToMe()
@@ -1776,32 +1776,32 @@ RegisterCommand('ui-r', function()
     TriggerEvent('menu:menuexit')
     TriggerEvent('clothing:close')
     TriggerServerEvent('void:getmapprefrence')
-    exports['np-textui']:showInteraction("Restarting UI .")
+    exports['np-ui']:showInteraction("Restarting UI .")
     Wait(1000)
-    exports['np-textui']:showInteraction("Restarting UI ..")
+    exports['np-ui']:showInteraction("Restarting UI ..")
     Wait(1000)
-    exports['np-textui']:showInteraction("Restarting UI ...")
+    exports['np-ui']:showInteraction("Restarting UI ...")
     Wait(1000)
-    exports['np-textui']:showInteraction("UI Successfully Restarted")
+    exports['np-ui']:showInteraction("UI Successfully Restarted")
     Wait(1000)
-    exports['np-textui']:hideInteraction()
+    exports['np-ui']:hideInteraction()
     TriggerEvent('np-hud:EnableHud', true)
 	TriggerServerEvent("police:SetMeta")
 end)
 
 RegisterCommand("anim-r", function()
-    exports["np-textui"]:showInteraction("Reseting Animations .")
+    exports["np-ui"]:showInteraction("Reseting Animations .")
     Wait(1000)
-    exports["np-textui"]:showInteraction("Reseting Animations ..")
+    exports["np-ui"]:showInteraction("Reseting Animations ..")
     Wait(1000)
-    exports["np-textui"]:showInteraction("Reseting Animations ...")
+    exports["np-ui"]:showInteraction("Reseting Animations ...")
     Wait(1000)
     ClearPedTasks(GetPlayerPed(-1))
     ClearPedTasks(PlayerPedId())
-    exports["np-textui"]:showInteraction("Animations Restarted !", "success")
+    exports["np-ui"]:showInteraction("Animations Restarted !", "success")
     Wait(1000)
-    exports["np-textui"]:hideInteraction()
-    exports["np-textui"]:hideInteraction("success")
+    exports["np-ui"]:hideInteraction()
+    exports["np-ui"]:hideInteraction("success")
 end)
 
 Citizen.CreateThread( function()
@@ -1889,7 +1889,7 @@ function removeAttachedProp2()
 
   RegisterNetEvent("np-hud:jerry_can:refuel")
   AddEventHandler("np-hud:jerry_can:refuel",function()
-      vehicleCurrentFuel = exports["np-vehicles"]:CurrentFuel(veh) --DecorGetInt(veh, "GetVehicleCurrentFuel")
+      vehicleCurrentFuel = DecorGetInt(veh, "CurrentFuel")
       if exports['np-inventory']:hasEnoughOfItem('883325847', 1) then
         local timer = (100 - vehicleCurrentFuel) * 400
         refillVehicle()
@@ -1898,19 +1898,16 @@ function removeAttachedProp2()
     
         if finished == 100 then
             if exports['np-inventory']:hasEnoughOfItem('883325847', 1) then
-                --DecorSetInt(veh, "GetVehicleCurrentFuel", 100)
-                exports["np-vehicles"]:SetVehicleFuel(veh, 100)
+                DecorSetInt(veh, "GetVehicleCurrentFuel", 100)
                 TriggerEvent('inventory:removeItem', '883325847', 1)
             else
                 TriggerEvent('DoLongHudText', 'Try again!', 2)
             end
     
-            local vehicleCurrentFuel = exports["np-vehicles"]:CurrentFuel(veh) --DecorGetInt(veh, "GetVehicleCurrentFuel")
+            local vehicleCurrentFuel = DecorGetInt(veh, "CurrentFuel")
             local endFuel = (100 - vehicleCurrentFuel) 
             endFuel = math.ceil(endFuel * (finished / 100) + vehicleCurrentFuel)
-            --DecorSetInt(veh, "GetVehicleCurrentFuel", endFuel)
-            exports["np-vehicles"]:SetVehicleFuel(veh, endFuel)
-    
+            DecorSetInt(veh, "GetVehicleCurrentFuel", endFuel)    
         end
         endanimation()
     else
@@ -2153,4 +2150,3 @@ SendNUIMessage({
   action = "Minimap"
 })
 end)
- 

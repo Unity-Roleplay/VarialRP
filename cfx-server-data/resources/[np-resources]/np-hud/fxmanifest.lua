@@ -42,4 +42,5 @@ exports {
 	'BuffHunger',
     'BuffThirst',
 	'BuffAlert',
+	'NearGasFn'
 }
