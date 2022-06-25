@@ -21,3 +21,7 @@ files {
 }
 
 lua54 'yes'
+
+exports {
+  'pCanVin'
+}

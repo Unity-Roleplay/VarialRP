@@ -365,6 +365,29 @@ Entries[#Entries + 1] = {
     group = { 2 },
     data = {
         {
+            id = "vinscratch_car",
+            label = "Scratch Vin",
+            icon = "eye-slash",
+            event = "ethicalpixel-boosting:client:ScratchVehicle",
+            parameters = {}
+        }
+    },
+    options = {
+        distance = { radius = 4.0 },
+        isEnabled = function(pEntity, pContext)
+            return (not (isCloseToHood(pEntity, PlayerPedId()) or isCloseToBoot(pEntity, PlayerPedId(), 2.0, pContext.model))
+              or pContext.model == GetHashKey("emsnspeedo"))
+              and not IsPedInAnyVehicle(PlayerPedId(), false)
+              and NetworkGetEntityIsNetworked(pEntity) and exports['ethicalpixel-boosting']:pCanVin()
+        end
+    }
+}
+
+Entries[#Entries + 1] = {
+    type = 'entity',
+    group = { 2 },
+    data = {
+        {
             id = "vehicle_keysgive",
             label = "give key",
             icon = "key",

@@ -45,6 +45,7 @@ local CanUseComputer = false
 local CanScratchVehicle = false
 local MainThreadStarted = false
 local URL = Config['Utils']["Laptop"]["DefaultBackground"]
+local ModelHash = nil
 
 InBoostingQueue = false
 OnTheDropoffWay = false
@@ -465,13 +466,15 @@ AddEventHandler("ethicalpixel-boosting:DisablerUsed" , function()
               Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
               DisablerTimes = DisablerTimes + 1
               TriggerServerEvent("ethicalpixel-boosting:SetBlipTime")
-              if Config['General']["Core"] == "QBCORE" then
-                CoreName.Functions.Notify(Config['Utils']["Notifications"]["SuccessHack"], "success", 3500)    
-              elseif Config['General']["Core"] == "ESX" then
-                  ShowNotification(Config['Utils']["Notifications"]["SuccessHack"],'success')
-              elseif Config['General']["Core"] == "NPBASE" then
-                  TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["SuccessHack"])
-              end
+              pDropVinVeh = AddBlipForCoord(472.08, -1310.73, 29.22)
+              SetBlipSprite(pDropVinVeh, 227)
+              SetBlipScale(pDropVinVeh, 1.5)
+              SetBlipRoute(pDropVinVeh, 1)
+              SetBlipAsShortRange(pDropVinVeh, false)
+              BeginTextCommandSetBlipName("STRING")
+              AddTextComponentString("Drop Off")
+              EndTextCommandSetBlipName(pDropVinVeh)
+              TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["SuccessHack"])
             end
           else
             if(DisablerTimes == Config['Utils']["Disabler"]["VinScratch"]) then
@@ -1112,23 +1115,13 @@ local ScratchAnim = "car_bomb_mechanic"
 
 local function AddVehicleToGarage()
   local EntityModel = GetEntityModel(Vehicle)
-  local DiplayName = GetDisplayNameFromVehicleModel(EntityModel)
-  if Config['General']["Core"] == "QBCORE" then
-    CoreName.Functions.Notify("Vin scratch complete!", "success", 3500)    
-    TriggerServerEvent('ethicalpixel-boosting:AddVehicle',string.lower(DiplayName) ,Contracts[startedcontractid].plate)
-    print(string.lower(DiplayName) ,Contracts[startedcontractid].plate)
-  elseif Config['General']["Core"] == "ESX" then
-      ShowNotification("Vin scratch complete!",'success')
-      local vehicleProps = ESX.Game.GetVehicleProperties(Vehicle)
-      TriggerServerEvent('ethicalpixel-boosting:AddVehicle',string.lower(DiplayName) ,Contracts[startedcontractid].plate,vehicleProps)
-  elseif Config['General']["Core"] == "NPBASE" then
-      TriggerEvent("DoLongHudText","Vin scratch complete!")
-      TriggerServerEvent('ethicalpixel-boosting:AddVehicle',string.lower(DiplayName) ,Contracts[startedcontractid].plate)
-  end
+  local DiplayName = GetDisplayNameFromVehicleModel(Contracts[startedcontractid].vehicle)
+  TriggerEvent("DoLongHudText","Vin scratch complete!")
+  print('Vehicle Model: '..DiplayName)
+  TriggerServerEvent('ethicalpixel-boosting:AddVehicle', DiplayName, Contracts[startedcontractid].plate)
   vinstarted = false
   CanScratchVehicle = false
   table.remove(Contracts , startedcontractid)
-  
 end
 
 RegisterNetEvent("ethicalpixel-boosting:client:UseComputer")
@@ -1158,7 +1151,7 @@ AddEventHandler("ethicalpixel-boosting:client:UseComputer" , function()
       LoadDict(ScratchAnimDict)
       FreezeEntityPosition(PlayerPedId(),true)
       TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
-      local finished = exports[Config['CoreSettings']["ESX"]["ProgressBarScriptName"]]:taskBar(5000, 'Connection to network...')
+      local finished = exports['np-taskbar']:taskBar(5000, 'Connection to network...')
       if (finished == 100) then
         CanScratchVehicle = true
         ShowNotification(Config['Utils']["Notifications"]["FinishComputer"],'success')
@@ -1220,51 +1213,17 @@ end
 
 RegisterNetEvent("ethicalpixel-boosting:client:ScratchVehicle")
 AddEventHandler("ethicalpixel-boosting:client:ScratchVehicle" , function()
-  if Config['General']["Core"] == "QBCORE" then
-    CoreName.Functions.Progressbar("boosting_scratch", "Scratching Vin", 10000, false, true, {
-      disableMovement = true,
-      disableCarMovement = true,
-      disableMouse = false,
-      disableCombat = true,
-      }, {
-        animDict = ScratchAnimDict,
-        anim = ScratchAnim,
-        flags = 16,
-      }, {}, {}, function() -- Done
-        StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-        AddVehicleToGarage()
-        CoreName.Functions.Notify(Config['Utils']["Notifications"]["VehicleAdded"], "success", 3500)
-        DeleteBlip()
-        CallingCops = false
-      end, function() -- Cancel
-        StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-        CoreName.Functions.Notify("Failed!", "error", 3500)
-    end)
-  elseif Config['General']["Core"] == "ESX" then
-    LoadDict(ScratchAnimDict)
+    CanScratchVehicle = false
     FreezeEntityPosition(PlayerPedId(),true)
-    TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
-    local finished = exports[Config['CoreSettings']["ESX"]["ProgressBarScriptName"]]:taskBar(10000, 'Scratching Vin')
-    if (finished == 100) then
-      AddVehicleToGarage()
-      ShowNotification(Config['Utils']["Notifications"]["VehicleAdded"],'success')
-      CallingCops = false
-      DeleteBlip()
-      FreezeEntityPosition(PlayerPedId(),false)
-    end
-  elseif Config['General']["Core"] == "NPBASE" then
-    LoadDict(ScratchAnimDict)
-    FreezeEntityPosition(PlayerPedId(),true)
-    TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
-    local finished = exports[Config['CoreSettings']["NPBASE"]["ProgressBarScriptName"]]:taskBar(10000, 'Scratching Vin')
+    TriggerEvent('animation:PlayAnimation', 'kneel')
+    local finished = exports['np-taskbar']:taskBar(10000, 'Scratching Vin')
     if (finished == 100) then
       AddVehicleToGarage()
       TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["VehicleAdded"])
       CallingCops = false
       DeleteBlip()
       FreezeEntityPosition(PlayerPedId(),false)
-    end 
-  end
+    end
   NotifySent = false
 end)
 
@@ -1288,11 +1247,6 @@ Citizen.CreateThread(function()
             count = count - 1
           end
         end
-        if dist < 2.5 then
-          TriggerEvent('ethicalpixel-boosting:client:ScratchVehicle')
-          CanScratchVehicle = false
-          break
-        end
       end
     else
       Wait(5000)
@@ -1312,15 +1266,9 @@ function MainThread()
           DrawMarker(2, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 200, 200, 200, 222, false, false, false, true, false, false, false)
           MainThreadStarted = true
           if (#(pos - vector3(v.x, v.y, v.z)) < 1.5) then
-            if Config['General']["Core"] == "QBCORE" then
-              CoreName.Functions.DrawText3D(v.x, v.y, v.z, "~g~E~w~ - Use Computer")
-            elseif Config['General']["Core"] == "ESX" then
-              local coordsoftext = vector3(v.x, v.y, v.z)
-              ESX.Game.Utils.DrawText3D(coordsoftext, "~g~E~w~ - Use Computer")
-            elseif Config['General']["Core"] == "NPBASE" then
-              DrawText3D2(v.x, v.y, v.z, "~g~E~w~ - Use Computer")
-            end
+            DrawText3D2(v.x, v.y, v.z, "~g~E~w~ - Use Computer")
             if IsControlJustReleased(0, Keys["E"]) then
+              RemoveBlip(pDropVinVeh)
               TriggerEvent('ethicalpixel-boosting:client:UseComputer')
               return
             end
@@ -1453,3 +1401,12 @@ AddEventHandler('ethicalpixel-boosting:AddContract' , function(contract, sender)
   end
   table.insert(Contracts, contract)
 end)
+
+function pCanVin()
+  if CanScratchVehicle then
+    CanScratchVehicle = true
+  elseif not CanScratchVehicle then
+    CanScratchVehicle = false
+  end
+  return CanScratchVehicle
+end
