@@ -1159,6 +1159,7 @@ end)
 Citizen.CreateThread(function ()
 	while true do
 		local isTalking = NetworkIsPlayerTalking(PlayerId())
+    print('Is Ped Talking: '..NetworkIsPlayerTalking(PlayerId()))
         local pRadioActive = exports['np-voice']:pRadioActive()
         SendNUIMessage({
             action = "voiceupdate", 

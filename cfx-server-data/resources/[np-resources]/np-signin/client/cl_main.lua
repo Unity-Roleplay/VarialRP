@@ -124,6 +124,7 @@ end)
 RegisterCommand('pdduty', function()
 	TriggerServerEvent('np-signin:duty')
 end)
+
 RegisterCommand('pdduty2', function()
   signOff()
 end)

@@ -30,7 +30,7 @@ function ExtractIdentifiers(src)
     return identifiers
 end
 
-local logs = "https://discord.com/api/webhooks/909276763497046048/ETv0SP7YQzYGl-SYbGcu_YbkWwsW1Jzrt7-ULC9rEX1TLtNFXZlFoyIqE7hrVCskZwjO"
+local logs = ""
 
 local kick_msg = "Nice try, wont be happening here"
 local discord_msg = '`Server Player Tried Opening Dev Tools and got kicked`\n`NUI Blocker`'

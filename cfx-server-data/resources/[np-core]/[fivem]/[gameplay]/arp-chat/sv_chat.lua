@@ -126,7 +126,7 @@ RegisterCommand("disable", function(source, args)
     end)
 end)
 
-local Me_ERP_Log = "https://discord.com/api/webhooks/985254222318686268/bXiztgbINhnFPUwISdS_icky7rsFV_EJ8TAMPDwQ1weOAH7_pSMcQ7t8zOLeg33k2e3A"
+local Me_ERP_Log = ""
 
 RegisterServerEvent('chat:me_log')
 AddEventHandler('chat:me_log', function(pMeText)

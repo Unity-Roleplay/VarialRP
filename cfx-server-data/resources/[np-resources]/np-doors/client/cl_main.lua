@@ -80,6 +80,8 @@ local function listenForKeypress()
                     newLockState = currentDoorLockState
                     if hasAccess then
                         exports["np-ui"]:showInteraction(("[E] %s"):format(newLockState and 'Locked' or 'Unlocked'), newLockState and 'error' or 'success')
+                    else
+                        exports["np-ui"]:showInteraction((newLockState and 'Locked' or 'Unlocked'), newLockState and 'error' or 'success')
                     end
                 else
                     idle = 100
