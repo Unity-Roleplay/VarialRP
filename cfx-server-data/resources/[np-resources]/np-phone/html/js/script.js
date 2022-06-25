@@ -991,7 +991,7 @@ $(document).ready(function () {
                 $('.jss1153').css('display',"none")
                 $('.jss2770').empty();
                 $(this).parent('.cryptoPaper').children(".cryptDrawer").css("display", "flex");
-                addStocks(item,item.stocksData,item.SynditeAmount,item.TgbAmount,item.DvdAmount);
+                addStocks(item,item.stocksData,item.ShungiteAmount,item.TgbAmount,item.DvdAmount);
                 openContainer('crypto');
                 break;
             case "buydarkMarket":
@@ -1986,10 +1986,10 @@ function setWeather(weather) {
     
 }
 // <button class="waves-effect waves-light btn-small garage-spawn stocks-exchange" style="margin-top:4px" data-stock-id="${stockEntry.identifier}"> Transfer</button> 
-// function addStocks(stocksData,SynditeAmount,TgbAmount,DvdAmount) {
+// function addStocks(stocksData,ShungiteAmount,TgbAmount,DvdAmount) {
 //     for (let stock of Object.keys(stocksData)) {
 //         let stockEntry = stocksData[stock];
-//         if (stockEntry.identifier == "Syndite") {
+//         if (stockEntry.identifier == "Shungite") {
 //             let stockElement = `
 //             <li>
 //             <li style="background-color: #31455e;">
@@ -1998,7 +1998,7 @@ function setWeather(weather) {
 //                 </div>
 //                 <div class="collapsible-body garage-body" style="height:269px; margin-top: 10px; font-size: 14px">
 //                     <ul class="collection" style="background-color: #31455E;">
-//                         <li class="collection-item"><i class="far fa-address-card"></i> ${stockEntry.name} (${SynditeAmount})</li>
+//                         <li class="collection-item"><i class="far fa-address-card"></i> ${stockEntry.name} (${ShungiteAmount})</li>
 //                             <li class="collection-item"><i class="fas fa-tag"></i> ${stockEntry.identifier} </li>
 //                             <li class="collection-item"><i class="far fa-credit-card"></i> ${stockEntry.amountavailable}</li>
 //                             <li class="collection-item"><i class="fas fa-chart-bar"></i> ${stockEntry.value}.00</li>
@@ -2011,7 +2011,7 @@ function setWeather(weather) {
 //                 </li>
 //             `
 //             $('.stocks-entries').append(stockElement);
-//         } else if (stockEntry.identifier == "TGB Coin"){
+//         } else if (stockEntry.identifier == "Guinea"){
 //             let stockElement = `
 //             <li>
 //             <li style="background-color: #31455E;">
@@ -2059,15 +2059,15 @@ function setWeather(weather) {
 //     }
 // }
 
-function addStocks(item,stocksData,SynditeAmount,TgbAmount,DvdAmount) {
+function addStocks(item,stocksData,ShungiteAmount,TgbAmount,DvdAmount) {
     // console.log(JSON.stringify(item))
     for (let stock of Object.keys(stocksData)) {
         let stockEntry = stocksData[stock];
         let stockElement = ""
-        // console.log("STOCK ID",stockEntry.name,SynditeAmount,stockEntry.identifier)
+        // console.log("STOCK ID",stockEntry.name,ShungiteAmount,stockEntry.identifier)
         stockElement += `<div class="cryptoPaper">
                                <div class="mainContainer crypt-container">`
-        if (stockEntry.identifier == "Syndite") {
+        if (stockEntry.identifier == "Shungite") {
             stockElement += `<div class="image">
             <svg aria-hidden="true" focusable="false" data-prefix="fas"
                data-icon="caret-square-up" class="svg-inline--fa fa-caret-square-up fa-w-14 fa-fw fa-3x "
@@ -2077,7 +2077,7 @@ function addStocks(item,stocksData,SynditeAmount,TgbAmount,DvdAmount) {
                </path>
             </svg>
          </div>`
-        }else if (stockEntry.identifier == "TGB Coin"){
+        }else if (stockEntry.identifier == "Guinea"){
             stockElement += `<div class="image">
             <svg aria-hidden="true" focusable="false" data-prefix="fas"
                 data-icon="horse-head" class="svg-inline--fa fa-horse-head fa-w-16 fa-fw fa-3x " role="img"
@@ -2104,12 +2104,12 @@ function addStocks(item,stocksData,SynditeAmount,TgbAmount,DvdAmount) {
                                         <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
                                            style="word-break: break-word;">${stockEntry.identifier}</p>
                                      </div>`
-        if (stockEntry.identifier == "Syndite") {                       
+        if (stockEntry.identifier == "Shungite") {                       
                         stockElement +=`<div class="description ">
                         <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
-                            style="word-break: break-word;">${SynditeAmount}</p>
+                            style="word-break: break-word;">${ShungiteAmount}</p>
                         </div>`
-        }else if (stockEntry.identifier == "TGB Coin") {                       
+        }else if (stockEntry.identifier == "Guinea") {                       
             stockElement +=`<div class="description ">
             <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
                 style="word-break: break-word;">${TgbAmount}</p>
@@ -2134,17 +2134,17 @@ function addStocks(item,stocksData,SynditeAmount,TgbAmount,DvdAmount) {
                                         </svg>
                                      </div>
                                      <div class="text">`
-                                     if (stockEntry.identifier == "Syndite") {                       
+                                     if (stockEntry.identifier == "Shungite") {                       
                                         stockElement +=` <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
-                                            style="word-break: break-word;">${stockEntry.name} (${SynditeAmount})</p>`
-                                    }else if (stockEntry.identifier == "TGB Coin") {                       
+                                            style="word-break: break-word;">${stockEntry.name} (${ShungiteAmount})</p>`
+                                    }else if (stockEntry.identifier == "Guinea") {                       
                                         stockElement +=`<p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
                                             style="word-break: break-word;">${stockEntry.name} (${TgbAmount})</p>`
                                     }else if (stockEntry.identifier == "DVD Prime") {                       
                                         stockElement +=` <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
                                             style="word-break: break-word;">${stockEntry.name} (${DvdAmount})</p>`
-                                    }
-        stockElement +=`</div>
+                                    }stockElement +=`</div>
+                                    
                                   </div>
                                   <div class="cryptItem">
                                      <div class="icon">
@@ -2644,7 +2644,7 @@ function addBuying(materials,blueprintid) {
             <div class="collapsible-header">
                 <i class="fas fa-user-secret" style="font-size: 60px; color:white;margin-left: 6px;"> </i>
                 <i class="name-car" style="font-size: 18px;margin-left: 35px;">VPN</i>
-                <span  class="new-badge">20 Syndite</span>
+                <span  class="new-badge">20 Shungite</span>
             </div>
             <div class="collapsible-body garage-body">
             <div class="collapsible-body garage-body">
@@ -2671,7 +2671,7 @@ function addBuying(materials,blueprintid) {
                 <div class="collapsible-header">
                     <i class="fas fa-clipboard-list" style="font-size: 60px; color:white;margin-left: 8px; "> </i>
                     <i class="name-car" style="font-size: 18px;margin-left=0">Delivery List</i>
-                    <span  class="new-badge">20 Syndite</span>
+                    <span  class="new-badge">20 Shungite</span>
                 </div>
                 <div class="collapsible-body garage-body">
                 <div class="collapsible-body garage-body">
@@ -2749,7 +2749,7 @@ function addBuying(materials,blueprintid) {
                 <div class="collapsible-header">
                     <i class="fas fa-laptop" style="font-size: 50px; color:white"> </i>
                     <i style="margin-left:40px;font-size: 15px" class="name-car"> Laptop (G)</i>
-                    <span class="new-badge"> 50 Syndite</span>
+                    <span class="new-badge"> 50 Shungite</span>
                 </div>
                 <div class="collapsible-body garage-body">
                 <div class="collapsible-body garage-body">
@@ -2775,7 +2775,7 @@ function addBuying(materials,blueprintid) {
                 <div class="collapsible-header">
                     <i class="fas fa-laptop" style="font-size: 50px; color:white"> </i>
                     <i style="margin-left:40px;font-size: 15px" class="name-car"> Laptop (B)</i>
-                    <span class="new-badge"> 65 Syndite</span>
+                    <span class="new-badge"> 65 Shungite</span>
                 </div>
                 <div class="collapsible-body garage-body">
                 <div class="collapsible-body garage-body">
@@ -2801,7 +2801,7 @@ function addBuying(materials,blueprintid) {
                 <div class="collapsible-header">
                     <i class="fas fa-laptop" style="font-size: 50px; color:white"> </i>
                     <i style="margin-left:40px;font-size: 15px" class="name-car"> Laptop (R)</i>
-                    <span class="new-badge"> 65 Syndite</span>
+                    <span class="new-badge"> 65 Shungite</span>
                 </div>
                 <div class="collapsible-body garage-body">
                 <div class="collapsible-body garage-body">
@@ -2827,7 +2827,7 @@ function addBuying(materials,blueprintid) {
                 <div class="collapsible-header">
                     <i class="fas fa-laptop" style="font-size: 50px; color:white"> </i>
                     <i style="margin-left:40px;font-size: 15px" class="name-car"> RP Laptop</i>
-                    <span class="new-badge"> 100 Syndite</span>
+                    <span class="new-badge"> 100 Shungite</span>
                 </div>
                 <div class="collapsible-body garage-body">
                 <div class="collapsible-body garage-body">

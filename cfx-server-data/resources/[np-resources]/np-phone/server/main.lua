@@ -1,7 +1,6 @@
 local serverstockvalues = {
-    [1] = { ["name"] = "SYNDEE", ["value"] = 100.0, ["identifier"] = "Syndite", ["lastchange"] = 0.00, ["amountavailable"] = math.random(200,350) },
-    [2] = { ["name"] = "THEGOODBOYS", ["value"] = 50.0, ["identifier"] = "TGB Coin", ["lastchange"] = 0.00, ["amountavailable"] = math.random(400,500) },
-    [3] = { ["name"] = "DAVADAM PRIME", ["value"] = 1000.0, ["identifier"] = "DVD Prime", ["lastchange"] = 0.00, ["amountavailable"] = math.random(100,200) },
+    [1] = { ["name"] = "Shung", ["value"] = 100.0, ["identifier"] = "Shungite", ["lastchange"] = 0.00, ["amountavailable"] = math.random(200,350) },
+    [2] = { ["name"] = "Guinea", ["value"] = 50.0, ["identifier"] = "Guinea", ["lastchange"] = 0.00, ["amountavailable"] = math.random(400,500) },
   }
 
 Citizen.CreateThread(function()
@@ -634,9 +633,9 @@ AddEventHandler("np-phone:GiveCrypto", function(type,amount)
     local char = user:getVar("character")
     local id = char.id
     if type == 1 then
-        local mySyndite = getSynditeAmount(id)
-        TriggerClientEvent("chatMessage", src, "EMAIL", 8,  "You have recieved " .. amount .. " Syndite")
-        exports.ghmattimysql:execute("UPDATE characters SET syndite = @syndite WHERE id = @id", {["syndite"] = mySyndite+amount ,['id'] = id})
+        local myShungite = getShungiteAmount(id)
+        TriggerClientEvent("chatMessage", src, "EMAIL", 8,  "You have recieved " .. amount .. " Shungite")
+        exports.ghmattimysql:execute("UPDATE characters SET Shungite = @Shungite WHERE id = @id", {["Shungite"] = myShungite+amount ,['id'] = id})
     elseif type == 2 then
         local myTGB = getTgbAmount(id)
         TriggerClientEvent("chatMessage", src, "EMAIL", 8,  "You have recieved " .. amount .. " TGB")
@@ -712,15 +711,15 @@ end)
 --     local user = exports["np-base"]:getModule("Player"):GetUser(src)
 --     local char = user:getVar("character")
 --     local id = char.id
---     local mySyndite = getSynditeAmount(id)
+--     local myShungite = getShungiteAmount(id)
 --     local myTgb = getTgbAmount(id)
 --     local myDvd = getDvdAmount(id)
 --     local amount = amount.param
 --     if type.param == 1 then
---         if tonumber(mySyndite) >= tonumber(amount) then
---             TriggerClientEvent("chatMessage", src, "Bank", 8,  "You exchanged " .. amount .. " Syndite")
+--         if tonumber(myShungite) >= tonumber(amount) then
+--             TriggerClientEvent("chatMessage", src, "Bank", 8,  "You exchanged " .. amount .. " Shungite")
 --             serverstockvalues[1]["amountavailable"] = serverstockvalues[1]["amountavailable"] + amount
---             exports.ghmattimysql:execute("UPDATE characters SET syndite = @syndite WHERE id = @id", {["syndite"] = mySyndite-amount ,['id'] = id})
+--             exports.ghmattimysql:execute("UPDATE characters SET Shungite = @Shungite WHERE id = @id", {["Shungite"] = myShungite-amount ,['id'] = id})
 --             user:addBank(amount * 100)
 --         else
 --             TriggerClientEvent("chatMessage", src, "Bank", 8,  "Transaction failed. There isnt enough in your bank")
@@ -753,15 +752,15 @@ RPC.register("np-phone:exchangeCrypto", function(pSource,type,amount)
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getVar("character")
     local id = char.id
-    local mySyndite = getSynditeAmount(id)
+    local myShungite = getShungiteAmount(id)
     local myTgb = getTgbAmount(id)
     local myDvd = getDvdAmount(id)
     local amount = amount.param
     if type.param == 1 then
-        if tonumber(mySyndite) >= tonumber(amount) then
-            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You exchanged " .. amount .. " Syndite")
+        if tonumber(myShungite) >= tonumber(amount) then
+            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You exchanged " .. amount .. " Shungite")
             serverstockvalues[1]["amountavailable"] = serverstockvalues[1]["amountavailable"] + amount
-            exports.ghmattimysql:execute("UPDATE characters SET syndite = @syndite WHERE id = @id", {["syndite"] = mySyndite-amount ,['id'] = id})
+            exports.ghmattimysql:execute("UPDATE characters SET Shungite = @Shungite WHERE id = @id", {["Shungite"] = myShungite-amount ,['id'] = id})
             user:addBank(amount * 100)
         else
             TriggerClientEvent("chatMessage", src, "Bank", 8,  "Transaction failed. There isnt enough in your bank")
@@ -794,19 +793,19 @@ RPC.register("np-phone:transferCrypto", function(pSource,type,amount,target)
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getVar("character")
     local id = char.id
-    local mySyndite = getSynditeAmount(id)
+    local myShungite = getShungiteAmount(id)
     local myTgb = getTgbAmount(id)
     local myDvd = getDvdAmount(id)
     local amount = amount.param
     local target = target.param
-    local targetSyndite = getSynditeAmount(target)
+    local targetShungite = getShungiteAmount(target)
     local targetTgb = getTgbAmount(target)
     local targetDvd = getDvdAmount(target)
     if type.param == 1 then
-        if tonumber(mySyndite) >= tonumber(amount) then
-            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You transfered " .. amount .. " Syndite")
-            exports.ghmattimysql:execute("UPDATE characters SET syndite = @syndite WHERE id = @id", {["syndite"] = mySyndite-amount ,['id'] = id})
-            exports.ghmattimysql:execute("UPDATE characters SET syndite = @syndite WHERE id = @id", {["syndite"] = targetSyndite+amount ,['id'] = target})
+        if tonumber(myShungite) >= tonumber(amount) then
+            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You transfered " .. amount .. " Shungite")
+            exports.ghmattimysql:execute("UPDATE characters SET Shungite = @Shungite WHERE id = @id", {["Shungite"] = myShungite-amount ,['id'] = id})
+            exports.ghmattimysql:execute("UPDATE characters SET Shungite = @Shungite WHERE id = @id", {["Shungite"] = targetShungite+amount ,['id'] = target})
         else
             TriggerClientEvent("chatMessage", src, "Bank", 8,  "Transaction failed. There isnt enough in your bank")
         end
@@ -829,13 +828,13 @@ RPC.register("np-phone:transferCrypto", function(pSource,type,amount,target)
     end
 end)
 
-RPC.register("np-phone:GetSyndite", function (pSource)
+RPC.register("np-phone:GetShungite", function (pSource)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getVar("character")
     local id = char.id
-    local syndite = getSynditeAmount(id)
-    return syndite
+    local Shungite = getShungiteAmount(id)
+    return Shungite
 end)
 
 RPC.register("np-phone:GetTgb", function (pSource)
@@ -862,19 +861,19 @@ RPC.register("np-phone:buyCrypto", function (pSource,ctype,amount)
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getVar("character")
     local id = char.id
-    local mySyndite = getSynditeAmount(id)
+    local myShungite = getShungiteAmount(id)
     local myTgb = getTgbAmount(id)
     local myDvd = getDvdAmount(id)
     local banko = myBank(id)
     if ctype == 1 then
         local price = (amount*100)
         if banko < price then
-            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You do not have the funds to recieve " .. amount .. " Syndite")
+            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You do not have the funds to recieve " .. amount .. " Shungite")
             return false
         else
             user:removeBank(price)
-            exports.ghmattimysql:execute("UPDATE characters SET syndite = @syndite WHERE id = @id", {["syndite"] = mySyndite+amount ,['id'] = id})
-            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You have recieved " .. amount .. " Syndite")
+            exports.ghmattimysql:execute("UPDATE characters SET Shungite = @Shungite WHERE id = @id", {["Shungite"] = myShungite+amount ,['id'] = id})
+            TriggerClientEvent("chatMessage", src, "Bank", 8,  "You have recieved " .. amount .. " Shungite")
             return true
         end
     elseif type == 2 then
@@ -908,14 +907,14 @@ RPC.register("np-phone:purchaseDarkMarket", function (pSource,type,price)
     local char = user:getCurrentCharacter()
     local id = char.id
     local price = tonumber(price)
-    local mySyndite = getSynditeAmount(id)
+    local myShungite = getShungiteAmount(id)
     local myTgb = getTgbAmount(id)
     local myDvd = getDvdAmount(id)
     if type == 1 then
-        if tonumber(mySyndite) < price then
+        if tonumber(myShungite) < price then
             value = false
         else
-            exports.ghmattimysql:execute("UPDATE characters SET syndite = @syndite WHERE id = @id", {["syndite"] = mySyndite-price ,['id'] = id})
+            exports.ghmattimysql:execute("UPDATE characters SET Shungite = @Shungite WHERE id = @id", {["Shungite"] = myShungite-price ,['id'] = id})
             value = true
         end
     elseif type == 2 then
@@ -938,13 +937,13 @@ RPC.register("np-phone:purchaseDarkMarket", function (pSource,type,price)
     return value
 end)
 
-function getSynditeAmount(id)
+function getShungiteAmount(id)
     exports.ghmattimysql:execute('SELECT * FROM characters WHERE id = @id', {['id'] = id}, function(result)
-        syndite = result[1].syndite
+        Shungite = result[1].Shungite
     end)
     Wait(100)
     
-    return syndite
+    return Shungite
 end
 
 function getTgbAmount(id)

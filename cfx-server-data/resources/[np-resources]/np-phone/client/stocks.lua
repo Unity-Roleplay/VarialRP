@@ -114,7 +114,7 @@ RegisterNUICallback('stocksTradeToPlayer', function(data, cb)
     return
   end
 
-  if data.identifier == "Syndite" then
+  if data.identifier == "Shungite" then
       status = RPC.execute("np-phone:buyCrypto",1,data.amount)
     if status then
       serverstockvalues[1]["amountavailable"] = serverstockvalues[1]["amountavailable"] - data.amount
@@ -124,7 +124,7 @@ RegisterNUICallback('stocksTradeToPlayer', function(data, cb)
       TriggerEvent("DoLongHudText", "You don't have enough cash!", 2)
       return
     end
-  elseif data.identifier == "TGB Coin" then
+  elseif data.identifier == "Guinea" then
     status = RPC.execute("np-phone:buyCrypto",2,data.amount)
     if status then
       serverstockvalues[2]["amountavailable"] = serverstockvalues[2]["amountavailable"] - data.amount
@@ -154,9 +154,9 @@ RegisterNUICallback('exchangeCrypto', function(e)
   local amount = e.amount
   local characterId = tonumber(exports["isPed"]:isPed("cid"))
   local playerid = e.cid
-  if e.stockID == "Syndite" then
+  if e.stockID == "Shungite" then
     popo = 1
-  elseif e.stockID == "TGB Coin" then
+  elseif e.stockID == "Guinea" then
     popo = 2
   elseif e.stockID == "DVD Prime" then
     popo = 3
@@ -174,9 +174,9 @@ end)
 RegisterNUICallback('buyCrypto', function(e)
   local amount = e.amount
   local characterId = tonumber(exports["isPed"]:isPed("cid"))
-  if e.stockID == "Syndite" then
+  if e.stockID == "Shungite" then
     popo = 1
-  elseif e.stockID == "TGB Coin" then
+  elseif e.stockID == "Guinea" then
     popo = 2
   elseif e.stockID == "DVD Prime" then
     popo = 3
@@ -200,10 +200,10 @@ function sendStocksToPhone(isRefresh)
     serverstockvalues = RPC.execute("np-phone:incomingCrypto")
   end
 
-  Synditelol = RPC.execute("np-phone:GetSyndite")
+  Shungitelol = RPC.execute("np-phone:GetShungite")
   Tgblol = RPC.execute("np-phone:GetTgb")
   Dvdlol = RPC.execute("np-phone:GetDvd")
-  SendNUIMessage({ openSection = "addStocks", stocksData = serverstockvalues, SynditeAmount = Synditelol, TgbAmount = Tgblol, DvdAmount = Dvdlol})
+  SendNUIMessage({ openSection = "addStocks", stocksData = serverstockvalues, ShungiteAmount = Shungitelol, TgbAmount = Tgblol, DvdAmount = Dvdlol})
 end
 
 RegisterNUICallback('btnStocks', function()
@@ -229,7 +229,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
             TriggerEvent("addPickUpBlip")
             TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
           else
-            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Syndite!")
+            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Shungite!")
           end
       elseif data.item == "deliverylist" then
         result = RPC.execute('np-phone:purchaseDarkMarket',1,20)
@@ -241,7 +241,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
             TriggerEvent("addPickUpBlip")
             TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
           else
-            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Syndite!")
+            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Shungite!")
           end
         elseif data.item == "choplist" then
           result = RPC.execute('np-phone:purchaseDarkMarket',2,20)
@@ -253,7 +253,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
               TriggerEvent("addPickUpBlip")
               TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
             else
-              TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough TGB Coin!")
+              TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Guinea!")
             end
           -- TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order for a chop list is unavailable!")
       elseif data.item == "gdongle" then
@@ -266,7 +266,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
             TriggerEvent("addPickUpBlip")
             TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
           else
-            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough TGB Coin!")
+            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Guinea!")
           end
       elseif data.item == "boostlaptop" then
         -- result = RPC.execute('np-phone:purchaseDarkMarket',1,100)
@@ -291,7 +291,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
           TriggerEvent("addPickUpBlip")
           TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
         else
-          TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Syndite!")
+          TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Shungite!")
         end
       elseif data.item == "laptopgreen" then
         result = RPC.execute('np-phone:purchaseDarkMarket',1,50)
@@ -303,7 +303,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
             TriggerEvent("addPickUpBlip")
             TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
           else
-            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Syndite!")
+            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Shungite!")
           end
       elseif data.item == "laptopgold" then
       elseif data.item == "laptopblue" then
@@ -316,7 +316,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
             TriggerEvent("addPickUpBlip")
             TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
           else
-            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Syndite!")
+            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Shungite!")
           end
       elseif data.item == "thermite" then
         result = RPC.execute('np-phone:purchaseDarkMarket',2,50)
@@ -328,7 +328,7 @@ RegisterNUICallback('purchase-darkMarket', function(data)
             TriggerEvent("addPickUpBlip")
             TriggerEvent("chatMessage", "Suspicious Individual", 8, "Your order has been finalized, please check your GPS!")
           else
-            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough TGB Coins!")
+            TriggerEvent("chatMessage", "Suspicious Individual", 8, "You don't have enough Guineas!")
           end
       elseif data.item == "Skorpion" then
         result = RPC.execute('np-phone:purchaseDarkMarket',3,data.itemamount)
