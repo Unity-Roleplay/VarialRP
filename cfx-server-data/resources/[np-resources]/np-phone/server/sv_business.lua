@@ -1,3 +1,5 @@
+pFirstNLastName = 
+
 RegisterNetEvent('np-phone:fireEmp')
 AddEventHandler('np-phone:fireEmp', function(id, job, name)
   local src = source
@@ -22,7 +24,7 @@ RegisterServerEvent('np-phone:business_hired', function(StateID, Rank, pBusiness
     {
         ['@cid'] = StateID,
         ['@rank'] = Rank,
-        ['@name'] = 'NEEDS FIXING',
+        ['@name'] = '',
         ['@giver'] = pHiringName,
         ['@pass_type'] = pBusiness,
         ['@business_name'] = pBusiness,
@@ -104,28 +106,6 @@ RegisterServerEvent('np-phone:business_fire', function(pBusinessName, pStateID)
 
     exports.ghmattimysql:execute("DELETE FROM character_passes WHERE cid = @cid AND pass_type = @pass_type", {['@cid'] = pStateID, ['@pass_type'] = pBusinessName}, function()end)
 end)
-
-function getFullname(cid)
-    local name = MySQL.query.await([[
-        SELECT * FROM characters
-        WHERE id = ?
-    ]],
-    {cid})
-    -- print("GETTING NAME", name[1].first_name)
-    return name[1].first_name.." "..name[1].last_name
-end
-
-function cidExist(cid)
-    local result = MySQL.query.await([[
-        SELECT * FROM characters
-        WHERE id = ?
-    ]],
-    { cid })
-    if not result[1] then 
-        return false
-    end
-    return true
-end
 
 function getBusinessName(bId)
     local businessName = ""
