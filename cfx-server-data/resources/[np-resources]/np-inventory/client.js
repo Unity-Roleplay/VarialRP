@@ -529,13 +529,10 @@ on('inventory-open-request', async () => {
     let isInVehicle = IsPedInAnyVehicle(PlayerPedId(), false);
     if (isInVehicle) {
         vehicleFound = GetVehiclePedIsIn(PlayerPedId(), false);
-        let vehicleModel = GetEntityModel(vehicleFound);
-        if (!IsThisModelABicycle(vehicleModel) && !IsThisModelABike(vehicleModel)) {
-            let licensePlate = GetVehicleNumberPlateText(vehicleFound);
-            const gloveboxName = "Glovebox-" + licensePlate
-            emitNet('server-inventory-open', startPosition, cid, '1', gloveboxName);
-        } else {
-        }
+        let licensePlate = GetVehicleNumberPlateText(vehicleFound);
+        const gloveboxName = "Glovebox-" + licensePlate
+        emitNet('server-inventory-open', startPosition, cid, '1', gloveboxName);
+  
     } else if (tacoShopDst < 2.0) {
         TriggerEvent('server-inventory-open', '18', 'Craft');
     } else if (tacoStorage < 1.0) {
