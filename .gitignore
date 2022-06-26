@@ -9,3 +9,4 @@ np_clothes_props
 cache
 \[artifact\]/server-tls.crt
 \[artifact\]/server-tls.key
+start.bat
