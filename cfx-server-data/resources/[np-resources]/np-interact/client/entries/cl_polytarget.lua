@@ -2975,6 +2975,26 @@ Entries[#Entries + 1] = {
 
 Entries[#Entries + 1] = {
     type = 'polytarget',
+    group = { 'boosting_prepscratch' },
+    data = {
+        {
+            id = "boosting_prepscratch",
+            label = "Prepare Vin Scratch",
+            icon = "laptop",
+            event = "ethicalpixel-boosting:client:UseComputer",
+            parameters = {}
+        }
+    },
+    options = {
+        distance = { radius = 1.0 },
+        isEnabled = function(entity)
+            return exports['ethicalpixel-boosting']:pCanUseComputer()
+        end
+    }
+}
+
+Entries[#Entries + 1] = {
+    type = 'polytarget',
     group = { 'gang3_craft' },
     data = {
         {
@@ -2989,7 +3009,6 @@ Entries[#Entries + 1] = {
         distance = { radius = 1.0 }
     }
 }
-
 
 Entries[#Entries + 1] = {
     type = 'polytarget',
@@ -3319,9 +3338,16 @@ exports["np-polytarget"]:AddBoxZone("gang3_stash", vector3(1609.23, 3774.43, 34.
     --debugPoly=true
 })
 
-exports["np-polytarget"]:AddBoxZone("gang3_craft", vector3(1607.63, 3776.36, 34.69), 1, 1, {-- Guerro Stash
+exports["np-polytarget"]:AddBoxZone("gang3_craft", vector3(1607.63, 3776.36, 34.69), 1, 1, { -- Guerro Stash
     heading=305,
     --debugPoly=true,
     minZ=34.87-1,
     maxZ=34.87+1
+})
+
+exports["np-polytarget"]:AddBoxZone("boosting_prepscratch", vector3(471.6, -1311.0, 29.22), 0.5, 0.5, {-- Guerro Stash
+    heading=25,
+    --debugPoly=true,
+    minZ=25.62,
+    maxZ=29.62
 })

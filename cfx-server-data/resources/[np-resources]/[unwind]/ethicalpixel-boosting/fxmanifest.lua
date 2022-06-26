@@ -23,5 +23,6 @@ files {
 lua54 'yes'
 
 exports {
-  'pCanVin'
+  'pCanVin',
+  'pCanUseComputer'
 }

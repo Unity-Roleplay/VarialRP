@@ -26,10 +26,6 @@ elseif Config['General']["Core"] == "ESX" then
     end)
 end
 
-
-RegisterCommand('testabc', function()
-  TriggerServerEvent('ethicalpixel-boosting:finished')
-end)
 ----------------------------------------------------------------------------------------------------------------------------
 
 local authorized = false
@@ -43,7 +39,6 @@ local checked = false
 local vinstarted = false
 local CanUseComputer = false
 local CanScratchVehicle = false
-local MainThreadStarted = false
 local URL = Config['Utils']["Laptop"]["DefaultBackground"]
 local ModelHash = nil
 
@@ -72,7 +67,6 @@ function CreateVeh(model , coord, id)
     print(coord.x, coord.y , coord.z)
     SetModelAsNoLongerNeeded(ModelHash) 
     SetVehicleEngineOn(Vehicle, false, false)
-    SetVehicleDoorsLocked(Vehicle, 2)
     local vehClass = "F"
     for k,v in pairs(Config.Vehicles) do
       if v.vehicle == ModelHash then
@@ -122,9 +116,6 @@ function ethicalpixelLevel()
     end
   end
 end
-
-
-
 
 RegisterNetEvent('ethicalpixel-boosting:CreateContract')
 AddEventHandler('ethicalpixel-boosting:CreateContract' , function(shit)
@@ -306,13 +297,7 @@ RegisterNUICallback('dick', function(data)
   if Config['General']["Core"] == "QBCORE" then
     if Config['General']["MinPolice"] == 0 then
       if started or vinstarted then
-        if Config['General']["Core"] == "QBCORE" then
-          CoreName.Functions.Notify(Config['Utils']["Notifications"]["AllreadyStarted"], "error", 3500)   
-        elseif Config['General']["Core"] == "ESX" then
-          ShowNotification(Config['Utils']["Notifications"]["AllreadyStarted"],'error')
-        elseif Config['General']["Core"] == "NPBASE" then
-          TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["AllreadyStarted"],2)
-        end
+        TriggerEvent("DoLongHudText", 'A contract is already in progress',2)
       else
         TriggerEvent("ethicalpixel-boosting:StartContract" , data.id)
         Contracts[data.id].started = true
@@ -320,13 +305,7 @@ RegisterNUICallback('dick', function(data)
     else
       CoreName.Functions.TriggerCallback('ethicalpixel-boosting:server:GetActivity', function(result) 
         if started or vinstarted then
-            if Config['General']["Core"] == "QBCORE" then
-              CoreName.Functions.Notify(Config['Utils']["Notifications"]["AllreadyStarted"], "error", 3500)   
-            elseif Config['General']["Core"] == "ESX" then
-              ShowNotification(Config['Utils']["Notifications"]["AllreadyStarted"],'error')
-            elseif Config['General']["Core"] == "NPBASE" then
-              TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["AllreadyStarted"],2)
-            end
+            TriggerEvent("DoLongHudText", 'A contract is already in progress',2)
           else
             TriggerEvent("ethicalpixel-boosting:StartContract" , data.id)
             Contracts[data.id].started = true
@@ -337,13 +316,7 @@ RegisterNUICallback('dick', function(data)
     ESX.TriggerServerCallback('ethicalpixel-boosting:server:GetActivity', function(result)
       if result >= Config['General']["MinPolice"] then
         if started or vinstarted then
-          if Config['General']["Core"] == "QBCORE" then
-            CoreName.Functions.Notify(Config['Utils']["Notifications"]["AllreadyStarted"], "error", 3500)   
-          elseif Config['General']["Core"] == "ESX" then
-            ShowNotification(Config['Utils']["Notifications"]["AllreadyStarted"],'error')
-          elseif Config['General']["Core"] == "NPBASE" then
-            TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["AllreadyStarted"],2)
-          end
+            TriggerEvent("DoLongHudText", 'A contract is already in progress',2)
         else
           TriggerEvent("ethicalpixel-boosting:StartContract" , data.id)
           Contracts[data.id].started = true
@@ -354,13 +327,7 @@ RegisterNUICallback('dick', function(data)
     end)  
   elseif Config['General']["Core"] == "NPBASE" then
       if started or vinstarted then
-        if Config['General']["Core"] == "QBCORE" then
-          CoreName.Functions.Notify(Config['Utils']["Notifications"]["AllreadyStarted"], "error", 3500)   
-        elseif Config['General']["Core"] == "ESX" then
-          ShowNotification(Config['Utils']["Notifications"]["AllreadyStarted"],'error')
-        elseif Config['General']["Core"] == "NPBASE" then
-          TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["AllreadyStarted"],2)
-        end
+          TriggerEvent("DoLongHudText", 'A contract is already in progress',2)
       else
         TriggerEvent("ethicalpixel-boosting:StartContract" , data.id)
         Contracts[data.id].started = true
@@ -382,26 +349,14 @@ end)
 RegisterNUICallback('vin', function(data)
   if(tonumber(BNEBoosting['functions'].GetCurrentBNE().bne) >= tonumber(Config['Utils']["VIN"]["BNEPrice"])) then
     if started or vinstarted then
-      if Config['General']["Core"] == "QBCORE" then
-        CoreName.Functions.Notify(Config['Utils']["Notifications"]["AllreadyStarted"], "error", 3500)   
-      elseif Config['General']["Core"] == "ESX" then
-        ShowNotification(Config['Utils']["Notifications"]["AllreadyStarted"],'error')
-      elseif Config['General']["Core"] == "NPBASE" then
-        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["AllreadyStarted"],2)
-      end
+      TriggerEvent("DoLongHudText", 'A contract is already in progress',2)
     else
       Contracts[data.id].started = true
       BNEBoosting['functions'].RemoveBNE(Config['Utils']["VIN"]["BNEPrice"])
       TriggerEvent("ethicalpixel-boosting:StartContract" , data.id , true)
     end
   else
-    if Config['General']["Core"] == "QBCORE" then
-      CoreName.Functions.Notify(Config['Utils']["Notifications"]["NotEnoughBNE"], "error", 3500)    
-    elseif Config['General']["Core"] == "ESX" then
-        ShowNotification(Config['Utils']["Notifications"]["NotEnoughBNE"],'error')
-    elseif Config['General']["Core"] == "NPBASE" then
-        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["NotEnoughBNE"],2)
-    end
+    TriggerEvent("DoLongHudText", 'Not enough BNE',2)
   end
 end)
 
@@ -422,84 +377,52 @@ AddEventHandler("ethicalpixel-boosting:DisablerUsed" , function()
         if(GetVehicleNumberPlateText(veh) == Contracts[startedcontractid].plate) then
           local Class = Contracts[startedcontractid].type 
           if (Config['Utils']["Contracts"]["DisableTrackingOnDCB"]) and (Class == "D" or Class == "C" or Class == "B") then
-            if Config['General']["Core"] == "QBCORE" then
-              CoreName.Functions.Notify(Config['Utils']["Notifications"]["NoTrackerOnThisVehicle"], "error", 3500)    
-            elseif Config['General']["Core"] == "ESX" then
-                ShowNotification(Config['Utils']["Notifications"]["NoTrackerOnThisVehicle"],'error')
-            elseif Config['General']["Core"] == "NPBASE" then
-                TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["NoTrackerOnThisVehicle"],2)
-            end
+              TriggerEvent("DoLongHudText", 'Seems like this vehicle doesn\'t have a tracker on', 2)
           elseif(vinstarted == false) then
-            if(DisablerTimes < Config['Utils']["Disabler"]["NormalDropOff"]) then
+            if(DisablerTimes < 5) then
               DisablerUsed = true
               local minigame = exports['ethicalpixel-minigame']:Open()   
               if(minigame == true) then
                 Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
                 DisablerTimes = DisablerTimes + 1
                 TriggerServerEvent("ethicalpixel-boosting:SetBlipTime")
-                if Config['General']["Core"] == "QBCORE" then
-                  CoreName.Functions.Notify(Config['Utils']["Notifications"]["SuccessHack"], "success", 3500)    
-                elseif Config['General']["Core"] == "ESX" then
-                    ShowNotification(Config['Utils']["Notifications"]["SuccessHack"],'success')
-                elseif Config['General']["Core"] == "NPBASE" then
-                    TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["SuccessHack"])
-                end
+                TriggerEvent("DoLongHudText", 'Successfully completed hack.')
               end
             else
-              if(DisablerTimes == Config['Utils']["Disabler"]["NormalDropOff"]) then
+              if(DisablerTimes == 5) then
                 CallingCops = false
                 TriggerServerEvent("ethicalpixel-boosting:removeblip")
-                if Config['General']["Core"] == "QBCORE" then
-                  CoreName.Functions.Notify(Config['Utils']["Notifications"]["TrackerRemovedVINMission"], "success", 3500)    
-                elseif Config['General']["Core"] == "ESX" then
-                    ShowNotification(Config['Utils']["Notifications"]["TrackerRemovedVINMission"],'success')
-                elseif Config['General']["Core"] == "NPBASE" then
-                    TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["TrackerRemovedVINMission"])
-                end
+                TriggerEvent("DoLongHudText", 'Tracker removed, head to the dropoff location', 1)
               end
             end
         elseif vinstarted == true then
-          if(DisablerTimes < Config['Utils']["Disabler"]["VinScratch"]) then
+          if(DisablerTimes < 10) then
             DisablerUsed = true
             local minigame = exports['ethicalpixel-minigame']:Open()   
             if(minigame == true) then
               Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
               DisablerTimes = DisablerTimes + 1
+              DisablerTimes = 10
+              TriggerEvent('phone:addnotification', 'Anonymous', '('..DisablerTimes..'/10) Trackers Disabled.')
               TriggerServerEvent("ethicalpixel-boosting:SetBlipTime")
+            end
+          else
+            if(DisablerTimes == 10) then
+              CallingCops = false
+              TriggerServerEvent("ethicalpixel-boosting:removeblip")
+              CanUseComputer = true
+              TriggerEvent('phone:addnotification', 'Anonymous', 'Tracker removed, head to the scratch location.')
               pDropVinVeh = AddBlipForCoord(472.08, -1310.73, 29.22)
               SetBlipSprite(pDropVinVeh, 227)
               SetBlipScale(pDropVinVeh, 1.5)
               SetBlipRoute(pDropVinVeh, 1)
+              SetBlipRouteColour(pDropVinVeh, 3)
               SetBlipAsShortRange(pDropVinVeh, false)
               BeginTextCommandSetBlipName("STRING")
               AddTextComponentString("Drop Off")
               EndTextCommandSetBlipName(pDropVinVeh)
-              TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["SuccessHack"])
+              TriggerEvent("DoLongHudText", 'Successfully completed hack.')
             end
-          else
-            if(DisablerTimes == Config['Utils']["Disabler"]["VinScratch"]) then
-              CallingCops = false
-              TriggerServerEvent("ethicalpixel-boosting:removeblip")
-              CanUseComputer = true
-              if Config['General']["Core"] == "QBCORE" then
-                CoreName.Functions.Notify(Config['Utils']["Notifications"]["TrackerRemovedVINMission"], "success", 3500)    
-              elseif Config['General']["Core"] == "ESX" then
-                  ShowNotification(Config['Utils']["Notifications"]["TrackerRemovedVINMission"],'success')
-              elseif Config['General']["Core"] == "NPBASE" then
-                  TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["TrackerRemovedVINMission"])
-              end
-              if not MainThreadStarted then
-                MainThread()
-              end
-            end
-          end
-        else
-        if Config['General']["Core"] == "QBCORE" then
-          CoreName.Functions.Notify(Config['Utils']["Notifications"]["NoMissionDetected"], "error", 3500)    
-          elseif Config['General']["Core"] == "ESX" then
-              ShowNotification(Config['Utils']["Notifications"]["NoMissionDetected"],'error')
-          elseif Config['General']["Core"] == "NPBASE" then
-              TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["NoMissionDetected"],2)
           end
         end
       end
@@ -537,15 +460,9 @@ AddEventHandler("ethicalpixel-boosting:DisplayUI" , function()
     SendNUIMessage({rank = Level , show = 'true' , vinprice = Config['Utils']["VIN"]["BNEPrice"],logo = Config['Utils']["Laptop"]["LogoUrl"] , background = URL, time = string.format("%02d:%02d", t.h, t.m) , BNE =   BNEBoosting['functions'].GetCurrentBNE().bne , defaultback = Config['Utils']["Laptop"]["DefaultBackground"]})
     toggleTablet()
   else
-    if Config['General']["Core"] == "QBCORE" then
-      CoreName.Functions.Notify(Config['Utils']["Notifications"]["UiStillLoadingMsg"], "error", 3500)    
-    elseif Config['General']["Core"] == "ESX" then
-        ShowNotification(Config['Utils']["Notifications"]["UiStillLoadingMsg"],'error')
-    elseif Config['General']["Core"] == "NPBASE" then
-        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["UiStillLoadingMsg"],2)
-    end
+    TriggerEvent("DoLongHudText", 'The UI is still loading use the laptop again.', 2)
     TriggerServerEvent("ethicalpixel-boosting:loadNUI")
-    Citizen.Wait(5000)
+    Citizen.Wait(1000)
     NuiLoaded = true
   end
 end)
@@ -856,19 +773,10 @@ Citizen.CreateThread(function()
   end
 end)
 
-
-
-
 RegisterNetEvent("ethicalpixel-boosting:ContractDone")
 AddEventHandler("ethicalpixel-boosting:ContractDone" , function()
   if CompletedTask then
-    if Config['General']["Core"] == "QBCORE" then
-      CoreName.Functions.Notify(Config['Utils']["Notifications"]["DropOffMsg"], "success", 3500)    
-    elseif Config['General']["Core"] == "ESX" then
-        ShowNotification(Config['Utils']["Notifications"]["DropOffMsg"],'success')
-    elseif Config['General']["Core"] == "NPBASE" then
-        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["DropOffMsg"])
-    end
+    TriggerEvent("DoLongHudText", 'Get out of the car and leave the area , you will get your money soon')
     TriggerServerEvent("ethicalpixel-boosting:removeblip")
     Citizen.Wait(math.random(25000,35000))
     TriggerServerEvent("ethicalpixel-boosting:expreward",Contracts[startedcontractid].type)
@@ -1037,86 +945,75 @@ function toggleTablet()
 end
 
 ---------- COMMAND --------------
-Citizen.CreateThread(function()
-  if Config['Utils']["Commands"]["boosting_test"] ~= 'nil' then
-    RegisterCommand(Config['Utils']["Commands"]["boosting_test"], function()
-      if Config['Utils']["VIN"]["ForceVin"] then
-        TriggerEvent('ethicalpixel-boosting:CreateContract', true)
-      else
-        TriggerEvent("ethicalpixel-boosting:CreateContract")
-      end
-    end)
-  end
+-- Citizen.CreateThread(function()
+--   if Config['Utils']["Commands"]["boosting_test"] ~= 'nil' then
+--     RegisterCommand(Config['Utils']["Commands"]["boosting_test"], function()
+--       if Config['Utils']["VIN"]["ForceVin"] then
+--         TriggerEvent('ethicalpixel-boosting:CreateContract', true)
+--       else
+--         TriggerEvent("ethicalpixel-boosting:CreateContract")
+--       end
+--     end)
+--   end
+-- end)
 
-end)
-
-
-
-
-Citizen.CreateThread(function()
-  if Config['Utils']["Commands"]["force_close_nui"] ~= 'nil' then
-    RegisterCommand(Config['Utils']["Commands"]["force_close_nui"], function()
-      SetNuiFocus(false ,false)
-      toggleTablet()
-
-    end)
-  end
-end)
+-- Citizen.CreateThread(function()
+--   if Config['Utils']["Commands"]["force_close_nui"] ~= 'nil' then
+--     RegisterCommand(Config['Utils']["Commands"]["force_close_nui"], function()
+--       SetNuiFocus(false ,false)
+--       toggleTablet()
+--     end)
+--   end
+-- end)
 -------------------------------
 
 
 
-Citizen.CreateThread(function()
-  if Config['Utils']["Commands"]["get_vehicle_class"] ~= 'nil' then
-    RegisterCommand(Config['Utils']["Commands"]["get_vehicle_class"], function()
-      local veh = GetVehiclePedIsIn(PlayerPedId())
-      local fInitialDriveMaxFlatVel = getField("fInitialDriveMaxFlatVel" , veh)
-      local fInitialDriveForce = getField("fInitialDriveForce" , veh)
-      local fDriveBiasFront = getField("fDriveBiasFront" ,veh )
-      local fInitialDragCoeff = getField("fInitialDragCoeff" , veh)
-      local fTractionCurveMax = getField("fTractionCurveMax" , veh)
-      local fTractionCurveMin = getField("fTractionCurveMin" , veh )
-      local fSuspensionReboundDamp = getField("fSuspensionReboundDamp" , veh )
-      local fBrakeForce = getField("fBrakeForce" ,veh )
-      local force = fInitialDriveForce
-      local handling = (fTractionCurveMax + fSuspensionReboundDamp) * fTractionCurveMin
-      local braking = ((fTractionCurveMin / fInitialDragCoeff) * fBrakeForce) * 7
-      local accel = (fInitialDriveMaxFlatVel * force) / 10
-      local speed = ((fInitialDriveMaxFlatVel / fInitialDragCoeff) * (fTractionCurveMax + fTractionCurveMin)) / 40
-      local perfRating = ((accel * 5) + speed + handling + braking) * 15
-      local vehClass = "F"
-      if isMotorCycle then
-        vehClass = "M"
-      elseif perfRating > 900 then
-        vehClass = "X"
-      elseif perfRating > 700 then
-        vehClass = "S"
-      elseif perfRating > 550 then
-        vehClass = "A"
-      elseif perfRating > 400 then
-        vehClass = "B"
-      elseif perfRating > 325 then
-        vehClass = "C"
-      else
-        vehClass = "D"
-      end
-      print(vehClass)
-    end)
-  end
-end)
+-- Citizen.CreateThread(function()
+--   if Config['Utils']["Commands"]["get_vehicle_class"] ~= 'nil' then
+--     RegisterCommand(Config['Utils']["Commands"]["get_vehicle_class"], function()
+--       local veh = GetVehiclePedIsIn(PlayerPedId())
+--       local fInitialDriveMaxFlatVel = getField("fInitialDriveMaxFlatVel" , veh)
+--       local fInitialDriveForce = getField("fInitialDriveForce" , veh)
+--       local fDriveBiasFront = getField("fDriveBiasFront" ,veh )
+--       local fInitialDragCoeff = getField("fInitialDragCoeff" , veh)
+--       local fTractionCurveMax = getField("fTractionCurveMax" , veh)
+--       local fTractionCurveMin = getField("fTractionCurveMin" , veh )
+--       local fSuspensionReboundDamp = getField("fSuspensionReboundDamp" , veh )
+--       local fBrakeForce = getField("fBrakeForce" ,veh )
+--       local force = fInitialDriveForce
+--       local handling = (fTractionCurveMax + fSuspensionReboundDamp) * fTractionCurveMin
+--       local braking = ((fTractionCurveMin / fInitialDragCoeff) * fBrakeForce) * 7
+--       local accel = (fInitialDriveMaxFlatVel * force) / 10
+--       local speed = ((fInitialDriveMaxFlatVel / fInitialDragCoeff) * (fTractionCurveMax + fTractionCurveMin)) / 40
+--       local perfRating = ((accel * 5) + speed + handling + braking) * 15
+--       local vehClass = "F"
+--       if isMotorCycle then
+--         vehClass = "M"
+--       elseif perfRating > 900 then
+--         vehClass = "X"
+--       elseif perfRating > 700 then
+--         vehClass = "S"
+--       elseif perfRating > 550 then
+--         vehClass = "A"
+--       elseif perfRating > 400 then
+--         vehClass = "B"
+--       elseif perfRating > 325 then
+--         vehClass = "C"
+--       else
+--         vehClass = "D"
+--       end
+--       print(vehClass)
+--     end)
+--   end
+-- end)
 
 
 ---------------------- VIN SCRATCH ------------------------
 
-
-
-local ScratchAnimDict = "mp_car_bomb"
-local ScratchAnim = "car_bomb_mechanic"
-
 local function AddVehicleToGarage()
   local EntityModel = GetEntityModel(Vehicle)
   local DiplayName = GetDisplayNameFromVehicleModel(Contracts[startedcontractid].vehicle)
-  TriggerEvent("DoLongHudText","Vin scratch complete!")
   print('Vehicle Model: '..DiplayName)
   TriggerServerEvent('ethicalpixel-boosting:AddVehicle', DiplayName, Contracts[startedcontractid].plate)
   vinstarted = false
@@ -1126,81 +1023,30 @@ end
 
 RegisterNetEvent("ethicalpixel-boosting:client:UseComputer")
 AddEventHandler("ethicalpixel-boosting:client:UseComputer" , function()
-  if Config['General']["Core"] == "QBCORE" then
-    if CanUseComputer then
-      CoreName.Functions.Progressbar("boosting_scratch", "Connection to network...", 5000, false, true, {
-        disableMovement = true,
-        disableCarMovement = true,
-        disableMouse = false,
-        disableCombat = true,
-        }, {
-          animDict = ScratchAnimDict,
-          anim = ScratchAnim,
-          flags = 16,
-        }, {}, {}, function() -- Done
-          TriggerEvent('ethicalpixel-boosting:client:2ndUseComputer')
-        end, function() -- Cancel
-          StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-          CoreName.Functions.Notify("Failed!", "error", 3500)
-      end)
-    else
-      CoreName.Functions.Notify("Can't use this now!", "error", 3500)
-    end
-  elseif Config['General']["Core"] == "ESX" then
-    if CanUseComputer then
-      LoadDict(ScratchAnimDict)
-      FreezeEntityPosition(PlayerPedId(),true)
-      TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
-      local finished = exports['np-taskbar']:taskBar(5000, 'Connection to network...')
+  if CanUseComputer then
+    CanUseComputer = false
+    RemoveBlip(pDropVinVeh)
+    FreezeEntityPosition(PlayerPedId(),true)
+    TriggerEvent("animation:PlayAnimation", 'type')
+    local finished = exports['np-taskbar']:taskBar(1500, 'Opening Laptop')
+    if (finished == 100) then
+      Citizen.Wait(250)
+      TriggerEvent("animation:PlayAnimation", 'type')
+      local finished = exports['np-taskbar']:taskBar(7000, 'Connection to network...')
       if (finished == 100) then
-        CanScratchVehicle = true
-        ShowNotification(Config['Utils']["Notifications"]["FinishComputer"],'success')
-        CanUseComputer = false
-        FreezeEntityPosition(PlayerPedId(),false)
-        ClearPedTasks(PlayerPedId())
+        Citizen.Wait(250)
+        TriggerEvent("animation:PlayAnimation", 'type')
+        local finished = exports['np-taskbar']:taskBar(13000, "Wiping Online Paperwork...")
+        if finished == 100 then
+          CanScratchVehicle = true
+          TriggerEvent("DoLongHudText", 'Head to the vehicle and scratch off the vin!', 1)
+          FreezeEntityPosition(PlayerPedId(),false)
+          ClearPedTasks(PlayerPedId())
+        end
       end
-    else
-      ShowNotification("Can't use this now",'error')
     end
-  elseif Config['General']["Core"] == "NPBASE" then
-    if CanUseComputer then
-      LoadDict(ScratchAnimDict)
-      FreezeEntityPosition(PlayerPedId(),true)
-      TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
-      local finished = exports[Config['CoreSettings']["NPBASE"]["ProgressBarScriptName"]]:taskBar(5000, 'Connection to network...')
-      if (finished == 100) then
-        CanScratchVehicle = true
-        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["FinishComputer"])
-        CanUseComputer = false
-        FreezeEntityPosition(PlayerPedId(),false)
-        ClearPedTasks(PlayerPedId())
-      end
-    else
-      TriggerEvent("DoLongHudText","Can't use this now!",2)
-    end
-  end
-end)
-
-RegisterNetEvent("ethicalpixel-boosting:client:2ndUseComputer")
-AddEventHandler("ethicalpixel-boosting:client:2ndUseComputer" , function()
-  if Config['General']["Core"] == "QBCORE" then
-    CoreName.Functions.Progressbar("boosting_scratch", "Wiping online paperwork...", 5000, false, true, {
-      disableMovement = true,
-      disableCarMovement = true,
-      disableMouse = false,
-      disableCombat = true,
-      }, {
-        animDict = ScratchAnimDict,
-        anim = ScratchAnim,
-        flags = 16,
-      }, {}, {}, function() -- Done
-        CanScratchVehicle = true
-        CoreName.Functions.Notify(Config['Utils']["Notifications"]["FinishComputer"], "success" , 3500)
-        CanUseComputer = false
-      end, function() -- Cancel
-        StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-        CoreName.Functions.Notify("Failed!", "error", 3500)
-    end)  
+  else
+    TriggerEvent("DoLongHudText","Can't use this now!",2)
   end
 end)
 
@@ -1219,7 +1065,7 @@ AddEventHandler("ethicalpixel-boosting:client:ScratchVehicle" , function()
     local finished = exports['np-taskbar']:taskBar(10000, 'Scratching Vin')
     if (finished == 100) then
       AddVehicleToGarage()
-      TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["VehicleAdded"])
+      TriggerEvent("DoLongHudText", 'Vin Scratch Complete.', 1)
       CallingCops = false
       DeleteBlip()
       FreezeEntityPosition(PlayerPedId(),false)
@@ -1254,33 +1100,6 @@ Citizen.CreateThread(function()
   end
 end)
 
-Keys = { ['E'] = 38 }
-
-function MainThread()
-  while true do 
-    if CanUseComputer then
-      Citizen.Wait(1)
-      local pos = GetEntityCoords(PlayerPedId())
-      for k, v in pairs(Config['Utils']["VinLocations"]) do
-        if (#(pos - vector3(v.x, v.y, v.z)) < 10.0) then
-          DrawMarker(2, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 200, 200, 200, 222, false, false, false, true, false, false, false)
-          MainThreadStarted = true
-          if (#(pos - vector3(v.x, v.y, v.z)) < 1.5) then
-            DrawText3D2(v.x, v.y, v.z, "~g~E~w~ - Use Computer")
-            if IsControlJustReleased(0, Keys["E"]) then
-              RemoveBlip(pDropVinVeh)
-              TriggerEvent('ethicalpixel-boosting:client:UseComputer')
-              return
-            end
-          end 
-        end
-      end
-    else
-      Wait(5000)
-    end
-  end
-end
-
 function getVehicleInDirection(coordFrom, coordTo)
   local offset = 0
   local rayHandle
@@ -1302,24 +1121,18 @@ function getVehicleInDirection(coordFrom, coordTo)
   return vehicle ~= nil and vehicle or 0
 end
 
-
-
-
-
 RegisterNetEvent('XZCore:Client:OnPlayerLoaded')
 AddEventHandler('XZCore:Client:OnPlayerLoaded', function()
   CoreName.Functions.TriggerCallback('ethicalpixel-boosting:server:checkVin' , function(res)
     if(res == true) then
       TriggerEvent('ethicalpixel-boosting:CreateContract'  , true)
-    else
       return
     end
   end)
 end)
 
-
-
 ----------- QUEUE -------------------
+
 RegisterNUICallback("QueueUpdate", function()
   InBoostingQueue = not InBoostingQueue  
 end)
@@ -1358,49 +1171,27 @@ RegisterNUICallback("transfercontract", function(data)
             vin = v.vin
           }
           table.remove(Contracts, v.id)
-          if Config['General']["Core"] == "QBCORE" then
-            CoreName.Functions.Notify(Config['Utils']["Notifications"]["ContractTransfered"]..target, "success", 3500)   
-          elseif Config['General']["Core"] == "NPBASE" then
-            TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["ContractTransfered"]..target)
-          elseif Config['General']["Core"] == "ESX" then
-            ShowNotification(Config['Utils']["Notifications"]["ContractTransfered"]..target, "success")
-          end
+          TriggerEvent("DoLongHudText", 'You successfully sent a contract to '..target)
           TriggerServerEvent('ethicalpixel-boosting:server:transfercontract',contract,target)
           SetNuiFocus(false,false)
         end
       end
     else
-      if Config['General']["Core"] == "QBCORE" then
-        CoreName.Functions.Notify(Config['Utils']["Notifications"]["NotOnline"], "error", 3500)   
-      elseif Config['General']["Core"] == "NPBASE" then
-        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["NotOnline"],2)
-      elseif Config['General']["Core"] == "ESX" then
-        ShowNotification(Config['Utils']["Notifications"]["NotOnline"], "error")
-      end
+      TriggerEvent("DoLongHudText", 'ID doesnt exist', 2)
     end
   else
-    if Config['General']["Core"] == "QBCORE" then
-      CoreName.Functions.Notify(Config['Utils']["Notifications"]["Canttransfertoyourself"], "error", 3500)   
-    elseif Config['General']["Core"] == "NPBASE" then
-      TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["Canttransfertoyourself"],2)
-    elseif Config['General']["Core"] == "ESX" then
-      ShowNotification(Config['Utils']["Notifications"]["Canttransfertoyourself"], "error")
-    end
+    TriggerEvent("DoLongHudText", 'You cant transfer yourself your own contract.',2)
   end
 end)
 
 
 RegisterNetEvent('ethicalpixel-boosting:AddContract')
 AddEventHandler('ethicalpixel-boosting:AddContract' , function(contract, sender)
-  if Config['General']["Core"] == "QBCORE" then
-    CoreName.Functions.Notify(Config['Utils']["Notifications"]["RecievedATransferedContract"]..sender, "success", 3500)   
-  elseif Config['General']["Core"] == "NPBASE" then
-    TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["RecievedATransferedContract"]..sender)
-  elseif Config['General']["Core"] == "ESX" then
-    ShowNotification(Config['Utils']["Notifications"]["RecievedATransferedContract"]..sender, "success")
-  end
+  TriggerEvent("DoLongHudText", 'You recieved a new contract from '..sender)
   table.insert(Contracts, contract)
 end)
+
+-- EXPORTS --
 
 function pCanVin()
   if CanScratchVehicle then
@@ -1409,4 +1200,13 @@ function pCanVin()
     CanScratchVehicle = false
   end
   return CanScratchVehicle
+end
+
+function pCanUseComputer()
+  if CanUseComputer then
+    CanUseComputer = true
+  elseif not CanUseComputer then
+    CanUseComputer = false
+  end
+  return CanUseComputer
 end

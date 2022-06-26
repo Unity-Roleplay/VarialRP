@@ -74,13 +74,6 @@ Config['Utils'] = {
         ["ForceVin"] = true, -- this will force vin contract optiion on any created contract turn to false to use days instead
         ["VinDays"] = 7, -- amount of days between vin contracts , (irl days) 
     },
-    ["VinLocations"] = { -- laptop coords
-        [1] = {x = 472.08, y = -1310.73, z = 29.22},
-    },
-    ["Disabler"] = {
-        ["NormalDropOff"] = 4,
-        ["VinScratch"] = 6,
-    },
     ["ClassPrices"] = {
         ['X'] = "35",
         ['A'] = "30",
@@ -94,42 +87,20 @@ Config['Utils'] = {
         ["DisableTrackingOnDCB"] = false, -- This will disable the police tracking on D , C , B vehicle classes (Turn to false to disable this option)
     },
     ["Notifications"] = {
-        ["NotEnoughBNE"] = "Not enough BNE", 
-        ["NoTrackerOnThisVehicle"] = "Seems like this vehicle doesn't have a tracker on", 
         ["TrackerRemoved"] = "Tracker removed",
-        ["TrackerRemovedVINMission"] = "Tracker removed, head to the scratch location", 
-        ["TrackerRemoved"] = "Tracker removed", 
-        ["FinishComputer"] = "Head to the vehicle and scratch off the vin!",
-        ["VehicleAdded"] = "Vehicle added to your garage!",
-        ["DropOffMsg"] = "Get out of the car and leave the area , you will get your money soon", 
-        ["UiStillLoadingMsg"] = "Please wait 5 senconds the nui is loading", 
-        ["SuccessHack"] = "Success" ,
-        ["NoMissionDetected"] = "No ongoing mission detected",
-        ["ContractTransfered"] = "You successfully sent a contract to ", -- make sure to leave a space at the end just like so
-        ["RecievedATransferedContract"] = "You recieved a new contract from ", -- make sure to leave a space at the end just like so
-        ["Canttransfertoyourself"] = "You can't do that...",
-        ["NotOnline"] = "Player is not online",
-        ["AllreadyStarted"] = "A mission is allready started",
 
     },
-    ["Commands"] = {
-        ["boosting_test"] = "boostingtest", -- This Command will send you a test contract for testing purposes leave as nil to disable
-        ["force_close_nui"] = "boostingclose", -- This Command will close the nui if it glitches leave as nil to disable
-        ["get_vehicle_class"] = "boostingclass", -- This Command will print (F8) the vehicle class of the one ur sitting in
-    },
+    -- ["Commands"] = {
+    --     ["boosting_test"] = "boostingtest", -- This Command will send you a test contract for testing purposes leave as nil to disable
+    --     ["force_close_nui"] = "boostingclose", -- This Command will close the nui if it glitches leave as nil to disable
+    --     ["get_vehicle_class"] = "boostingclass", -- This Command will print (F8) the vehicle class of the one ur sitting in
+    -- },
     ["Laptop"] = {
         ["LogoUrl"] = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/1200px-Windows_logo_-_2012.svg.png", 
         ["DefaultBackground"] = "https://wallpaperdb.net/full/dwd-1367.jpg",
         ["CopNotifyLength"] = 5000, -- Time in (ms) of the police Notify length
     },
 }
-
-
-
-
-
-
-
 
 -----     VEHCILES TO SPAWN        -------
 Config.Vehicles = {
