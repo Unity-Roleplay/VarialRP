@@ -391,7 +391,6 @@ AddEventHandler("ethicalpixel-boosting:DisablerUsed" , function()
               if(minigame == true) then
                 Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
                 DisablerTimes = DisablerTimes + 1
-                DisablerTimes = 5
                 TriggerEvent('phone:addnotification', 'Anonymous', '('..DisablerTimes..'/5) Trackers Disabled.')
                 TriggerServerEvent("ethicalpixel-boosting:SetBlipTime")
                 if DisablerTimes == 5 then
@@ -403,8 +402,10 @@ AddEventHandler("ethicalpixel-boosting:DisablerUsed" , function()
                   if OnTheDropoffWay then
                       blip = AddBlipForCoord(DropOffLocations[rnd]["x"],DropOffLocations[rnd]["y"],DropOffLocations[rnd]["z"])
                   end
-                  SetBlipSprite(blip, 514)
-                  SetBlipScale(blip, 0.7)
+                  SetBlipSprite(blip, 227)
+                  SetBlipScale(blip, 1.5)
+                  SetBlipRoute(blip, 1)
+                  SetBlipRouteColour(blip, 3)
                   SetBlipAsShortRange(blip, false)
                   BeginTextCommandSetBlipName("STRING")
                   AddTextComponentString("Drop Off")
@@ -711,15 +712,15 @@ Citizen.CreateThread(function()
               CallingCops = false
             else
               local primary, secondary = GetVehicleColours(veh)
-                primary = colorNames[tostring(primary)]
-                secondary = colorNames[tostring(secondary)]
-                local hash = GetEntityModel(Vehicle)
-                local modelName = GetLabelText(GetDisplayNameFromVehicleModel(hash))
-                if not NotifySent then
-                  TriggerServerEvent("ethicalpixel-boosting:CallCopsNotify" , Contracts[startedcontractid].plate , modelName, primary..', '..secondary , getStreetandZone(GetEntityCoords(PlayerPed)))
-                  CallingCops = true
-                  NotifySent = true
-                end
+              primary = colorNames[tostring(primary)]
+              secondary = colorNames[tostring(secondary)]
+              local hash = GetEntityModel(Vehicle)
+              local modelName = GetLabelText(GetDisplayNameFromVehicleModel(hash))
+              if not NotifySent then
+                TriggerServerEvent("ethicalpixel-boosting:CallCopsNotify" , Contracts[startedcontractid].plate , modelName, primary..', '..secondary , getStreetandZone(GetEntityCoords(PlayerPed)))
+                CallingCops = true
+                NotifySent = true
+              end
             end
             DeleteCircle()
           end
@@ -960,9 +961,7 @@ end
 
 local function AddVehicleToGarage()
   local EntityModel = GetEntityModel(Vehicle)
-  local DiplayName = GetDisplayNameFromVehicleModel(Contracts[startedcontractid].vehicle)
-  print('Vehicle Model: '..DiplayName)
-  TriggerServerEvent('ethicalpixel-boosting:AddVehicle', DiplayName, Contracts[startedcontractid].plate)
+  TriggerServerEvent('ethicalpixel-boosting:AddVehicle', Contracts[startedcontractid].vehicle, Contracts[startedcontractid].plate)
   vinstarted = false
   CanScratchVehicle = false
   table.remove(Contracts , startedcontractid)

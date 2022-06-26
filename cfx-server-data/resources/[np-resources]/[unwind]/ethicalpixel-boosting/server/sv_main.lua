@@ -87,9 +87,9 @@ if Config['General']["Core"] == "QBCORE" then
         local pData = CoreName.Functions.GetPlayer(src)
         local cid = pData.PlayerData.citizenid
         if pData ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1] == nil then
-                SQL('INSERT INTO ethicalpixel_boosting (citizenid) VALUES (?)',{cid})
+                SQL('INSERT INTO dares_boosting (citizenid) VALUES (?)',{cid})
                 cb({BNE = 0 , background = tostring(Config['Utils']["Laptop"]["DefaultBackground"]) , vin = nil})
             else
                 if sql[1].BNE ~= nil then
@@ -108,9 +108,9 @@ elseif Config['General']["Core"] == "ESX" then
         local cid = xPlayer.identifier
     
         if xPlayer ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1] == nil then
-                SQL('INSERT INTO ethicalpixel_boosting (citizenid) VALUES (?)',{cid})
+                SQL('INSERT INTO dares_boosting (citizenid) VALUES (?)',{cid})
                 cb(0)
             else
                 if sql[1].BNE ~= nil then
@@ -127,9 +127,9 @@ elseif Config['General']["Core"] == "NPBASE" then
         local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
         local cid = user:getCurrentCharacter().id
         if user ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1] == nil then
-                SQL('INSERT INTO ethicalpixel_boosting (citizenid) VALUES (?)',{cid})
+                SQL('INSERT INTO dares_boosting (citizenid) VALUES (?)',{cid})
                 value = 0
             else
                 if sql[1].BNE ~= nil then
@@ -154,20 +154,20 @@ AddEventHandler("ethicalpixel-boosting:server:setBacgkround" , function(back)
     if Config['General']["Core"] == "QBCORE" then
         local pData = CoreName.Functions.GetPlayer(src)
         local cid = pData.PlayerData.citizenid
-        local sql = SQL('UPDATE ethicalpixel_boosting SET background=@b WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@b'] = back})
+        local sql = SQL('UPDATE dares_boosting SET background=@b WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@b'] = back})
         
     elseif Config['General']["Core"] == "ESX" then
         local xPlayer = ESX.GetPlayerFromId(src)
         local cid = xPlayer.identifier
 
         if xPlayer ~= nil then
-            local sql = SQL('UPDATE ethicalpixel_boosting SET background=@b WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@b'] = back})
+            local sql = SQL('UPDATE dares_boosting SET background=@b WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@b'] = back})
         end
     elseif Config['General']["Core"] == "NPBASE" then
         local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
         local cid = user:getCurrentCharacter().id
         if user ~= nil then
-            local sql = SQL('UPDATE ethicalpixel_boosting SET background=@b WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@b'] = back})
+            local sql = SQL('UPDATE dares_boosting SET background=@b WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@b'] = back})
         end 
     end
 end)
@@ -182,23 +182,23 @@ AddEventHandler("ethicalpixel-boosting:expreward" , function(class)
     if Config['General']["Core"] == "QBCORE" then
         local pData = CoreName.Functions.GetPlayer(src)
         local cid = pData.PlayerData.citizenid
-        local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+        local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
         if sql[1].exp ~= nil then
-            local sql = SQL('UPDATE ethicalpixel_boosting SET exp=@reward WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@reward'] = amount + sql[1].exp})
+            local sql = SQL('UPDATE dares_boosting SET exp=@reward WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@reward'] = amount + sql[1].exp})
         end
     elseif Config['General']["Core"] == "ESX" then
         local xPlayer = ESX.GetPlayerFromId(src)
         local cid = xPlayer.identifier
-        local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+        local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
         if sql[1].exp ~= nil then
-            local sql = SQL('UPDATE ethicalpixel_boosting SET exp=@reward WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@reward'] = amount + sql[1].exp})
+            local sql = SQL('UPDATE dares_boosting SET exp=@reward WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@reward'] = amount + sql[1].exp})
         end
     elseif Config['General']["Core"] == "NPBASE" then
         local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
         local cid = user:getCurrentCharacter().id
-        local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+        local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
         if sql[1].exp ~= nil then
-            local sql = SQL('UPDATE ethicalpixel_boosting SET exp=@reward WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@reward'] = amount + sql[1].exp})
+            local sql = SQL('UPDATE dares_boosting SET exp=@reward WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@reward'] = amount + sql[1].exp})
         end
     end
 
@@ -211,7 +211,7 @@ if Config['General']["Core"] == "QBCORE" then
         local pData = CoreName.Functions.GetPlayer(src)
         local cid = pData.PlayerData.citizenid
         if pData ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].exp ~= nil then
                 cb(sql[1].exp)
             else
@@ -227,7 +227,7 @@ elseif Config['General']["Core"] == "ESX" then
         local cid = xPlayer.identifier
 
         if xPlayer ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].exp ~= nil then
                 cb(sql[1].exp)
             else
@@ -242,7 +242,7 @@ elseif Config['General']["Core"] == "NPBASE" then
         local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
         local cid = user:getCurrentCharacter().id
         if user ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].exp ~= nil then
                 value = sql[1].exp
             else
@@ -263,10 +263,10 @@ if Config['General']["Core"] == "QBCORE" then
         local pData = CoreName.Functions.GetPlayer(src)
         local cid = pData.PlayerData.citizenid
         if pData ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].BNE ~= nil then
                 local pBNE = sql[1].BNE
-                SQL('UPDATE ethicalpixel_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE - amount})
+                SQL('UPDATE dares_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE - amount})
             else
                 cb(0)
             end
@@ -280,10 +280,10 @@ elseif Config['General']["Core"] == "ESX" then
         local cid = xPlayer.identifier
     
         if xPlayer ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].BNE ~= nil then
                 local pBNE = sql[1].BNE
-                SQL('UPDATE ethicalpixel_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE - amount})
+                SQL('UPDATE dares_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE - amount})
             else
                 cb(0)
             end
@@ -296,10 +296,10 @@ elseif Config['General']["Core"] == "NPBASE" then
         local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
         local cid = user:getCurrentCharacter().id
         if user ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].BNE ~= nil then
                 local pBNE = sql[1].BNE
-                SQL('UPDATE ethicalpixel_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE - amount})
+                SQL('UPDATE dares_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE - amount})
             else
                 value = 0
             end
@@ -316,10 +316,10 @@ if Config['General']["Core"] == "QBCORE" then
         local pData = CoreName.Functions.GetPlayer(src)
         local cid = pData.PlayerData.citizenid
         if pData ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].BNE ~= nil then
                 local pBNE = sql[1].BNE
-                SQL('UPDATE ethicalpixel_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE + amount})
+                SQL('UPDATE dares_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE + amount})
             else
                 cb(0)
             end
@@ -330,10 +330,10 @@ elseif Config['General']["Core"] == "ESX" then
         local src = source
         local xPlayer = ESX.GetPlayerFromId(src)
         local cid = xPlayer.identifier
-        local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+        local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
         if sql[1].BNE ~= nil then
             local pBNE = sql[1].BNE
-            SQL('UPDATE ethicalpixel_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE + amount})
+            SQL('UPDATE dares_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE + amount})
         else
             cb(0)
         end
@@ -344,10 +344,10 @@ elseif Config['General']["Core"] == "NPBASE" then
         local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
         local cid = user:getCurrentCharacter().id
         if user ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if sql[1].BNE ~= nil then
                 local pBNE = sql[1].BNE
-                SQL('UPDATE ethicalpixel_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE + amount})
+                SQL('UPDATE dares_boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE + amount})
             else
                 value = 0
             end
@@ -364,18 +364,18 @@ if Config['General']["Core"] == "QBCORE" then
         local cid = pData.PlayerData.citizenid
     
         if pData ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if(sql[1] ~= nil) then
                 if(sql[1].vin == 0) then
                     value = true
-                    SQL('UPDATE ethicalpixel_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
+                    SQL('UPDATE dares_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
                 else
                     local d1 = os.date("*t",   os.time())
                     local d2 = os.date("*t", sql[1].vin)
                     local zone_diff = os.difftime(os.time(d1), os.time(d2))
                     if(math.floor(zone_diff  / 86400) >= Config['Utils']["VIN"] ["VinDays"]) then
                         cb(true)
-                        SQL('UPDATE ethicalpixel_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
+                        SQL('UPDATE dares_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
                     end
                 end
             end
@@ -389,18 +389,18 @@ elseif Config['General']["Core"] == "ESX" then
         local cid = xPlayer.identifier
     
         if xPlayer ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if(sql[1] ~= nil) then
                 if(sql[1].vin == 0) then
                     value = true
-                    SQL('UPDATE ethicalpixel_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
+                    SQL('UPDATE dares_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
                 else
                     local d1 = os.date("*t",   os.time())
                     local d2 = os.date("*t", sql[1].vin)
                     local zone_diff = os.difftime(os.time(d1), os.time(d2))
                     if(math.floor(zone_diff  / 86400) >= Config['Utils']["VIN"] ["VinDays"]) then
                         cb(true)
-                        SQL('UPDATE ethicalpixel_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
+                        SQL('UPDATE dares_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
                     end
                 end
             end
@@ -412,18 +412,18 @@ elseif Config['General']["Core"] == "NPBASE" then
         local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
         local cid = user:getCurrentCharacter().id
         if user ~= nil then
-            local sql = SQL('SELECT * FROM ethicalpixel_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
+            local sql = SQL('SELECT * FROM dares_boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
             if(sql[1] ~= nil) then
                 if(sql[1].vin == 0) then
                     value = true
-                    SQL('UPDATE ethicalpixel_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
+                    SQL('UPDATE dares_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
                 else
                     local d1 = os.date("*t",   os.time())
                     local d2 = os.date("*t", sql[1].vin)
                     local zone_diff = os.difftime(os.time(d1), os.time(d2))
                     if(math.floor(zone_diff  / 86400) >= Config['Utils']["VIN"] ["VinDays"]) then
                         value = true
-                        SQL('UPDATE ethicalpixel_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
+                        SQL('UPDATE dares_boosting SET vin=@vin WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@vin'] = os.time()})
                     end
                 end
             end
@@ -697,3 +697,21 @@ RegisterServerEvent("ethicalpixel-boosting:CallCopsNotify" , function(plate , mo
     end
 end)
 
+RegisterServerEvent('ethicalpixel-boosting:AddVehicle')
+AddEventHandler('ethicalpixel-boosting:AddVehicle', function(model, plate)
+    local src = source
+    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    local cid = user:getCurrentCharacter().id
+    exports.oxmysql:execute("INSERT INTO characters_cars (cid, model, vehicle_state, current_garage, name, degredation, license_plate) VALUES (@cid, @model, @vehicle_state, @current_garage, @name, @degredation, @license_plate)", {
+        ['@cid'] = cid,
+        ['@model'] = model,
+        ['@vehicle_state'] = 'Out',
+        ['@current_garage'] = 'C',
+        ['@name'] = model,
+        ['@degredation'] = '100,100,100,100,100,100,100,100',
+        ['@license_plate'] = plate
+    })
+    print('[VIN SCRATCH] State ID: '..cid)
+    print('[VIN SCRATCH] License Plate: '..plate)
+    print('[VIN SCRATCH] Vehicle Model: '..model)
+end)

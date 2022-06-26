@@ -156,6 +156,8 @@ Config.Vehicles = {
     [44] = {vehicle = "Dilettante", class = "D"},
     ---------- M CLASS --------------
     [45] = {vehicle = "manchez", class = "M"},
+    [46] = {vehicle = "bf400", class = "M"},
+
 }
 
 -----     VEHICLE SPAWN LOCATIONS        -------
