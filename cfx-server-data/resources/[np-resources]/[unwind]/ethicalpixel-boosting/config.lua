@@ -158,14 +158,6 @@ Config.Vehicles = {
     [45] = {vehicle = "manchez", class = "M"},
 }
 
-
------     DROP OFF LOCATIONS        -------
-Config.BoostingDropOff = {
-	[1] =  { ['x'] = 196.87251281738,['y'] = -156.60850524902,['z'] = 56.786975860596},
-	[2] =  { ['x'] = -1286.9621582031,['y'] = -274.47973632813,['z'] = 38.724918365479},
-	[3] =  { ['x'] = -1330.8432617188,['y'] = -1034.8623046875,['z'] = 7.518029212951},
-}
-
 -----     VEHICLE SPAWN LOCATIONS        -------
 Config.VehicleCoords = {
     [1] = {x = -1132.395, y = -1070.607, z = 1.64372, h = 120.00},
@@ -337,9 +329,6 @@ Config.CitizenNames =  {
     [100] = {name = "Jenna Anderson"},
 }
 
-
-
-
 --------------BLIPS----------------- DON4T TOUCH ANY OF THESE UNLESS YOU KNOW WHAT YOU ARE DOING
 local Circle
 
@@ -364,22 +353,6 @@ function DeleteBlip()
 	end
 end
 
-
-function CreateDropPoint()
-    DeleteBlip()
-    rnd = math.random(1,#Config.BoostingDropOff)
-    if OnTheDropoffWay then
-        blip = AddBlipForCoord(Config.BoostingDropOff[rnd]["x"],Config.BoostingDropOff[rnd]["y"],Config.BoostingDropOff[rnd]["z"])
-    end
-    SetBlipSprite(blip, 514)
-    SetBlipScale(blip, 0.7)
-    SetBlipAsShortRange(blip, false)
-    BeginTextCommandSetBlipName("STRING")
-    AddTextComponentString("Drop Off")
-    EndTextCommandSetBlipName(blip)
-    DropblipCreated = true
-end
-
 function DeleteCopBlip()
 	if DoesBlipExist(copblip) then
 		RemoveBlip(copblip)
@@ -394,23 +367,6 @@ function CreateCopBlip(cx,cy,cz)
     SetBlipColour(copblip, 8)
     PulseBlip(copblip)
 end
-
-
-function CreateScratchPoint()
-    DeleteBlip()
-    if vinstarted then
-        blip = AddBlipForCoord(Config.ScratchLocation[1]["x"],Config.ScratchLocation[1]["y"],Config.ScratchLocation[1]["z"])
-    end
-    SetBlipSprite(blip, 514)
-    SetBlipScale(blip, 0.7)
-    SetBlipAsShortRange(blip, false)
-    BeginTextCommandSetBlipName("STRING")
-    AddTextComponentString("Vin Scratch")
-    EndTextCommandSetBlipName(blip)
-    DropblipCreated = true
-end
-
-
 
 ---- leave this if using np base if not you can remove it
 

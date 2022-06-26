@@ -567,54 +567,6 @@ AddEventHandler('ethicalpixel-boosting:SetBlipTime', function()
     end
 end)
 
-  
-
-
-RegisterNetEvent('ethicalpixel-boosting:finished')
-AddEventHandler('ethicalpixel-boosting:finished' , function()
-    if Config['General']["Core"] == "QBCORE" then
-        local src = source
-        local ply = CoreName.Functions.GetPlayer(src)                   
-        local worthamount = math.random(13000, 17000)
-        local info = {
-            worth = worthamount
-        }
-        if Config['Utils']["Rewards"]["Type"] == 'item' then
-            ply.Functions.AddItem(Config['Utils']["Rewards"]["RewardItemName"], Config['Utils']["Rewards"]["RewardItemAmount"], false, info)
-            TriggerClientEvent("inventory:client:ItemBox", src, CoreName.Shared.Items[Config['Utils']["Rewards"]["RewardItemName"]], "add")
-        elseif Config['Utils']["Rewards"]["Type"] == 'money' then
-            ply.Functions.AddMoney("bank",Config['Utils']["Rewards"]["RewardMoneyAmount"],"boosting-payment")
-        end
-    elseif Config['General']["Core"] == "ESX" then
-        local src = source
-        local ply = ESX.GetPlayerFromId(src)
-        local worthamount = math.random(13000, 17000)
-        local info = {
-          worth = worthamount
-        }
-        if Config['Utils']["Rewards"]["Type"] == 'item' then
-            ply.addInventoryItem(Config['Utils']["Rewards"]["RewardItemName"], Config['Utils']["Rewards"]["RewardItemAmount"])
-        elseif Config['Utils']["Rewards"]["Type"] == 'money' then
-            ply.addMoney(Config['Utils']["Rewards"]["RewardMoneyAmount"])
-        end
-    elseif Config['General']["Core"] == "NPBASE" then
-        local src = tonumber(source)
-        local user = exports[Config['CoreSettings']["NPBASE"]["Name"]]:getModule("Player"):GetUser(src)
-        if Config['Utils']["Rewards"]["Type"] == 'item' then
-            TriggerClientEvent('player:receiveItem', src, Config['Utils']["Rewards"]["RewardItemName"], Config['Utils']["Rewards"]["RewardItemAmount"])
-        elseif Config['Utils']["Rewards"]["Type"] == 'money' then
-            if Config['Utils']["Rewards"]["RewardAccount"] == 'cash' then
-                user:addMoney(math.floor(Config['Utils']["Rewards"]["RewardMoneyAmount"]))
-            elseif Config['Utils']["Rewards"]["RewardAccount"] == 'bank' then
-                user:addBank(math.floor(Config['Utils']["Rewards"]["RewardMoneyAmount"]))
-            end
-            TriggerClientEvent("DoLongHudText", src, "You recieved "..Config['Utils']["Rewards"]["RewardMoneyAmount"].."$ in "..Config['Utils']["Rewards"]["RewardAccount"].." - boosting")
-        end 
-    end
-end)
-
-
-
 if Config['General']["Core"] == "QBCORE" then
     CoreName.Functions.CreateUseableItem("pixellaptop", function(source, item)
         local Player = CoreName.Functions.GetPlayer(source)

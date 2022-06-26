@@ -26,6 +26,12 @@ elseif Config['General']["Core"] == "ESX" then
     end)
 end
 
+DropOffLocations = {
+	[1] =  { ['x'] = 196.87251281738,['y'] = -156.60850524902,['z'] = 56.786975860596},
+	[2] =  { ['x'] = -1286.9621582031,['y'] = -274.47973632813,['z'] = 38.724918365479},
+	[3] =  { ['x'] = -1330.8432617188,['y'] = -1034.8623046875,['z'] = 7.518029212951},
+}
+
 ----------------------------------------------------------------------------------------------------------------------------
 
 local authorized = false
@@ -378,21 +384,33 @@ AddEventHandler("ethicalpixel-boosting:DisablerUsed" , function()
           local Class = Contracts[startedcontractid].type 
           if (Config['Utils']["Contracts"]["DisableTrackingOnDCB"]) and (Class == "D" or Class == "C" or Class == "B") then
               TriggerEvent("DoLongHudText", 'Seems like this vehicle doesn\'t have a tracker on', 2)
-          elseif(vinstarted == false) then
+          elseif(not vinstarted) then
             if(DisablerTimes < 5) then
               DisablerUsed = true
               local minigame = exports['ethicalpixel-minigame']:Open()   
               if(minigame == true) then
                 Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
                 DisablerTimes = DisablerTimes + 1
+                DisablerTimes = 5
+                TriggerEvent('phone:addnotification', 'Anonymous', '('..DisablerTimes..'/5) Trackers Disabled.')
                 TriggerServerEvent("ethicalpixel-boosting:SetBlipTime")
-                TriggerEvent("DoLongHudText", 'Successfully completed hack.')
-              end
-            else
-              if(DisablerTimes == 5) then
-                CallingCops = false
-                TriggerServerEvent("ethicalpixel-boosting:removeblip")
-                TriggerEvent("DoLongHudText", 'Tracker removed, head to the dropoff location', 1)
+                if DisablerTimes == 5 then
+                  CallingCops = false
+                  OnTheDropoffWay = true
+                  TriggerServerEvent("ethicalpixel-boosting:removeblip")
+                  TriggerEvent('phone:addnotification', 'Anonymous', 'Tracker removed, head to the drop off location.')
+                  rnd = math.random(1,#DropOffLocations)
+                  if OnTheDropoffWay then
+                      blip = AddBlipForCoord(DropOffLocations[rnd]["x"],DropOffLocations[rnd]["y"],DropOffLocations[rnd]["z"])
+                  end
+                  SetBlipSprite(blip, 514)
+                  SetBlipScale(blip, 0.7)
+                  SetBlipAsShortRange(blip, false)
+                  BeginTextCommandSetBlipName("STRING")
+                  AddTextComponentString("Drop Off")
+                  EndTextCommandSetBlipName(blip)
+                  DropblipCreated = true
+                end
               end
             end
         elseif vinstarted == true then
@@ -402,26 +420,23 @@ AddEventHandler("ethicalpixel-boosting:DisablerUsed" , function()
             if(minigame == true) then
               Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
               DisablerTimes = DisablerTimes + 1
-              DisablerTimes = 10
               TriggerEvent('phone:addnotification', 'Anonymous', '('..DisablerTimes..'/10) Trackers Disabled.')
               TriggerServerEvent("ethicalpixel-boosting:SetBlipTime")
-            end
-          else
-            if(DisablerTimes == 10) then
-              CallingCops = false
-              TriggerServerEvent("ethicalpixel-boosting:removeblip")
-              CanUseComputer = true
-              TriggerEvent('phone:addnotification', 'Anonymous', 'Tracker removed, head to the scratch location.')
-              pDropVinVeh = AddBlipForCoord(472.08, -1310.73, 29.22)
-              SetBlipSprite(pDropVinVeh, 227)
-              SetBlipScale(pDropVinVeh, 1.5)
-              SetBlipRoute(pDropVinVeh, 1)
-              SetBlipRouteColour(pDropVinVeh, 3)
-              SetBlipAsShortRange(pDropVinVeh, false)
-              BeginTextCommandSetBlipName("STRING")
-              AddTextComponentString("Drop Off")
-              EndTextCommandSetBlipName(pDropVinVeh)
-              TriggerEvent("DoLongHudText", 'Successfully completed hack.')
+              if DisablerTimes == 10 then
+                CallingCops = false
+                TriggerServerEvent("ethicalpixel-boosting:removeblip")
+                CanUseComputer = true
+                TriggerEvent('phone:addnotification', 'Anonymous', 'Tracker removed, head to the scratch location.')
+                pDropVinVeh = AddBlipForCoord(472.08, -1310.73, 29.22)
+                SetBlipSprite(pDropVinVeh, 227)
+                SetBlipScale(pDropVinVeh, 1.5)
+                SetBlipRoute(pDropVinVeh, 1)
+                SetBlipRouteColour(pDropVinVeh, 3)
+                SetBlipAsShortRange(pDropVinVeh, false)
+                BeginTextCommandSetBlipName("STRING")
+                AddTextComponentString("Drop Off")
+                EndTextCommandSetBlipName(pDropVinVeh)
+              end
             end
           end
         end
@@ -638,7 +653,6 @@ function getStreetandZone(coords)
 	return playerStreetsLocation
 end
 
-
 NotifySent = false
 
 Citizen.CreateThread(function()
@@ -648,11 +662,11 @@ Citizen.CreateThread(function()
       Wait(1000)
       local veh = GetVehiclePedIsIn(GetPlayerPed(PlayerId()) , false)
       if(veh ~= 0) then
-        local PlayerPed = PlayerPedId()
         if(GetVehicleNumberPlateText(veh) == Contracts[startedcontractid].plate) then
-          local PedVehicle = GetVehiclePedIsIn(PlayerPed)
-          local Driver = GetPedInVehicleSeat(PedVehicle, -1)
-          if Driver == PlayerPed then
+          DeleteCircle()
+          rnd = math.random(1,#DropOffLocations)
+          local Driver = GetPedInVehicleSeat(veh, -1)
+          if Driver == PlayerPedId() then
             if not(DropblipCreated) then
               OnTheDropoffWay = true
               DropblipCreated = true
@@ -666,13 +680,11 @@ Citizen.CreateThread(function()
                 local hash = GetEntityModel(Vehicle)
                 local modelName = GetLabelText(GetDisplayNameFromVehicleModel(hash))
                 if not NotifySent then
-                  TriggerServerEvent("ethicalpixel-boosting:CallCopsNotify" , Contracts[startedcontractid].plate , modelName, primary..', '..secondary , getStreetandZone(GetEntityCoords(PlayerPed)))
+                  TriggerServerEvent("ethicalpixel-boosting:CallCopsNotify" , Contracts[startedcontractid].plate , modelName, primary..', '..secondary , getStreetandZone(GetEntityCoords(PlayerPedId())))
                   CallingCops = true
                   NotifySent = true
                 end
               end
-              CreateDropPoint()
-              DeleteCircle()
             end
           end
         end
@@ -752,7 +764,7 @@ Citizen.CreateThread(function()
           local PlayerPed = PlayerPedId()
           if(GetVehicleNumberPlateText(veh) == Contracts[startedcontractid].plate) then
             local PedVehicle = GetVehiclePedIsIn(PlayerPed)
-            local aDist = GetDistanceBetweenCoords(Config.BoostingDropOff[rnd]["x"],Config.BoostingDropOff[rnd]["y"],Config.BoostingDropOff[rnd]["z"], coordA["x"],coordA["y"],coordA["z"])
+            local aDist = GetDistanceBetweenCoords(DropOffLocations[rnd]["x"],DropOffLocations[rnd]["y"],DropOffLocations[rnd]["z"], coordA["x"],coordA["y"],coordA["z"])
             if aDist < 10.0 then
               CallingCops = false
               CompletedTask = true
@@ -776,11 +788,10 @@ end)
 RegisterNetEvent("ethicalpixel-boosting:ContractDone")
 AddEventHandler("ethicalpixel-boosting:ContractDone" , function()
   if CompletedTask then
-    TriggerEvent("DoLongHudText", 'Get out of the car and leave the area , you will get your money soon')
+    TriggerEvent('phone:addnotification', 'Anonymous', 'Get out of the car and flee the area, keep an eye on your Vehicle Class Bar.')
     TriggerServerEvent("ethicalpixel-boosting:removeblip")
     Citizen.Wait(math.random(25000,35000))
-    TriggerServerEvent("ethicalpixel-boosting:expreward",Contracts[startedcontractid].type)
-    TriggerServerEvent('ethicalpixel-boosting:finished')
+    TriggerServerEvent("ethicalpixel-boosting:expreward", Contracts[startedcontractid].type)
     BNEBoosting['functions'].AddBne(VehiclePrice)
     table.remove(Contracts , startedcontractid)
     started = false
@@ -943,70 +954,6 @@ function toggleTablet()
       isVisible = false
   end
 end
-
----------- COMMAND --------------
--- Citizen.CreateThread(function()
---   if Config['Utils']["Commands"]["boosting_test"] ~= 'nil' then
---     RegisterCommand(Config['Utils']["Commands"]["boosting_test"], function()
---       if Config['Utils']["VIN"]["ForceVin"] then
---         TriggerEvent('ethicalpixel-boosting:CreateContract', true)
---       else
---         TriggerEvent("ethicalpixel-boosting:CreateContract")
---       end
---     end)
---   end
--- end)
-
--- Citizen.CreateThread(function()
---   if Config['Utils']["Commands"]["force_close_nui"] ~= 'nil' then
---     RegisterCommand(Config['Utils']["Commands"]["force_close_nui"], function()
---       SetNuiFocus(false ,false)
---       toggleTablet()
---     end)
---   end
--- end)
--------------------------------
-
-
-
--- Citizen.CreateThread(function()
---   if Config['Utils']["Commands"]["get_vehicle_class"] ~= 'nil' then
---     RegisterCommand(Config['Utils']["Commands"]["get_vehicle_class"], function()
---       local veh = GetVehiclePedIsIn(PlayerPedId())
---       local fInitialDriveMaxFlatVel = getField("fInitialDriveMaxFlatVel" , veh)
---       local fInitialDriveForce = getField("fInitialDriveForce" , veh)
---       local fDriveBiasFront = getField("fDriveBiasFront" ,veh )
---       local fInitialDragCoeff = getField("fInitialDragCoeff" , veh)
---       local fTractionCurveMax = getField("fTractionCurveMax" , veh)
---       local fTractionCurveMin = getField("fTractionCurveMin" , veh )
---       local fSuspensionReboundDamp = getField("fSuspensionReboundDamp" , veh )
---       local fBrakeForce = getField("fBrakeForce" ,veh )
---       local force = fInitialDriveForce
---       local handling = (fTractionCurveMax + fSuspensionReboundDamp) * fTractionCurveMin
---       local braking = ((fTractionCurveMin / fInitialDragCoeff) * fBrakeForce) * 7
---       local accel = (fInitialDriveMaxFlatVel * force) / 10
---       local speed = ((fInitialDriveMaxFlatVel / fInitialDragCoeff) * (fTractionCurveMax + fTractionCurveMin)) / 40
---       local perfRating = ((accel * 5) + speed + handling + braking) * 15
---       local vehClass = "F"
---       if isMotorCycle then
---         vehClass = "M"
---       elseif perfRating > 900 then
---         vehClass = "X"
---       elseif perfRating > 700 then
---         vehClass = "S"
---       elseif perfRating > 550 then
---         vehClass = "A"
---       elseif perfRating > 400 then
---         vehClass = "B"
---       elseif perfRating > 325 then
---         vehClass = "C"
---       else
---         vehClass = "D"
---       end
---       print(vehClass)
---     end)
---   end
--- end)
 
 
 ---------------------- VIN SCRATCH ------------------------
