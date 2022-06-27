@@ -26,7 +26,7 @@ AddEventHandler("apartment:serverApartmentSpawn",function(roomType, isNew, insta
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
 
-    exports["ghmattimysql"]:execute("SELECT * FROM character_motel WHERE cid = @cid", {
+    exports.ghmattimysql:execute("SELECT * FROM character_motel WHERE cid = @cid", {
         ["cid"] = char.id
     }, function(result)
         if #result > 0 then
@@ -115,9 +115,9 @@ AddEventHandler("apartment:upgradeApartment2",function(price)
     local char = user:getCurrentCharacter()
     if user:getCash() >= price then
         user:removeMoney(price)
-        exports["ghmattimysql"]:execute("UPDATE character_motel WHERE id = @number AND building_type = @type", {
-            ["number"] = currentRoomNumber,
-            ["type"] = currentRoomType
+        exports.ghmattimysql:execute("UPDATE character_motel SET building_type=@building_type WHERE cid=@cid",{
+            ["cid"] = char.id,
+            ["building_type"] = 2
         })
     else
         TriggerClientEvent('DoLongHudText', source, "You can't afford that", 2)
@@ -125,15 +125,15 @@ AddEventHandler("apartment:upgradeApartment2",function(price)
 end)
 
 RegisterServerEvent("apartment:upgradeApartment3")
-AddEventHandler("apartment:upgradeApartment3",function(price)
+AddEventHandler("apartment:upgradeApartment3",function()
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
     local char = user:getCurrentCharacter()
     if user:getCash() >= price then
         user:removeMoney(price)
-        exports["ghmattimysql"]:execute("UPDATE character_motel WHERE id = @number AND building_type = @type", {
-            ["number"] = currentRoomNumber,
-            ["type"] = currentRoomType
+        exports.ghmattimysql:execute("UPDATE character_motel SET building_type=@building_type WHERE cid=@cid",{
+            ["cid"] = char.id,
+            ["building_type"] = 3
         })
     else
         TriggerClientEvent('DoLongHudText', source, "You can't afford that", 2)

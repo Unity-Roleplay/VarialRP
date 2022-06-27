@@ -659,7 +659,7 @@ end
 
 RegisterNetEvent('apartment:upgrades2')
 AddEventHandler('apartment:upgrades2', function()
-    local price = 80000
+    local price = 100
     TriggerServerEvent("apartment:upgradeApartment2",price)
     SetNewWaypoint(-1236.27,-860.84)
     TriggerEvent('DoLongHudText', 'A GPS marker to your new apartment has been set.')
@@ -680,7 +680,7 @@ AddEventHandler('apartment:upgrades', function()
             id = 1,
             header = "Base Apartment Upgrades",
             txt = "",
-            
+
         },
         {
             id = 2,
@@ -698,6 +698,6 @@ AddEventHandler('apartment:upgrades', function()
                 event = "apartment:upgrades3"
             }
         },
-        
+
     })
 end)
