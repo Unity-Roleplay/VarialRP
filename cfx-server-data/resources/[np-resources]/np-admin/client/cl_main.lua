@@ -93,6 +93,11 @@ end)
 
 RegisterNUICallback("Admin/DevMode", function(Data, Cb)
     local Bool = Data.Toggle
+    if Bool then
+        pDevMode = 1
+    else
+        pDevMode = 0
+    end
     ToggleDevMode(Bool)
     Cb('Ok')
 end)
