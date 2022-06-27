@@ -82,7 +82,7 @@ end)
 
 RegisterNetEvent('np-phone:MakeBill', function()
     -- print("MAKING BILLS")
-    local input = exports["np-input"]:showInput({
+    local input = exports["np-ui"]:showInput({
         {
             icon = "id-card",
             label = "CID",
