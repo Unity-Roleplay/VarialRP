@@ -3648,97 +3648,6 @@ local emsVehicleListWhite = { {"Ambulance", "emsnspeedo"}, {"Explorer", "bexp"},
 local emsVehicleList = { 
 	"ambulance"
 }
-
-local copVehicleList = {{"LSPD Vic", "POLVIC"}, {"BCSO/SASP Vic", "POLVIC2"}, {"New CVPI", "npolvic"},
-                        {"Taurus", "POLTAURUS"}, {"Tahoe", "POLTAH"}, {"Motorbike", "pol8"}, {"Raptor", "POLRAPTOR"},
-                        {"Charger", "POLCHAR"}, {"SWAT Suburban", "pol10"}, {"Helicopter", "maverick2"},
-                        {"HC Helicopter", "polas350"}, {"Boat", "predator"}, {"Prison Bus", "pbus2"},
-                        {"Armored Van", "policet"}, {"UC Schafter", "polschafter3"}, {"Mustang", "2015POLSTANG"},
-                        {"New Mustang", "npolstang"}, {"FBI Buffalo", "fbi"}, {"FBI Granger", "fbi2"},
-
-                        {"UC Washington", "ucwashington"}, {"UC Banshee", "ucbanshee"}, {"UC Rancher", "ucrancher"},
-                        {"UC Primo", "ucprimo"}, {"UC Coquette", "uccoquette"}, {"UC Buffalo", "ucbuffalo"},
-                        {"UC Baller", "ucballer"}, {"UC Comet", "uccomet"} -- "flatbed2", -- PD tow truck.
-}
-
-local pullout = false
-
-local function serviceVehicle(arg, livery, isEmsWhiteListed, cb)
-    if not arg then
-        cb("No argument was given")
-        return
-    end
-
-    local function printHelp(list)
-        copVehStrList = ""
-        for i = 1, #list do
-            copVehStrList = copVehStrList .. "[" .. i .. "] " .. list[i][1] .. "\n"
-        end
-        TriggerEvent("chatMessage", "SYSTEM ", 2, copVehStrList)
-    end
-    if arg == "help" then
-        print("sv help")
-        if exports["isPed"]:isPed("myjob") == "police" then
-            printHelp(copVehicleList)
-        elseif exports["isPed"]:isPed("myjob") == "ems" then
-            printHelp(emsVehicleListWhite)
-        end
-        return
-    end
-
-    arg = tonumber(arg)
-    if not arg then
-        cb("Invalid argument")
-        return
-    end
-
-    if isCop then
-        if arg > #copVehicleList then
-            arg = 1
-        end
-
-        selectedSkin = copVehicleList[arg][2]
-
-    else
-        if exports["isPed"]:isPed("myjob") == "ems" then
-            if arg > #emsVehicleListWhite then
-                arg = 1
-            end
-            selectedSkin = emsVehicleListWhite[arg][2]
-        else
-            if arg > #emsVehicleList then
-                arg = 1
-            end
-            selectedSkin = emsVehicleList[arg]
-        end
-    end
-
-    Citizen.CreateThread(function()
-
-        if not pullout then
-            pullout = true
-        else
-            -- TriggerServerEvent("MayorCashAdjust",250,2,"New Emergency Vehicle")
-        end
-
-        local hash = GetHashKey(selectedSkin)
-
-        if not IsModelAVehicle(hash) then
-            cb("Model isn't a vehicle")
-            return
-        end
-        if not IsModelInCdimage(hash) or not IsModelValid(hash) then
-            cb("Model doesn't exist")
-            return
-        end
-
-        TriggerEvent("np-admin:runSpawnCommand", selectedSkin, livery)
-    end)
-end
-
-local policeSkinsList = {"s_m_y_cop_01", "s_f_y_sheriff_01", "s_m_y_hwaycop_01", "s_m_y_ranger_01", "s_m_y_sheriff_01",
-                         "s_m_y_swat_01", "s_f_y_cop_02C"}
-
 function GroupRank(groupid)
     local rank = 0
     local mypasses = exports["isPed"]:isPed("passes")
@@ -3874,40 +3783,6 @@ AddEventHandler("police:chatCommand", function(args, cmd, isVehicleCmd)
             SetVehicleMod(vehicle, 23, rimList[tonumber(args[1])], false)
         end
 
-        if cmd == "fix" then
-            local finished = exports["np-taskbar"]:taskBar(3500, "Completing Task", false, true)
-
-            if finished == 100 then
-                local canFix = false
-                local playerPed = PlayerPedId()
-                local playerCoords = GetEntityCoords(playerPed, 0)
-                TriggerServerEvent("MayorCashAdjust", 250, 2, "Emergency Vehicle Repairs")
-                if exports["isPed"]:isPed("myjob") == "ems" then
-                    SetVehicleFixed(vehicle)
-                    SetVehiclePetrolTankHealth(vehicle, 4000.0)
-                else
-                    for i, v in ipairs(fixPoints) do
-                        local dist = Vdist(playerCoords.x, playerCoords.y, playerCoords.z, fixPoints[i][1],
-                            fixPoints[i][2], fixPoints[i][3])
-                        if (dist < 75) then
-                            canFix = true
-                        end
-                    end
-
-                    if canFix then
-                        SetVehicleFixed(vehicle)
-                        SetVehiclePetrolTankHealth(vehicle, 4000.0)
-                    else
-                        errorMsg("Need To be at Repair Point")
-                    end
-                end
-            end
-        end
-
-        if cmd == "sv" then
-            serviceVehicle(args[1], args[2], isEmsWhiteListed, errorMsg)
-        end
-
         if cmd == "hat" then
             local arg = tonumber(args[1])
             if not arg then
@@ -3962,27 +3837,6 @@ AddEventHandler("police:chatCommand", function(args, cmd, isVehicleCmd)
             end
         end
 
-        if cmd == "duty" then
-            if exports["isPed"]:isPed("myjob") == "ems" then
-                local arg = tonumber(args[1])
-                TriggerEvent("emsGear", arg)
-            else
-                local arg = tonumber(args[1])
-                if not arg then
-                    errorMsg("Invalid argument")
-                    return
-                end
-                SkinNoUpdate(arg)
-                TriggerEvent("policegear")
-                TriggerServerEvent('tattoos:retrieve')
-                TriggerServerEvent('Blemishes:retrieve')
-            end
-            TriggerEvent("facewear:update")
-        end
-
-        if cmd == "spikes" then
-            TriggerEvent("c_setSpike")
-        end
     else
     end
 end)
@@ -4016,10 +3870,6 @@ RegisterCommand('callsign', function(source, args)
     end
 end)
 
-RegisterCommand('sv', function(source, args)
-    TriggerEvent("police:chatCommand", args, 'sv', false)
-end)
-
 RegisterCommand('livery', function(source, args)
     TriggerEvent("police:chatCommand", args, 'livery', true)
 end)
@@ -4044,24 +3894,12 @@ RegisterCommand('color2', function(source, args)
     TriggerEvent("police:chatCommand", args, 'color2', true)
 end)
 
-RegisterCommand('fix', function(source, args)
-    TriggerEvent("police:chatCommand", args, 'fix', true)
-end)
-
 RegisterCommand('whitelist', function(source, args)
     TriggerEvent("police:chatCommand", args, 'whitelist', false)
 end)
 
 RegisterCommand('remove', function(source, args)
     TriggerEvent("police:chatCommand", args, 'remove', false)
-end)
-
-RegisterCommand('duty', function(source, args)
-    TriggerEvent("police:chatCommand", args, 'duty', false)
-end)
-
-RegisterCommand('sport', function(source)
-    TriggerEvent('police:sport')
 end)
 
 RegisterCommand('dorifto', function(source)
