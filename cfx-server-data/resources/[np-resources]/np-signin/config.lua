@@ -43,7 +43,7 @@ MenuData = {
       description = "Sign in or sign out",
       key = "police",
       children = {
-          { title = "Sign In", action = "np-signin:handler", icon = 'circle', key = { sign_in = true, job = "police" } },
+          { title = "Sign In", action = "np-signin:handler", key = { sign_in = true, job = "police" } },
           { title = "Sign Out", action = "np-signin:handler", key = { sign_off = true } }
       }
     },
