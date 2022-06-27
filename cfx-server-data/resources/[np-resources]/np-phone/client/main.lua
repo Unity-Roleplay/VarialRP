@@ -976,12 +976,22 @@ RegisterNetEvent('np-phone:sellCar')
 AddEventHandler('np-phone:sellCar', function(plate,amount,sId)
   sellCarPlate = plate
   local title = "Purchase Vehicle"
-  data = {amount = amount, sellerID = sId}
+  data = {amount = amount, sellerID = sId, pType = 'car_sale'}
   phoneBillNotification("car",data,title)
 end)
 
 RegisterNUICallback('purchaseCar', function(data)
   TriggerServerEvent('np-phone:purchasedCar', sellCarPlate, data.amount,data.sID)
+end)
+
+RegisterNUICallback('purchase_gas', function(data)
+  TriggerEvent('np-fuel:OfferAccepted')
+end)
+
+RegisterNetEvent('np-hud:send_fuel_bill', function(pCost)
+  local title = "Gas Station"
+  data = {amount = pCost, sellerID = '1', pType = 'gas_station'}
+  phoneBillNotification("circle", data, title)
 end)
 
 local timeSpawn = 0

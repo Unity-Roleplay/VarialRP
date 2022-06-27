@@ -1351,6 +1351,15 @@ AddEventHandler('np-phone:purchasedCar', function(plate,amount,sID)
     end
 end)
 
+RegisterNetEvent('np-phone:send_gas_bill')
+AddEventHandler('np-phone:send_gas_bill', function(targetId, pFuelCost)
+    local pSrc = source
+    
+	if targetId ~= nil then
+        TriggerClientEvent('np-hud:send_fuel_bill', targetId, pFuelCost, pSrc)
+    end
+end)
+
 AddEventHandler('onResourceStart', function(resource)    
 	if resource == GetCurrentResourceName() then
         exports.ghmattimysql:execute('DELETE FROM tweets', {}, function (result) end)

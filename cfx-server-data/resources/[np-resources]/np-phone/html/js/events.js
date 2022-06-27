@@ -18,7 +18,15 @@ function billDecline(){
 }
 
 function billAccept(data){
-    let price = data.amount
-    let sID = data.sellerID
-    $.post('https://np-phone/purchaseCar', JSON.stringify({amount:price, sID: sID}))
+    if (data.pType == "car_sale") {   
+        let price = data.amount
+        let sID = data.sellerID
+        let pType = data.pType
+        $.post('https://np-phone/purchaseCar', JSON.stringify({amount: price, sID: sID, pType: pType}))
+    } else if (data.pType == "gas_station") {
+        let price = data.amount
+        let sID = data.sellerID
+        let pType = data.pType
+        $.post('https://np-phone/purchase_gas', JSON.stringify({amount: price, sID: sID, pType: pType}))
+    }
 }
