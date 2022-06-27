@@ -30,12 +30,17 @@ RegisterCommand("setfuel", function(source, args, rawCommand)
 	TriggerEvent('np-fuel:setFuel', GetVehiclePedIsIn(GetPlayerPed(source)), tonumber(args[1]))
 	Wait(500)
 	print(GetFuel(GetVehiclePedIsIn(GetPlayerPed(source))))
- end, false)
+end, false)
 
 RegisterNetEvent('np-fuel:PurchaseSuccessful', function(gprice)
 	local pSrc = source
-	if exports['np-fw']:GetModule('GetBalance')(pSrc) >= tonumber(gprice) then
-        exports['np-fw']:GetModule('RemoveBank')(pSrc, tonumber(gprice))
+	local user = exports["np-base"]:getModule("Player"):GetUser(pSrc)
+
+	if user:getBalance() >= gprice then
+		print(gprice)
+		user:removeBank(gprice)
+	else
+		TriggerClientEvent('DoLongHudText', pSrc, 'Not enough money in bank!', 2)
 	end
 end)
 

@@ -6,6 +6,7 @@ local canRefillVehicle = true
 local canPayBill = false
 local zoneData = nil
 local GallonPrice = 6
+local paid = false
 attachedProp = 0
 
 local FuelClasses = {
@@ -196,42 +197,38 @@ AddEventHandler('np-polyzone:exit', function(name)
 end)
 
 RegisterNetEvent('np-fuel:SelectFuel', function()
-	TriggerEvent('np-context:sendMenu', {
+	local menuData = {
 		{
-			header = "Gas Pump",
-			context = "Select the kind of fuel you want to use",
-		},
+            title = "Gas Pump",
+            description = "Select the kind of fuel you want to use",
+			icon = 'info-circle',
+            key = "EVENTS.GAS",
+        },
 		{
-			header = "Regular",
-			context = "Octane: 87 | Price: $".. GallonPrice,
-			event = "np-fuel:FuelSelected",
-			disabled = hasNozle
-		},
-		{
-			header = "Return Nozle",
-			context = "",
-			event = "np-fuel:ReturnNozel",
-			disabled = canReturnNozle
-		},
-	})
+            title = "Regular",
+            description = "Octane: 87 | Price: $".. GallonPrice,
+			icon = 'gas-pump',
+            key = "EVENTS.REFUEL",
+			action = 'np-fuel:FuelSelected'
+        },
+    }
+    exports["np-ui"]:showContextMenu(menuData)
 end)
 
-RegisterNetEvent('np-fuel:FuelSelected', function()
-	local currentPed = PlayerPedId()
+RegisterUICallback("np-fuel:FuelSelected", function(data, cb)
+	SetUIFocus(false, false)
 	if not hasNozle then
 		hasNozle = true
 		canReturnNozle = false
-		attachedProp = CreateObject(GetHashKey("prop_cs_fuel_nozle"), 0, 0, 0, true, true, true)
-		AttachEntityToEntity(attachedProp, currentPed, GetPedBoneIndex(currentPed, 0xDEAD), 0.13, 0.04, -0.03, 80.0, 100.0, 190.0, true, true, false, true, 1, true)
+		TriggerEvent("attachItemRadio","fuel_nozle")
+		-- attachedProp = CreateObject(GetHashKey("prop_cs_fuel_nozle"), 0, 0, 0, true, true, true)
+		-- AttachEntityToEntity(attachedProp, currentPed, GetPedBoneIndex(currentPed, 0xDEAD), 0.13, 0.04, -0.03, 80.0, 100.0, 190.0, true, true, false, true, 1, true)
 	end
 end)
 
 RegisterNetEvent('np-fuel:ReturnNozel', function()
 	if hasNozle then
-		if DoesEntityExist(attachedProp) then
-            DeleteEntity(attachedProp)
-            attachedProp = 0
-        end
+		TriggerEvent("destroyPropRadio")
 		hasNozle = false
 		canReturnNozle = true
 	end
@@ -242,23 +239,58 @@ RegisterNetEvent('np-fuel:RefillVehicle', function()
 	local vehicleCurrentFuel = math.ceil(exports['np-fuel']:GetFuel(veh))
 	local endFuel = (100 - vehicleCurrentFuel)
 	local FuelCost = endFuel * GallonPrice
-	TriggerEvent('np-context:sendMenu', {
+
+	local menuData = {
 		{
-			header = "Refuel Vehicle",
-			context = "Fuel Amount: ".. math.ceil(exports['np-fuel']:GetFuel(veh)) .. " | Total Cost: $".. FuelCost .. ".0",
+			title = "Refuel Vehicle",
+			description = "Fuel Amount: ".. math.ceil(exports['np-fuel']:GetFuel(veh)) .. " | Total Cost: $".. FuelCost .. ".0",
+			icon = 'info-circle',
+			key = "EVENTS.GAS",
 		},
 		{
-			header = "Start Refueling",
-			event = "np-fuel:RefuelVehicle",
-			disabled = canRefillVehicle
+			title = "Start Refueling",
+			icon = 'gas-pump',
+			key = "EVENTS.REFUEL",
+			action = 'np-fuel:RefuelVehicle',
+			disabled = not canPayBill
 		},
 		{
-			header = "Send Bill",
-			event = "np-fuel:SendBillToBank",
-			args = {FuelCost},
+			title = "Send Bill",
+			icon = 'credit-card',
+			key = "EVENTS.CARD",
+			action = 'np-fuel:pay_bank',
 			disabled = canPayBill
 		},
-	})
+	}
+	exports["np-ui"]:showContextMenu(menuData)
+end)
+
+RegisterUICallback('np-fuel:pay_bank', function(data, cb, pParams)
+	SetUIFocus(false, false)
+	exports['np-ui']:openApplication('textbox', {
+        callbackUrl = 'np-ui:send_bill',
+        header = "Gas Station Bill",
+        key = data.key,
+        items = {
+            {
+                icon = "address-card",
+                label = "Paypal ID",
+                name = "ppaypal_id",
+            },
+        },
+        show = true,
+    })	
+end)
+
+RegisterUICallback("np-ui:send_bill", function(data, cb)
+	SetUIFocus(false, false)
+	local veh = getVehicleClosestToMe()
+	local vehicleCurrentFuel = math.ceil(exports['np-fuel']:GetFuel(veh))
+	local endFuel = (100 - vehicleCurrentFuel)
+	local FuelCost = endFuel * GallonPrice
+
+    exports['np-ui']:closeApplication('textbox')
+	TriggerServerEvent("np-phone:send_gas_bill", data[1].value, FuelCost)
 end)
 
 RegisterNetEvent('np-fuel:SendBillToBank', function(fCost)
@@ -270,12 +302,15 @@ RegisterNetEvent('np-fuel:OfferAccepted', function()
 	local vehicleCurrentFuel = math.ceil(exports['np-fuel']:GetFuel(veh))
 	local endFuel = (100 - vehicleCurrentFuel)
 	local FuelCost = endFuel * GallonPrice
-	TriggerServerEvent('np-fuel:PurchaseSuccessful', FuelCost)
+	if not paid then
+		paid = true
+		TriggerServerEvent('np-fuel:PurchaseSuccessful', FuelCost)
+	end
 	canRefillVehicle = false
 	canPayBill = true
 end)
 
-RegisterNetEvent('np-fuel:RefuelVehicle', function()
+RegisterUICallback('np-fuel:RefuelVehicle', function(data, cb)
 	local veh = getVehicleClosestToMe()
 	local vehicleCurrentFuel = math.ceil(exports['np-fuel']:GetFuel(veh))
 	local timer = (100 - vehicleCurrentFuel) * 400
@@ -283,28 +318,24 @@ RegisterNetEvent('np-fuel:RefuelVehicle', function()
 	loadAnimDict("anim@heists@keycard@")
     TaskPlayAnim(PlayerPedId(), "anim@heists@keycard@","idle_a",1.0, 1.0, -1, 9, 1.0, 0, 0, 0)
 
-	exports['np-taskbar']:Progress({
-		duration = timer,
-		label = "Refueling",
-	}, function(cancelled)
-		if not cancelled then
-			exports['np-fuel']:SetFuel(veh, 100)
-			canRefillVehicle = true
-			canPayBill = false
-			ClearPedTasks(PlayerPedId())
-		else
-			local endFuel = (100 - vehicleCurrentFuel) 
-			endFuel = math.ceil(endFuel * (exports['np-taskbar']:ProcessTime() / 100) + vehicleCurrentFuel)
-			exports['np-fuel']:SetFuel(veh, endFuel)
-			processRefund = (100 - endFuel) * GallonPrice
-			TriggerServerEvent('np-fuel:Refund', processRefund)
-			canRefillVehicle = true
-			canPayBill = false
-			ClearPedTasks(PlayerPedId())
-		end
-	end)
+	SetUIFocus(false, false)
+	-- exports['np-taskbar']:Progress({
+	-- 	duration = timer,
+	-- 	label = "Refueling",
+	-- }, function(cancelled)
+	local finished = exports['np-taskbar']:taskBar(timer, 'Refueling')
+	if finished == 100 then
+		paid = false
+		exports['np-fuel']:SetFuel(veh, 100)
+		canRefillVehicle = true
+		canPayBill = false
+		ClearPedTasks(PlayerPedId())
+	else
+		canRefillVehicle = true
+		canPayBill = false
+		ClearPedTasks(PlayerPedId())
+	end
 end)
-
 
 exports("hasNozle", function()
 	return hasNozle
