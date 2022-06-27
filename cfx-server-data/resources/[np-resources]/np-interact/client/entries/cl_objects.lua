@@ -313,7 +313,7 @@ Entries[#Entries + 1] = {
             id = 'use_atm',
             label = "Use ATM",
             icon = "credit-card",
-            event = "bank:checkATM",
+            event = "np-ui:openATM",
             parameters = {}
         }
     },
