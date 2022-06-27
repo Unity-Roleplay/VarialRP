@@ -61,3 +61,25 @@ AddEventHandler('police:setAnimData', function(AnimSet)
 	local metaData = json.encode(AnimSet)
 	exports.oxmysql:execute("UPDATE characters SET `meta` = @metaData WHERE id = @cid", {['metaData'] = metaData, ['cid'] = user["PlayerData"]["id"]})
 end)
+
+RegisterServerEvent('police:getAnimData')
+AddEventHandler('police:getAnimData', function()
+	local src = source
+	local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    local char = user:getCurrentCharacter()
+
+	exports.oxmysql:execute("SELECT meta FROM characters WHERE id = @cid", {['cid'] = char.id}, function(result)
+		if (result[1]) then
+			if not result[1].meta then
+				TriggerClientEvent('checkDNA', src)
+			else
+				local sex = json.decode(result[1].meta)
+			if sex == nil then
+				TriggerClientEvent('CheckDNA',src)
+				return
+			end
+			TriggerClientEvent('emote:setAnimsFromDB', src, result[1].meta)
+			end
+		end
+	end)
+end)
