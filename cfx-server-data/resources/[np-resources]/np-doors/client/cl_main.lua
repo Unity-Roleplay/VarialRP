@@ -180,12 +180,12 @@ AddEventHandler("np-doors:doorKeyFob", function()
     end
 
     if (not hasSecuredAccess(doorId, 'door') or not AllowsKeyFob(doorId)) then
-        PlaySoundFromEntity(-1, "Keycard_Fail", PlayerPedId(), "DLC_HEISTS_BIOLAB_FINALE_SOUNDS", 1, 5.0);
+        TriggerEvent('InteractSound_CL:PlayOnOne',isLocked and "GarageOpen" or "GarageClose", 0.2)
         return TriggerEvent("DoLongHudText", "The key fob is not working for this door.",2)
     end
 
     local isLocked = (DoorSystemGetDoorState(doorId) ~= 0 and true or false)
-    PlaySoundFromEntity(-1, "Keycard_Success", PlayerPedId(), "DLC_HEISTS_BIOLAB_FINALE_SOUNDS", 1, 5.0);
+    TriggerEvent('InteractSound_CL:PlayOnOne',isLocked and "GarageOpen" or "GarageClose", 0.2)
 
     TriggerServerEvent("np-doors:change-lock-state", doorId, isBollard and (not isLocked and 6 or 0) or (not isLocked))
 end)
