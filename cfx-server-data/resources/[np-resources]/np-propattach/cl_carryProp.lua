@@ -263,7 +263,6 @@ AddEventHandler('attachProp69', function(attachModelSent,boneNumberSent,x,y,z,xR
 	AttachEntityToEntity(attachedProp69, PlayerPedId(), bone, x, y, z, xR, yR, zR, 1, 0, 0, 0, 2, 1)
 end)
 
-
 attachPropList = {
 
 	["test"] = {
@@ -328,6 +327,10 @@ attachPropList = {
 
 	["radio01"] = {
 		["model"] = "prop_cs_hand_radio", ["bone"] = 57005, ["x"] = 0.14,["y"] = 0.01,["z"] = -0.02,["xR"] = 110.0,["yR"] = 120.0, ["zR"] = -15.0
+	},
+
+	["fuel_nozle"] = {
+		["model"] = "prop_cs_fuel_nozle", ["bone"] = 57005, ["x"] = 0.14,["y"] = 0.01,["z"] = -0.02,["xR"] = -40.0,["yR"] = 320.0, ["zR"] = -100.0
 	},
 
 	["clipboard01"] = {
