@@ -7,7 +7,7 @@ function getDui(url, width, height)
     width = width or 512
     height = height or 512
 
-    local duiSize = tostring(width) .. 'x' .. tostring(height)
+    local duiSize = tostring(width) .. "x" .. tostring(height)
 
     -- Check if dui with size exists
     if (availableDuis[duiSize] and #availableDuis[duiSize] > 0) then
@@ -28,8 +28,8 @@ function getDui(url, width, height)
 
     -- Generate a new one.
     duiCounter = duiCounter + 1
-    local generatedDictName = duiSize..'-dict-'..tostring(duiCounter)
-    local generatedTxtName = duiSize..'-txt-'..tostring(duiCounter)
+    local generatedDictName = duiSize.."-dict-"..tostring(duiCounter)
+    local generatedTxtName = duiSize.."-txt-"..tostring(duiCounter)
     local duiObject = CreateDui(url, width, height)
     local dictObject = CreateRuntimeTxd(generatedDictName)
     local duiHandle = GetDuiHandle(duiObject)
@@ -65,13 +65,13 @@ function releaseDui(id)
     local settings = duis[id]
     local duiSize = settings.duiSize
 
-    SetDuiUrl(settings.duiObject, 'about:blank')
+    SetDuiUrl(settings.duiObject, "about:blank")
     if not availableDuis[duiSize] then
       availableDuis[duiSize] = {}
-    end 
+    end
     table.insert(availableDuis[duiSize], id)
 end
 
-exports('getDui', getDui)
-exports('changeDuiUrl', changeDuiUrl)
-exports('releaseDui', releaseDui)
+exports("getDui", getDui)
+exports("changeDuiUrl", changeDuiUrl)
+exports("releaseDui", releaseDui)
