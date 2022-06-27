@@ -10,33 +10,15 @@ function ToggleDevMode(Bool)
     devmodeToggle = Bool
 end
 
-function IsPlayerAdmin()
-    print(exports["np-base"]:getModule("LocalPlayer"):getVar("rank"))
-    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
-        return true
-    else
-        return false
-    end
+function IsPlayerAdmin() 
+
+    return true
 end
 
 function DebugLog(Message)
     if Config.MenuDebug then
         print('[DEBUG]: ', Message)
     end
-end
-
-Citizen.CreateThread(function()
-    GetInventoryItems()
-end)
-
-function GetInventoryItems()
-    local items = exports["np-inventory"]:getFullItemList()
-    for k, v in pairs(items) do
-        table.insert(Inventory, {
-            Text = k
-        });
-    end
-    return Inventory
 end
 
 function DeletePlayerBlips()
@@ -149,6 +131,21 @@ function RefreshMenu(Type)
     UpdateMenu()
 end
 
+-- Inventory Items
+Citizen.CreateThread(function()
+    GetInventoryItems()
+end)
+
+function GetInventoryItems()
+    local items = exports["np-inventory"]:getFullItemList()
+    for k, v in pairs(items) do
+        table.insert(Inventory, {
+            Text = k
+        });
+    end
+    return Inventory
+end
+
 -- Get
 
 function GetPlayersInArea(Coords, Radius)
@@ -164,6 +161,18 @@ function GetPlayers()
     local Players = RPC.execute("np-admin/server/get-players")
 
         return (Players)
+end
+
+function GetPlayersss()
+    local players = {}
+
+    for i = 0, 255 do
+        if NetworkIsPlayerActive(i) then
+            players[#players+1]= i
+        end
+    end
+
+    return players
 end
 
 function GetJobs()
@@ -187,6 +196,18 @@ function GetAddonVehicles()
         [5] = 'lp700'
     }
     return AddonVehicles
+end
+
+AvailableGangs = {}
+function GetGangs()
+    local data = exports["np-gangsnew"]:GetAvailableGangs()
+    for k,v in pairs(data) do
+        local toinset = {
+            Text = v
+        }
+        table.insert(AvailableGangs,toinset)
+    end
+    return AvailableGangs
 end
 
 -- Generate
@@ -347,7 +368,7 @@ end)
 RegisterNetEvent("np-admin:ReviveInDistance")
 AddEventHandler("np-admin:ReviveInDistance", function()
     local playerList = {}
-    local players = GetPlayers()
+    local players = GetPlayersss()
     local ply = PlayerPedId()
     local plyCoords = GetEntityCoords(ply, 0)
 
@@ -357,15 +378,14 @@ AddEventHandler("np-admin:ReviveInDistance", function()
         local targetCoords = GetEntityCoords(GetPlayerPed(value), 0)
         local distance = #(vector3(targetCoords["x"], targetCoords["y"], targetCoords["z"]) - vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
         if(distance < 50) then
-            TriggerServerEvent("admin:reviveAreaFromClient",playerList)
             playerList[index] = GetPlayerServerId(value)
         end
     end
 
     if playerList ~= {} and playerList ~= nil then
+        TriggerServerEvent("admin:reviveAreaFromClient",playerList)
 
         for k,v in pairs(playerList) do
-            TriggerServerEvent("np-death:reviveSV", v)
             TriggerServerEvent("reviveGranted", v)
             TriggerEvent("Hospital:HealInjuries",true) 
             TriggerServerEvent("ems:healplayer", v)
@@ -500,6 +520,9 @@ AddEventHandler("np-admin:dv", function()
       end 
   end 
 end )
+
+
+
 
 function DeleteGivenVehicle(veh, timeoutMax)
   local timeout = 0 

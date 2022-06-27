@@ -168,7 +168,7 @@ end
 
 -- [ Events ] --
 
-RegisterNetEvent('Mercy/client/specPlayer', function(targetServerId, coords)
+RegisterNetEvent('Nopixel/client/specPlayer', function(targetServerId, coords)
     local spectatorPed = PlayerPedId()
     lastSpectateLocation = GetEntityCoords(spectatorPed)
 

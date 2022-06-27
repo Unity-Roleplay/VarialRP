@@ -13,49 +13,34 @@ AddEventHandler('onResourceStop', function (resourceName)
     if resourceName == GetCurrentResourceName() then
         LoggedIn = false
     end
-  end)
-  
-  
+end)
+
+function openadminfunction()
+    TriggerServerEvent('np-admin/server/open-menu')
+end
+Citizen.CreateThread(function()
+    exports["np-keybinds"]:registerKeyMapping("", "noclip", "No Clip (Devmode)", "+noclip", "-noclip")
+    RegisterCommand('+noclip', noclip, false)
+    RegisterCommand('-noclip', function() end, false)
+
+
+    exports["np-keybinds"]:registerKeyMapping("", "adminmenu", "Open Admin Menu", "+openadminfunction", "-openadminfunction")
+    RegisterCommand('+openadminfunction', openadminfunction, false)
+    RegisterCommand('-openadminfunction', function() end, false)
+end)
 
 -- [ Code ] --
 
 -- [ Mapping ] --
 
-function noclip()
-    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
-        if exports['np-admin']:DevMode() then
-            TriggerEvent('Admin:Toggle:Noclip')
-        end
-    end
-end
+RegisterKeyMapping('adminmenu', 'Open Admin Menu', 'keyboard', 'INSERT')
 
-function openMenu()
-    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
-        if exports['np-admin']:DevMode() then
-            TriggerEvent('np-admin-AttemptOpen', true) 
-        end
-    end
-end
-
-RegisterCommand('tpm', function()
-    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
-        TriggerEvent('Admin:Teleport:Marker')
-    end
-end)
-
-Citizen.CreateThread(function()
-    exports["np-keybinds"]:registerKeyMapping("", "Admin", "No Clip (Devmode)", "+noclip", "-noclip", "")
-    RegisterCommand('+noclip', noclip)
-
-    exports["np-keybinds"]:registerKeyMapping("", "Admin", "Open Menu (Devmode)", "+openmenu", "-noclip", "")
-    RegisterCommand('+openmenu', openMenu)
-end)
 
 -- [ Events ] --
 
 RegisterNetEvent('np-admin-AttemptOpen', function(OnPress)
     local Players = GetPlayers()
-    SetCursorLocation(0.87, 0.15)
+    SetCursorLocation(0.5, 0.5)
     SetNuiFocus(true, true)
     SendNUIMessage({
         Action = 'Open',
@@ -108,11 +93,6 @@ end)
 
 RegisterNUICallback("Admin/DevMode", function(Data, Cb)
     local Bool = Data.Toggle
-    if Bool then
-        pDevMode = 1
-    else
-        pDevMode = 0
-    end
     ToggleDevMode(Bool)
     Cb('Ok')
 end)
@@ -130,6 +110,34 @@ RegisterNUICallback('Admin/TriggerAction', function(Data, Cb)
         end
     end
     Cb('Ok')
+end)
+
+function noclip()
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        if exports['np-admin']:DevMode() then
+            TriggerEvent('Admin:Toggle:Noclip')
+        end
+    end
+end
+
+function openMenu()
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        if exports['np-admin']:DevMode() then
+            TriggerEvent('np-admin-AttemptOpen', true) 
+        end
+    end
+end
+
+RegisterCommand('tpm', function()
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        TriggerEvent('Admin:Teleport:Marker')
+    end
+end)
+
+RegisterCommand('nc', function()
+    if exports["np-base"]:getModule("LocalPlayer"):getVar("rank") == 'dev' or 'admin' or 'superadmin' or 'mod' or 'owner' then
+        TriggerEvent('Admin:Toggle:Noclip')
+    end
 end)
 
 function DevMode()

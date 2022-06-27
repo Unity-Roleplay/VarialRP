@@ -28,6 +28,30 @@ RegisterNetEvent('Admin:Toggle:Noclip', function()
     end
 end)
 
+
+RegisterNetEvent('Admin:Toggle:Debug', function(Result)
+    if IsPlayerAdmin() then
+        SendNUIMessage({
+            Action = 'Close',
+        })
+        SendNUIMessage({
+            Action = "SetItemEnabled",
+            Name = 'debug',
+            State = not debugmodeToggle
+        })
+        if debugmodeToggle then
+            debugmodeToggle = false
+        else
+            debugmodeToggle = true
+        end
+    end
+end)
+
+RegisterNetEvent('Admin:WeatherAndTime:Change', function(Result)
+    TriggerServerEvent("np-admin/server/change-weather-time", Result['weather'], Result['time'])
+end)
+
+
 RegisterNetEvent('Admin:Fix:Vehicle', function(Result)
     if IsPlayerAdmin() then
         if IsPedInAnyVehicle(PlayerPedId(), false) then
@@ -53,14 +77,11 @@ RegisterNetEvent('Admin:Spawn:Vehicle', function(Result)
 end)
 
 RegisterNetEvent('Admin:Bennys:Menu', function(Result)
-    print(IsPedInAnyVehicle(PlayerPedId()))
     if IsPlayerAdmin() then
-        if IsPedInAnyVehicle(PlayerPedId()) == 1 then
-            SendNUIMessage({
-                Action = 'Close',
-            })
-            TriggerEvent('enter:benny:DevBennys')
-        end
+        SendNUIMessage({
+            Action = 'Close',
+        })
+        TriggerEvent('enter:benny:DevBennys')
     end
 end)
 
@@ -115,16 +136,7 @@ RegisterNetEvent('Admin:Open:Clothing', function(Result)
         SendNUIMessage({
             Action = 'Close',
         })
-        TriggerServerEvent('np-admin/server/give-clothing', Result['player'])
-    end
-end)
-
-RegisterNetEvent('Admin:Open:BarberShop', function(Result)
-    if IsPlayerAdmin() then
-        SendNUIMessage({
-            Action = 'Close',
-        })
-        TriggerEvent("raid_clothes:admin:open", true, false)
+        TriggerEvent("raid_clothes:openClothing", true, true, false)
     end
 end)
 
@@ -136,6 +148,7 @@ end)
 
 RegisterNetEvent('Admin:Remove:Stress', function(Result)
     if IsPlayerAdmin() then
+        TriggerServerEvent('server:alterStress', false, 1000, Result['player'])
         TriggerServerEvent('np-admin/server/remove-stress', Result['player'])
     end
 end)
@@ -143,7 +156,7 @@ end)
 RegisterNetEvent('Admin:Change:Model', function(Result)
     if IsPlayerAdmin() and Result['model'] ~= '' then
         local Model = GetHashKey(Result['model'])
-        if IsModelValid(Model) then
+        if (Model) then
             TriggerServerEvent('np-admin/server/set-model', Result['player'], Model)
         end
     end
@@ -158,7 +171,9 @@ end)
 
 RegisterNetEvent('Admin:Food:Drink', function(Result)
     if IsPlayerAdmin() then
-        TriggerEvent('np-admin:maxstats')
+        TriggerEvent('np-hud:ChangeThirst', 90)
+        TriggerEvent('np-hud:ChangeHunger', 90)
+        TriggerEvent('DoLongHudText', 'Yummy..', 1)
     end
 end)
 
@@ -166,6 +181,14 @@ RegisterNetEvent('Admin:Request:Job', function(Result)
     if IsPlayerAdmin() then
         if Result['job'] ~= '' then
             TriggerServerEvent('np-admin/server/request-job', Result['player'], Result['job'])
+        end
+    end
+end)
+
+RegisterNetEvent('Admin:Request:Gang', function(Result)
+    if IsPlayerAdmin() then
+        if Result['gang'] ~= '' and Result['gang'] ~= '' then
+            TriggerEvent('unwind-gangs:Setgang', Result['player'], Result['gang'], Result['rank'])
         end
     end
 end)
@@ -191,6 +214,21 @@ end)
 RegisterNetEvent('Admin:Fling:Player', function(Result)
     if IsPlayerAdmin() then
         TriggerServerEvent('np-admin/server/fling-player', Result['player'])
+    end
+end)
+
+RegisterNetEvent('Admin:GiveCar', function(Result)
+    if IsPlayerAdmin() then
+        if Result['plate'] ~= nil then
+            plate = Result['plate']
+        else
+            plate = math.random()
+        end
+        if IsModelValid(Result['model']) then
+            TriggerServerEvent('np-admin/server/give-car', Result['player'], Result['model'], plate)
+        else
+            TriggerEvent('DoLongHudText', 'Invalid vehicle model.', 2)
+        end
     end
 end)
 
@@ -289,33 +327,72 @@ RegisterNetEvent('Admin:Toggle:PlayerNames', function()
         Name = 'playernames',
         State = NamesEnabled
     })
+end)
 
-    if NamesEnabled then
-        local Players = GetPlayersInArea(nil, 15.0)
+function getPlayers()
+    local players = {}
+    for k, player in pairs(GetActivePlayers()) do
+        local playerId = GetPlayerServerId(player)
+        players[k] = {
+            ['ped'] = GetPlayerPed(player),
+            ['name'] = GetPlayerName(player),
+            ['id'] = player,
+            ['serverid'] = playerId,
+        }
+    end
 
-        Citizen.CreateThread(function()
-            while NamesEnabled do
-                Citizen.Wait(2000)
-                Players = GetPlayersInArea(nil, 15.0)
+    table.sort(players, function(a, b)
+        return a.serverid < b.serverid
+    end)
+
+    return players
+end
+
+GetPlayersFromCoords = function(coords, distance)
+    local players = getPlayers()
+    local closePlayers = {}
+
+    if coords == nil then
+		coords = GetEntityCoords(GetPlayerPed(-1))
+    end
+    if distance == nil then
+        distance = 5.0
+    end
+    for _, player in pairs(players) do
+		local target = player['ped']
+		local targetCoords = GetEntityCoords(target)
+		local targetdistance = GetDistanceBetweenCoords(targetCoords, coords.x, coords.y, coords.z, true)
+		if targetdistance <= distance then
+			table.insert(closePlayers, player.id)
+		end
+    end
+    
+    return closePlayers
+end
+
+
+Citizen.CreateThread(function()
+    while true do
+
+        if NamesEnabled then
+            for _, player in pairs(GetPlayersFromCoords(GetEntityCoords(GetPlayerPed(-1)), 5.0)) do
+                local PlayerId = GetPlayerServerId(player)
+                local PlayerPed = GetPlayerPed(player)
+                local PlayerName = GetPlayerName(player)
+                local PlayerCoords = GetPedBoneCoords(PlayerPed, 0x796e)
+                local PedHealth = GetEntityHealth(PlayerPed) / GetEntityMaxHealth(PlayerPed) * 100
+                local PedArmor = GetPedArmour(PlayerPed)
+                DrawText3D(vector3(PlayerCoords.x, PlayerCoords.y, PlayerCoords.z + 0.5), ('[%s] - %s ~n~Health: %s - Armor: %s'):format(PlayerId, PlayerName, math.floor(PedHealth), math.floor(PedArmor)))
+
             end
-        end)
+        else
+            Citizen.Wait(1000)
+        end
 
-        Citizen.CreateThread(function()
-            while NamesEnabled do
-                for k, v in pairs(Players) do
-                    local Ped = GetPlayerPed(GetPlayerFromServerId(tonumber(v['ServerId'])))
-                    local PedCoords = GetPedBoneCoords(Ped, 0x796e)
-                    local PedHealth = GetEntityHealth(Ped) / GetEntityMaxHealth(Ped) * 100
-                    local PedArmor = GetPedArmour(Ped)
-                    
-                    DrawText3D(vector3(PedCoords.x, PedCoords.y, PedCoords.z + 0.5), ('[%s] - %s ~n~Health: %s - Armor: %s'):format(v['ServerId'], v['Name'], math.floor(PedHealth), math.floor(PedArmor)))
-                end
-                
-                Citizen.Wait(1)
-            end
-        end)
+        Citizen.Wait(3)
     end
 end)
+
 
 RegisterNetEvent('Admin:Toggle:Spectate', function(Result)
     if not IsPlayerAdmin() then return end
@@ -358,25 +435,6 @@ RegisterNetEvent("np-admin/client/toggle-godmode", function()
     end
 end)
 
-local DebugMode = false
-
-RegisterNetEvent("np-admin/client/toggle-debug", function()
-    SendNUIMessage({
-        Action = "SetItemEnabled",
-        Name = 'Debug',
-        State = not DebugMode
-    })
-  if not DebugMode then
-    DebugMode = true
-    TriggerEvent('DoLongHudText', 'Dev Debug Enabled!', 1)
-    debugmodeToggle = true
-  else
-    DebugMode = false
-    TriggerEvent('DoLongHudText', 'Dev Debug Disabled!', 1)
-    debugmodeToggle = false
-  end
-end)
-
 RegisterNetEvent('np-admin/client/teleport-player', function(Coords)
     local Entity = PlayerPedId()    
     SetPedCoordsKeepVehicle(Entity, Coords.x, Coords.y, Coords.z)
@@ -395,6 +453,10 @@ RegisterNetEvent('np-admin/client/set-model', function(Model)
     LoadModel(Model)
     SetPlayerModel(PlayerId(), Model)
     SetPedComponentVariation(PlayerPedId(), 0, 0, 0, 0)
+end)
+
+RegisterNetEvent('np-admin/client/armor-up', function()
+    SetPedArmour(PlayerPedId(), 60)
 end)
 
 RegisterNetEvent("np-admin/client/play-sound", function(Sound)
