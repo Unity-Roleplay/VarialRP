@@ -266,6 +266,10 @@ RegisterNetEvent('np-fuel:RefillVehicle', function()
 end)
 
 RegisterUICallback('np-fuel:pay_bank', function(data, cb, pParams)
+	local veh = getVehicleClosestToMe()
+	local vehicleCurrentFuel = math.ceil(exports['np-fuel']:GetFuel(veh))
+	local endFuel = (100 - vehicleCurrentFuel)
+	local FuelCost = endFuel * GallonPrice
 	SetUIFocus(false, false)
 	local input = exports["np-ui"]:showInput({
 		{
@@ -278,19 +282,7 @@ RegisterUICallback('np-fuel:pay_bank', function(data, cb, pParams)
 	if input["ppaypal_id"] then
 		TriggerServerEvent("np-phone:send_gas_bill", input["ppaypal_id"], FuelCost)
 		print(json.encode(input))
-		--TriggerServerEvent("np-phone:send_gas_bill", data[1].value, FuelCost)
 	end
-end)
-
-RegisterUICallback("np-ui:send_bill", function(data, cb)
-	SetUIFocus(false, false)
-	local veh = getVehicleClosestToMe()
-	local vehicleCurrentFuel = math.ceil(exports['np-fuel']:GetFuel(veh))
-	local endFuel = (100 - vehicleCurrentFuel)
-	local FuelCost = endFuel * GallonPrice
-
-    exports['np-ui']:closeApplication('textbox')
-	TriggerServerEvent("np-phone:send_gas_bill", data[1].value, FuelCost)
 end)
 
 RegisterNetEvent('np-fuel:SendBillToBank', function(fCost)
