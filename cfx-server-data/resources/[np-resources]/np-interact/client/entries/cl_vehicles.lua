@@ -28,14 +28,14 @@ Entries[#Entries + 1] = {
             id = "vehicle_refuel_station",
             label = "Refuel Vehicle",
             icon = "fas fa-gas-pump",
-            event = "vehicle:refuel:menu",
+            event = "np-fuel:RefillVehicle",
             parameters = {}
         }
     },
     options = {
         distance = { radius = 1.2, boneId = 'wheel_lr' },
         isEnabled = function(pEntity, pContext)
-            return exports['np-hud']:NearGasFn()
+            return exports['np-fuel']:hasNozle()
         end
     }
 }

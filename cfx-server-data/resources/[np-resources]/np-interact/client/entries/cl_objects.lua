@@ -42,12 +42,35 @@ Entries[#Entries + 1] = {
             id = 'use_gas',
             label = " Use Gas Pump",
             icon = "gas-pump",
-            event = "",
+            event = "np-fuel:SelectFuel",
             parameters = {}
         }
     },
     options = {
         distance = { radius = 1.7 },
+        isEnabled = function(pEntity, pContext)
+            return not exports['np-fuel']:hasNozle()
+        end
+    }
+}
+
+Entries[#Entries + 1] = {
+    type = 'flag',
+    group = { 'isFuelPump' },
+    data = {
+        {
+            id = 'return_hose',
+            label = "Return Hose",
+            icon = "hand-holding",
+            event = "np-fuel:ReturnNozel",
+            parameters = {}
+        }
+    },
+    options = {
+        distance = { radius = 1.7 },
+        isEnabled = function(pEntity, pContext)
+            return exports['np-fuel']:hasNozle()
+        end
     }
 }
 
