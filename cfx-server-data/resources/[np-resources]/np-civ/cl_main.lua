@@ -1,6 +1,14 @@
 
 Citizen.CreateThread(function()
 
+  exports["np-polyzone"]:AddCircleZone("townhalwl:gavel", vector3(-519.26, -175.61, 38.55), 1.25, { useZ=true }, {debugpoly=true})
+
+  exports['np-interact']:AddPeekEntryByPolyTarget("townhalwl:gavel", {{
+    event = "Courthouse:Gavel",
+    id = "gavel",
+    icon = "fas fa-gavel",
+    label = "Hit Gavel!",
+  }}, { distance = { radius = 2.5 } })
 
 
   exports["np-polyzone"]:AddCircleZone("townhall:gavel", vector3(-518.4946, -175.3768, 38.5612), 0.8, { useZ=true })
@@ -64,9 +72,7 @@ local function listenForKeypress(listenCounter, pEvent)
     Citizen.CreateThread(function()
         while listening == listenCounter do
             if IsControlJustReleased(0, 38) then
-              if pEvent == "townhall:gavel" then
-				        TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 20.0, 'gavel_3hit_mixdown', 0.4)
-              elseif pEvent == "gallery:ceo:stash" and exports["isPed"]:GroupRank("gallery") > 2 then
+              if pEvent == "gallery:ceo:stash" and exports["isPed"]:GroupRank("gallery") > 2 then
                 TriggerEvent("server-inventory-open", "1", "storage-gallery_ceo")
               elseif pEvent == "gallery:ceo:stash" and exports["isPed"]:GroupRank("gallery") < 3 then
                 TriggerEvent("DoLongHudText","Not allowed.", 2)
@@ -217,10 +223,7 @@ local function listenForKeypress(listenCounter, pEvent)
 end
 
 AddEventHandler("np-polyzone:enter", function(zone)
-  if zone == "townhall:gavel" then
-    exports["np-ui"]:showInteraction("[E] Bang the Gavel")
-    listenForKeypress(listening, zone)
-  elseif zone == "gallery:ceo:stash" then
+  if zone == "gallery:ceo:stash" then
     exports["np-ui"]:showInteraction("[E] Stash")
     listenForKeypress(listening, zone)
   elseif zone == "gallery:car:stash" then
@@ -462,3 +465,7 @@ function DrawText3DTest(x,y,z, text)
     local factor = (string.len(text)) / 370
     DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 end
+
+AddEventHandler('Courthouse:Gavel', function() 
+  TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 20.0, 'gavel_3hit_mixdown', 0.4)
+end)
