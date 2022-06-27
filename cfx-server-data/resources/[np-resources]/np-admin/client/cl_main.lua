@@ -15,9 +15,6 @@ AddEventHandler('onResourceStop', function (resourceName)
     end
 end)
 
-function openadminfunction()
-    TriggerServerEvent('np-admin/server/open-menu')
-end
 Citizen.CreateThread(function()
     exports["np-keybinds"]:registerKeyMapping("", "noclip", "No Clip (Devmode)", "+noclip", "-noclip")
     RegisterCommand('+noclip', noclip, false)
@@ -25,7 +22,7 @@ Citizen.CreateThread(function()
 
 
     exports["np-keybinds"]:registerKeyMapping("", "adminmenu", "Open Admin Menu", "+openadminfunction", "-openadminfunction")
-    RegisterCommand('+openadminfunction', openadminfunction, false)
+    RegisterCommand('+openadminfunction', openMenu, false)
     RegisterCommand('-openadminfunction', function() end, false)
 end)
 
