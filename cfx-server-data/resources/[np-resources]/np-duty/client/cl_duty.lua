@@ -679,9 +679,9 @@ AddEventHandler('np-duty:TowSuccess', function()
 	end
 end)
 
-RegisterCommand('pdduty', function()
+RegisterCommand('dutyon', function()
 	TriggerEvent('np-duty:OnDuty')
 end)
-RegisterCommand('pdduty2', function()
+RegisterCommand('dutyoff', function()
 	TriggerEvent('np-duty:OffDuty')
 end)
