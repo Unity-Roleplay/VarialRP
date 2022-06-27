@@ -25,7 +25,7 @@ local payphoneModels = {
 ]]
 
 AddEventHandler("np-phone:startPayPhoneCall", function()
-    local input = exports["np-input"]:showInput({
+    local input = exports["np-ui"]:showInput({
         {
             icon = "phone-volume",
             label = "Phone Number",
