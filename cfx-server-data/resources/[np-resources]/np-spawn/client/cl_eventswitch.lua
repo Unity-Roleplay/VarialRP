@@ -71,7 +71,9 @@ function Login.characterSpawned()
       if not exports["np-inventory"]:hasEnoughOfItem("repairkit", 1, false) then
         TriggerEvent("player:receiveItem", "repairkit", 1)
       end
-
+      TriggerEvent('np-hud:ChangeThirst', 100)
+      TriggerEvent('np-hud:ChangeHunger', 100)
+      TriggerEvent('np-hud:SaveValues')
 
       -- commands to make sure player is alive and full food/water/health/no injuries
       local src = GetPlayerServerId(PlayerId())
