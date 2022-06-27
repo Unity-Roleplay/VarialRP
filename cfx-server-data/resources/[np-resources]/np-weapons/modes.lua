@@ -110,11 +110,11 @@ function SwitchWeaponMode()
 	TriggerEvent("np-weapons:client:setWeaponFireRate", 33.3 * SELECTED_FIRE_RATE)
 
 	if selectedRate.label == "Single Fire" then
-		TriggerEvent('np-hud:armed', 30)
+		TriggerEvent('np-weapons:client:setWeaponFireRate', 30)
 	elseif selectedRate.label == "Burst Fire" then
-		TriggerEvent('np-hud:armed', 70)
+		TriggerEvent('np-weapons:client:setWeaponFireRate', 70)
 	elseif selectedRate.label == "Full Auto" then
-		TriggerEvent('np-hud:armed', 100)
+		TriggerEvent('np-weapons:client:setWeaponFireRate', 100)
 	end	
 end
 

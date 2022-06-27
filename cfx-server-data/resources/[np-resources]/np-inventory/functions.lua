@@ -1237,8 +1237,8 @@ AddEventHandler('RunUseItem', function(itemid, slot, inventoryName, isWeapon, pa
         local finished = exports["np-taskbar"]:taskBar(4500,"Putting on Armor",true,false,playerVeh)
         if (finished == 100) then
             StopAnimTask(PlayerPedId(), 'clothingshirt', 'try_shirt_positive_d', 1.0)
-            SetPlayerMaxArmour(PlayerId(), 60)
-            SetPedArmour( player, 60)
+            SetPlayerMaxArmour(PlayerId(), 100)
+            SetPedArmour( player, 100)
             TriggerEvent("UseBodyArmor")
             remove = true
         end

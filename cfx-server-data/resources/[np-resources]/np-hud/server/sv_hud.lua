@@ -35,7 +35,7 @@ end)
 RegisterServerEvent('carfill:checkmoney')
 AddEventHandler('carfill:checkmoney', function(costs)
 	local src = source
-	local player = exports['np-base']:getModule('GetPlayer')(src)
+	local player = exports['np-base']:getModule("Player"):GetUser(src)
 
 	if exports['np-base']:getModule('GetCash')(src) >= costs then
 		TriggerClientEvent("RefuelCarServerReturn", src)
@@ -49,7 +49,7 @@ end)
 RegisterServerEvent('police:setEmoteData')
 AddEventHandler('police:setEmoteData', function(emoteTable)
 	local src = source
-	local user = exports['np-base']:getModule('GetPlayer')(src)
+	local user = exports['np-base']:getModule("Player"):GetUser(src)
 	local emote = json.encode(emoteTable)
 	exports.oxmysql:execute("UPDATE characters SET `emotes` = @emotes WHERE id = @cid", {['emotes'] = emote, ['cid'] = user["PlayerData"]["id"]})
 end)
@@ -57,28 +57,7 @@ end)
 RegisterServerEvent('police:setAnimData')
 AddEventHandler('police:setAnimData', function(AnimSet)
 	local src = source
-	local user = exports['np-base']:getModule('GetPlayer')(src)
+	local user = exports['np-base']:getModule("Player"):GetUser(src)
 	local metaData = json.encode(AnimSet)
 	exports.oxmysql:execute("UPDATE characters SET `meta` = @metaData WHERE id = @cid", {['metaData'] = metaData, ['cid'] = user["PlayerData"]["id"]})
-end)
-
-RegisterServerEvent('police:getAnimData')
-AddEventHandler('police:getAnimData', function()
-	local src = source
-	local user = exports['np-base']:getModule('GetPlayer')(src)
-
-	exports.oxmysql:execute("SELECT meta FROM characters WHERE id = @cid", {['cid'] = user["PlayerData"]["id"]}, function(result)
-		if (result[1]) then
-			if not result[1].meta then
-				TriggerClientEvent('checkDNA', src)
-			else
-				local sex = json.decode(result[1].meta)
-			if sex == nil then
-				TriggerClientEvent('CheckDNA',src)
-				return
-			end
-			TriggerClientEvent('emote:setAnimsFromDB', src, result[1].meta)
-			end
-		end
-	end)
 end)
