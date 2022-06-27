@@ -680,23 +680,7 @@ end
 
 AddEventHandler("np-polyzone:enter", function(zone)
     local currentZone = zoneData[zone]
-    if zone == "mrpd_classroom" then
-        if not dui then
-            dui = exports["np-lib"]:getDui(currentBoardUrl)
-            AddReplaceTexture('prop_planning_b1', 'prop_base_white_01b', dui.dictionary, dui.texture)
-        else
-            exports["np-lib"]:changeDuiUrl(dui.id, currentBoardUrl)
-        end
-        inClassRoom = true
-    elseif zone == "mrpd_meetingroom" then
-        if not dui then
-            dui = exports["np-lib"]:getDui(currentMeetingRoomBoardUrl)
-            AddReplaceTexture('prop_planning_b1', 'prop_base_white_01b', dui.dictionary, dui.texture)
-        else
-            exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
-        end
-        inMeetingRoom = true
-    elseif currentZone then -- and isCop
+    if currentZone then -- and isCop
         currentPrompt = zone
         local prompt = type(currentZone.promptText) == 'function' and currentZone.promptText() or currentZone.promptText
         exports["np-ui"]:showInteraction(prompt)
@@ -706,65 +690,11 @@ end)
 
 AddEventHandler("np-polyzone:exit", function(zone)
     local currentZone = zoneData[zone]
-    if zone == "mrpd_classroom" then
-        RemoveReplaceTexture('prop_planning_b1', 'prop_base_white_01b')
-        if dui ~= nil then
-            exports["np-lib"]:releaseDui(dui.id)
-            dui = nil
-        end
-        inClassRoom = false
-    elseif zone == "mrpd_meetingroom" then
-        RemoveReplaceTexture('prop_planning_b1', 'prop_base_white_01b')
-        if dui ~= nil then
-            exports["np-lib"]:releaseDui(dui.id)
-            dui = nil
-        end
-        inMeetingRoom = false
-    elseif currentZone then
+  if currentZone then
         exports["np-ui"]:hideInteraction()
         listening = false
         currentPrompt = nil
     end
-end)
-
-RegisterNetEvent("police:changewhiteboardcli")
-AddEventHandler("police:changewhiteboardcli", function(pUrl, pRoom)
-    if pRoom == "classroom" and inClassRoom and dui then
-        currentBoardUrl = pUrl
-        exports["np-lib"]:changeDuiUrl(dui.id, currentBoardUrl)
-    elseif pRoom == "meetingroom" and inMeetingRoom and dui then
-        currentMeetingRoomBoardUrl = pUrl
-        exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
-    end
-end)
-
-RegisterUICallback("np-ui:policechangeurl", function(data, cb)
-    cb({
-        data = {},
-        meta = {
-            ok = true,
-            message = ''
-        }
-    })
-    exports['np-ui']:closeApplication('textbox')
-    print(data.value)
-    TriggerServerEvent("police:changewhiteboard", data.values.url, data.hiddenItems.room)
-end)
-
-AddEventHandler("np-polce:changewhiteboardurl", function(pParams)
-    exports['np-ui']:openApplication('textbox', {
-        callbackUrl = 'np-ui:policechangeurl',
-        key = 1,
-        items = {{
-            icon = "circle",
-            label = "URL",
-            name = "url"
-        }},
-        hiddenItems = {
-            room = pParams.room
-        },
-        show = true
-    })
 end)
 
 AddEventHandler('np-inventory:itemUsed', function(itemId, itemInfo, inventoryName, slot)
