@@ -17,6 +17,11 @@ RegisterNUICallback("np-ui:getAccounts", function(data, cb)
     })
 end)
 
+
+RegisterCommand('accounts', function()
+    TriggerServerEvent('np-spawn:create_bank_accounts', exports['isPed']:isPed('cid'))
+end)
+
 -- CREATE ACCOUNT
 RegisterNUICallback("np-ui:createAccount", function(data, cb)
     local name, accountType, is_frozen, is_monitored, is_owner = data.name, data.type_id, data.is_frozen, data.is_monitored, data.is_owner or false

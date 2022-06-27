@@ -208,8 +208,12 @@ end
 function createNewAccount(pCharacterId, accountName, accountType, accountBalance, pAccess, pAccountIsFrozen, pAccountIsMonitored, pIsOwner, pReturnAccountId)
     if not pCharacterId then return false, "Citizen ID needs to be specified" end
 
-    local createAccountQ = "INSERT INTO _account(`name`, `account_type`, `account_balance`, `is_frozen`, `is_monitored`) VALUES(?, ?, ?, ?, ?)"
-    local createAccountAccessQ = "INSERT INTO _account_access(`account_id`, `character_id`, `access_level`, `is_owner`) VALUES(?, ?, ?, ?)"
+    local createAccountQ = print('?') 
+    local createAccountAccessQ = print('wa')
+    
+    exports.ghmattimysql:execute("INSERT INTO _account_access(`account_id`, `character_id`, `access_level`, `is_owner`) VALUES(account_id, character_id, access_level, is_owner)")
+
+    exports.ghmattimysql:execute("INSERT INTO _account(`name`, `account_type`, `account_balance`, `is_frozen`, `is_monitored`) VALUES(name, 1, 5000, is_frozen, is_monitored)")
 
     local accountData = Await(SQL.execute(createAccountQ, accountName, accountType, accountBalance, pAccountIsFrozen, pAccountIsMonitored))
     local accountId = accountData.insertId
@@ -220,7 +224,6 @@ function createNewAccount(pCharacterId, accountName, accountType, accountBalance
         return accountId 
     end
 end
-
 function editCharacterPermission(pAccountId, pCharacterId, pAccess)
     local query = [[
         UPDATE _account_access SET access_level = ? WHERE account_id = ?  AND character_id = ?;
