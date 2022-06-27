@@ -2,11 +2,6 @@ voiceData = {}
 radioData = {}
 callData = {}
 
-function calculateVoiceTransmissionWithPixels(p1,p2,p3,p4)
-	local result = (p1 / p2 * p3 / p1 % p4 * (24 / 3) * 2)
-	return result
-end
-
 function defaultTable(source)
 	return {
 		radio = 0,
@@ -21,12 +16,35 @@ CreateThread(function()
     for i = 1, 1024 do
         MumbleCreateChannel(i)
     end
+	Wait(5000)
+	if GetConvarInt('voice_zoneRadius', 256) < 256 then
+		logger.warn('The convar \'voice_zoneRadius\' is less then 256 (currently %s, recommended is 256).', GetConvarInt('voice_zoneRadius', 256))
+	end
+
+	-- handle no convars being set
+	if GetConvar('voice_useNativeAudio', 'false') == 'false' and GetConvar('voice_use3dAudio', 'false') == 'false' and GetConvar('voice_use2dAudio', 'false') == 'false' then
+		SetConvarReplicated('voice_useNativeAudio', 'true')
+		if GetConvar('voice_useSendingRangeOnly', 'false') == 'false' then
+			SetConvarReplicated('voice_useSendingRangeOnly', 'true')
+		end
+		logger.warn('No convars detected for voice mode, defaulting to \'setr voice_useNativeAudio true\' and \'setr voice_useSendingRangeOnly true\'')
+	elseif GetConvar('voice_useSendingRangeOnly', 'false') == 'false' then
+		logger.warn('It\'s recommended to have \'voice_useSendingRangeOnly\' set to true you can do that with \'setr voice_useSendingRangeOnly true\', this prevents players who directly join the mumble server from broadcasting to players.')
+	end
 end)
 
 RegisterNetEvent('playerJoined', function()
 	if not voiceData[source] then
 		voiceData[source] = defaultTable(source)
-		Player(source).state:set('routingBucket', 0, true)
+		local plyState = Player(source).state
+		plyState:set('routingBucket', 0, true)
+		if GetConvarInt('voice_syncData', 0) == 1 then
+			plyState:set('radio', tonumber(GetConvar('voice_defaultVolume', '0.3')), true)
+			plyState:set('phone', tonumber(GetConvar('voice_defaultVolume', '0.3')), true)
+			plyState:set('proximity', {}, true)
+			plyState:set('callChannel', 0, true)
+			plyState:set('radioChannel', 0, true)
+		end
 	end
 end)
 
@@ -81,7 +99,27 @@ RegisterCommand('mute', function(source, args)
 	local mutePly = tonumber(args[1])
 	if mutePly then
 		if voiceData[mutePly] then
-			TriggerClientEvent('durp-voice:mutePlayer', mutePly)
+			TriggerClientEvent('np-voice:toggleMute', mutePly)
 		end
 	end
 end, true)
+
+if GetConvarInt('voice_externalDisallowJoin', 0) == 1 then
+	AddEventHandler('playerConnecting', function(playerName, kickReason, deferral)
+		deferral.defer()
+		Wait(0)
+		deferral.done('This server is not accepting connections.')
+	end)
+end
+
+
+function getPlayersInRadioChannel(channel)
+	local returnChannel = radioData[channel]
+	if returnChannel then
+		return returnChannel
+	end
+	-- channel doesnt exist
+	return {}
+end
+exports('getPlayersInRadioChannel', getPlayersInRadioChannel)
+exports('GetPlayersInRadioChannel', getPlayersInRadioChannel)

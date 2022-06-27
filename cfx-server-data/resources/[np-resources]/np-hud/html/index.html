@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <link href="script.js">
+      <link rel="stylesheet" href="style.css">
+      <title>Dares Fivem Leaks UI</title>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous">
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+      <link href="https://cdn.jsdelivr.net/npm/quasar@2.4.13/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+
+    </head>
+    <body>
+        <!-- CARHUD -->
+    <div class="outline2">
+			<center>
+				<div class="mapborder"></div>
+			</center>
+		</div>
+
+      <div id="main-app-container" class="menu">
+        <div class="jss1 jss384 jss2">
+            <input tabindex="0" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+            <input tabindex="-1" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+            <div class="jss1232 jss1237">
+              <div class="jss1233 jss1238">
+                <div class="jss1235 jss1240 jss1236 jss1241">
+                  <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" style="word-break: break-word;">HUD</p>
+                </div>
+              </div>
+              <div class="jss1234 jss1239">
+                <div class="jss1242 jss1277">
+                  <div>
+                    <div class="jss1244 jss1279 marginsifirla">
+                      <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary" style="word-break: break-word;"> Save settings you settings and load in with them when you re wake up.</p>
+                      <div class="save-btn" style="display: block; justify-content: flex-end;">
+                        <div>
+                          <button id="save-button" style="display: block;" class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-containedSizeSmall MuiButton-sizeSmall" tabindex="0" type="button">
+                            <span class="MuiButton-label">Save</span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div>
+                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary" style="word-break: break-word;">Status</h6>
+                    <div class="jss1244 jss1279">
+                      <div class="jss1243 jss1283">
+                        <div style="max-width: 35%;">
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormControlLabel-root">
+                              <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                                <span class="MuiIconButton-label">
+                                  <input id='healthInput' class="jss256" type="checkbox" data-indeterminate="false" value="" checked="true" />
+                                </span>
+                                <span class="MuiTouchRipple-root"></span>
+                              </span>
+                              <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Health</span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="input-wrapper">
+                          <div class="status-input-container MuiFormControl-root MuiTextField-root jss252" style="width: 65%; float: right; position: relative; top: -4.5vh;">
+                            <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true"> Hide when more than... (100 = never hide) </label>
+                            <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart">
+                              <div class="MuiInputAdornment-root MuiInputAdornment-positionStart">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="percent" class="svg-inline--fa fa-percent fa-w-14 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                  <path fill="currentColor" d="M112 224c61.9 0 112-50.1 112-112S173.9 0 112 0 0 50.1 0 112s50.1 112 112 112zm0-160c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zm224 224c-61.9 0-112 50.1-112 112s50.1 112 112 112 112-50.1 112-112-50.1-112-112-112zm0 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zM392.3.2l31.6-.1c19.4-.1 30.9 21.8 19.7 37.8L77.4 501.6a23.95 23.95 0 0 1-19.6 10.2l-33.4.1c-19.5 0-30.9-21.9-19.7-37.8l368-463.7C377.2 4 384.5.2 392.3.2z"></path>
+                                </svg>
+                              </div>
+                              <input aria-invalid="false" id="healthValue" placeholder="" rows="1" type="" class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart" value="95" />
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="jss1244 jss1279">
+                      <div class="jss1243 jss1288">
+                        <div style="max-width: 35%;">
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormControlLabel-root">
+                              <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                                <span class="MuiIconButton-label">
+                                  <input id='armorInput' class="jss256" type="checkbox" data-indeterminate="false" value="" checked="true" />
+                                </span>
+                                <span class="MuiTouchRipple-root"></span>
+                              </span>
+                              <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Armor</span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="input-wrapper">
+                          <div class="MuiFormControl-root MuiTextField-root jss252" style="width: 65%; float: right; position: relative; top: -4.5vh;">
+                            <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true"> Hide when more than... (100 = never hide) </label>
+                            <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart">
+                              <div class="MuiInputAdornment-root MuiInputAdornment-positionStart">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="percent" class="svg-inline--fa fa-percent fa-w-14 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                  <path fill="currentColor" d="M112 224c61.9 0 112-50.1 112-112S173.9 0 112 0 0 50.1 0 112s50.1 112 112 112zm0-160c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zm224 224c-61.9 0-112 50.1-112 112s50.1 112 112 112 112-50.1 112-112-50.1-112-112-112zm0 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zM392.3.2l31.6-.1c19.4-.1 30.9 21.8 19.7 37.8L77.4 501.6a23.95 23.95 0 0 1-19.6 10.2l-33.4.1c-19.5 0-30.9-21.9-19.7-37.8l368-463.7C377.2 4 384.5.2 392.3.2z"></path>
+                                </svg>
+                              </div>
+                              <input aria-invalid="false" id="armorValue" placeholder="" rows="1" type="" class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart" value="95" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jss1244 jss1279">
+                      <div class="jss1243 jss1293">
+                        <div style="max-width: 35%;">
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormControlLabel-root">
+                              <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                                <span class="MuiIconButton-label">
+                                  <input id='foodInput' class="jss256" type="checkbox" data-indeterminate="false" value="" checked="true" />
+                                </span>
+                                <span class="MuiTouchRipple-root"></span>
+                              </span>
+                              <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Food</span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="input-wrapper">
+                          <div class="MuiFormControl-root MuiTextField-root jss252" style="width: 65%; float: right; position: relative; top: -4.5vh;">
+                            <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true"> Hide when more than... (100 = never hide) </label>
+                            <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart">
+                              <div class="MuiInputAdornment-root MuiInputAdornment-positionStart">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="percent" class="svg-inline--fa fa-percent fa-w-14 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                  <path fill="currentColor" d="M112 224c61.9 0 112-50.1 112-112S173.9 0 112 0 0 50.1 0 112s50.1 112 112 112zm0-160c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zm224 224c-61.9 0-112 50.1-112 112s50.1 112 112 112 112-50.1 112-112-50.1-112-112-112zm0 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zM392.3.2l31.6-.1c19.4-.1 30.9 21.8 19.7 37.8L77.4 501.6a23.95 23.95 0 0 1-19.6 10.2l-33.4.1c-19.5 0-30.9-21.9-19.7-37.8l368-463.7C377.2 4 384.5.2 392.3.2z"></path>
+                                </svg>
+                              </div>
+                              <input aria-invalid="false" id="hungerValue" placeholder="" rows="1" type="" class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart" value="95" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jss1244 jss1279">
+                      <div class="jss1243 jss1298">
+                        <div class="input-wrapper">
+                          <div class="MuiFormControl-root MuiTextField-root jss252" style="width: 65%; float: right; position: relative; top: -3.5vh;">
+                            <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true"> Hide when more than... (100 = never hide) </label>
+                            <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart">
+                              <div class="MuiInputAdornment-root MuiInputAdornment-positionStart">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="percent" class="svg-inline--fa fa-percent fa-w-14 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                  <path fill="currentColor" d="M112 224c61.9 0 112-50.1 112-112S173.9 0 112 0 0 50.1 0 112s50.1 112 112 112zm0-160c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zm224 224c-61.9 0-112 50.1-112 112s50.1 112 112 112 112-50.1 112-112-50.1-112-112-112zm0 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zM392.3.2l31.6-.1c19.4-.1 30.9 21.8 19.7 37.8L77.4 501.6a23.95 23.95 0 0 1-19.6 10.2l-33.4.1c-19.5 0-30.9-21.9-19.7-37.8l368-463.7C377.2 4 384.5.2 392.3.2z"></path>
+                                </svg>
+                              </div>
+                              <input aria-invalid="false" id="thirstValue" placeholder="" rows="1" type="" class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart" value="95" />
+                            </div>
+                          </div>
+                        </div>
+                        <div style="max-width: 35%;">
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormControlLabel-root">
+                              <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                                <span class="MuiIconButton-label">
+                                  <input id='thirstInput' class="jss256" type="checkbox" data-indeterminate="false" value="" checked="true" />
+                                </span>
+                                <span class="MuiTouchRipple-root"></span>
+                              </span>
+                              <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Water</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div>
+                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary" style="word-break: break-word;">Vehicle</h6>
+                    <div class="jss1244 jss1279">
+                      <div class="jss1243 jss1278 ">
+                        <div>
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormControlLabel-root">
+                              <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                                <span class="MuiIconButton-label">
+                                  <input id='openmap' class="jss256" type="checkbox" data-indeterminate="false" value="" checked="true" />
+                                </span>
+                                <span class="MuiTouchRipple-root"></span>
+                              </span>
+                              <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Minimap Enabled</span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="speedometerfps" id="speedometerfps">
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Speedometer FPS</label>
+                            <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
+                              <div class="speedmeterOptionBtn MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input" tabindex="0" role="button" aria-haspopup="listbox">15</div>
+                              <input type="hidden" value="64" />
+                              <svg class="MuiSvgIcon-root MuiSelect-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 10l5 5 5-5z"></path>
+                              </svg>
+                            </div>
+                          </div>
+                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary" style="margin-top: 8px;">The higher the FPS, the more demanding this is on your machine</p>
+                        </div>
+                      </div>
+                      <div class="jss1244 jss1279" >
+                        <div class="MuiFormControl-root jss252">
+                          <label class="MuiFormControlLabel-root">
+                            <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
+                              <span class="MuiIconButton-label">
+                                <input id='defaultmap' type="checkbox" data-indeterminate="false" value="" />
+                              </span>
+                              <span class="MuiTouchRipple-root"></span>
+                            </span>
+                            <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Use Default Minimap (may require game restart)</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="jss1244 jss1279">
+                        <div class="MuiFormControl-root jss252">
+                          <label class="MuiFormControlLabel-root">
+                            <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                              <span class="MuiIconButton-label">
+                                <input id="outlinemap" class="jss256" type="checkbox" data-indeterminate="false" value="" checked="false" />
+                              </span>
+                              <span class="MuiTouchRipple-root"></span>
+                            </span>
+                            <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Minimap Outline</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="jss1244 jss1279">
+                      <div class="MuiFormControl-root jss252">
+                        <label class="MuiFormControlLabel-root">
+                          <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                            <span class="MuiIconButton-label">
+                              <input id="durability" class="jss256" type="checkbox" data-indeterminate="false" value="" checked="" />
+                            </span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </span>
+                          <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Harness durability</span>
+                        </label>
+                      </div>
+                    </div> -->
+                    <!-- <div class="jss1244 jss1279">
+                      <div class="jss1243 jss1278">
+                        <div class="MuiFormControl-root jss252">
+                          <label class="MuiFormControlLabel-root">
+                            <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                              <span class="MuiIconButton-label">
+                                <input id="nitrousleavels" class="jss256" type="checkbox" data-indeterminate="false" value="" checked="" />
+                              </span>
+                              <span class="MuiTouchRipple-root"></span>
+                            </span>
+                            <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Nitrous levels</span>
+                          </label>
+                        </div>
+                        <div style="float: right; width: 28vh; margin-top: -4.4vh;" class="MuiFormControl-root jss252">
+                          <label class="MuiFormControlLabel-root">
+                            <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
+                              <span class="MuiIconButton-label">
+                                <input id="nitroustrail" class="jss256" type="checkbox" data-indeterminate="false" value="" />
+                              </span>
+                              <span class="MuiTouchRipple-root"></span>
+                            </span>
+                            <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show Nitrous trail</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                  <hr />
+                  <div>
+                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary" style="word-break: break-word;">Compass</h6>
+                    <div class="jss1244 jss1279">
+                      <div class="jss1243 jss1278">
+                        <div >
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormControlLabel-root">
+                              <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary jss254 Mui-checked MuiIconButton-colorSecondary" aria-disabled="false">
+                                <span class="MuiIconButton-label">
+                                  <input id='compass' class="jss256" type="checkbox" data-indeterminate="false" value="" checked="" />
+                                </span>
+                                <span class="MuiTouchRipple-root"></span>
+                              </span>
+                              <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Enabled</span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="speedometerfps zordingen"  id="compassfull">
+                          <div class="MuiFormControl-root jss252">
+                            <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Compass FPS</label>
+                            <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
+                              <div class="compassOptionBtn MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input" tabindex="0" role="button" aria-haspopup="listbox">60</div>
+                              <input type="hidden" value="16" />
+                              <svg class="MuiSvgIcon-root MuiSelect-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 10l5 5 5-5z"></path>
+                              </svg>
+                            </div>
+                          </div>
+                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary" style="margin-top: 8px;">The higher the FPS, the more demanding this is on your machine</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="jss1244 jss1279">
+                      <div class="MuiFormControl-root jss252">
+                        <label class="MuiFormControlLabel-root">
+                          <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
+                            <span class="MuiIconButton-label">
+                              <input id='time'class="jss256" type="checkbox" data-indeterminate="false" value="" />
+                            </span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </span>
+                          <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Show the current time with the compass</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <!-- <div>
+                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary" style="word-break: break-word;">Phone Wallpaper</h6>
+                    <div class="jss1244 jss1279">
+                      <div class="input-wrapper">
+                        <div class="MuiFormControl-root MuiTextField-root jss252" style="width: 100%;">
+                          <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Phone Wallpaper (1:2.2 res)</label>
+                          <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart">
+                            <div class="MuiInputAdornment-root MuiInputAdornment-positionStart">
+                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mask" class="svg-inline--fa fa-mask fa-w-20 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                <path fill="currentColor" d="M320.67 64c-442.6 0-357.57 384-158.46 384 39.9 0 77.47-20.69 101.42-55.86l25.73-37.79c15.66-22.99 46.97-22.99 62.63 0l25.73 37.79C401.66 427.31 439.23 448 479.13 448c189.86 0 290.63-384-158.46-384zM184 308.36c-41.06 0-67.76-25.66-80.08-41.05-5.23-6.53-5.23-16.09 0-22.63 12.32-15.4 39.01-41.05 80.08-41.05s67.76 25.66 80.08 41.05c5.23 6.53 5.23 16.09 0 22.63-12.32 15.4-39.02 41.05-80.08 41.05zm272 0c-41.06 0-67.76-25.66-80.08-41.05-5.23-6.53-5.23-16.09 0-22.63 12.32-15.4 39.01-41.05 80.08-41.05s67.76 25.66 80.08 41.05c5.23 6.53 5.23 16.09 0 22.63-12.32 15.4-39.02 41.05-80.08 41.05z"></path>
+                              </svg>
+                            </div>
+                            <input aria-invalid="false" placeholder="" rows="1" type="" class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart" value="https://i.imgur.com/3KTfLIV.jpg" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr /> -->
+                  <div>
+                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary" style="word-break: break-word;">Black Bars</h6>
+                    <div class="jss1244 jss1279">
+                      <div class="MuiFormControl-root jss252">
+                        <label class="MuiFormControlLabel-root">
+                          <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
+                            <span class="MuiIconButton-label">
+                              <input id="blackbarInput" class="jss256" type="checkbox" data-indeterminate="false" value="" />
+                            </span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </span>
+                          <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Enabled</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="jss1244 jss1279">
+                      <div class="input-wrapper">
+                        <div class="MuiFormControl-root MuiTextField-root jss252" style="width: 100%;">
+                          <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Percentage of screen</label>
+                          <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart">
+                            <div class="MuiInputAdornment-root MuiInputAdornment-positionStart">
+                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mask" class="svg-inline--fa fa-mask fa-w-20 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                <path fill="currentColor" d="M320.67 64c-442.6 0-357.57 384-158.46 384 39.9 0 77.47-20.69 101.42-55.86l25.73-37.79c15.66-22.99 46.97-22.99 62.63 0l25.73 37.79C401.66 427.31 439.23 448 479.13 448c189.86 0 290.63-384-158.46-384zM184 308.36c-41.06 0-67.76-25.66-80.08-41.05-5.23-6.53-5.23-16.09 0-22.63 12.32-15.4 39.01-41.05 80.08-41.05s67.76 25.66 80.08 41.05c5.23 6.53 5.23 16.09 0 22.63-12.32 15.4-39.02 41.05-80.08 41.05zm272 0c-41.06 0-67.76-25.66-80.08-41.05-5.23-6.53-5.23-16.09 0-22.63 12.32-15.4 39.01-41.05 80.08-41.05s67.76 25.66 80.08 41.05c5.23 6.53 5.23 16.09 0 22.63-12.32 15.4-39.02 41.05-80.08 41.05z"></path>
+                              </svg>
+                            </div>
+                            <input class="blackbarInputNumber" aria-invalid="false" placeholder="" rows="1" type="" class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart" value="10" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <hr />
+                   <div>
+                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary" style="word-break: break-word;">Crosshair (lmao)</h6>
+                    <div class="jss1244 jss1279">
+                      <div class="MuiFormControl-root jss252">
+                        <label class="MuiFormControlLabel-root">
+                          <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
+                            <span class="MuiIconButton-label">
+                              <input class="jss256" type="checkbox" data-indeterminate="false" value="" />
+                              <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                              </svg>
+                            </span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </span>
+                          <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Enabled</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div>
+                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary" style="word-break: break-word;">Golf Ball Camera</h6>
+                    <div class="jss1244 jss1279">
+                      <div class="MuiFormControl-root jss252">
+                        <label class="MuiFormControlLabel-root">
+                          <span class="MuiButtonBase-root MuiIconButton-root jss253 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary" aria-disabled="false">
+                            <span class="MuiIconButton-label">
+                              <input class="jss256" type="checkbox" data-indeterminate="false" value="" />
+                              <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                              </svg>
+                            </span>
+                            <span class="MuiTouchRipple-root"></span>
+                          </span>
+                          <span class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Enabled</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>-->
+              </div>
+            </div>
+            <input tabindex="-1" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+            <input tabindex="0" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+          </div>
+        </div>
+              
+      </div>
+
+      <div class="jss1 jss111" id="hudfull">
+        <input tabindex="0" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+        <input tabindex="-1" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+
+        <div class="jss112 jss144">
+          <div class="jss137 jss169">
+            <div class="jss138 jss1258" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1259">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="voicebar" r="20" cx="24" cy="24" fill="transparent" stroke="white" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 400ms linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1259">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="voice" r="20" cx="24" cy="24" fill="transparent" stroke="white" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="41.97167785195965" stroke-opacity="1" style="transition: stroke-dashoffset 400ms linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1259">
+                <div class="jss140 jss1260">
+                  <svg id="ShowMic" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="microphone" class="svg-inline--fa fa-microphone fa-w-11 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"></path>
+                  </svg>
+                  <svg id="ShowHeadSet" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="headset" class="svg-inline--fa fa-headset fa-w-11 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" style="color: white; font-size: 18px; margin-right: 5.6px; margin-bottom:1px">
+                    <path fill="currentColor" d="M191.1 224c0-17.72-14.34-32.04-32-32.04L144 192c-35.34 0-64 28.66-64 64.08v47.79C80 339.3 108.7 368 144 368H160c17.66 0 32-14.36 32-32.06L191.1 224zM256 0C112.9 0 4.583 119.1 .0208 256L0 296C0 309.3 10.75 320 23.1 320S48 309.3 48 296V256c0-114.7 93.34-207.8 208-207.8C370.7 48.2 464 141.3 464 256v144c0 22.09-17.91 40-40 40h-110.7C305 425.7 289.7 416 272 416H241.8c-23.21 0-44.5 15.69-48.87 38.49C187 485.2 210.4 512 239.1 512H272c17.72 0 33.03-9.711 41.34-24H424c48.6 0 88-39.4 88-88V256C507.4 119.1 399.1 0 256 0zM368 368c35.34 0 64-28.7 64-64.13V256.1C432 220.7 403.3 192 368 192l-16 0c-17.66 0-32 14.34-32 32.04L320 335.9C320 353.7 334.3 368 352 368H368z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="jss138 jss1290" id="healthfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1355">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="healthbar" r="20" cx="24" cy="24" fill="transparent" stroke="#3BB273" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1291">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="health" r="20" cx="24" cy="24" fill="transparent" stroke="#3BB273" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="100" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1291">
+                <div class="jss140 jss1292">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" id="hearth-icon" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1322" id="dogalgazfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1323">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="dogalgazbar" r="20" cx="24" cy="24" fill="transparent" stroke="#33B8C1" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1323">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="dogalgaz" r="20" cx="24" cy="24" fill="transparent" stroke="#33B8C1" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1323">
+                <div class="jss140 jss1324">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="burn" class="svg-inline--fa fa-burn fa-w-12 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M192 0C79.7 101.3 0 220.9 0 300.5 0 425 79 512 192 512s192-87 192-211.5c0-79.9-80.2-199.6-192-300.5zm0 448c-56.5 0-96-39-96-94.8 0-13.5 4.6-61.5 96-161.2 91.4 99.7 96 147.7 96 161.2 0 55.8-39.5 94.8-96 94.8z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1354" id="armorfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1355">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="armorbar" r="20" cx="24" cy="24" fill="transparent" stroke="#1565C0" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1355">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="armor" r="20" cx="24" cy="24" fill="transparent" stroke="#1565C0" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1355">
+                <div class="jss140 jss1356">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" id="armor-icon" data-icon="shield-alt" class="svg-inline--fa fa-shield-alt fa-w-16 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1386" id="hungerfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1387">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="hungerbar" r="20" cx="24" cy="24" fill="transparent" stroke="#FF6D00" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1387">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="hunger" r="20" cx="24" cy="24" fill="transparent" stroke="#FF6D00" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1387">
+                <div class="jss140 jss1388">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" id="hunger-icon" data-icon="hamburger" class="svg-inline--fa fa-hamburger fa-w-16 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M464 256H48a48 48 0 0 0 0 96h416a48 48 0 0 0 0-96zm16 128H32a16 16 0 0 0-16 16v16a64 64 0 0 0 64 64h352a64 64 0 0 0 64-64v-16a16 16 0 0 0-16-16zM58.64 224h394.72c34.57 0 54.62-43.9 34.82-75.88C448 83.2 359.55 32.1 256 32c-103.54.1-192 51.2-232.18 116.11C4 180.09 24.07 224 58.64 224zM384 112a16 16 0 1 1-16 16 16 16 0 0 1 16-16zM256 80a16 16 0 1 1-16 16 16 16 0 0 1 16-16zm-128 32a16 16 0 1 1-16 16 16 16 0 0 1 16-16z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1418" id="thirstfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1419">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="thirstbar" r="20" cx="24" cy="24" fill="transparent" stroke="#0277BD" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1419">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="thirst" r="20" cx="24" cy="24" fill="transparent" stroke="#0277BD" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1419">
+                <div class="jss140 jss1420">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" id="thirst-icon" data-icon="tint" class="svg-inline--fa fa-tint fa-w-11 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M205.22 22.09c-7.94-28.78-49.44-30.12-58.44 0C100.01 179.85 0 222.72 0 333.91 0 432.35 78.72 512 176 512s176-79.65 176-178.09c0-111.75-99.79-153.34-146.78-311.82zM176 448c-61.75 0-112-50.25-112-112 0-8.84 7.16-16 16-16s16 7.16 16 16c0 44.11 35.89 80 80 80 8.84 0 16 7.16 16 16s-7.16 16-16 16z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1450" id="oxyfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1451">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="oxybar" r="20" cx="24" cy="24" fill="transparent" stroke="#90A4AE" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1451">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="oxy" r="20" cx="24" cy="24" fill="transparent" stroke="#90A4AE" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1451">
+                <div class="jss140 jss1452">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" id="oxy-icon" data-icon="lungs" class="svg-inline--fa fa-lungs fa-w-20 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M636.11 390.15C614.44 308.85 580.07 231 534.1 159.13 511.98 124.56 498.03 96 454.05 96 415.36 96 384 125.42 384 161.71v60.11l-32.88-21.92a15.996 15.996 0 0 1-7.12-13.31V16c0-8.84-7.16-16-16-16h-16c-8.84 0-16 7.16-16 16v170.59c0 5.35-2.67 10.34-7.12 13.31L256 221.82v-60.11C256 125.42 224.64 96 185.95 96c-43.98 0-57.93 28.56-80.05 63.13C59.93 231 25.56 308.85 3.89 390.15 1.3 399.84 0 409.79 0 419.78c0 61.23 62.48 105.44 125.24 88.62l59.5-15.95c42.18-11.3 71.26-47.47 71.26-88.62v-87.49l-85.84 57.23a7.992 7.992 0 0 1-11.09-2.22l-8.88-13.31a7.992 7.992 0 0 1 2.22-11.09L320 235.23l167.59 111.72a7.994 7.994 0 0 1 2.22 11.09l-8.88 13.31a7.994 7.994 0 0 1-11.09 2.22L384 316.34v87.49c0 41.15 29.08 77.31 71.26 88.62l59.5 15.95C577.52 525.22 640 481.01 640 419.78c0-9.99-1.3-19.94-3.89-29.63z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1482" id="stressfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1483">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="stressbar" r="20" cx="24" cy="24" fill="transparent" stroke="#d50000" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1483">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="stress" r="20" cx="24" cy="24" fill="transparent" stroke="#d50000" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1483">
+                <div class="jss140 jss1484">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="brain" class="svg-inline--fa fa-brain fa-w-18 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M208 0c-29.9 0-54.7 20.5-61.8 48.2-.8 0-1.4-.2-2.2-.2-35.3 0-64 28.7-64 64 0 4.8.6 9.5 1.7 14C52.5 138 32 166.6 32 200c0 12.6 3.2 24.3 8.3 34.9C16.3 248.7 0 274.3 0 304c0 33.3 20.4 61.9 49.4 73.9-.9 4.6-1.4 9.3-1.4 14.1 0 39.8 32.2 72 72 72 4.1 0 8.1-.5 12-1.2 9.6 28.5 36.2 49.2 68 49.2 39.8 0 72-32.2 72-72V64c0-35.3-28.7-64-64-64zm368 304c0-29.7-16.3-55.3-40.3-69.1 5.2-10.6 8.3-22.3 8.3-34.9 0-33.4-20.5-62-49.7-74 1-4.5 1.7-9.2 1.7-14 0-35.3-28.7-64-64-64-.8 0-1.5.2-2.2.2C422.7 20.5 397.9 0 368 0c-35.3 0-64 28.6-64 64v376c0 39.8 32.2 72 72 72 31.8 0 58.4-20.7 68-49.2 3.9.7 7.9 1.2 12 1.2 39.8 0 72-32.2 72-72 0-4.8-.5-9.5-1.4-14.1 29-12 49.4-40.6 49.4-73.9z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1514" id="dbfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none; display: none;">
+              <div class="jss139 jss1515">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="dbbar" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1515">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="db" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1515">
+                <div class="jss140 jss1516">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="database" class="svg-inline--fa fa-database fa-w-14 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1546" id="windfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none; display: none;">
+              <div class="jss139 jss1547">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="windbar" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1547">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="wind" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1547">
+                <div class="jss140 jss1548">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="wind" class="svg-inline--fa fa-wind fa-w-16 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M156.7 256H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h142.2c15.9 0 30.8 10.9 33.4 26.6 3.3 20-12.1 37.4-31.6 37.4-14.1 0-26.1-9.2-30.4-21.9-2.1-6.3-8.6-10.1-15.2-10.1H81.6c-9.8 0-17.7 8.8-15.9 18.4 8.6 44.1 47.6 77.6 94.2 77.6 57.1 0 102.7-50.1 95.2-108.6C249 291 205.4 256 156.7 256zM16 224h336c59.7 0 106.8-54.8 93.8-116.7-7.6-36.2-36.9-65.5-73.1-73.1-55.4-11.6-105.1 24.9-114.9 75.5-1.9 9.6 6.1 18.3 15.8 18.3h32.8c6.7 0 13.1-3.8 15.2-10.1C325.9 105.2 337.9 96 352 96c19.4 0 34.9 17.4 31.6 37.4-2.6 15.7-17.4 26.6-33.4 26.6H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16zm384 32H243.7c19.3 16.6 33.2 38.8 39.8 64H400c26.5 0 48 21.5 48 48s-21.5 48-48 48c-17.9 0-33.3-9.9-41.6-24.4-2.9-5-8.7-7.6-14.5-7.6h-33.8c-10.9 0-19 10.8-15.3 21.1 17.8 50.6 70.5 84.8 129.4 72.3 41.2-8.7 75.1-41.6 84.7-82.7C526 321.5 470.5 256 400 256z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1578" id="pingfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1579">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1579">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle r="20" cx="24" cy="24" fill="transparent" stroke="rgb(255, 36, 36)" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1579">
+                <div class="jss140 jss1580">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exclamation" class="svg-inline--fa fa-exclamation fa-w-6 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" style="color: rgb(255, 36, 36); font-size: 18px;">
+                    <path fill="currentColor" d="M176 432c0 44.112-35.888 80-80 80s-80-35.888-80-80 35.888-80 80-80 80 35.888 80 80zM25.26 25.199l13.6 272C39.499 309.972 50.041 320 62.83 320h66.34c12.789 0 23.331-10.028 23.97-22.801l13.6-272C167.425 11.49 156.496 0 142.77 0H49.23C35.504 0 24.575 11.49 25.26 25.199z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1610" id="ampulfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1611">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="ampulbar" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1611">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="ampul" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1611">
+                <div class="jss140 jss1612">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lightbulb" class="svg-inline--fa fa-lightbulb fa-w-11 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M96.06 454.35c.01 6.29 1.87 12.45 5.36 17.69l17.09 25.69a31.99 31.99 0 0 0 26.64 14.28h61.71a31.99 31.99 0 0 0 26.64-14.28l17.09-25.69a31.989 31.989 0 0 0 5.36-17.69l.04-38.35H96.01l.05 38.35zM0 176c0 44.37 16.45 84.85 43.56 115.78 16.52 18.85 42.36 58.23 52.21 91.45.04.26.07.52.11.78h160.24c.04-.26.07-.51.11-.78 9.85-33.22 35.69-72.6 52.21-91.45C335.55 260.85 352 220.37 352 176 352 78.61 272.91-.3 175.45 0 73.44.31 0 82.97 0 176zm176-80c-44.11 0-80 35.89-80 80 0 8.84-7.16 16-16 16s-16-7.16-16-16c0-61.76 50.24-112 112-112 8.84 0 16 7.16 16 16s-7.16 16-16 16z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1642" id="dollarfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1643">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="dollarbar" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1643">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="dollar" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1643">
+                <div class="jss140 jss1644">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dollar-sign" class="svg-inline--fa fa-dollar-sign fa-w-9 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M209.2 233.4l-108-31.6C88.7 198.2 80 186.5 80 173.5c0-16.3 13.2-29.5 29.5-29.5h66.3c12.2 0 24.2 3.7 34.2 10.5 6.1 4.1 14.3 3.1 19.5-2l34.8-34c7.1-6.9 6.1-18.4-1.8-24.5C238 74.8 207.4 64.1 176 64V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48h-2.5C45.8 64-5.4 118.7.5 183.6c4.2 46.1 39.4 83.6 83.8 96.6l102.5 30c12.5 3.7 21.2 15.3 21.2 28.3 0 16.3-13.2 29.5-29.5 29.5h-66.3C100 368 88 364.3 78 357.5c-6.1-4.1-14.3-3.1-19.5 2l-34.8 34c-7.1 6.9-6.1 18.4 1.8 24.5 24.5 19.2 55.1 29.9 86.5 30v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1674" id="yuzmefull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1675">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="yuzmebar" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1675">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="yuzme" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1675">
+                <div class="jss140 jss1676">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="swimmer" class="svg-inline--fa fa-swimmer fa-w-20 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M189.61 310.58c3.54 3.26 15.27 9.42 34.39 9.42s30.86-6.16 34.39-9.42c16.02-14.77 34.5-22.58 53.46-22.58h16.3c18.96 0 37.45 7.81 53.46 22.58 3.54 3.26 15.27 9.42 34.39 9.42s30.86-6.16 34.39-9.42c14.86-13.71 31.88-21.12 49.39-22.16l-112.84-80.6 18-12.86c3.64-2.58 8.28-3.52 12.62-2.61l100.35 21.53c25.91 5.53 51.44-10.97 57-36.88 5.55-25.92-10.95-51.44-36.88-57L437.68 98.47c-30.73-6.58-63.02.12-88.56 18.38l-80.02 57.17c-10.38 7.39-19.36 16.44-26.72 26.94L173.75 299c5.47 3.23 10.82 6.93 15.86 11.58zM624 352h-16c-26.04 0-45.8-8.42-56.09-17.9-8.9-8.21-19.66-14.1-31.77-14.1h-16.3c-12.11 0-22.87 5.89-31.77 14.1C461.8 343.58 442.04 352 416 352s-45.8-8.42-56.09-17.9c-8.9-8.21-19.66-14.1-31.77-14.1h-16.3c-12.11 0-22.87 5.89-31.77 14.1C269.8 343.58 250.04 352 224 352s-45.8-8.42-56.09-17.9c-8.9-8.21-19.66-14.1-31.77-14.1h-16.3c-12.11 0-22.87 5.89-31.77 14.1C77.8 343.58 58.04 352 32 352H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h16c38.62 0 72.72-12.19 96-31.84 23.28 19.66 57.38 31.84 96 31.84s72.72-12.19 96-31.84c23.28 19.66 57.38 31.84 96 31.84s72.72-12.19 96-31.84c23.28 19.66 57.38 31.84 96 31.84h16c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zm-512-96c44.18 0 80-35.82 80-80s-35.82-80-80-80-80 35.82-80 80 35.82 80 80 80z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1706" id="gymfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1707">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="gymbar" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1707">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="gym" r="20" cx="24" cy="24" fill="transparent" stroke="#FFD700" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1707">
+                <div class="jss140 jss1708">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dumbbell" class="svg-inline--fa fa-dumbbell fa-w-20 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M104 96H56c-13.3 0-24 10.7-24 24v104H8c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h24v104c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24zm528 128h-24V120c0-13.3-10.7-24-24-24h-48c-13.3 0-24 10.7-24 24v272c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V288h24c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM456 32h-48c-13.3 0-24 10.7-24 24v168H256V56c0-13.3-10.7-24-24-24h-48c-13.3 0-24 10.7-24 24v400c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V288h128v168c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1738" id="harnessfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1739">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="harnessbar" r="20" cx="24" cy="24" fill="transparent" stroke="#AB47BC" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1739">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="harness" r="20" cx="24" cy="24" fill="transparent" stroke="#AB47BC" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1739">
+                <div class="jss140 jss1740">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-slash" class="svg-inline--fa fa-user-slash fa-w-20 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M633.8 458.1L362.3 248.3C412.1 230.7 448 183.8 448 128 448 57.3 390.7 0 320 0c-67.1 0-121.5 51.8-126.9 117.4L45.5 3.4C38.5-2 28.5-.8 23 6.2L3.4 31.4c-5.4 7-4.2 17 2.8 22.4l588.4 454.7c7 5.4 17 4.2 22.5-2.8l19.6-25.3c5.4-6.8 4.1-16.9-2.9-22.3zM96 422.4V464c0 26.5 21.5 48 48 48h350.2L207.4 290.3C144.2 301.3 96 356 96 422.4z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1770" id="cruisefull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1771">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="cruisebar" r="20" cx="24" cy="24" fill="transparent" stroke="#e43f5a" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1771">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="cruise" r="20" cx="24" cy="24" fill="transparent" stroke="#e43f5a" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1771">
+                <div class="jss140 jss1772">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tachometer-alt" class="svg-inline--fa fa-tachometer-alt fa-w-18 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1802" id="nukefull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1803">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="nukebar" r="20" cx="24" cy="24" fill="transparent" stroke="#47e10c" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1803">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="nuke" r="20" cx="24" cy="24" fill="transparent" stroke="#47e10c" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="NaN" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1803">
+                <div class="jss140 jss1804">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="biohazard" class="svg-inline--fa fa-biohazard fa-w-18 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M287.9 112c18.6 0 36.2 3.8 52.8 9.6 13.3-10.3 23.6-24.3 29.5-40.7-25.2-10.9-53-17-82.2-17-29.1 0-56.9 6-82.1 16.9 5.9 16.4 16.2 30.4 29.5 40.7 16.5-5.7 34-9.5 52.5-9.5zM163.6 438.7c12-11.8 20.4-26.4 24.5-42.4-32.9-26.4-54.8-65.3-58.9-109.6-8.5-2.8-17.2-4.6-26.4-4.6-7.6 0-15.2 1-22.5 3.1 4.1 62.8 35.8 118 83.3 153.5zm224.2-42.6c4.1 16 12.5 30.7 24.5 42.5 47.4-35.5 79.1-90.7 83-153.5-7.2-2-14.7-3-22.2-3-9.2 0-18 1.9-26.6 4.7-4.1 44.2-26 82.9-58.7 109.3zm113.5-205c-17.6-10.4-36.3-16.6-55.3-19.9 6-17.7 10-36.4 10-56.2 0-41-14.5-80.8-41-112.2-2.5-3-6.6-3.7-10-1.8-3.3 1.9-4.8 6-3.6 9.7 4.5 13.8 6.6 26.3 6.6 38.5 0 67.8-53.8 122.9-120 122.9S168 117 168 49.2c0-12.1 2.2-24.7 6.6-38.5 1.2-3.7-.3-7.8-3.6-9.7-3.4-1.9-7.5-1.2-10 1.8C134.6 34.2 120 74 120 115c0 19.8 3.9 38.5 10 56.2-18.9 3.3-37.7 9.5-55.3 19.9-34.6 20.5-61 53.3-74.3 92.4-1.3 3.7.2 7.7 3.5 9.8 3.3 2 7.5 1.3 10-1.6 9.4-10.8 19-19.1 29.2-25.1 57.3-33.9 130.8-13.7 163.9 45 33.1 58.7 13.4 134-43.9 167.9-10.2 6.1-22 10.4-35.8 13.4-3.7.8-6.4 4.2-6.4 8.1.1 4 2.7 7.3 6.5 8 39.7 7.8 80.6.8 115.2-19.7 18-10.6 32.9-24.5 45.3-40.1 12.4 15.6 27.3 29.5 45.3 40.1 34.6 20.5 75.5 27.5 115.2 19.7 3.8-.7 6.4-4 6.5-8 0-3.9-2.6-7.3-6.4-8.1-13.9-2.9-25.6-7.3-35.8-13.4-57.3-33.9-77-109.2-43.9-167.9s106.6-78.9 163.9-45c10.2 6.1 19.8 14.3 29.2 25.1 2.5 2.9 6.7 3.6 10 1.6s4.8-6.1 3.5-9.8c-13.1-39.1-39.5-72-74.1-92.4zm-213.4 129c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1834" id="gpsfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1835">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="gpsbar" r="20" cx="24" cy="24" fill="transparent" stroke="#f08329" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1835">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="gps" r="20" cx="24" cy="24" fill="transparent" stroke="#f08329" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1835">
+                <div class="jss140 jss1836">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="location-arrow" class="svg-inline--fa fa-location-arrow fa-w-16 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="jss138 jss1866" id="gpufull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1867">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="gpubar" r="20" cx="24" cy="24" fill="transparent" stroke="#e43f5a" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1867">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="gpu" r="20" cx="24" cy="24" fill="transparent" stroke="#e43f5a" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1867">
+                <div class="jss140 jss1868">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="microchip" class="svg-inline--fa fa-microchip fa-w-16 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M416 48v416c0 26.51-21.49 48-48 48H144c-26.51 0-48-21.49-48-48V48c0-26.51 21.49-48 48-48h224c26.51 0 48 21.49 48 48zm96 58v12a6 6 0 0 1-6 6h-18v6a6 6 0 0 1-6 6h-42V88h42a6 6 0 0 1 6 6v6h18a6 6 0 0 1 6 6zm0 96v12a6 6 0 0 1-6 6h-18v6a6 6 0 0 1-6 6h-42v-48h42a6 6 0 0 1 6 6v6h18a6 6 0 0 1 6 6zm0 96v12a6 6 0 0 1-6 6h-18v6a6 6 0 0 1-6 6h-42v-48h42a6 6 0 0 1 6 6v6h18a6 6 0 0 1 6 6zm0 96v12a6 6 0 0 1-6 6h-18v6a6 6 0 0 1-6 6h-42v-48h42a6 6 0 0 1 6 6v6h18a6 6 0 0 1 6 6zM30 376h42v48H30a6 6 0 0 1-6-6v-6H6a6 6 0 0 1-6-6v-12a6 6 0 0 1 6-6h18v-6a6 6 0 0 1 6-6zm0-96h42v48H30a6 6 0 0 1-6-6v-6H6a6 6 0 0 1-6-6v-12a6 6 0 0 1 6-6h18v-6a6 6 0 0 1 6-6zm0-96h42v48H30a6 6 0 0 1-6-6v-6H6a6 6 0 0 1-6-6v-12a6 6 0 0 1 6-6h18v-6a6 6 0 0 1 6-6zm0-96h42v48H30a6 6 0 0 1-6-6v-6H6a6 6 0 0 1-6-6v-12a6 6 0 0 1 6-6h18v-6a6 6 0 0 1 6-6z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="jss138 jss2311" id="devmode" style="display:none; max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss2312">
+                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                    <circle r="20" cx="24" cy="24" fill="transparent" stroke="black" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                 </svg>
+              </div>
+              <div class="jss139 jss2312">
+                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                    <circle r="20" cx="24" cy="24" fill="transparent" stroke="black" id="devmodeicon" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                 </svg>
+              </div>
+              <div class="jss139 jss2312">
+                 <div class="jss140 jss2313">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="terminal" class="svg-inline--fa fa-terminal fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="color: white; font-size: 18px;"><path fill="currentColor" d="M257.981 272.971L63.638 467.314c-9.373 9.373-24.569 9.373-33.941 0L7.029 444.647c-9.357-9.357-9.375-24.522-.04-33.901L161.011 256 6.99 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L257.981 239.03c9.373 9.372 9.373 24.568 0 33.941zM640 456v-32c0-13.255-10.745-24-24-24H312c-13.255 0-24 10.745-24 24v32c0 13.255 10.745 24 24 24h304c13.255 0 24-10.745 24-24z"></path></svg>
+                 </div>
+              </div>
+           </div>
+           <div class="jss138 jss2311" id="debugmode" style="display:none; max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss2312">
+                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                    <circle r="20" cx="24" cy="24" fill="transparent" stroke="black" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                 </svg>
+              </div>
+              <div class="jss139 jss2312">
+                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                    <circle r="20" cx="24" cy="24" fill="transparent" stroke="black" id="debugicon" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                 </svg>
+              </div>
+              <div class="jss139 jss2312">
+                 <div class="jss140 jss2313">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bug" class="svg-inline--fa fa-bug fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;"><path fill="currentColor" d="M511.988 288.9c-.478 17.43-15.217 31.1-32.653 31.1H424v16c0 21.864-4.882 42.584-13.6 61.145l60.228 60.228c12.496 12.497 12.496 32.758 0 45.255-12.498 12.497-32.759 12.496-45.256 0l-54.736-54.736C345.886 467.965 314.351 480 280 480V236c0-6.627-5.373-12-12-12h-24c-6.627 0-12 5.373-12 12v244c-34.351 0-65.886-12.035-90.636-32.108l-54.736 54.736c-12.498 12.497-32.759 12.496-45.256 0-12.496-12.497-12.496-32.758 0-45.255l60.228-60.228C92.882 378.584 88 357.864 88 336v-16H32.666C15.23 320 .491 306.33.013 288.9-.484 270.816 14.028 256 32 256h56v-58.745l-46.628-46.628c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0L141.255 160h229.489l54.627-54.627c12.498-12.497 32.758-12.497 45.256 0 12.496 12.497 12.496 32.758 0 45.255L424 197.255V256h56c17.972 0 32.484 14.816 31.988 32.9zM257 0c-61.856 0-112 50.144-112 112h224C369 50.144 318.856 0 257 0z"></path></svg>
+                 </div>
+              </div>
+           </div>
+           <div class="jss138 jss2311" id="armed" style="display:none; max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+            <div class="jss139 jss2312">
+               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle r="20" cx="24" cy="24" fill="transparent" stroke="#e8466c" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+               </svg>
+            </div>
+            <div class="jss139 jss2312">
+               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle r="20" cx="24" cy="24" fill="transparent" stroke="#e8466c" id="debugicon" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+               </svg>
+            </div>
+            <div class="jss139 jss2312">
+               <div class="jss140 jss2313">
+                <svg version="1.1" id="Layer_1" style="position: absolute;
+                left: 50%;
+                top: 44%;
+                transform: translate(-50%, -46%); height: 6.7vh; width: 6.7vh;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 612 792" style="enable-background:new 0 0 612 792;" xml:space="preserve">
+                      <g>
+                    <path d="M423.97,407.98c-0.94,3.75-2.23,7.35-5.12,9.05c-1.95,1.14-4.21,1.95-6.34,1.96c-34.19,0.12-68.38,0.08-102.56,0.08c-19.34,0-38.68,0-58.02,0c-7.72,0-11.89-5.35-11.9-15.26c0-5.48-0.01-10.96,0-16.44c0.02-8.99,4.34-14.56,11.36-14.56c53.71-0.01,107.41-0.01,161.12,0c5.91,0,9.32,3.23,11.18,10.51c0.05,0.21,0.18,0.38,0.28,0.58C423.97,391.93,423.97,399.95,423.97,407.98z" fill="#ffffff"/>
+                      <path d="M397.99,343.6c-0.83,3.71-2.16,6.98-4.78,9.15c-2.16,1.79-4.55,2.16-7.04,2.16c-27.24-0.02-54.48-0.01-81.73-0.01
+                  c-26.22,0-52.45-0.03-78.67,0.03c-4.64,0.01-8.4-1.89-10.5-7.42c-0.76-2-1.11-4.42-1.16-6.67c-0.16-6.01-0.08-12.04-0.05-18.06
+                  c0.05-8.25,4.22-13.75,10.62-14.06c0.42-0.02,0.84-0.01,1.26-0.01c53.41,0,106.81,0.02,160.22-0.03c4.02,0,7.5,1.28,9.85,5.69
+                  c0.89,1.67,1.34,3.73,1.99,5.61C397.99,327.85,397.99,335.73,397.99,343.6z" fill="#ffffff"/>
+                    <path d="M398,471.9c-0.84,3.71-2.17,6.98-4.79,9.16c-2.22,1.84-4.68,2.13-7.23,2.13c-38.74-0.02-77.47-0.01-116.21-0.01
+                  c-14.55,0-29.1-0.23-43.65,0.09c-8.13,0.18-12.48-7.03-12.11-15.55c0.24-5.46,0.03-10.96,0.05-16.44
+                  c0.03-8.52,4.21-14.02,10.82-14.29c0.42-0.02,0.84-0.01,1.26-0.01c53.29,0,106.57,0.02,159.86-0.03c4.08,0,7.63,1.23,10.02,5.72
+                  c0.89,1.67,1.33,3.73,1.98,5.61C398,456.15,398,464.03,398,471.9z" fill="#ffffff"/>
+                      </g>
+                  </svg>
+               </div>
+            </div>
+         </div>
+            <div class="jss138 jss1898" id="nosfull" style="max-width: 54px; opacity: 1; transition-duration: 0s; transition-timing-function: ease; transition-delay: unset; transition-property: none;">
+              <div class="jss139 jss1899">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 100;">
+                  <circle id="nosbar" r="20" cx="24" cy="24" fill="transparent" stroke="#e43f5a" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="0" stroke-opacity="0.3500000000003638" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1899">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 48px; width: 48px; transform: rotate(-90deg); z-index: 200;">
+                  <circle id="nos" r="20" cx="24" cy="24" fill="transparent" stroke="#e43f5a" stroke-width="6" stroke-dasharray="125.66370614359172" stroke-dashoffset="125.66370614359172" stroke-opacity="1" style="transition: stroke-dashoffset 1s linear 0s; will-change: transition;"></circle>
+                </svg>
+              </div>
+              <div class="jss139 jss1899">
+                <div class="jss140 jss1900">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="meteor" class="svg-inline--fa fa-meteor fa-w-16 fa-fw" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: white; font-size: 18px;">
+                    <path fill="currentColor" d="M511.328,20.8027c-11.60759,38.70264-34.30724,111.70173-61.30311,187.70077,6.99893,2.09372,13.4042,4,18.60653,5.59368a16.06158,16.06158,0,0,1,9.49854,22.906c-22.106,42.29635-82.69047,152.795-142.47819,214.40356-.99984,1.09373-1.99969,2.5-2.99954,3.49995A194.83046,194.83046,0,1,1,57.085,179.41009c.99985-1,2.40588-2,3.49947-3,61.59994-59.90549,171.97367-120.40473,214.37343-142.4982a16.058,16.058,0,0,1,22.90274,9.49988c1.59351,5.09368,3.49947,11.5936,5.5929,18.59351C379.34818,35.00565,452.43074,12.30281,491.12794.70921A16.18325,16.18325,0,0,1,511.328,20.8027ZM319.951,320.00207A127.98041,127.98041,0,1,0,191.97061,448.00046,127.97573,127.97573,0,0,0,319.951,320.00207Zm-127.98041-31.9996a31.9951,31.9951,0,1,1-31.9951-31.9996A31.959,31.959,0,0,1,191.97061,288.00247Zm31.9951,79.999a15.99755,15.99755,0,1,1-15.99755-15.9998A16.04975,16.04975,0,0,1,223.96571,368.00147Z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <input tabindex="-1" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+        <input tabindex="0" style="opacity: 0; pointer-events: none; position: fixed; width: 1px; height: 1px; left: -1px; top: -1px;" />
+      </div>
+  
+      <div class="blackbars" style="top: 0;"></div>
+      <div class="blackbars" style="bottom: 0;"></div>
+      
+      <script src="script.js"></script>
+</html>

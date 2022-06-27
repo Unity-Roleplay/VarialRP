@@ -160,8 +160,8 @@ function preventVehicleExit()
         disableControl = true
         local finished = exports["np-taskbar"]:taskBar(options[math.random(1,3)],"Taking off Harness",true)
         if finished == 100 then
-            TriggerEvent('np-hud:hideharness')
-            TriggerEvent('np-hud:showseatbelt')
+            TriggerEvent('np-hud:harness_values', 0)
+            TriggerEvent('seatbelt', false)
             harness = false
             TriggerEvent("harness", false, harnessDurability)
             TriggerEvent("InteractSound_CL:PlayOnOne","seatbeltoff",0.7)
@@ -183,7 +183,7 @@ function carCrash()
     if harness then
         print('STALLED UPDATING HARNESS DURABILITY')
         harnessDurability = harnessDurability - 5
-        TriggerEvent('np-hud:showharness', harnessDurability)
+        TriggerEvent('np-hud:harness_values', harnessDurability)
     end
 end
 
@@ -372,12 +372,12 @@ function toggleHarness()
     local finished = 0
     if harness then
         finished = exports["np-taskbar"]:taskBar(5000,"Taking off Harness",true)
-        TriggerEvent('np-hud:hideharness')
-        TriggerEvent('np-hud:showseatbelt')
+        TriggerEvent('np-hud:harness_values', 0)
+        TriggerEvent('seatbelt', false)
     else
         finished = exports["np-taskbar"]:taskBar(5000,"Putting on Harness",true)
-        TriggerEvent('np-hud:showharness', harnessDurability)
-        TriggerEvent('np-hud:hideseatbelt')
+        TriggerEvent('np-hud:harness_values', harnessDurability)
+        TriggerEvent('seatbelt', true)
     end
     if (finished == 100) then
         if playerPed == driverPed then
@@ -1005,7 +1005,7 @@ Citizen.CreateThread(function()
                                 if harness and harnessDurability > 0.0 then
                                     print('UPDATING HARNESS DURABILITY')
                                     harnessDurability = harnessDurability - 5
-                                    TriggerEvent('np-hud:showharness', harnessDurability)
+                                    TriggerEvent('np-hud:harness_values', harnessDurability)
                                     TriggerServerEvent("vehicleMod:updateHarness", GetVehicleNumberPlateText(currentVehicle), harnessDurability)
                                     if DecorExistOn(currentVehicle, "vehicleHarnessDur") then
                                         DecorSetFloat(currentVehicle, "vehicleHarnessDur", harnessDurability)
@@ -1014,7 +1014,7 @@ Citizen.CreateThread(function()
                                         harnessDurability = 0.0
                                         TriggerEvent("event:control:vehicleMod")
                                         TriggerEvent("DoLongHudText","Harness Broken!",2)
-                                        TriggerEvent('np-hud:showseatbelt')
+                                        TriggerEvent('seatbelt', false)
                                     end
                                 elseif not seatbelt then
                                     eject(30.5, lastCurrentVehicleSpeed, true)

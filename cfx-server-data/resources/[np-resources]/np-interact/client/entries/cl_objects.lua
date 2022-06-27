@@ -34,6 +34,23 @@ Entries[#Entries + 1] = {
     }
 }
 
+Entries[#Entries + 1] = {
+    type = 'flag',
+    group = { 'isFuelPump' },
+    data = {
+        {
+            id = 'use_gas',
+            label = " Use Gas Pump",
+            icon = "gas-pump",
+            event = "",
+            parameters = {}
+        }
+    },
+    options = {
+        distance = { radius = 1.7 },
+    }
+}
+
 
 Entries[#Entries + 1] = {
     type = 'flag',

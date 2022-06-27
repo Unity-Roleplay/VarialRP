@@ -365,7 +365,7 @@ end
 
 function StartPeekin()
     if IsPeeking then return end
-    if LocalPlayer.state.disabled or LocalPlayer.state.disableinput or IsPedInAnyVehicle(PlayerPedId()) or IsPlayerFreeAiming(PlayerId()) or LocalPlayer.state.dead or IsPedBeingStunned(PlayerPedId()) or IsPedRagdoll(PlayerPedId()) then return end
+    if LocalPlayer.state.disabled or LocalPlayer.state.disableinput or IsPedArmed(GetPlayerPed(-1), 4 | 2) or LocalPlayer.state.dead or IsPedBeingStunned(PlayerPedId()) or IsPedRagdoll(PlayerPedId()) then return end
 
     local entries, context
 

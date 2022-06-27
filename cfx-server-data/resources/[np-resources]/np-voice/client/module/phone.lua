@@ -3,13 +3,15 @@
 local function createPhoneThread()
 	Citizen.CreateThread(function()
 		local changed = false
-		while voiceData.call ~= 0 do
+		while callChannel ~= 0 do
 			-- check if they're pressing voice keybinds
 			if NetworkIsPlayerTalking(PlayerId()) and not changed then
 				changed = true
+				playerTargets(radioPressed and radioData or {}, callData)
 				TriggerServerEvent('np-voice:setTalkingOnCall', true)
 			elseif changed and NetworkIsPlayerTalking(PlayerId()) ~= 1 then
 				changed = false
+				MumbleClearVoiceTargetPlayers(1)
 				TriggerServerEvent('np-voice:setTalkingOnCall', false)
 			end
 			Wait(0)
@@ -17,34 +19,27 @@ local function createPhoneThread()
 	end)
 end
 
-RegisterNetEvent('np-voice:syncCallData')
-AddEventHandler('np-voice:syncCallData', function(callTable, channel)
+RegisterNetEvent('np-voice:syncCallData', function(callTable, channel)
 	callData = callTable
 	for tgt, enabled in pairs(callTable) do
 		if tgt ~= playerServerId then
 			toggleVoice(tgt, enabled, 'phone')
 		end
 	end
-	playerTargets(radioData, callData)
 end)
 
-RegisterNetEvent('np-voice:setTalkingOnCall')
-AddEventHandler('np-voice:setTalkingOnCall', function(tgt, enabled)
+RegisterNetEvent('np-voice:setTalkingOnCall', function(tgt, enabled)
 	if tgt ~= playerServerId then
 		callData[tgt] = enabled
-		playerTargets(radioData, callData)
 		toggleVoice(tgt, enabled, 'phone')
 	end
 end)
 
-RegisterNetEvent('np-voice:addPlayerToCall')
-AddEventHandler('np-voice:addPlayerToCall', function(plySource)
+RegisterNetEvent('np-voice:addPlayerToCall', function(plySource)
 	callData[plySource] = false
-	playerTargets(radioData, callData)
 end)
 
-RegisterNetEvent('np-voice:removePlayerFromCall')
-AddEventHandler('np-voice:removePlayerFromCall', function(plySource)
+RegisterNetEvent('np-voice:removePlayerFromCall', function(plySource)
 	if plySource == playerServerId then
 		for tgt, enabled in pairs(callData) do
 			if tgt ~= playerServerId then
@@ -52,19 +47,25 @@ AddEventHandler('np-voice:removePlayerFromCall', function(plySource)
 			end
 		end
 		callData = {}
-		playerTargets(radioData, callData)
+		MumbleClearVoiceTargetPlayers(1)
+		playerTargets(radioPressed and radioData or {}, callData)
+		plyState:set('callChannel', 0, GetConvarInt('voice_syncData', 0) == 1)
 	else
 		callData[plySource] = nil
 		toggleVoice(plySource, false, 'phone')
-		playerTargets(radioData, callData)
+		if NetworkIsPlayerTalking(PlayerId()) then
+			MumbleClearVoiceTargetPlayers(1)
+			playerTargets(radioPressed and radioData or {}, callData)
+		end
 	end
 end)
 
 function setCallChannel(channel)
 	if GetConvarInt('voice_enablePhones', 1) ~= 1 then return end
 	TriggerServerEvent('np-voice:setPlayerCall', channel)
-	voiceData.call = channel
-	if GetConvarInt('voice_enableUi', 1) == 1 then
+	callChannel = channel
+	plyState:set('callChannel', channel, GetConvarInt('voice_syncData', 0) == 1)
+	if GetConvarInt('voice_enableUi', 0) == 1 then
 		SendNUIMessage({
 			callInfo = channel
 		})
@@ -73,6 +74,8 @@ function setCallChannel(channel)
 end
 
 exports('setCallChannel', setCallChannel)
+exports('SetCallChannel', setCallChannel)
+
 exports('addPlayerToCall', function(call)
 	local call = tonumber(call)
 	if call then
@@ -83,9 +86,9 @@ exports('removePlayerFromCall', function()
 	setCallChannel(0)
 end)
 
-RegisterNetEvent('np-voice:clSetPlayerCall')
-AddEventHandler('np-voice:clSetPlayerCall', function(callChannel)
+RegisterNetEvent('np-voice:clSetPlayerCall', function(_callChannel)
 	if GetConvarInt('voice_enablePhones', 1) ~= 1 then return end
-	voiceData.call = callChannel
+	callChannel = _callChannel
+	plyState:set('callChannel', _callChannel, GetConvarInt('voice_syncData', 0) == 1)
 	createPhoneThread()
 end)

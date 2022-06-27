@@ -1,12 +1,6 @@
+game {'gta5'}
 
-
-
-
-
-
-game { 'gta5' }
-
-fx_version 'adamant'
+fx_version 'cerulean'
 author 'AvarianKnight'
 description 'VOIP built using FiveM\'s built in mumble.'
 
@@ -15,13 +9,11 @@ lua54 'yes'
 shared_script 'shared.lua'
 
 client_scripts {
-	'client/main.lua',
-    'client/module/*.lua',
+    'client/**/*.lua',
 }
 
 server_scripts {
-    'server/server.lua',
-    'server/module/*.lua'
+    'server/**/*.lua'
 }
 
 files {
@@ -34,6 +26,9 @@ files {
 ui_page 'ui/index.html'
 
 provides {
-	'mumble-voip'
+	'mumble-voip',
+    -- why does it use so many different names
+    'tokovoip',
+    'toko-voip',
+    'tokovoip_script'
 }
-
