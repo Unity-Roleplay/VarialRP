@@ -23,7 +23,7 @@ function Login.characterLoaded()
   Wait(500)
   TriggerServerEvent("police:getAnimData")
   TriggerServerEvent("server:currentpasses")
-  TriggerEvent("np-hud:SetValues")
+  TriggerEvent("np-hud:SetValues", exports['isPed']:isPed('cid'))
   TriggerServerEvent("police:getEmoteData")
   TriggerServerEvent("police:SetMeta")
   TriggerServerEvent('np-scoreboard:AddPlayer')
@@ -49,7 +49,7 @@ function Login.characterSpawned()
   TriggerEvent("attachWeapons")
   TriggerServerEvent("request-dropped-items")
   TriggerServerEvent("server-request-update", exports["isPed"]:isPed("cid"))
-  
+
   if Spawn.isNew then
       Wait(1000)
       TriggerServerEvent('np-spawn:create_bank_accounts', exports['isPed']:isPed('cid'))
