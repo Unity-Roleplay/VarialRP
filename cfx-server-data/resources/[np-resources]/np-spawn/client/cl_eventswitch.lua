@@ -49,9 +49,10 @@ function Login.characterSpawned()
   TriggerEvent("attachWeapons")
   TriggerServerEvent("request-dropped-items")
   TriggerServerEvent("server-request-update", exports["isPed"]:isPed("cid"))
-
+  
   if Spawn.isNew then
       Wait(1000)
+      TriggerServerEvent('np-spawn:create_bank_accounts', exports['isPed']:isPed('cid'))
       if not exports["np-inventory"]:hasEnoughOfItem("mobilephone", 1, false) then
           TriggerEvent("player:receiveItem", "mobilephone", 1)
       end
