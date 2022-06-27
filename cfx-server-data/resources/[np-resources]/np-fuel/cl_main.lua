@@ -267,19 +267,19 @@ end)
 
 RegisterUICallback('np-fuel:pay_bank', function(data, cb, pParams)
 	SetUIFocus(false, false)
-	exports['np-ui']:openApplication('textbox', {
-        callbackUrl = 'np-ui:send_bill',
-        header = "Gas Station Bill",
-        key = data.key,
-        items = {
-            {
-                icon = "address-card",
-                label = "Paypal ID",
-                name = "ppaypal_id",
-            },
-        },
-        show = true,
-    })	
+	local input = exports["np-ui"]:showInput({
+		{
+			icon = "address-card",
+			label = "Paypal ID",
+			name = "ppaypal_id",
+		},
+	})
+	
+	if input["ppaypal_id"] then
+		TriggerServerEvent("np-phone:send_gas_bill", input["ppaypal_id"], FuelCost)
+		print(json.encode(input))
+		--TriggerServerEvent("np-phone:send_gas_bill", data[1].value, FuelCost)
+	end
 end)
 
 RegisterUICallback("np-ui:send_bill", function(data, cb)
