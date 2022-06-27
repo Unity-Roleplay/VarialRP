@@ -657,7 +657,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         if isLoggedIn then
-
+            
             if LocalPlayer.state.hungerLevel > 0 then
                 LocalPlayer.state:set('hungerLevel', LocalPlayer.state.hungerLevel - math.random(3), true)
             end
@@ -670,6 +670,7 @@ Citizen.CreateThread(function()
                 local newhealth = GetEntityHealth(PlayerPedId()) - math.random(10)
                 SetEntityHealth(PlayerPedId(), newhealth)
             end
+            TriggerEvent('np-hud:SaveValues')
 
             Citizen.Wait(300000)
         end
@@ -682,7 +683,7 @@ end)
 
 RegisterNUICallback("SaveSettings", function(data)
     local pInfo = exports["np-base"]:getModule("LocalPlayer")
-    local cid = pInfo.id
+    local cid = exports['isPed']:isPed('cid')
 
     SetResourceKvpInt(cid..'-healthValue', tonumber(data.healthValue))
     SetResourceKvpInt(cid..'-armorValue', tonumber(data.armorValue))
@@ -709,7 +710,7 @@ end)
 
 RegisterNetEvent("np-hud:SaveValues", function()
     local pInfo = exports["np-base"]:getModule("LocalPlayer")
-    local cid = pInfo.id
+    local cid = exports['isPed']:isPed('cid')
     SetResourceKvpInt(cid..'-armour', GetPedArmour(PlayerPedId()))
     SetResourceKvpInt(cid..'-stress', LocalPlayer.state.stressLevel)
     SetResourceKvpInt(cid..'-thirst', LocalPlayer.state.thirstLevel)
@@ -719,7 +720,7 @@ end)
 
 RegisterNetEvent("np-hud:SetValues", function()
     local pInfo = exports["np-base"]:getModule("LocalPlayer")
-    local cid = pInfo.id
+    local cid = exports['isPed']:isPed('cid')
 
     local SetAmour = GetResourceKvpInt(cid..'-armour')
     local SetStress = GetResourceKvpInt(cid..'-stress')
