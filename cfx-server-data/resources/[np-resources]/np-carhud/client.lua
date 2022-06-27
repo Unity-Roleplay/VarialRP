@@ -16,6 +16,7 @@ local sokakadlariaktif = true
 local pusulaaktif = false
 local minimapborder1 = true
 local engineDamageShow = false
+local mapsuankaremi = false
 local minimapborderr = true
 local compass = true
 
