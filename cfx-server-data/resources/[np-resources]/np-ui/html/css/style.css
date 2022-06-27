@@ -296,6 +296,33 @@ input:checked + .slider:before{
     
 }
 
+.div-wrap {
+    display: block;
+    margin-left: 0.8%;
+    width: 30%;
+    height: 15%;
+    margin-top: 26.5%;
+    color: white;
+    padding: 1px;
+}
+
+.notification-bg {
+    position: absolute;
+    background-color: rgba(51, 112, 165, 1);
+    text-align: center;
+    border-radius: 4px;
+    padding: 14px 16px 14px 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: inline-block;
+    left: -20%;
+}
+
+.strokeme {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 @keyframes slidein {
     from {
       transform: translateX(-50%);
@@ -1007,6 +1034,8 @@ html,body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+
 /* 
 context style */
 
@@ -1023,9 +1052,9 @@ context style */
 
 .buttoncontext {
     max-height: 70vh;
-    width: 290px;
+    width: 320px;
     overflow-x: none;
-    overflow-y: none;
+    overflow-y: auto;
     padding: 20px;
     margin-bottom: 1rem;
 }
@@ -1103,4 +1132,191 @@ context style */
     margin: 50px auto;
     width: 200px;
     margin-bottom: 10%;
+}
+
+/* CONTEXT BOZO */
+.root {
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    max-width: 100vw;
+    min-width: 100vw;
+    max-height: 100vh;
+    min-height: 100vh;
+    pointer-events: none;
+    border: 0px !important;
+    margin: 0px !important;
+    outline: 0px !important;
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.context-outer-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    pointer-events: all;
+}
+
+.padding-left {
+    padding-left: 120px;
+}
+
+.padding-right {
+    padding-right: 0px;
+}
+
+.context-flex-container {
+    flex: 1 1 0%;
+    display: flex;
+    padding: 20vh 0px 64px;
+}
+
+.context-right-inner-container {
+    width: auto;
+    display: inline-block;
+    padding: 8px;
+    max-height: calc(100vh - 128px);
+    overflow-y: auto;
+}
+
+.context-button-normal {
+    color: rgb(224, 224, 224);
+    cursor: pointer;
+    display: flex;
+    padding: 8px;
+    position: relative;
+    min-width: 300px;
+    box-shadow: black 0px 0px 4px 1px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    pointer-events: all;
+    background-color: rgb(34, 40, 49);
+}
+
+.context-button-normal:hover {
+    color: white;
+    background-color: rgb(48, 71, 94);
+}
+
+.context-button-children {
+    color: rgb(224, 224, 224);
+    cursor: pointer;
+    display: flex;
+    padding: 8px;
+    position: relative;
+    min-width: 300px;
+    box-shadow: black 0px 0px 4px 1px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    pointer-events: all;
+    background-color: rgb(34, 40, 49);
+}
+
+.context-button-children:hover {
+    color: white;
+    background-color: rgb(48, 71, 94);
+}
+
+.context-button-normal-flex {
+    flex: 1 1 0%;
+    display: flex;
+}
+
+.context-button-children-flex {
+    flex: 1 1 0%;
+    display: flex;
+}
+
+.context-button-children-chevron {
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.context-button-goback-margin {
+    padding-left: 0px !important;
+    margin-bottom: 16px !important;
+}
+
+.context-button-goback {
+    color: rgb(224, 224, 224);
+    cursor: pointer;
+    display: flex;
+    padding: 8px;
+    position: relative;
+    min-width: 300px;
+    box-shadow: black 0px 0px 4px 1px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    pointer-events: all;
+    background-color: rgb(34, 40, 49);
+}
+
+.context-button-goback:hover {
+    color: white;
+    background-color: rgb(48, 71, 94);
+}
+
+.context-button {
+    color: rgb(224, 224, 224);
+    cursor: pointer;
+    display: flex;
+    padding: 8px;
+    position: relative;
+    min-width: 300px;
+    box-shadow: black 0px 0px 4px 1px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    pointer-events: all;
+    background-color: rgb(34, 40, 49);
+}
+
+.context-button:hover {
+    color: white;
+    background-color: rgb(48, 71, 94);
+}
+
+.context-button-disabled {
+    background-color: rgb(132, 132, 134) !important;
+    pointer-events: none !important;
+}
+
+.context-button-goback-flex {
+    flex: 1 1 0%;
+    display: flex;
+}
+
+.context-button-goback-chevron {
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MuiTypography-colorTextPrimary {
+    color: #fff;
+}
+
+.MuiTypography-root {
+    margin: 0;
+}
+
+.MuiTypography-body1 {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+}
+
+.MuiTypography-body2 {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
 }

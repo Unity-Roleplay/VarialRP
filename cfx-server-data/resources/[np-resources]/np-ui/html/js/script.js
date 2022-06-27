@@ -147,7 +147,6 @@ eyeintactive = false
 textmenukey = null;
 
 
-
 const OpenMenu = (data) => {
     if (data.show) {
         $(`.root-wrapper`).fadeIn(0)
@@ -294,37 +293,79 @@ window.addEventListener('message',function(event){
                 drawskillbar(msg.data.duration,msg.data.difficulty)
             }
             break;
-        case "contextmenu":
-            if (msg.show == true) {
-                // console.log("Show Contextmenu")
-                $(".buttoncontext").html("");
-                $(".containercontext").show();
-                contextmenuactive = true
-                if (msg.data.options) {
-                    menucontextdata = msg.data.options
-                    $.each(msg.data.options, function (index1, item1) {
-                        // console.log(index1,item1.title,item1.description,item1.action,item1.key)
-                        if (item1.children) {
-                            //console.log("Have Chicldren")
-                            $(".buttoncontext").append('<div class="button-context" id="contextmenu-'+index1+'"><div class="titlecontext" id="contextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="contextmenu-'+index1+'">'+item1.description+'</div></div>');
-                            $("#contextmenu-"+index1).data("action",item1.action);
-                            $("#contextmenu-"+index1).data("key",item1.key);
-                            $("#contextmenu-"+index1).data("children",item1.children);
-                        }else{
-                            $(".buttoncontext").append('<div class="button-context" id="contextmenu-'+index1+'"><div class="titlecontext" id="contextmenu-'+index1+'">'+item1.title+'</div><div class="descriptioncontext" id="contextmenu-'+index1+'">'+item1.description+'</div></div>');
-                            $("#contextmenu-"+index1).data("action",item1.action);
-                            $("#contextmenu-"+index1).data("key",item1.key);
-                            $("#contextmenu-"+index1).data("children",null);
-                            // console.log("Dont Have")
-                        }
-                    })
+            case "contextmenu":
+                if (msg.show == true) {
+                    // console.log("Show Contextmenu")
+                    $(".context-right-inner-container").html("");
+                    $(".context-outer-container").show();
+                    contextmenuactive = true
+                    if (msg.data.options) {
+                        menucontextdata = msg.data.options
+                        $.each(msg.data.options, function (index1, item1) {
+                            // console.log(index1,item1.title,item1.description,item1.action,item1.key)
+                            let disabled = item1.disabled !== undefined ? item1.disabled : false
+                            if (item1.children) {
+    
+                                if(item1.icon !== undefined) {
+                                    console.log("icon", item1.icon)
+    
+                                    let title = item1.title !== undefined ? item1.title : ''
+                                    let description = item1.description !== undefined ? item1.description : ''
+                                    if(disabled) {
+                                        $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                    } else {
+                                        $(".context-right-inner-container").append('<div class="context-button padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                    }
+                                } else {
+                                    let title = item1.title !== undefined ? item1.title : ''
+                                    let description = item1.description !== undefined ? item1.description : ''
+                                    if(disabled) {
+                                        $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                    } else {
+                                        $(".context-right-inner-container").append('<div class="context-button padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                    }
+                                }
+    
+                                if(!disabled) {
+                                    $("#contextmenu-"+index1).data("action",item1.action);
+                                    $("#contextmenu-"+index1).data("key",item1.key);
+                                    $("#contextmenu-"+index1).data("children",item1.children);
+                                }
+                            }else{
+    
+                                if(item1.icon !== undefined) {
+                                    let title = item1.title !== undefined ? item1.title : ''
+                                    let description = item1.description !== undefined ? item1.description : ''
+                                    if(disabled) {
+                                        $(".context-right-inner-container").append('<div class="context-button context-button-disabled" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                    } else {
+                                        $(".context-right-inner-container").append('<div class="context-button" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                    }
+                                } else {
+                                    let title = item1.title !== undefined ? item1.title : ''
+                                    let description = item1.description !== undefined ? item1.description : ''
+                                    if(disabled) {
+                                        $(".context-right-inner-container").append('<div class="context-button context-button-disabled" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                    } else {
+                                        $(".context-right-inner-container").append('<div class="context-button" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                    }
+                                }
+    
+                                if(!disabled) {
+                                    $("#contextmenu-"+index1).data("action",item1.action);
+                                    $("#contextmenu-"+index1).data("key",item1.key);
+                                    $("#contextmenu-"+index1).data("children",null);
+                                }
+                                // console.log("Dont Have")
+                            }
+                        })
+                    }
+                }else{
+                    //console.log("hide context menu")
+                    $(".context-outer-container").hide();
+                    $(".context-right-inner-container").html("");
                 }
-            }else{
-                //console.log("hide context menu")
-                $(".containercontext").hide();
-                $(".buttoncontext").html("");
-            }
-            break;
+                break;
         case "taskbar":
             if (msg.data.display) {
                 //console.log("Display Progbar")
@@ -769,13 +810,12 @@ $(document).keydown(function(event) {
     if (key == 27) {
         if (contextmenuactive) {
             contextmenuactive = false
-            $(".buttoncontext").html("");
-            $(".containercontext").hide();
+            $(".context-right-inner-container").html("");
+            $(".context-outer-container").hide();
             $.post('https://np-ui/closecontext', JSON.stringify({}));
         }
         if (textboxactive) {
             CancelMenu();
-            textboxactive = false
         }
         if (eyeintactive){
             eyeintactive = false
@@ -890,3 +930,316 @@ document.addEventListener("keydown", function(ev) {
         }
     }
 });
+
+window.addEventListener("message", function(event){
+    var data = event.data
+
+    if (data.display) {
+        let text = data.text
+
+        text = text.replace(/[\[']+/g, `<span class="strokeme">[`);
+        text = text.replace(/[\]']+/g, `]</span>`);
+
+        $("#interaction-text").html(text);
+        $("#interaction-text").css("background-color", data.color);
+
+        LeftSlideRight("#interaction-text", 700, "0.5");
+    } else {
+        RightSlideLeft("#interaction-text", 700, "-20");
+    }
+})
+
+function LeftSlideRight(Object, Timeout, Percentage) {
+    $(Object).css("display", "inline-block").animate({
+        left: Percentage + "%",
+    }, Timeout);
+}
+
+function RightSlideLeft(Object, Timeout, Percentage) {
+    $(Object).css("display", "inline-block").animate({
+        left: Percentage + "%",
+    }, Timeout, function(){
+        $(Object).css("display", "none");
+        $("#interaction-text").html("");
+    });
+}
+
+
+$(document).keydown(function(event) {
+    var key = (event.keyCode ? event.keyCode : event.which);
+    if (key == 27) {
+        if (contextmenuactive) {
+            contextmenuactive = false
+            $(".context-right-inner-container").html("");
+            $(".context-outer-container").hide();
+            $.post('https://np-ui/closecontext', JSON.stringify({}));
+        }
+        if (textboxactive) {
+            CancelMenu();
+        }
+        if (eyeintactive){
+            eyeintactive = false
+            $.post('https://np-ui/closeeyeint', JSON.stringify({}));
+        }
+    }
+});
+
+$(document).click(function(event){
+    let $target = $(event.target);
+    if ($target.closest('.context-button').length && $('.context-button').is(":visible")) {
+        //console.log("click context menu", $target)
+        // $("#"+event.target.id).data('eventData', "context:cl:thisme");
+        if (event.target.id == "backmenu") {
+            //console.log("this for backmenu",menucontextdata.length)
+            $(".context-right-inner-container").empty();
+            $(".context-right-inner-container").html("");
+            $.each(menucontextdata, function (index1, item1) {
+                let disabled = item1.disabled !== undefined ? item1.disabled : false
+                if (item1.children) {
+
+                    if(item1.icon !== undefined) {
+                        let title = item1.title !== undefined ? item1.title : ''
+                        let description = item1.description !== undefined ? item1.description : ''
+                        if(disabled) {
+                            $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                        } else {
+                            $(".context-right-inner-container").append('<div class="context-button padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                        }
+                    } else {
+                        let title = item1.title !== undefined ? item1.title : ''
+                        let description = item1.description !== undefined ? item1.description : ''
+                        if(disabled) {
+                            $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                        } else {
+                            $(".context-right-inner-container").append('<div class="context-button padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                        }
+                    }
+                    
+                    if(!disabled) {
+                        $("#contextmenu-"+index1).data("action",item1.action);
+                        $("#contextmenu-"+index1).data("key",item1.key);
+                        $("#contextmenu-"+index1).data("children",item1.children);
+                    }
+                }else{
+
+                    if(item1.icon !== undefined) {
+                        let title = item1.title !== undefined ? item1.title : ''
+                        let description = item1.description !== undefined ? item1.description : ''
+                        if(disabled) {
+                            $(".context-right-inner-container").append('<div class="context-button-disabled" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                        } else {
+                            $(".context-right-inner-container").append('<div class="context-button" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                        }
+                    } else {
+                        let title = item1.title !== undefined ? item1.title : ''
+                        let description = item1.description !== undefined ? item1.description : ''
+                        if(disabled) {
+                            $(".context-right-inner-container").append('<div class="context-button context-button-disabled" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                        } else {
+                            $(".context-right-inner-container").append('<div class="context-button" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                        }
+                    }
+
+                    if(!disabled) {
+                        $("#contextmenu-"+index1).data("action",item1.action);
+                        $("#contextmenu-"+index1).data("key",item1.key);
+                        $("#contextmenu-"+index1).data("children",null);
+                    }
+                }
+            })
+        }else{
+            //console.log("Not Back Button", event.target.id)
+            if (event.target.id.split("-")[0] === 'contextmenu') {
+                //console.log("context menu open")
+                let action = $("#" + event.target.id).data('action');
+                //console.log("action", action)
+                let key = $("#" + event.target.id).data('key');
+                //console.log("action", key)
+                let children = $("#" + event.target.id).data('children');
+                //console.log("action", children)
+                //$(".context-right-inner-container").html("");
+
+                if (children) {
+                    //console.log("has children clear old menu :)")
+                    // Create new Menu for children
+                    if (action) {
+                        $.post('https://np-ui/' + action, JSON.stringify({
+                            key: key
+                        }));
+                    }
+                    //console.log("ye ye clear")
+                    $(".context-right-inner-container").html("");
+                    $(".context-right-inner-container").append('<div id="backmenu" onclick="goBack()" class="context-button context-button-goback-margin" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"><div class="context-button-goback-flex"><div class="context-button-goback-chevron"><i class="fas fa-chevron-left fa-w-10 fa-fw"></i></div><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" style="word-break: break-word;">Go Back</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" style="word-break: break-word;"></p></div></div></div>')
+
+
+                    $.each(children, function(index1, item1) {
+                        let disabled = item1.disabled !== undefined ? item1.disabled : false
+                        if (item1.children) {
+                            if(item1.icon !== undefined) {
+                                let title = item1.title !== undefined ? item1.title : ''
+                                let description = item1.description !== undefined ? item1.description : ''
+                                if(disabled) {
+                                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="subcontextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron id="subcontextmenu-' + index1 + '""><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                } else {
+                                    $(".context-right-inner-container").append('<div class="context-button padding-right" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="subcontextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron id="subcontextmenu-' + index1 + '""><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                }
+                            } else {
+                                let title = item1.title !== undefined ? item1.title : ''
+                                let description = item1.description !== undefined ? item1.description : ''
+                                if(disabled) {
+                                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="subcontextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                } else {
+                                    $(".context-right-inner-container").append('<div class="context-button padding-right" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="subcontextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                                }
+                            }
+
+                            if(!disabled) {
+                                $("#subcontextmenu-" + index1).data("action", item1.action);
+                                $("#subcontextmenu-" + index1).data("key", item1.key);
+                                $("#subcontextmenu-" + index1).data("children", item1.children);
+                            }
+                        } else {
+
+                            if(item1.icon !== undefined) {
+                                let title = item1.title !== undefined ? item1.title : ''
+                                let description = item1.description !== undefined ? item1.description : ''
+                                if(disabled) {
+                                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="subcontextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                } else {
+                                    $(".context-right-inner-container").append('<div class="context-button" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="subcontextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                }
+                            } else {
+                                let title = item1.title !== undefined ? item1.title : ''
+                                let description = item1.description !== undefined ? item1.description : ''
+                                if(disabled) {
+                                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                } else {
+                                    $(".context-right-inner-container").append('<div class="context-button" id="subcontextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="subcontextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="subcontextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                                }
+                            }
+
+                            if(!disabled) {
+                                $("#subcontextmenu-" + index1).data("action", item1.action);
+                                $("#subcontextmenu-" + index1).data("key", item1.key);
+                                $("#subcontextmenu-" + index1).data("children", null);
+                            }
+                        }
+                    })
+
+                    $.post('https://np-ui/'+action, JSON.stringify({
+                        key:key
+                    }));
+                }else{
+                    //Post data
+                    //console.log("Dont have Chiclred and submit post data")
+                    // contextmenuactive = false
+                    $(".context-right-inner-container").html("");
+                    $(".context-outer-container").hide();
+                    $.post('https://np-ui/'+action, JSON.stringify({
+                        key:key
+                    }));
+                    
+                }
+            }else if(event.target.id.split("-")[0] === 'subcontextmenu'){
+                //console.log("Submit Post data")
+                let subaction = $("#"+event.target.id).data('action');
+                let subkey = $("#"+event.target.id).data('key');
+                // console.log("This Sub Contextmenu",subaction,subkey)
+                // contextmenuactive = false
+                $(".context-right-inner-container").html("");
+                $(".context-outer-container").hide();
+                $.post('https://np-ui/'+subaction, JSON.stringify({
+                    key:subkey
+                }));
+            }
+        }
+    }
+})
+// skillbarcode
+
+document.addEventListener("keydown", function(ev) {
+    if (skillbaractive) {
+        let key_pressed = ev.key;
+        let valid_keys = ['1','2','3','4'];
+
+        if( valid_keys.includes(key_pressed) ){
+            if( key_pressed === key_to_press ){
+                let d_start = (180 / Math.PI) * g_start;
+                let d_end = (180 / Math.PI) * g_end;
+                if( degrees < d_start ){
+                    console.log('Failed: Too soon!');
+                    wrong();
+                }else if( degrees > d_end ){
+                    console.log('Failed: Too late!');
+                    wrong();
+                }else{
+                    console.log('Success!');
+                    correct();
+                }
+            }else{
+                console.log('Failed: Pressed '+key_pressed+' instead of '+key_to_press);
+                wrong();
+            }
+        }
+    }
+});
+
+function goBack() {
+    $(".context-right-inner-container").html("");
+    $.each(menucontextdata, function(index1, item1) {
+        let disabled = item1.disabled !== undefined ? item1.disabled : false
+        if (item1.children) {
+            //console.log("Have Chicldren")
+            
+            if(item1.icon !== undefined) {
+                let title = item1.title !== undefined ? item1.title : ''
+                let description = item1.description !== undefined ? item1.description : ''
+                if(disabled) {
+                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                } else {
+                    $(".context-right-inner-container").append('<div class="context-button padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                }
+            } else {
+                let title = item1.title !== undefined ? item1.title : ''
+                let description = item1.description !== undefined ? item1.description : ''
+                if(disabled) {
+                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                } else {
+                    $(".context-right-inner-container").append('<div class="context-button padding-right" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-children-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> <div class="context-button-children-chevron" id="contextmenu-' + index1 + '"><i class="fas fa-chevron-right fa-w-10 fa-fw" style="color: #fff"></i></div></div>')
+                }
+            }
+            
+            if(!disabled) {
+                $("#contextmenu-" + index1).data("action", item1.action);
+                $("#contextmenu-" + index1).data("key", item1.key);
+                $("#contextmenu-" + index1).data("children", item1.children);
+            }
+        } else {
+            
+            if(item1.icon !== undefined) {
+                let title = item1.title !== undefined ? item1.title : ''
+                let description = item1.description !== undefined ? item1.description : ''
+                if(disabled) {
+                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                } else {
+                    $(".context-right-inner-container").append('<div class="context-button" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div id="contextmenu-' + index1 + '" style="margin: auto 0px; width: 10%"><i class="fas fa-'+ item1.icon +' fa-w-14 fa-fw" style="color: #fff"></i></div> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                }
+            } else {
+                let title = item1.title !== undefined ? item1.title : ''
+                let description = item1.description !== undefined ? item1.description : ''
+                if(disabled) {
+                    $(".context-right-inner-container").append('<div class="context-button context-button-disabled" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                } else {
+                    $(".context-right-inner-container").append('<div class="context-button" id="contextmenu-' + index1 + '" style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"> <div class="context-button-normal-flex" id="contextmenu-' + index1 + '"><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + title +'</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary" id="contextmenu-' + index1 + '" style="word-break: break-word;">' + description +'</p></div></div> </div>')
+                }
+            }
+            
+            if(!disabled) {
+                $("#contextmenu-" + index1).data("action", item1.action);
+                $("#contextmenu-" + index1).data("key", item1.key);
+                $("#contextmenu-" + index1).data("children", null);
+            }
+            // console.log("Dont Have")
+        }
+    })
+}

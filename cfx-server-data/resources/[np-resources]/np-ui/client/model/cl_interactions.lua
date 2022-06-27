@@ -1,28 +1,40 @@
 local lastMessage = ""
 
-exports("showInteraction", function(message, type)
-    if not type then type = "info" end
-    lastMessage = message
-    SendNUIMessage({
-        action = "interactions",
-        data = {
-            message = message,
-            show = true,
-            type = type,
-        }
-    })
+function showInteraction(text, type)
+	local color = "#2196f3"
+
+	if type == "success" then
+		color = "#4caf50"
+	elseif type == "error" then
+		color = "#f44336"
+	end
+
+	SendNUIMessage({
+		display = true,
+		text = text,
+		color = color
+	})
+end
+
+function hideInteraction()
+	SendNUIMessage({
+		display = false
+	})
+end
+
+exports("showInteraction", showInteraction)
+exports("hideInteraction", hideInteraction)
+
+AddEventHandler('closeinteraction', function()
+	hideInteraction()
 end)
 
-exports("hideInteraction", function(type)
-    type = type and type or "info"
-    SendNUIMessage({
-        action = "interactions",
-        data = {
-            message = lastMessage,
-            show = false,
-            type = type,
-        }
-    })
+RegisterCommand('inter', function()
+    TriggerEvent("interactions")
+end)
+
+AddEventHandler("interactions", function(zone, data)
+            exports["np-ui"]:showInteraction("Shared PD")
 end)
 
 exports("showContextMenu", function(options, position)
