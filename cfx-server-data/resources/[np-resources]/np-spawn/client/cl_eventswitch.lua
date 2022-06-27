@@ -23,7 +23,7 @@ function Login.characterLoaded()
   Wait(500)
   TriggerServerEvent("police:getAnimData")
   TriggerServerEvent("server:currentpasses")
-  TriggerEvent("np-hud:SetValues")
+  TriggerEvent("np-hud:SetValues", exports['isPed']:isPed('cid'))
   TriggerServerEvent("police:getEmoteData")
   TriggerServerEvent("police:SetMeta")
   TriggerServerEvent('np-scoreboard:AddPlayer')
@@ -52,6 +52,7 @@ function Login.characterSpawned()
 
   if Spawn.isNew then
       Wait(1000)
+      TriggerServerEvent('np-spawn:create_bank_accounts', exports['isPed']:isPed('cid'))
       if not exports["np-inventory"]:hasEnoughOfItem("mobilephone", 1, false) then
           TriggerEvent("player:receiveItem", "mobilephone", 1)
       end
