@@ -359,15 +359,13 @@ input:checked + .slider:before{
 }
 
 .main-wrapper {
-    width: 44%;
+    width: 35%;
     height: auto;
     background: #222831;
     margin: auto;
     position: relative;
-    top: 10%;
     overflow: hidden;
-    padding: 1.5rem;
-    border-radius: 3%;
+    padding: 1.2rem;
 }
 
 .heading {
@@ -451,16 +449,16 @@ input:checked + .slider:before{
     text-align: center;
     margin-top: 1%;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    height: 4vh;
-    width: 40%;
-    line-height: 4vh;
+    height: 3vh;
+    width: 30%;
+    line-height: 2vh;
     text-decoration: none;
     background-color: #95ef77;
     color: #222831;
-    border-radius: 1vh;
+    border-radius: 0.3vh;
     text-transform: uppercase;
     border: none;
-    font-size: 1.4vh;
+    font-size: 1.2vh;
     font-weight: 500;
 }
 
