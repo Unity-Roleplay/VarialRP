@@ -12,3 +12,5 @@ cache
 \[artifact\]/server-tls.crt
 \[artifact\]/server-tls.key
 start.bat
+\[artifact\]/
+\[artifact\]/
