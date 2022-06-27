@@ -728,22 +728,22 @@ RegisterNUICallback('btnHousing', function()
   allNewHouses = {}
   myAccessHouse = {}
   local apt = RPC.execute("np-phone:apt")
-  local housing = exports['np-housing']:housingForPhone()
+  local housing = RPC.execute("np-phone:getHouses")
   -- local apartment = exports['np-apartments']:getMyCurrentApartment()
-  myHousess = RPC.execute("np-phone:getCurrentOwned")
+  myHousess = RPC.execute('np-phone:getCurrentOwned')
   accessHouse = RPC.execute('np-phone:getAccessHouse_2')
   TriggerServerEvent('checkKeys')
   local cid = exports["isPed"]:isPed("cid")
-  for i,v in pairs(myHousess) do
+ -- for i,v in pairs(myHousess) do
     -- print("STATUS", v.status)
-    table.insert(newHouses, {
-      hid = v.hid,
-      cid = v.cid,
-      status = v.status,
-      cat = exports['np-housing']:getHousingCatFromPropertID(v.hid),
+ --   table.insert(newHouses, {
+  --    hid = v.hid,
+  --    cid = v.cid,
+  --    status = v.status,
+      --cat = exports['np-housing']:getHousingCatFromPropertID(v.hid),
       
-    })
-  end
+   -- })
+  --end
   for l,s in pairs(accessHouse) do
     -- print("STATUS", v.status)
     if tonumber(cid) ==  tonumber(s.cid) then
@@ -760,7 +760,7 @@ RegisterNUICallback('btnHousing', function()
   SendNUIMessage({
     openSection = "housing",
     apId = apt.id,
-    sName = "Street",
+    sName = "Alta Street",
     myHouse = newHouses,
     houses = housing,
     accessHouse = myAccessHouse,
@@ -786,7 +786,7 @@ AddEventHandler('updateHousing', function()
       hid = v.hid,
       cid = v.cid,
       status = v.status,
-      cat = exports['np-housing']:getHousingCatFromPropertID(v.hid),
+      --cat = exports['np-housing']:getHousingCatFromPropertID(v.hid),
       
     })
   end

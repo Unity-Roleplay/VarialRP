@@ -320,8 +320,13 @@
                       </div> -->
 
                       <div class="col s3">
-                        <div class="jss35 jss38 phone-button callcs phone-button" style="background: rgb(30, 133, 44); color: rgb(255, 255, 255);" data-action=""aria-label="Housing"><i class="fas fa-house-user" style="font-size:35px"></i></div>
-                      </div>
+                        <!-- <div class="rounded-square messages12" data-action="messages" aria-label="Housing"
+                              data-balloon-pos="up"><i class="fas fa-house-user icon fa-lg"></i></div> -->
+                        <div class="jss35 jss38 phone-button" data-action="btnHousing" aria-label="Housing">
+                           <div class="rounded-square housing" data-balloon-pos="up"><i
+                                 class="fas fa-house-user icon fa-lg"></i></div>
+                        </div>
+                     </div>
 
                        <div class="col s3">
                         <div class="jss35 jss38 phone-button" data-action="btnStocks" style="background: url('images/crypto.png') 0% 0% / cover no-repeat;" aria-label="Crypto App"></div>
@@ -535,6 +540,314 @@
                         </div>
                     </div>
                    <!-- customize page criminal -->
+
+                   <div class="housing-container phone-app">
+                     <div class="jss42 jss2901">
+                        <div class="MuiTabs-root" style="width: 100%;">
+                           <div class="MuiTabs-scroller MuiTabs-fixed" style="overflow: hidden;">
+                              <div aria-label="housing tabs" class="MuiTabs-flexContainer" role="tablist">
+                                 <button id="hb-1"
+                                    class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected MuiTab-fullWidth"
+                                    tabindex="0" type="button" role="tab" aria-selected="true" style="min-width: 0px;">
+                                    <span class="MuiTab-wrapper">
+                                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house-user"
+                                          class="svg-inline--fa fa-house-user fa-w-18 fa-fw fa-lg " role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                          <path fill="currentColor"
+                                             d="M570.69,236.27,512,184.44V48a16,16,0,0,0-16-16H432a16,16,0,0,0-16,16V99.67L314.78,10.3C308.5,4.61,296.53,0,288,0s-20.46,4.61-26.74,10.3l-256,226A18.27,18.27,0,0,0,0,248.2a18.64,18.64,0,0,0,4.09,10.71L25.5,282.7a21.14,21.14,0,0,0,12,5.3,21.67,21.67,0,0,0,10.69-4.11l15.9-14V480a32,32,0,0,0,32,32H480a32,32,0,0,0,32-32V269.88l15.91,14A21.94,21.94,0,0,0,538.63,288a20.89,20.89,0,0,0,11.87-5.31l21.41-23.81A21.64,21.64,0,0,0,576,248.19,21,21,0,0,0,570.69,236.27ZM288,176a64,64,0,1,1-64,64A64,64,0,0,1,288,176ZM400,448H176a16,16,0,0,1-16-16,96,96,0,0,1,96-96h64a96,96,0,0,1,96,96A16,16,0,0,1,400,448Z">
+                                          </path>
+                                       </svg>
+                                    </span>
+                                    <span class="MuiTouchRipple-root"></span>
+                                 </button>
+                                 <button id="hb-2"
+                                    class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary MuiTab-fullWidth" tabindex="-1"
+                                    type="button" role="tab" aria-selected="false" style="min-width: 0px;">
+                                    <span class="MuiTab-wrapper">
+                                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="building"
+                                          class="svg-inline--fa fa-building fa-w-14 fa-fw fa-lg " role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                          <path fill="currentColor"
+                                             d="M436 480h-20V24c0-13.255-10.745-24-24-24H56C42.745 0 32 10.745 32 24v456H12c-6.627 0-12 5.373-12 12v20h448v-20c0-6.627-5.373-12-12-12zM128 76c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12V76zm0 96c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12v-40zm52 148h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm76 160h-64v-84c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v84zm64-172c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40zm0-96c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40zm0-96c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12V76c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40z">
+                                          </path>
+                                       </svg>
+                                    </span>
+                                    <span class="MuiTouchRipple-root"></span>
+                                 </button>
+                              </div>
+                              <span class="jss2907 jss2908 MuiTabs-indicator" style="left: 0px; width: 124px;"></span>
+                           </div>
+                        </div>
+                        <div id="house-2" style="width: 100%;display: block;height: 85%;">
+                           <div class="flex flex-centered btn-2" style="margin: 16px 0px; display: none;">
+                              <div id="house-check" style="display: none;">
+                                 <button id="h-check"
+                                    class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-containedSizeSmall MuiButton-sizeSmall h-check"
+                                    tabindex="0" type="button">
+                                    <span class="MuiButton-label">Check Current Location</span>
+                                    <span class="MuiTouchRipple-root"></span>
+                                 </button>
+                              </div>
+                           </div>
+                           <div class="flex flex-centered edit-h" style="margin: 2px 0px;width: 100%;height: 5%;display: flex;">
+                              <div id="edit-h" style="margin: auto; display: block;">
+                                 <button
+                                    class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-containedSizeSmall MuiButton-sizeSmall h-edit"
+                                    tabindex="0" type="button">
+                                    <span class="MuiButton-label">
+                                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="edit"
+                                          class="svg-inline--fa fa-edit fa-w-18 fa-fw fa-1x " role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                          <path fill="currentColor"
+                                             d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z">
+                                          </path>
+                                       </svg>
+                                    </span>
+                                    <span class="MuiTouchRipple-root"></span>
+                                 </button>
+                              </div>
+                              <div id="sell-h" style="margin: auto; display: block;">
+                                 <button
+                                    class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-containedSizeSmall MuiButton-sizeSmall sell-h"
+                                    tabindex="0" type="button">
+                                    <span class="MuiButton-label">
+                                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="edit"
+                                          class="svg-inline--fa fa-edit fa-w-18 fa-fw fa-1x " role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                          <path fill="currentColor"
+                                             d="M568.2 336.3c-13.12-17.81-38.14-21.66-55.93-8.469l-119.7 88.17h-120.6c-8.748 0-15.1-7.25-15.1-15.99c0-8.75 7.25-16 15.1-16h78.25c15.1 0 30.75-10.88 33.37-26.62c3.25-20-12.12-37.38-31.62-37.38H191.1c-26.1 0-53.12 9.25-74.12 26.25l-46.5 37.74L15.1 383.1C7.251 383.1 0 391.3 0 400v95.98C0 504.8 7.251 512 15.1 512h346.1c22.03 0 43.92-7.188 61.7-20.27l135.1-99.52C577.5 379.1 581.3 354.1 568.2 336.3zM279.3 175C271.7 173.9 261.7 170.3 252.9 167.1L248 165.4C235.5 160.1 221.8 167.5 217.4 179.1s2.121 26.2 14.59 30.64l4.655 1.656c8.486 3.061 17.88 6.095 27.39 8.312V232c0 13.25 10.73 24 23.98 24s24-10.75 24-24V221.6c25.27-5.723 42.88-21.85 46.1-45.72c8.688-50.05-38.89-63.66-64.42-70.95L288.4 103.1C262.1 95.64 263.6 92.42 264.3 88.31c1.156-6.766 15.3-10.06 32.21-7.391c4.938 .7813 11.37 2.547 19.65 5.422c12.53 4.281 26.21-2.312 30.52-14.84s-2.309-26.19-14.84-30.53c-7.602-2.627-13.92-4.358-19.82-5.721V24c0-13.25-10.75-24-24-24s-23.98 10.75-23.98 24v10.52C238.8 40.23 221.1 56.25 216.1 80.13C208.4 129.6 256.7 143.8 274.9 149.2l6.498 1.875c31.66 9.062 31.15 11.89 30.34 16.64C310.6 174.5 296.5 177.8 279.3 175z">
+                                          </path>
+                                       </svg>
+                                    </span>
+                                    <span class="MuiTouchRipple-root"></span>
+                                 </button>
+                              </div>
+                           </div>
+                           <div class="housing-wrapper">
+                              <!--OWNED HOUSE-->
+                              <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary h-owned"
+                                 style="word-break: break-word;">Owned</p>
+                              <div class="house-entries" style="width: 100%;">
+         
+         
+                              </div>
+                              <!--ACCESS-->
+                              <div class="access" style="width: 100%;">
+                                 <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary h-access"
+                                    style="word-break: break-word;">Access</p>
+                                 <div class="access-house-entries" style="width: 100%;">
+         
+         
+                                 </div>
+                                 <!-- <div hoverid="a3" class="component-paper btn-2-house" style="width: 100%;">
+                                                         <div class="main-container">
+                                                         <div class="image">
+                                                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house-user"
+                                                                 class="svg-inline--fa fa-house-user fa-w-18 fa-fw fa-3x " role="img"
+                                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                                                 <path fill="currentColor"
+                                                                     d="M570.69,236.27,512,184.44V48a16,16,0,0,0-16-16H432a16,16,0,0,0-16,16V99.67L314.78,10.3C308.5,4.61,296.53,0,288,0s-20.46,4.61-26.74,10.3l-256,226A18.27,18.27,0,0,0,0,248.2a18.64,18.64,0,0,0,4.09,10.71L25.5,282.7a21.14,21.14,0,0,0,12,5.3,21.67,21.67,0,0,0,10.69-4.11l15.9-14V480a32,32,0,0,0,32,32H480a32,32,0,0,0,32-32V269.88l15.91,14A21.94,21.94,0,0,0,538.63,288a20.89,20.89,0,0,0,11.87-5.31l21.41-23.81A21.64,21.64,0,0,0,576,248.19,21,21,0,0,0,570.69,236.27ZM288,176a64,64,0,1,1-64,64A64,64,0,0,1,288,176ZM400,448H176a16,16,0,0,1-16-16,96,96,0,0,1,96-96h64a96,96,0,0,1,96,96A16,16,0,0,1,400,448Z">
+                                                                 </path>
+                                                             </svg>
+                                                         </div>
+                                                         <div class="details ">
+                                                             <div class="title ">
+                                                                 <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                                                                 id = "apartment_room_number1" style="word-break: break-word;"></p>
+                                                             </div>
+                                                             <div class="description ">
+                                                                 <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary ap-street"
+                                                                     style="word-break: break-word;">No33</p>
+                                                             </div>
+                                                         </div>
+                                                         <div hoverid="a3" class="actions actions-show">
+                                                             <div title="Set GPS" class="">
+                                                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marked"
+                                                                     class="svg-inline--fa fa-map-marked fa-w-18 fa-fw fa-lg " role="img"
+                                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                                                     <path fill="currentColor"
+                                                                     d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z">
+                                                                     </path>
+                                                                 </svg>
+                                                             </div>
+                                                         </div>
+                                                         </div>
+                                                     </div> -->
+                              </div>
+                              <!--CURRENT-->
+                              <div style="width: 100%; display:block;" class="h-current">
+                                 <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+                                    style="word-break: break-word;">Current</p>
+                                 <div hoverid="a3" class="component-paper btn-2-house" style="width: 100%;">
+                                    <div class="main-container">
+                                       <div class="image">
+                                          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house-user"
+                                             class="svg-inline--fa fa-house-user fa-w-18 fa-fw fa-3x " role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                             <path fill="currentColor"
+                                                d="M570.69,236.27,512,184.44V48a16,16,0,0,0-16-16H432a16,16,0,0,0-16,16V99.67L314.78,10.3C308.5,4.61,296.53,0,288,0s-20.46,4.61-26.74,10.3l-256,226A18.27,18.27,0,0,0,0,248.2a18.64,18.64,0,0,0,4.09,10.71L25.5,282.7a21.14,21.14,0,0,0,12,5.3,21.67,21.67,0,0,0,10.69-4.11l15.9-14V480a32,32,0,0,0,32,32H480a32,32,0,0,0,32-32V269.88l15.91,14A21.94,21.94,0,0,0,538.63,288a20.89,20.89,0,0,0,11.87-5.31l21.41-23.81A21.64,21.64,0,0,0,576,248.19,21,21,0,0,0,570.69,236.27ZM288,176a64,64,0,1,1-64,64A64,64,0,0,1,288,176ZM400,448H176a16,16,0,0,1-16-16,96,96,0,0,1,96-96h64a96,96,0,0,1,96,96A16,16,0,0,1,400,448Z">
+                                             </path>
+                                          </svg>
+                                       </div>
+                                       <div class="details ">
+                                          <div class="title ">
+                                             <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                                                id="apartment_room_number" style="word-break: break-word;"></p>
+                                          </div>
+                                          <div class="description ">
+                                             <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary ap-street"
+                                                style="word-break: break-word;">No33</p>
+                                          </div>
+                                       </div>
+                                       <div hoverid="a3" class="actions actions-show">
+                                          <div title="Set GPS" class="">
+                                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marked"
+                                                class="svg-inline--fa fa-map-marked fa-w-18 fa-fw fa-lg " role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                                <path fill="currentColor"
+                                                   d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z">
+                                                </path>
+                                             </svg>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+         
+                        </div>
+                        <div id="house-1" style="width: 100%;">
+                           <div style="width: 100%;">
+                              <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+                                 style="word-break: break-word;">Current</p>
+                              <div hoverid="3" class="component-paper " style="width: 100%;">
+                                 <div class="main-container">
+                                    <div class="image">
+                                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house-user"
+                                          class="svg-inline--fa fa-house-user fa-w-18 fa-fw fa-3x " role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                          <path fill="currentColor"
+                                             d="M570.69,236.27,512,184.44V48a16,16,0,0,0-16-16H432a16,16,0,0,0-16,16V99.67L314.78,10.3C308.5,4.61,296.53,0,288,0s-20.46,4.61-26.74,10.3l-256,226A18.27,18.27,0,0,0,0,248.2a18.64,18.64,0,0,0,4.09,10.71L25.5,282.7a21.14,21.14,0,0,0,12,5.3,21.67,21.67,0,0,0,10.69-4.11l15.9-14V480a32,32,0,0,0,32,32H480a32,32,0,0,0,32-32V269.88l15.91,14A21.94,21.94,0,0,0,538.63,288a20.89,20.89,0,0,0,11.87-5.31l21.41-23.81A21.64,21.64,0,0,0,576,248.19,21,21,0,0,0,570.69,236.27ZM288,176a64,64,0,1,1-64,64A64,64,0,0,1,288,176ZM400,448H176a16,16,0,0,1-16-16,96,96,0,0,1,96-96h64a96,96,0,0,1,96,96A16,16,0,0,1,400,448Z">
+                                          </path>
+                                       </svg>
+                                    </div>
+                                    <div class="details ">
+                                       <div class="title ">
+                                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                                             id="apartment_room_number_h1" style="word-break: break-word;">Room: 100</p>
+                                       </div>
+                                       <div class="description ">
+                                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary ap-street"
+                                             style="word-break: break-word;">No33</p>
+                                       </div>
+                                    </div>
+                                    <div hoverid="3" class="actions actions-show">
+                                       <div title="Set GPS" class="">
+                                          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marked"
+                                             class="svg-inline--fa fa-map-marked fa-w-18 fa-fw fa-lg " role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                             <path fill="currentColor"
+                                                d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z">
+                                             </path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div style="width: 100%;">
+                              <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+                                 style="word-break: break-word;">Available</p>
+                              <div hoverid="4" class="component-paper " style="width: 100%;">
+                                 <div class="main-container">
+                                    <div class="image">
+                                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home"
+                                          class="svg-inline--fa fa-home fa-w-18 fa-fw fa-3x " role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                          <path fill="currentColor"
+                                             d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
+                                          </path>
+                                       </svg>
+                                    </div>
+                                    <div class="details ">
+                                       <div class="title ">
+                                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                                             style="word-break: break-word;">$80,000.00</p>
+                                       </div>
+                                       <div class="description ">
+                                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                                             style="word-break: break-word;">Prosperity</p>
+                                       </div>
+                                    </div>
+                                    <div hoverid="4" class="actions actions-show">
+                                       <div title="Upgrade!" class="upgrade-button">
+                                          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dollar-sign"
+                                             class="svg-inline--fa fa-dollar-sign fa-w-9 fa-fw fa-lg " role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 512">
+                                             <path fill="currentColor"
+                                                d="M209.2 233.4l-108-31.6C88.7 198.2 80 186.5 80 173.5c0-16.3 13.2-29.5 29.5-29.5h66.3c12.2 0 24.2 3.7 34.2 10.5 6.1 4.1 14.3 3.1 19.5-2l34.8-34c7.1-6.9 6.1-18.4-1.8-24.5C238 74.8 207.4 64.1 176 64V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48h-2.5C45.8 64-5.4 118.7.5 183.6c4.2 46.1 39.4 83.6 83.8 96.6l102.5 30c12.5 3.7 21.2 15.3 21.2 28.3 0 16.3-13.2 29.5-29.5 29.5h-66.3C100 368 88 364.3 78 357.5c-6.1-4.1-14.3-3.1-19.5 2l-34.8 34c-7.1 6.9-6.1 18.4 1.8 24.5 24.5 19.2 55.1 29.9 86.5 30v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z">
+                                             </path>
+                                          </svg>
+                                       </div>
+                                       <div class="">
+                                          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marked"
+                                             class="svg-inline--fa fa-map-marked fa-w-18 fa-fw fa-lg " role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                             <path fill="currentColor"
+                                                d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z">
+                                             </path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div hoverid="5" class="component-paper " style="width: 100%;">
+                                 <div class="main-container">
+                                    <div class="image">
+                                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home"
+                                          class="svg-inline--fa fa-home fa-w-18 fa-fw fa-3x " role="img"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                          <path fill="currentColor"
+                                             d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
+                                          </path>
+                                       </svg>
+                                    </div>
+                                    <div class="details ">
+                                       <div class="title ">
+                                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                                             style="word-break: break-word;">$210,000.00</p>
+                                       </div>
+                                       <div class="description ">
+                                          <p class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextPrimary"
+                                             style="word-break: break-word;">Pill Box Swiss St</p>
+                                       </div>
+                                    </div>
+                                    <div hoverid="5" class="actions actions-show">
+                                       <div title="Upgrade!" class="upgrade-button">
+                                          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dollar-sign"
+                                             class="svg-inline--fa fa-dollar-sign fa-w-9 fa-fw fa-lg " role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 512">
+                                             <path fill="currentColor"
+                                                d="M209.2 233.4l-108-31.6C88.7 198.2 80 186.5 80 173.5c0-16.3 13.2-29.5 29.5-29.5h66.3c12.2 0 24.2 3.7 34.2 10.5 6.1 4.1 14.3 3.1 19.5-2l34.8-34c7.1-6.9 6.1-18.4-1.8-24.5C238 74.8 207.4 64.1 176 64V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48h-2.5C45.8 64-5.4 118.7.5 183.6c4.2 46.1 39.4 83.6 83.8 96.6l102.5 30c12.5 3.7 21.2 15.3 21.2 28.3 0 16.3-13.2 29.5-29.5 29.5h-66.3C100 368 88 364.3 78 357.5c-6.1-4.1-14.3-3.1-19.5 2l-34.8 34c-7.1 6.9-6.1 18.4 1.8 24.5 24.5 19.2 55.1 29.9 86.5 30v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z">
+                                             </path>
+                                          </svg>
+                                       </div>
+                                       <div class="">
+                                          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marked"
+                                             class="svg-inline--fa fa-map-marked fa-w-18 fa-fw fa-lg " role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                             <path fill="currentColor"
+                                                d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z">
+                                             </path>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
 
 
                    <div class="racing-container phone-app">

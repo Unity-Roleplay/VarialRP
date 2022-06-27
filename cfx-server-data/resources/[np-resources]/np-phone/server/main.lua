@@ -1005,12 +1005,12 @@ RPC.register('np-phone:getMyGroup', function(cid)
 end)
 
 RPC.register('np-phone:getHouses', function(src)
-    -- exports.ghmattimysql:execute('SELECT * FROM housing', {}, function(result)
-    --     if result[1] then
-    --         house = result[1]
-    --     end
-    -- end)
-    -- Wait(100)
+     exports.ghmattimysql:execute('SELECT * FROM __housedata', {}, function(result)
+         if result[1] then
+             house = result[1]
+         end
+     end)
+     Wait(100)
     return nil
 end)
 
@@ -1029,29 +1029,37 @@ RPC.register('np-phone:apt', function(source)
     return apt
 end)
 
-RPC.register('np-phone:getCurrentOwned', function(source)
+RPC.register('np-phone:getCurrentOwned', function()
     local src = source
-    local user = exports["np-base"]:getModule("Player"):GetUser(src)
+    local user = exports['np-base']:getModule('Player')(src)
     local cid = user:getCurrentCharacter().id
-    local house = nil
-    -- exports.ghmattimysql:execute('SELECT * FROM housing WHERE cid = @cid', {['cid'] = cid}, function(result)
-    --     if result ~= nil then
-    --         house = {}
-    --         for i,k in pairs(result) do
-    --             -- print("MESSAGE",k.message)
-    --             -- local msg = json.decode(k.message)
-    --             -- print(msg.text,msg.attachment)
-    --             table.insert(house, {
-    --                 ['hid'] = k.hid,
-    --                 ['cid'] = cid,
-    --                 ['category'] = "",
-    --                 ['status'] = k.status
-    --             })
-    --         end
-    --         return
-    --     end
-    --     house = false
-    -- end)
+    local house
+    exports.oxmysql:execute('SELECT * FROM __housedata WHERE cid = @cid', {['cid'] = cid}, function(result)
+        if result ~= nil then
+            house = {}
+            for i,k in pairs(result) do
+                local houseCat = ''
+                if k.house_model == 1 then 
+                    houseCat = 'Type: House'
+                end
+                if k.house_model == 2 then 
+                    houseCat = 'Type: Mansion'
+                end
+                if k.house_model == 3 then 
+                    houseCat = 'Type: Mega Mansion'
+                end
+                table.insert(house, {
+                    ['hid'] = k.house_id,
+                    ['cid'] = k.cid,
+                    ['category'] = houseCat,
+                    ['status'] = k.force_locked,
+                    ['houseeName'] = k.housename
+                })
+            end
+            return
+        end
+        house = false
+    end)
     Wait(100)
     return house
 end)
@@ -1168,31 +1176,33 @@ RPC.register('np-phone:getAccessHouse', function(source,house)
     return person
 end)
 
-RPC.register('np-phone:getAccessHouse_2', function(source,house)
+RPC.register('np-phone:getAccessHouse_2', function(house)
     local src = source
     local user = exports["np-base"]:getModule("Player"):GetUser(src)
-    local cid = user:getCurrentCharacter().id
-    local hid = house.param
-    local person
-
-    local q = [[ SELECT k.hid as house_id, k.cid AS player_cid, c.status AS house_status
-    FROM housing_keys k
-    INNER JOIN housing c ON c.hid = k.hid
+    local cid = user.id
+    local hid = house
+    local personforce_locked
+    local q = [[ SELECT k.house_id as house_id, k.cid AS cid, c.status AS housename
+    FROM __housekeys k
+    INNER JOIN __housedata c ON c.house_id = k.house_id
     WHERE k.cid = @cid ]]
     local v = {["cid"] = cid}
-    exports.ghmattimysql:execute(q, v, function(results)
+    exports.oxmysql:execute(q, v, function(results)
         person = {}
+ 
         for i,k in pairs(results) do
+
             table.insert(person, {
                 -- ['name'] = k.player_name,
-                ['cid'] = k.player_cid,
+                ['cid'] = k.cid,
                 ['house'] = k.house_id,
-                ['status'] = k.house_status
+                ['category'] = k.housename
             })
         end
     end)
     Wait(100)
     return person
+
 end)
 
 RPC.register("np-phone:removeKeys", function(src, pHouseId, pPlayerId)
