@@ -358,37 +358,21 @@ input:checked + .slider:before{
     background: transparent !important;
 }
 
+html, body {
+    background: transparent !important;
+}
+
 .main-wrapper {
     width: 35%;
     height: auto;
-    background: #222831;
+    background-color: #222831;
     margin: auto;
     position: relative;
+    top: 10%;
     overflow: hidden;
-    padding: 1.2rem;
-}
-
-.heading {
-    width: 100%;
-    max-width: 100%;
-    height: 10%;
-    display: flex;
-    align-items: center;
-    position: relative;
-    justify-content: center;
-    overflow: wrap;
-}
-
-.form-control{
-    width: 100%;
-}
-
-.heading h1 {
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.85rem;
-    font-weight: bold;
-    position: relative;
+    border-radius: 1%;
+    padding: 16px;
+    display: none;
 }
 
 .body {
@@ -405,34 +389,45 @@ input:checked + .slider:before{
 }
 
 .body label {
-    color: white;
+    color: rgba(255, 255, 255, 0.7);
     margin-top: 0.8em;
+    padding: 0;
+    font-size: 0.80rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.00938em;
 }
 
-.body input[type="text"] {
-    background: #222831;
+.body input {
+    display: inline-flex;
     color: white;
-    border: none;
-    border-radius: 1px;
-    border-bottom: 1px solid white;
+    background: transparent !important;
+    border-radius: 0%;
+    border-width: 0 0 2px;
+    border-color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    box-sizing: border-box;
+    align-items: center;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.1876em;
+    letter-spacing: 0.00938em;
+    padding-left: 10%;
 }
 
-
-.body input[type="text"]:focus {
-    box-shadow: 0 0 0 0.1rem#222831;
+.body input:focus {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: white;
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
 }
 
-.body select {
-    background: #222831;
-    color: white;
-    border: none;
-}
-
-
-.body option {
-    background: #222831;
-    color: white;
-    padding: 1rem 0;
+.body input:hover {
+    border-color: white;
 }
 
 .footer {
@@ -441,47 +436,58 @@ input:checked + .slider:before{
     align-items: center;
     justify-content: center;
     padding-top: 10%;
-    margin-right: 1%;
-    margin-left: 1%;
 }
 
-.new-button-submit {
-    text-align: center;
-    margin-top: 1%;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    height: 3vh;
-    width: 30%;
-    line-height: 2vh;
-    text-decoration: none;
+.btn-submit {
+    color: rgba(0, 0, 0, 0.87);
     background-color: #95ef77;
-    color: #222831;
-    border-radius: 0.3vh;
-    text-transform: uppercase;
-    border: none;
-    font-size: 1.2vh;
+    padding: 4px 10px;
+    font-size: 0.8125rem;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+    min-width: 64px;
+    box-sizing: border-box;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 500;
+    line-height: 1.75;
+    border-radius: 4px;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    display: inline-flex;
+    outline: 0;
+    position: relative;
+    align-items: center;
+    user-select: none;
+    justify-content: center;
+    text-decoration: none;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    word-spacing: normal;
+    text-indent: 0px;
+    text-shadow: none;
 }
 
-.new-button-erorr {
-    background-color: #d63031;
+.btn-submit:hover {
+    background-color: rgb(104, 167, 83);
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
 }
 
-.new-button-submit:focus {
-    outline: none;
+.input-wrapper{
+    position: relative;
 }
 
-
-.background {
-    width: auto;
-    height: auto;
+.input-icon {
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.452);
-    z-index: -99;
-    display: none;
+    left: 1%;
+    top: 60%; /* Keep icon in center of input, regardless of the input height */
+    color: rgba(255, 255, 255, 0.7);
 }
-
 /* End Of Keyboard / Textbox */
 
 /* Start Cash View */

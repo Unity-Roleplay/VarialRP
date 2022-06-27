@@ -132,9 +132,6 @@ function wrong(){
 }
 // End skillbarcode
 
-
-var RowsData = [];
-var Rows = [];
 var saved = "";
 arraydatainteract = null;
 contextdata = null
@@ -147,88 +144,106 @@ eyeintactive = false
 textmenukey = null;
 
 
-const OpenMenu = (data) => {
-    if (data.show) {
-        $(`.root-wrapper`).fadeIn(0)
-        $(`.background`).fadeIn(0)
-        textmenucallbackurl = data.callbackUrl
-        SetHeader(data.header)
-        textmenukey = data.key
-        // console.log("textmenu key ",textmenukey)
-        AddRow(data.items) 
-    }
-    
-}
+var RowsData = {};
+var Rows = {};
 
-function SetHeader(header) {
-    var element
-    element = $('<h1>' + header + '<h1>');
-    $('.heading').append(element);
-    saved = element
+const OpenMenu = (data) => {
+    $(`.main-wrapper`).fadeIn(0)
+
+    $( ".body" ).empty();
+    RowsData = {};
+    Rows = {};
+
+    AddRow(data)
 }
 
 const CloseMenu = () => {
-    $(`.root-wrapper`).fadeOut(0);
-    $(`.background`).fadeOut(0);
-    $(saved).remove();
-    RowsData = [];
-    Rows = [];
-    saved = "";
-    textboxactive = false
-    $.post(`https://np-ui/guccimanecancel`)
-    
-};
+    $(`.main-wrapper`).fadeOut(0);
 
-const CancelMenu = () => {
-    $.each(RowsData, function (idx, item) {
-        var id = item.name;
-        
-        $(Rows[id]).remove();
-    })
-    
-    $.post(`https://np-ui/guccimanecancel`)
-    return CloseMenu();
-}
+    $( ".body" ).empty();
+    RowsData = {};
+    Rows = {};
+};
 
 function AddRow(data) {
     RowsData = data
-    $.each(data, function (idx, item) {
-        var element
-        element = $('<label for="usr"><i class="'+item.icon+'" style="margin-right: 2%;"></i>' + item.label + '</label> <input type="text" class="form-control" id="' + item.name + '" />');
-        $('.body').append(element);
-        Rows[item.name] = element
-    })
+
+    for (var i = 0; i < RowsData.length; i++) {
+        let element
+
+        element = `<div class="input-wrapper">`
+        element += `<label>${RowsData[i].label}</label>`;
+        element += `<input type="text" class="form-control" id="${RowsData[i].name}"/>`;
+        element += `<span class="fas fa-${RowsData[i].icon} input-icon"></span>`;
+        element += `</div>`
+
+        $(".body").append(element);
+        Rows[RowsData[i].name] = element
+    }
 }
 
+$(`#submit`).click(() => {
+    SubmitData();
+})
+
 function SubmitData() {
-    returnData = [];
-    $.each(RowsData, function (idx, item) {
-        var id = item.name;
-        var data = document.getElementById(id);
+    const returnData = {};
+
+    for (var i = 0; i < RowsData.length; i++) {
+        var id = RowsData[i].name
+        var data = document.getElementById(id)
+
         if (data.value) {
-            returnData.push({
-                value: data.value,
-            });
+            returnData[id] = data.value;
         } else {
-            returnData.push({
-                value: null,
-            });
+            returnData[id] = null;
         }
-        
         $(Rows[id]).remove();
+    }
+
+    PostData({
+        data: returnData
     })
-    returnData.push({
-        value: textmenukey,
-    })
-    PostData(returnData)
+
     CloseMenu();
 }
 
-
 const PostData = (data) => {
-    return $.post(`https://np-ui/`+textmenucallbackurl, JSON.stringify(data))
+    return $.post(`https://np-ui/dataPost`, JSON.stringify(data))
 }
 
+const CancelMenu = () => {
+    for (var i = 0; i < RowsData.length; i++) {
+        var id = RowsData[i].id
+        $(Rows[id]).remove();
+    }
+    $.post(`https://np-ui/cancel`)
+    return CloseMenu();
+}
+
+window.addEventListener("message", (evt) => {
+    const data = evt.data
+    const info = data.data
+    const action = data.action
+    switch (action) {
+        case "OPEN_MENU":
+            return OpenMenu(info);
+        case "CLOSE_MENU":
+            return CloseMenu();
+        default:
+            return;
+    }
+})
+
+document.onkeyup = function (event) {
+    event = event || window.event;
+    var charCode = event.keyCode || event.which;
+    if (charCode == 27) {
+        CancelMenu();
+    } else if (charCode == 13) {
+        SubmitData()
+    }
+};
 function closesettings(){
     $(".settings").hide();
     $.post('https://np-ui/close');
@@ -778,9 +793,9 @@ window.addEventListener('message',function(event){
 // Click Event
 
 
-$("#submit").click(() => {
-    SubmitData();
-})
+//$("#submit").click(() => {
+//    SubmitData();
+//})
 
 $(".header").click(() => {
     closesettings();

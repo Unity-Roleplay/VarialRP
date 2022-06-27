@@ -50,35 +50,7 @@ end
 
 exports("cashFlash", cashFlash)
 
-function openApplication(app, data, stealFocus)
-    stealFocus = stealFocus == nil and true or false
-    SendUIMessage({
-        action = app,
-        show = true,
-        data = data or {},
-    })
-    -- print("Open Application",stealFocus)
-    if stealFocus then
-        SetUIFocus(true, true)
-    end
-end
 
-exports("openApplication", openApplication)
-
-RegisterNetEvent("np-ui:open-application")
-AddEventHandler("np-ui:open-application", openApplication)
-
-function closeApplication(app, data)
-    SendUIMessage({
-        action = app,
-        show = false,
-        data = data or {},
-    })
-    SetUIFocus(false, false)
-    TriggerEvent("np-ui:application-closed", app, { fromEscape = false })
-end
-
-exports("closeApplication", closeApplication)
 
 function sendAppEvent(app, data)
     SendUIMessage({
