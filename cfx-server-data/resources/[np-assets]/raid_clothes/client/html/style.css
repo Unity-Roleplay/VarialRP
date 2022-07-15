@@ -19,8 +19,8 @@ div {
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
-  background-color: #4a92ff;
-  outline: 1px solid #313131;
+  background-color: #24b2ff;
+  outline: 1px solid #333333;
   border-radius: 5px;
 }
 
@@ -39,19 +39,19 @@ input[type=number] {
     box-shadow: none !important;
 }
 input[type=number]:active {
-    border-bottom-color: #4182e2 !important;
+    border-bottom-color: #24b2ff !important;
 }
 
 button {
-    background-color: #4182e2 !important;
-    border-color: #4182e2 !important;
+    background-color: #24b2ff !important;
+    border-color: #24b2ff !important;
     color: #e7e7e7 !important;
 }
 
 #clothes-container,
 #barber-container,
 #tats-container {
-    background-color: #2c3b53;
+    background-color: #1a1a1a;
     border-radius: 0px;
     overflow: hidden;
     transform: scale(1);
@@ -80,8 +80,8 @@ button {
     position: relative;
     top: -10%;
     left: 40%;
-    background-color: #313131;
-    border-radius: 0px;
+    background-color: #333333;
+    border-radius: 8px;
     transform: scale(0.75);
 }
 #button_menu {
@@ -110,14 +110,14 @@ h6 {
 .panel {
     padding: 0px !important;
     margin: 10px 10px !important;
-    border-radius: 0px;
+    border-radius: 8px;
     width: calc(100% - 20px) !important;
     background-color: transparent;
     overflow: hidden;
 }
 
 .panel-title {
-    background-color: #3b4e6c;
+    background-color: #333333;
 }
 .panel-title > h6 {
     font-weight: bold !important;
@@ -128,45 +128,49 @@ h6 {
 }
 
 .panel-bottom {
-    background-color: #445a7c;
+    background-color: #333333;
     padding: 10px !important;
 }
 
 button.button-menu {
-    background-color: #445a7c !important;
+    background-color: #494949 !important;
 }
 button.button-menu.active {
-    background-color: #4a92ff !important;
+    background-color: #24b2ff !important;
 }
 
 
 .color_palette {
     border-radius: 2px;
-    border: 2px solid #e7e7e762;
+    border: 2px solid #24b2ff;
     margin: 4px;
     width: 40px;
     height: 40px;
     display: inline-flex;
+    border-radius: 8px;
 }
 .color_palette:hover {
-    border: 2px solid #4a92ff !important;
+    border: 2px solid #24b2ff !important;
 }
 .color_palette.active {
-    border: 2px solid #4a92ff !important;
+    border: 2px solid #24b2ff !important;
 }
 
 .collapsible {
-    background-color: #3b4e6c !important;
+    background-color: #494949 !important;
     color: #e7e7e7 !important;
-    border-color: #3b4e6c !important;
+    border-color: #494949 !important;
+    border-radius: 8px;
 }
 .collapsible-header {
-    background-color: #3b4e6c !important;
+    background-color: #333333 !important;
     color: #e7e7e7 !important;
+    border-radius: 8px;
 }
 .collapsible-body {
-    border-color: #3b4e6c !important;
+    border-color: #333333 !important;
     padding: 15px !important;
+    border-radius: 8px;
 }
 
 
@@ -200,12 +204,12 @@ input[type="range" i] {
  */
 input:focus,
 input:active {
-    border-bottom-color: #4182e2 !important;
+    border-bottom-color: #5800ea !important;
 }
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background: #4182e2 !important;
+    background: #5800ea !important;
     cursor: pointer;
     border-radius: 2px !important;
 }
