@@ -1473,7 +1473,7 @@ $(document).click(function(event){
 var showroomuiactive = false
 // End Showroom Area
 
-var arrayinteracteyeevent, contextdataeye, entitydataeye; //Eye aspecte
+var arrayinteracteyeevent, contextdataeye, entitydataeye; //Eye Variale
 var eyeactive = false;
 var preferencesactive = false;
 var newspapperactive = false;
