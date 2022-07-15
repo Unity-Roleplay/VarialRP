@@ -60,7 +60,7 @@ Entries[#Entries + 1] = {
     data = {
         {
             id = 'return_hose',
-            label = "Return Hose",
+            label = "Return the Nozel",
             icon = "hand-holding",
             event = "np-fuel:ReturnNozel",
             parameters = {}

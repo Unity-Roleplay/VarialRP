@@ -8,8 +8,8 @@ end)
 
 RegisterServerEvent('np-paycheck:server:send', function(cid)
 	local pSrc = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(pSrc)
-    local userjob = exports['np-fw']:getPlayerJob(user)
+    local user = exports['np-base']:GetModule('GetPlayer')(pSrc)
+    local userjob = exports['np-base']:getPlayerJob(user)
 
     if userjob == "unemployed" then
         TriggerEvent("np-paycheck:server:add", pSrc, cid, userjob, 50, 50)
@@ -40,7 +40,7 @@ RegisterNetEvent("np-paycheck:collect", function(cid)
 		local amount = tonumber(data[1].paycheck)
 		if amount > 0 then
 			exports.oxmysql:execute("UPDATE characters SET `paycheck` = ? WHERE `id` = ?", {"0", cid})
-            exports['np-fw']:GetModule('AddBank')(pSrc, amount)
+            exports['np-base']:GetModule('AddBank')(pSrc, amount)
 		else
 			TriggerClientEvent("DoLongHudText", pSrc, "You're broke, go work!")
 		end

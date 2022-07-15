@@ -17,7 +17,7 @@ end
 
 remoteCalls.register("np-banking:getBankingInfo", function()
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
     TriggerClientEvent('banking:updateCash', src, user["PlayerData"]["cash"], true)
     TriggerClientEvent('banking:updateBalance', src, user["PlayerData"]["bank"], true)
     return user["PlayerData"]["first_name"], user["PlayerData"]["last_name"], user["PlayerData"]["bank"], user["PlayerData"]["cash"], user["PlayerData"]["id"]
@@ -25,7 +25,7 @@ end)
 
 remoteCalls.register("np-banking:getBusiness", function()
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
     local result = SQL("SELECT business_name, rank FROM character_passes WHERE cid = @cid", {
         ["cid"] = user["PlayerData"]["id"]
     })
@@ -45,7 +45,7 @@ end)
 
 remoteCalls.register("np-banking:bank:withdraw", function(pAmount, pComment, pDate)
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
     local ply = user["PlayerData"]["id"]
     local type = "neg"
     local iden = "WITHDRAW"
@@ -59,10 +59,10 @@ remoteCalls.register("np-banking:bank:withdraw", function(pAmount, pComment, pDa
     if pAmount <= 0 then
         TriggerClientEvent('DoShortHudText', src, 'Not enough money', 2)
     else
-        exports['np-fw']:GetModule('RemoveBank')(src, pAmount)
-        exports['np-fw']:GetModule('AddCash')(src, pAmount)
+        exports['np-base']:GetModule('RemoveBank')(src, pAmount)
+        exports['np-base']:GetModule('AddCash')(src, pAmount)
     end
-    exports['np-fw']:sendToDiscord(pSteam, ""..sender.." Withdrew $"..pAmount .. " [Personal Account]", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX-XXXXXXXXXXXXXX")
+    exports['np-base']:sendToDiscord(pSteam, ""..sender.." Withdrew $"..pAmount .. " [Personal Account]", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX-XXXXXXXXXXXXXX")
     TriggerEvent("np-banking:updaterecent", src, ply, pAmount, pComment, pDate, type, sender, target, iden) --adds to recent sql
     TriggerClientEvent("np-banking:refresh", src)
 
@@ -71,7 +71,7 @@ end)
 
 remoteCalls.register("np-banking:bank:deposit", function(pAmount, pComment, pDate)
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
     local ply = user["PlayerData"]["id"]
     local type = "pos"
     local iden = "DEPOSIT"
@@ -85,10 +85,10 @@ remoteCalls.register("np-banking:bank:deposit", function(pAmount, pComment, pDat
     if pAmount <= 0 then
         TriggerClientEvent('DoShortHudText', src, 'Not enough money', 2)
     else
-        exports['np-fw']:GetModule('RemoveCash')(src, pAmount)
-        exports['np-fw']:GetModule('AddBank')(src, pAmount)
+        exports['np-base']:GetModule('RemoveCash')(src, pAmount)
+        exports['np-base']:GetModule('AddBank')(src, pAmount)
     end
-    exports['np-fw']:sendToDiscord(pSteam, ""..sender.." Deposited $"..pAmount .. " [Personal Account]", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX/XXXXXXXXXXXXXX-usk7Iun_35DxwL")
+    exports['np-base']:sendToDiscord(pSteam, ""..sender.." Deposited $"..pAmount .. " [Personal Account]", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX/XXXXXXXXXXXXXX-usk7Iun_35DxwL")
     TriggerEvent("np-banking:updaterecent", src, ply, pAmount, pComment, pDate, type, sender, target, iden) --adds to recent sql
     TriggerClientEvent("np-banking:refresh", src)
 
@@ -97,8 +97,8 @@ end)
 
 remoteCalls.register("np-banking:bank:transfer", function(pAmount, pComment, pId, pDate)
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
-    local user2 = exports['np-fw']:GetModule('GetPlayer')(tonumber(pId))
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
+    local user2 = exports['np-base']:GetModule('GetPlayer')(tonumber(pId))
 
     local sendertype = "neg"
     local receivertype = "pos"
@@ -131,9 +131,9 @@ remoteCalls.register("np-banking:bank:transfer", function(pAmount, pComment, pId
     if pAmount <= 0 then
         TriggerClientEvent('DoShortHudText', src, 'Invaild Amount', 2)
     else
-        if tonumber(pAmount) <= exports['np-fw']:GetModule('GetBalance')(src) then
-            exports['np-fw']:GetModule('RemoveBank')(src, pAmount)
-            exports['np-fw']:GetModule('AddBank')(tonumber(pId), pAmount)
+        if tonumber(pAmount) <= exports['np-base']:GetModule('GetBalance')(src) then
+            exports['np-base']:GetModule('RemoveBank')(src, pAmount)
+            exports['np-base']:GetModule('AddBank')(tonumber(pId), pAmount)
             TriggerEvent("np-banking:updaterecent", src, ply, pAmount, pComment, pDate, sendertype, sender, target, iden)
             TriggerEvent("np-banking:updaterecent", pId, other, pAmount, pComment, pDate, receivertype, sender, target, iden)
         else
@@ -141,7 +141,7 @@ remoteCalls.register("np-banking:bank:transfer", function(pAmount, pComment, pId
         end
     end
     
-    exports['np-fw']:sendToDiscord(pSteam, ""..sender.." Transferred $"..pAmount .. " to " .. target .. " [Personal Account]", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX/XXXXXXXXXXXXXX")
+    exports['np-base']:sendToDiscord(pSteam, ""..sender.." Transferred $"..pAmount .. " to " .. target .. " [Personal Account]", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX/XXXXXXXXXXXXXX")
 
     return true
 end)
@@ -150,7 +150,7 @@ end)
 
 remoteCalls.register("np-banking:business:withdraw", function(pAmount, pComment, pDate, pBizName)
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
     local ply = user["PlayerData"]["id"]
     local type = "neg"
     local iden = "WITHDRAW"
@@ -162,7 +162,7 @@ remoteCalls.register("np-banking:business:withdraw", function(pAmount, pComment,
         ["group_type"] = pBizName
     })
 
-    exports['np-fw']:GetModule('AddCash')(src, pAmount)
+    exports['np-base']:GetModule('AddCash')(src, pAmount)
 
     TriggerEvent("np-banking:updaterecentBiz", src, pBizName, pAmount, pComment, pDate, type, sender, target, iden)
     TriggerClientEvent("np-banking:refreshBiz", src, pBizName)
@@ -172,7 +172,7 @@ end)
 
 remoteCalls.register("np-banking:business:deposit", function(pAmount, pComment, pDate, pBizName) --recode
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
     local ply = user["PlayerData"]["id"]
     local type = "pos"
     local iden = "DEPOSIT"
@@ -182,8 +182,8 @@ remoteCalls.register("np-banking:business:deposit", function(pAmount, pComment, 
     if pAmount <= 0 then
         TriggerClientEvent('DoShortHudText', src, 'Invaild Amount', 2)
     else
-        if tonumber(pAmount) <= exports['np-fw']:GetModule('GetBalance')(src) then
-            exports['np-fw']:GetModule('RemoveCash')(src, pAmount)
+        if tonumber(pAmount) <= exports['np-base']:GetModule('GetBalance')(src) then
+            exports['np-base']:GetModule('RemoveCash')(src, pAmount)
 
             SQL("UPDATE group_banking SET bank = bank + @amount WHERE group_type = @group_type", {
                 ["amount"] = pAmount,
@@ -263,7 +263,7 @@ end)
 
 remoteCalls.register("np-banking:bank:recent", function()
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
 
     local result = SQL("SELECT id, sender, target, label, amount, iden, type, date FROM character_bank_statments WHERE cid = @identifier", {
         ["identifier"] = user["PlayerData"]["id"]
@@ -280,14 +280,14 @@ end)
 
 RegisterCommand('cash', function(source, args)
     local src = source
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
     TriggerClientEvent('banking:updateCash', source, user["PlayerData"]["cash"], true)
 end)
 
 RegisterServerEvent('cash:remove')
 AddEventHandler('cash:remove', function(src, amount)
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
-    exports['np-fw']:GetModule('RemoveCash')(src, tonumber(amount))
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
+    exports['np-base']:GetModule('RemoveCash')(src, tonumber(amount))
 end)
 
 RegisterCommand('givecash', function(source, args)
@@ -300,9 +300,9 @@ RegisterServerEvent('bank:givemecash')
 AddEventHandler('bank:givemecash', function(sender, reciever, amount)
     local src = source
 
-    local user = exports['np-fw']:GetModule('GetPlayer')(src)
+    local user = exports['np-base']:GetModule('GetPlayer')(src)
 
-    local user2 = exports['np-fw']:GetModule('GetPlayer')(tonumber(reciever))
+    local user2 = exports['np-base']:GetModule('GetPlayer')(tonumber(reciever))
 
     local pSteam = GetPlayerName(src)
 
@@ -314,12 +314,12 @@ AddEventHandler('bank:givemecash', function(sender, reciever, amount)
     if tonumber(amount) <= 0 then
         TriggerClientEvent('DoShortHudText', sender, 'Invaild Amount', 2)
     else
-        if tonumber(amount) <= exports['np-fw']:GetModule('GetCash')(src) then
-            exports['np-fw']:GetModule('RemoveCash')(src, amount)
-            exports['np-fw']:GetModule('AddCash')(tonumber(reciever), amount)
+        if tonumber(amount) <= exports['np-base']:GetModule('GetCash')(src) then
+            exports['np-base']:GetModule('RemoveCash')(src, amount)
+            exports['np-base']:GetModule('AddCash')(tonumber(reciever), amount)
             TriggerClientEvent("DoLongHudText", user["PlayerData"]["source"], "You have handed $" ..amount.. " to ID: " ..reciever)
             TriggerClientEvent("DoLongHudText", user2["PlayerData"]["source"], "You have been handed $"..amount.." from ID: " ..sender)
-            exports['np-fw']:sendToDiscord(pSteam, ""..senderfirstname.." "..senderlastname.." Gave $ "..amount .. " to "..receiverfirstname.." "..receiverlastname.."", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX/XXXXXXXXXXXXXX-XXXXXXXXXXXXXX-ot2cWOHf-mvLnNVZ")
+            exports['np-base']:sendToDiscord(pSteam, ""..senderfirstname.." "..senderlastname.." Gave $ "..amount .. " to "..receiverfirstname.." "..receiverlastname.."", color, "https://discord.com/api/webhooks/XXXXXXXXXXXXXX/XXXXXXXXXXXXXX-XXXXXXXXXXXXXX-ot2cWOHf-mvLnNVZ")
         else
             TriggerClientEvent('DoShortHudText', sender, 'Not enough money', 2)
         end 

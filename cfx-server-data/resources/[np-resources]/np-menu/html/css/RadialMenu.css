@@ -27,9 +27,11 @@ svg.menu.outer {
     visibility: hidden;
 }
 
-svg.menu > g > path {
-    fill-opacity: 0.4;
+svg.menu>g>path {
+    fill-opacity: 0.8;
     fill: #00000080;
+    fill-rule: "evenodd";
+    stroke: #4bbaff
 }
 
 svg.menu > g.sector > path {
@@ -44,12 +46,12 @@ svg.menu > g.sector > use {
 }
 
 svg.menu > g.sector.selected > path {
-    fill: #2D98DA;
+    fill: #4bbaff;
     fill-opacity: 0.6;
 }
 
 svg.menu > g.center:hover > circle {
-    fill:#2D98DA;
+    fill:#4bbaff;
     fill-opacity: 0.6;
 }
 

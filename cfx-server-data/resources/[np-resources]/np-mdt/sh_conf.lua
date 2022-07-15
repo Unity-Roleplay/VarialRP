@@ -38,7 +38,7 @@ Ranks[2] = { -- SASP
     [9] = "Assistant Chief",
     [10] = "Chief of State"
 }
-Ranks[3] = { --SASRP
+Ranks[3] = { --SASPR
     ["Name"] = "San Andreas State Park Rangers",
     [1] = "Cadet",
     [2] = "Solo Cadet",

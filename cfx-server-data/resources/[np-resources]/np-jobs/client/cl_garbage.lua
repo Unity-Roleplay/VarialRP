@@ -260,7 +260,7 @@ function findtrashbins(coordVec,xtruck,pickup)
     else
         submit()
         doingGarbage = false
-        TriggerEvent("DoLongHudText", "Job done! Return to Sanitation")
+        TriggerEvent("DoLongHudText", "Job done! Please Return to Sanitation")
         submitBlip = AddBlipForCoord(submitCoords)
         SetBlipColour(submitBlip, 25)
     end

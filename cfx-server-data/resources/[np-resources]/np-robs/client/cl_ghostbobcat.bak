@@ -140,7 +140,7 @@ RegisterNetEvent('ghost:ThermiteFirstDoor') -- Very first door
 AddEventHandler('ghost:ThermiteFirstDoor', function()
     local pCoords = GetEntityCoords(PlayerPedId())
     local vDoor = GetClosestObjectOfType(pCoords["x"], pCoords["y"], pCoords["z"], 3.0, -1259801187, 0, 0, 0)
-    local thermite = exports["drp-inventory"]:hasEnoughOfItem("thermite",1,false)
+    local thermite = exports["np-inventory"]:hasEnoughOfItem("thermite",1,false)
     if thermite then
     if vDoor ~= 0 then
 	if exports["isPed"]:isPed("countpolice") >= 0 then
@@ -168,7 +168,7 @@ RegisterNetEvent('ghost:secondoor') -- Second door thermite
 AddEventHandler('ghost:secondoor', function()
     local pCoords = GetEntityCoords(PlayerPedId())
     local vDoor = GetClosestObjectOfType(pCoords["x"], pCoords["y"], pCoords["z"], 3.0, -551608542, 0, 0, 0)
-    local thermite = exports["drp-inventory"]:hasEnoughOfItem("thermite",1,false)
+    local thermite = exports["np-inventory"]:hasEnoughOfItem("thermite",1,false)
     if thermite then
     if vDoor ~=        0 then
     exports["memorygame"]:thermiteminigame(1, 4, 2, 6,
@@ -191,20 +191,20 @@ RegisterNetEvent('ghost:keypad') -- third set of doors
 AddEventHandler('ghost:keypad', function()
     local pCoords = GetEntityCoords(PlayerPedId())
     local ped = PlayerPedId()
-            if exports['drp-inventory']:hasEnoughOfItem('securitycard', 1) then
+            if exports['np-inventory']:hasEnoughOfItem('securitycard', 1) then
                 --AlertBobCat()
                 TriggerEvent("inventory:removeItem","securitycard", 1)
                 FreezeEntityPosition(ped, true)
                 RequestAnimDict("anim@amb@business@meth@meth_monitoring_cooking@monitoring@")
                 while not HasAnimDictLoaded("anim@amb@business@meth@meth_monitoring_cooking@monitoring@") do Citizen.Wait(0) end
                 TaskPlayAnim(ped, "anim@amb@business@meth@meth_monitoring_cooking@monitoring@", "look_around_v5_monitor", 8.0, 8.0, 1.0, 48, -1, 0, 0, 0)
-                local finished = exports["drp-taskbar"]:taskBar(10000,"Pressing Buttons...",false,true)
+                local finished = exports["np-taskbar"]:taskBar(10000,"Pressing Buttons...",false,true)
                 if finished == 100 then
                 FreezeEntityPosition(ped, false)
                 TriggerEvent("DoLongHudText", "Access Granted")
 				TriggerEvent("ghost:pedicreatele")
-                TriggerServerEvent('drp-doors:change-lock-state', 271, false) 
-                TriggerServerEvent('drp-doors:change-lock-state', 272, false)
+                TriggerServerEvent('np-doors:change-lock-state', 271, false) 
+                TriggerServerEvent('np-doors:change-lock-state', 272, false)
                 end
             else
                 TriggerEvent('DoLongHudText', 'Access Denied !',2)
@@ -220,19 +220,19 @@ AddEventHandler('ghost:keypad', function()
 RegisterNetEvent('ghost:unlockSecondDoor')
 AddEventHandler('ghost:unlockSecondDoor', function()
 	Number2DoorAnimation()
-	TriggerServerEvent('drp-doors:change-lock-state', 270, false)
+	TriggerServerEvent('np-doors:change-lock-state', 270, false)
 end)
 
 
 RegisterNetEvent('ghost:changeLocksFirstDoor') 
 AddEventHandler('ghost:changeLocksFirstDoor', function()
-    TriggerServerEvent('drp-doors:change-lock-state', 269, false) --  Door on left  fuck locks 
-    TriggerServerEvent('drp-doors:change-lock-state', 268, false) --  Door on right
+    TriggerServerEvent('np-doors:change-lock-state', 269, false) --  Door on left  fuck locks 
+    TriggerServerEvent('np-doors:change-lock-state', 268, false) --  Door on right
 end)
 
 RegisterNetEvent('ghost:changeseconddoorlocks') -- Second Door 
 AddEventHandler('ghost:changeseconddoorlocks', function()
-	TriggerServerEvent('drp-doors:change-lock-state', 272, false)
+	TriggerServerEvent('np-doors:change-lock-state', 272, false)
 end)
 
 
@@ -264,7 +264,7 @@ end)
           }
         })
       
-        TriggerEvent('drp-dispatch:dispatchBobcat')
+        TriggerEvent('np-dispatch:dispatchBobcat')
 --        Wait(math.random(5000,15000))
 
       end
@@ -336,7 +336,7 @@ RegisterNetEvent('ghost:searchCrate') -- Searching crate
 AddEventHandler('ghost:searchCrate', function()
     if searchedSecond == true then
     TriggerServerEvent( 'mission:completed', math.random(900, 6783))
-    TriggerServerEvent('drp-bobcat:reward')
+    TriggerServerEvent('np-bobcat:reward')
     searchedSecond = false
     if math.random(4) == 3 then
 		TriggerEvent("player:receiveItem", "1593441988",math.random(1,1)) 
@@ -353,7 +353,7 @@ RegisterNetEvent('ghost:searchCrate2') -- Searching crate
 AddEventHandler('ghost:searchCrate2', function()
     if searched == true then
         searched = false
-        TriggerServerEvent('drp-bobcat:reward')
+        TriggerServerEvent('np-bobcat:reward')
         if math.random(4) == 3 then
             TriggerEvent("player:receiveItem", "handcuffs",math.random(2,4)) 
             TriggerEvent("player:receiveItem", "oxy",math.random(10,20)) -- tec 9
@@ -695,11 +695,11 @@ end
 RegisterNetEvent('bobcat:fullrestart')
 AddEventHandler('bobcat:fullrestart', function()
   TriggerEvent("ghost:resetvault") -- Resets back to orginal state unbroken
-  TriggerServerEvent("drp-doors:change-lock-state", 268, true)
-  TriggerServerEvent("drp-doors:change-lock-state", 269, true)
-  TriggerServerEvent('drp-doors:change-lock-state', 270, true) 
-  TriggerServerEvent('drp-doors:change-lock-state', 271, true)
-  TriggerServerEvent("drp-doors:change-lock-state", 272, true)
+  TriggerServerEvent("np-doors:change-lock-state", 268, true)
+  TriggerServerEvent("np-doors:change-lock-state", 269, true)
+  TriggerServerEvent('np-doors:change-lock-state', 270, true) 
+  TriggerServerEvent('np-doors:change-lock-state', 271, true)
+  TriggerServerEvent("np-doors:change-lock-state", 272, true)
   searched = true
   searchedSecond = true
 end)
