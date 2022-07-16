@@ -10,7 +10,7 @@ AddEventHandler('np-alerts:gunshotInProgress', function(targetCoords)
 		SetBlipScale(gunshotBlip, 1.2)
 		SetBlipAsShortRange(gunshotBlip,  1)
 		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString('10-71 Shots Fired')
+		AddTextComponentString('10-71A Shots Fired')
 		EndTextCommandSetBlipName(gunshotBlip)
 		PlaySound(-1, "Lose_1st", "GTAO_FM_Events_Soundset", 0, 0, 1)
 		while alpha ~= 0 do

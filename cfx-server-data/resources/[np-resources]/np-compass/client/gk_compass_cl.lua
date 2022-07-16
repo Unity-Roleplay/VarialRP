@@ -237,7 +237,7 @@ AddEventHandler('hud:saveCurrentMeta', function()
 end)]]
 
 --local crouched = false
---exports["np-keymapping"]:registerKeyMapping("Crouch", "Player", "Toggle Crouch", "+Crouch", "-Crouch", "LCONTROL", true)
+--exports["drp-keymapping"]:registerKeyMapping("Crouch", "Player", "Toggle Crouch", "+Crouch", "-Crouch", "LCONTROL", true)
 --[[RegisterCommand("+Crouch", function()
     local ped = PlayerPedId()
 

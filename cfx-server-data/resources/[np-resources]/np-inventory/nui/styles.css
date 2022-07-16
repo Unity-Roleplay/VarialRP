@@ -144,7 +144,7 @@ body {
 }
 
 #move-amount:hover {
-    background-color: #0a0b0cad;
+    background-color: #444555;
 }
 
 h2 {
@@ -164,7 +164,7 @@ hr {
 
 
 div.tooltip {
-    background: rgba(14, 14, 15, 0.8);
+    background: rgba(34, 35, 51, 0.80);
     border-bottom-left-radius: 0;
 }
 
@@ -182,8 +182,8 @@ input[type='number']::-webkit-inner-spin-button {
 	align-items: center;
 	flex-direction: column-reverse;
 	justify-content: space-evenly;
-	border-bottom: 2px solid #00ffbe;
-	background: rgba(9, 9, 10, 0.8);
+	border-bottom: 2px solid #00f8b9;
+	background: rgba(34, 35, 51, 0.80);
 }
 
 .item3 > .itemimage {
@@ -232,7 +232,7 @@ input[type='number']::-webkit-inner-spin-button {
     border: 1px solid rgba(200, 200, 200, 0.9);
     position: absolute;
     z-index: -1;
-    background: #030303;
+    background: #222831;
 }
 
 .inventory {
@@ -275,9 +275,9 @@ input[type='number']::-webkit-inner-spin-button {
     position: absolute;
     left: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, #00ffbe, #0000009f 100%);
+    background: linear-gradient(to bottom, #00f8b9, #1b1844 100%);
     background-size: 1000% 1000%;
-    background-color: #00ffbe;
+    background-color: #00f8b9;
     background-position: 0% 0%;
     pointer-events: none;
     /* border-bottom-left-radius: 0.5vh; */
@@ -292,7 +292,7 @@ input[type='number']::-webkit-inner-spin-button {
     position: absolute;
     left: 0;
     bottom: 0;
-    background: #00ffbe;
+    background: #00f8b9;
     background-size: 100000% 100000%;
     pointer-events: none;
     /* border-bottom-left-radius: 4px;
@@ -360,7 +360,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .wrapmain::-webkit-scrollbar-track, .wrapsecondary::-webkit-scrollbar-track {
-    background: transparent;
+    background: #1114199f;
 }
 
 .wrapmain::-webkit-scrollbar-thumb, .wrapsecondary::-webkit-scrollbar-thumb {
@@ -385,7 +385,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .move-center:hover {
-    background-color: #0a0b0cad;
+    background-color: #191e25c0;
 }
 
 .move-center:hover .Use {
@@ -402,7 +402,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .bottom-button:hover {
-    background-color: #0a0b0cad;
+    background-color: #444555;
 }
 
 .invShopMoney::before {
@@ -452,7 +452,7 @@ img.smaller {
     width: 40%;
 }
 
-#move-amount {  /*use*/
+#move-amount {
   width: 100%;
   border: none;
   padding: 0.40rem 0;
@@ -460,7 +460,7 @@ img.smaller {
   font-size: 1.5vh;
   text-align: center;
   border-radius: 0px;
-  background-color: #000000ab;
+  background-color: #444555;
   text-transform: none;
   color: rgba(220, 220, 220, 1);
 }
@@ -475,7 +475,7 @@ img.smaller {
 }
 
 .bottom-button {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(34, 35, 51, 0.80);
     border-radius: 5px;
     color: #fff;
     display: inline-block;
@@ -491,7 +491,7 @@ img.smaller {
 }
 
 .help-menu {
-    background: rgba(0, 0, 0, 0.534);
+    background: rgba(34, 35, 51, 0.80);
     border-radius: 10px;
     color: rgba(220, 220, 220, 1);
     display: none;
@@ -516,7 +516,7 @@ input[type='checkbox'] {
 }
 
 .settings-menu {
-    background: rgba(0, 0, 0, 0.548);
+    background: rgba(34, 35, 51, 0.80);
     border-radius: 10px;
     color: rgba(220, 220, 220, 1);
     display: none;
@@ -580,7 +580,7 @@ button:active {
 }
 
 .CurrentInformation {
-    background: rgba(0, 0, 0, 0.658);
+    background: rgba(34, 35, 51, 0.80);
     color: #ffffff;
     font-size: 1.35vh;
     font-weight: 0;
@@ -619,7 +619,7 @@ h2 {
 }
 
 .weightbar {
-    background-color: #0000009f;
+    background-color: #1114199f;
     position: absolute;
     width: 36%;
     margin-top: 2%;
@@ -629,7 +629,7 @@ h2 {
 }
 
 .weightfill {
-    background: #00ffbe;
+    background: #00f8b9;
     display: inline-block;
     height: 100%;
     line-height: 2.2vh;
@@ -646,7 +646,7 @@ h2 {
 }
 
 .craftSearch {
-    background-color: #000000ab;
+    background-color: #191e259d;
     border: none;
     border-radius: 1vh;
     color: #fff;
@@ -781,13 +781,13 @@ h2 {
     margin-right: 0.5rem;
 }
 
-.inventory-box {   /*MAINBACKGROUND*/
+.inventory-box {
 	width: 40%;
     max-height: 65vh;
 	display: flex;
 	padding: 2.1vh;
 	flex-direction: column;
-    background: rgba(31, 30, 30, 0.87);
+    background: rgba(34, 35, 51, 0.80);
 }
 
 .inventory-actions-wrapper {
@@ -797,7 +797,7 @@ h2 {
     min-height: 65vh;
 }
 
-.inventory-actions {  /*MIDDLEBACKGROUND*/
+.inventory-actions {
     display: flex;
     width: 100%;
     /* height: 59%; */
@@ -805,7 +805,7 @@ h2 {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background: rgba(31, 30, 30, 0.87);
+    background: rgba(34, 35, 51, 0.80);
     z-index: 5;
   }
 
@@ -843,7 +843,7 @@ h2 {
     height: 3.65em;
     border-radius: 0;
     text-transform: none;
-    background-color: #000000c0;
+    background-color: #444555;
     color: rgba(220, 220, 220, 1);
 }
 

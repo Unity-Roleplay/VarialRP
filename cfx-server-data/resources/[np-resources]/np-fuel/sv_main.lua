@@ -46,5 +46,5 @@ end)
 
 RegisterNetEvent('np-fuel:Refund', function(gprice)
 	local pSrc = source
-	exports['np-base']:GetModule('AddBank')(pSrc, tonumber(gprice))
+	exports['np-fw']:GetModule('AddBank')(pSrc, tonumber(gprice))
 end)

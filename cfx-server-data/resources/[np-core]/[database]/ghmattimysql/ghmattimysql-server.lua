@@ -37,3 +37,14 @@ exports('transactionSync', function (query, parameters)
   repeat Citizen.Wait(0) until finishedTransaction == true
   return res
 end)
+
+exports('storeSync', function (query)
+  local res = {}
+  local finishedStore = false
+  exports.ghmattimysql:store(query, function (result)
+    res = result
+    finishedStore = true
+  end, GetInvokingResource())
+  repeat Citizen.Wait(0) until finishedStore == true
+  return res
+end)

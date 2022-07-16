@@ -146,7 +146,7 @@ RegisterNetEvent("np-garages:carmenu:list:vehicles", function(params)
             {
                 id = 4,
                 header = "Dodge Charger",
-                txt = "Price: $50,000",
+                txt = "Price: $84,000",
                 url = "https://i.imgur.com/ow1tKPl.png",
             	params = {
                     event = "np-garages:carmenu:attempt:buy",

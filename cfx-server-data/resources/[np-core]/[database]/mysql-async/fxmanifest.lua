@@ -12,7 +12,7 @@ games { 'gta5' }
 
 server_script 'mysql-async.js'
 client_script 'mysql-async-client.js'
-client_script "@np-errorlog/client/cl_errorlog.lua"
+client_script "@vrp-errorlog/client/cl_errorlog.lua"
 
 files {
   'ui/index.html',

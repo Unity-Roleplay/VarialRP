@@ -6,13 +6,13 @@ local donep3 = false
 
 -- To Do: Package meth and selling meth
 
-RegisterNetEvent('np-meth:startMeth')
-AddEventHandler('np-meth:startMeth', function()
+RegisterNetEvent('drp-meth:startMeth')
+AddEventHandler('drp-meth:startMeth', function()
     local ped = PlayerPedId()
-    if exports["np-inventory"]:hasEnoughOfItem("methstick",1,false) then 
+    if exports["drp-inventory"]:hasEnoughOfItem("methstick",1,false) then 
         TriggerEvent("animation:PlayAnimation","type")
         FreezeEntityPosition(ped, true)
-        local finished = exports["np-taskbar"]:taskBar(15000,"Starting meth production")
+        local finished = exports["drp-taskbar"]:taskBar(15000,"Starting meth production")
         if finished == 100 then
             FreezeEntityPosition(ped, false)
             allowedtostart = true
@@ -26,14 +26,14 @@ AddEventHandler('np-meth:startMeth', function()
     end
 end)
 
-RegisterNetEvent('np-meth:startp1')
-AddEventHandler('np-meth:startp1', function()
+RegisterNetEvent('drp-meth:startp1')
+AddEventHandler('drp-meth:startp1', function()
     local ped = PlayerPedId()
     if allowedtostart then
-        if exports["np-inventory"]:hasEnoughOfItem("chloroform",1,false) then
+        if exports["drp-inventory"]:hasEnoughOfItem("chloroform",1,false) then
             TriggerEvent("animation:PlayAnimation","push")
             FreezeEntityPosition(ped, true)
-            local finished = exports["np-taskbar"]:taskBar(30000,"Placing chloroform into furnace")
+            local finished = exports["drp-taskbar"]:taskBar(30000,"Placing chloroform into furnace")
             if finished == 100 then
                 FreezeEntityPosition(ped, false)
                 TriggerEvent("inventory:removeItem", "chloroform", 1)
@@ -53,13 +53,13 @@ AddEventHandler('np-meth:startp1', function()
     end
 end)
 
-RegisterNetEvent('np-meth:PrepareOven')
-AddEventHandler('np-meth:PrepareOven', function()
+RegisterNetEvent('drp-meth:PrepareOven')
+AddEventHandler('drp-meth:PrepareOven', function()
     local ped = PlayerPedId()
     if donep1 then 
         TriggerEvent("animation:PlayAnimation","browse")
         FreezeEntityPosition(ped, true)
-        local finished = exports["np-taskbar"]:taskBar(30000,"Preparing oven")
+        local finished = exports["drp-taskbar"]:taskBar(30000,"Preparing oven")
         if finished == 100 then
             FreezeEntityPosition(ped, false)
             TriggerEvent('DoLongHudText', 'The oven is now prepared, you can start cooking your shit')
@@ -81,12 +81,12 @@ AddEventHandler("dreams-meth:begin-cook", function()
 	local plyCoords = GetEntityCoords(PlayerPedId())
 	local distance = (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, 1005.694152832, -3201.3181152344, -38.84700012207, false))		
 	if donep2 then
-        if exports["np-inventory"]:hasEnoughOfItem("methbrick",1) then
+        if exports["drp-inventory"]:hasEnoughOfItem("methbrick",1) then
             Cooking()
             TriggerEvent("animation:meth")
             FreezeEntityPosition(PlayerPedId(),true)
             SetEntityHeading(PlayerPedId(), 179.97245788574)
-            local finished = exports["np-taskbar"]:taskBar(115000,"Mixing Chemicals")
+            local finished = exports["drp-taskbar"]:taskBar(115000,"Mixing Chemicals")
             if (finished == 100) then
                 donep2 = false
                 FreezeEntityPosition(PlayerPedId(),false)
@@ -115,12 +115,12 @@ AddEventHandler("pack:crystal", function()
 	local playerped = PlayerPedId()
 	local plyCoords = GetEntityCoords(PlayerPedId())
 	local distance = (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, 1006.0034179688, -3194.9982910156, -38.993167877197, false))	
-	if exports["np-inventory"]:hasEnoughOfItem("methraw",5,false) and exports["np-inventory"]:hasEnoughOfItem("drugbaggy",1,false) and ongoing == false then
+	if exports["drp-inventory"]:hasEnoughOfItem("methraw",5,false) and exports["drp-inventory"]:hasEnoughOfItem("drugbaggy",1,false) and ongoing == false then
 		FreezeEntityPosition(PlayerPedId(),true)
 		SetEntityHeading(PlayerPedId(), 357.65960693359)
 		Drying()
         TriggerEvent("animation:push")
-		local finished = exports["np-taskbar"]:taskBar(32000,"Drying crystals be careful!")
+		local finished = exports["drp-taskbar"]:taskBar(32000,"Drying crystals be careful!")
 		if (finished == 100) then
 			FreezeEntityPosition(PlayerPedId(),false)
 			TriggerEvent("inventory:removeItem","methraw", 5)
