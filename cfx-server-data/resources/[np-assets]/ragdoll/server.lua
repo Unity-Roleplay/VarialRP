@@ -1,7 +1,7 @@
 RegisterServerEvent('police:isDead')
 AddEventHandler('police:isDead', function()
     -- local src = source
-	-- local user = exports["durp-base"]:getModule("Player"):GetUser(src)
+	-- local user = exports["dnp-base"]:getModule("Player"):GetUser(src)
     -- local characterId = user:getVar("character").id
     -- local q = [[SELECT is_dead FROM characters WHERE id = @cid;]]
     -- local v = {
@@ -20,7 +20,7 @@ end)
 RegisterServerEvent('kill:confirmed')
 AddEventHandler('kill:confirmed', function(targetplayer, data)
     -- local src = source
-	-- local user = exports["durp-base"]:getModule("Player"):GetUser(src)
+	-- local user = exports["dnp-base"]:getModule("Player"):GetUser(src)
     -- local characterId = user:getVar("character").id
     -- local q = [[UPDATE characters SET is_dead = @isDead WHERE id = @cid;]]
     -- local v = {

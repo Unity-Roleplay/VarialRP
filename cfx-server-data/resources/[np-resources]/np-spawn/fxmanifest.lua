@@ -7,7 +7,7 @@
 fx_version 'cerulean'
 games {'gta5'}
 
--- dependency "durp-base"
+-- dependency "dnp-base"
 -- dependency "raid_clothes"
 
 ui_page "html/index.html"
