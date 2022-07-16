@@ -69,7 +69,7 @@ RegisterNetEvent("np-storageunits:attempt:access", function(args)
 
         TriggerEvent('np-context:sendMenu', menu_data)
     else
-        TriggerEvent("DoLongHudText", "You dont have permission to use this!", 2)
+        TriggerEvent("DoLongHudText", "You don't have permission to use this!", 2)
     end
 end)
 

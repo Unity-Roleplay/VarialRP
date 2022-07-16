@@ -3669,7 +3669,7 @@ RegisterNUICallback('PostNewImage', function(data, cb)
     elseif IsControlJustPressed(1, 173) then 
       CellFrontCamActivate(false)
     elseif IsControlJustPressed(1, 176) then
-      exports['screenshot-basic']:requestScreenshotUpload('https://discordapp.com/api/webhooks/951960397236273192/8Hmql5UEs1oBcCfFEcbR634uEdWxcUtK3b1A63ukUsaina7-a4P0bKxHA3NoVcBFiG-M', 'files[]', function(data2)
+      exports['screenshot-basic']:requestScreenshotUpload('https://discord.com/api/webhooks/997869961731125319/V4m3Conu5Wyl4D4dU96xo05CSRw01Ctmrf4NPPehphWt_P5ZSQ3kb_c4Txow6J7KLfbR', 'files[]', function(data2)
         local resp = json.decode(data2)
         test = resp.attachments[1].proxy_url
         cb(resp.attachments[1].proxy_url)

@@ -1,4 +1,4 @@
-local DISCORD_WEBHOOK5 = ""
+local DISCORD_WEBHOOK5 = "https://discord.com/api/webhooks/997869410071097444/-TfGK0qJPc6BEUfUtPqCin1jhVkaNhUHcBzSBi_mYKUFbRC9x0C5CfWqSC4ybnqemjpq"
 local DISCORD_NAME5 = "Meth Selling Logs"
 
 local STEAM_KEY = "0C007CC382AB06D1D99D9B45EC3924B1"

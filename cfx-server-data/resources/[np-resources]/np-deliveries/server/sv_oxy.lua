@@ -1,4 +1,4 @@
-local DISCORD_WEBHOOK5 = ""
+local DISCORD_WEBHOOK5 = "https://discord.com/api/webhooks/997869108051849277/BW_DLrfE2D8ubD-kQ2Ljr2ld0aCartw3ewxucXVZQ2lj5AShisWdMaUdzNLLn-O6j0GO"
 local DISCORD_NAME5 = "Oxy Run Logs"
 
 local STEAM_KEY = "0C007CC382AB06D1D99D9B45EC3924B1"

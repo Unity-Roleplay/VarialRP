@@ -1,4 +1,4 @@
-local DISCORD_WEBHOOK6 = ""
+local DISCORD_WEBHOOK6 = "https://discord.com/api/webhooks/997869845066559488/rztO5nnltSYj_E7vcyxHpi57a8HStX-zRpoiqv6MJuBukmLrwnZbeGFv6qis1WMmkgJF"
 local DISCORD_NAME6 = "Garbage Triggers"
 
 local STEAM_KEY = "0C007CC382AB06D1D99D9B45EC3924B1"

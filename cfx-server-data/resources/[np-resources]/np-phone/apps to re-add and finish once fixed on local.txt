@@ -1,0 +1,51 @@
+BANK BUSTERS:
+
+<div class="col s3">
+                        <div class="jss35 jss38 phone-button callcs phone-button" style="background: rgb(211, 224, 20); color: rgb(255, 255, 255);" data-action="btnBankBusters"
+                        aria-label="Bank Busters"
+                        ><i class="fas fa-piggy-bank" style="font-size:28px; color: rgb(0, 0, 0);"></i></div>
+                      </div>
+
+                      <div class="col s3">
+                        <div class="jss35 jss38 phone-button" data-action="" aria-label="Department Of Justice" style="background: url('https://cdn.discordapp.com/attachments/881955889861509120/982524969936367616/unknown.png') 0% 0% / cover no-repeat;"></div>
+                      </div>
+
+                      <div class="col s3">
+                        <div class="jss35 jss38 phone-button callcs phone-button" style="background: rgb(20, 210, 224); color: rgb(255, 255, 255);" data-action-button=""
+                        data-action=""
+                        aria-label="Camera"
+                        ><i class="fas fa-camera" style="font-size:28px; color: #fff;"></i></div>
+                      </div>
+                      
+                      <div class="col s3">
+                        <div class="jss35 jss38 phone-button" id="settings" data-action="screen-saver" aria-label="Settings" style="background: url('images/settings.png') 0% 0% / cover no-repeat;"></div>
+                      </div>
+                      <div class="col s3 hidden-buttons btn-darkmarket">
+                        <div class="jss35 jss38 teal darken-2 phone-button" style="font-size:34px;" aria-label="Dark Market" data-action='buying-darkMarket' data-balloon-pos="up-right">
+                          <i class="fas fa-user-secret"></i></div>
+                    </div>
+                  
+                    <div class="col s3 hidden-buttons btn-decrypt">
+                        <div class="jss35 jss38 blue darken-4 phone-button" data-action="btnDecrypt" aria-label="Decryption" data-balloon-pos="up-left">
+                          <i class="fas fa-unlock-alt"></i></div>
+                      </div>
+                    </div>
+                     
+                    <div class="row app-row">
+        
+                    </div>
+                    <div class="row app-row">
+        
+                    </div>
+                    <div class="row app-row">
+        
+                    </div>
+                    <div class="row app-row">
+        
+                    </div>
+                    <div class="row app-row">
+         
+                    </div>
+        
+                  </div>
+

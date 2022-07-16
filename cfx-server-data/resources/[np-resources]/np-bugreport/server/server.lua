@@ -1,4 +1,4 @@
-local DISCORD_WEBHOOK = ""
+local DISCORD_WEBHOOK = "https://discord.com/api/webhooks/997868891407667200/tMpSbTmzVn4hYVDs8LDF2Hd9STr8Np4V1T1aTK_2AfQ0MUQ9xYAzJt3k8Bp07Xz6axEl"
 
 RegisterServerEvent('send')
 AddEventHandler('send', function(data)
