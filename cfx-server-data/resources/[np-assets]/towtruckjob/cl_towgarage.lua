@@ -400,7 +400,7 @@ end)
 
 --// CraftShit
 
-DreamsCraftDocs1 = false
+aspectCraftDocs1 = false
 
 Citizen.CreateThread(function()
     exports["np-polyzone"]:AddBoxZone("harmony_autos_docs_refine", vector3(1176.13, 2635.48, 37.75), 1.4, 3.6, {
@@ -415,7 +415,7 @@ end)
 RegisterNetEvent('np-polyzone:enter')
 AddEventHandler('np-polyzone:enter', function(name)
     if name == "harmony_autos_docs_refine" then
-        DreamsCraftDocs1 = true     
+        aspectCraftDocs1 = true     
         TunerShopCraft1()
             local rank = exports["isPed"]:GroupRank("harmony_autos")
             if rank > 1 then 
@@ -427,14 +427,14 @@ end)
 RegisterNetEvent('np-polyzone:exit')
 AddEventHandler('np-polyzone:exit', function(name)
     if name == "harmony_autos_docs_refine" then
-        DreamsCraftDocs1 = false
+        aspectCraftDocs1 = false
         exports['np-ui']:hideInteraction()
     end
 end)
 
 function TunerShopCraft1()
 	Citizen.CreateThread(function()
-        while DreamsCraftDocs1 do
+        while aspectCraftDocs1 do
             Citizen.Wait(5)
 			if IsControlJustReleased(0, 38) then
                     local rank = exports["isPed"]:GroupRank("harmony_autos")
@@ -542,7 +542,7 @@ end)
 
 --// CraftShit
 
-DreamsCraftDocs = false
+aspectCraftDocs = false
 
 Citizen.CreateThread(function()
     exports["np-polyzone"]:AddBoxZone("harmony_autos_docs_craft", vector3(1183.13, 2635.46, 37.75), 2.2, 3.0, {
@@ -557,7 +557,7 @@ end)
 RegisterNetEvent('np-polyzone:enter')
 AddEventHandler('np-polyzone:enter', function(name)
     if name == "harmony_autos_docs_craft" then
-        DreamsCraftDocs = true     
+        aspectCraftDocs = true     
         TunerShopCraft()
             local rank = exports["isPed"]:GroupRank("harmony_autos")
             if rank > 1 then 
@@ -569,14 +569,14 @@ end)
 RegisterNetEvent('np-polyzone:exit')
 AddEventHandler('np-polyzone:exit', function(name)
     if name == "harmony_autos_docs_craft" then
-        DreamsCraftDocs = false
+        aspectCraftDocs = false
         exports['np-ui']:hideInteraction()
     end
 end)
 
 function TunerShopCraft()
 	Citizen.CreateThread(function()
-        while DreamsCraftDocs do
+        while aspectCraftDocs do
             Citizen.Wait(5)
 			if IsControlJustReleased(0, 38) then
                     local rank = exports["isPed"]:GroupRank("harmony_autos")
@@ -684,7 +684,7 @@ end)
 
 --// CraftShit
 
-DreamsCraftDocs2 = false
+aspectCraftDocs2 = false
 
 Citizen.CreateThread(function()
     exports["np-polyzone"]:AddBoxZone("redline_autos_craft", vector3(950.76, -979.06, 39.5), 3.6, 1.8, {
@@ -699,7 +699,7 @@ end)
 RegisterNetEvent('np-polyzone:enter')
 AddEventHandler('np-polyzone:enter', function(name)
     if name == "redline_autos_craft" then
-        DreamsCraftDocs2 = true     
+        aspectCraftDocs2 = true     
         TunerShopCraft2()
             local rank = exports["isPed"]:GroupRank("tuner_carshop")
             if rank > 1 then 
@@ -711,14 +711,14 @@ end)
 RegisterNetEvent('np-polyzone:exit')
 AddEventHandler('np-polyzone:exit', function(name)
     if name == "redline_autos_craft" then
-        DreamsCraftDocs2 = false
+        aspectCraftDocs2 = false
         exports['np-ui']:hideInteraction()
     end
 end)
 
 function TunerShopCraft2()
 	Citizen.CreateThread(function()
-        while DreamsCraftDocs2 do
+        while aspectCraftDocs2 do
             Citizen.Wait(5)
 			if IsControlJustReleased(0, 38) then
                     local rank = exports["isPed"]:GroupRank("tuner_carshop")

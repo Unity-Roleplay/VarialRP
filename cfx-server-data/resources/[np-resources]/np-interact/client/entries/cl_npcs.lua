@@ -863,7 +863,7 @@ Entries[#Entries + 1] = {
             id = "post_op",
             label = "Clock in",
             icon = "circle",
-            event = "dreams-civjobs:start-post-op",
+            event = "aspect-civjobs:start-post-op",
             parameters = {}
         }
     },

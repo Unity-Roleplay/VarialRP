@@ -15597,7 +15597,7 @@ itemList['miningstone'] = {
   weight: 1,
   nonStack: false,
   model: '',
-  image: 'dreams-stone.png',
+  image: 'aspect-stone.png',
   information: 'A stone!',
 };
 
@@ -15623,7 +15623,7 @@ itemList['miningdiamond'] = {
   weight: 1,
   nonStack: false,
   model: '',
-  image: 'dreams-diamond.png',
+  image: 'aspect-diamond.png',
   information: 'Diamonds!',
 };
 
@@ -15636,7 +15636,7 @@ itemList['miningsapphire'] = {
   weight: 1,
   nonStack: false,
   model: '',
-  image: 'dreams-uncutsapphire.png',
+  image: 'aspect-uncutsapphire.png',
   information: 'Sapphire!',
 };
 
@@ -15649,7 +15649,7 @@ itemList['miningruby'] = {
   weight: 1,
   nonStack: false,
   model: '',
-  image: 'dreams-uncutruby.png',
+  image: 'aspect-uncutruby.png',
   information: 'Ruby!',
 };
 

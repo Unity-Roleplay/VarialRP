@@ -13,8 +13,8 @@
 
 
 -- Dumping database structure for 1test
-CREATE DATABASE IF NOT EXISTS `dreams` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `dreams`;
+CREATE DATABASE IF NOT EXISTS `aspect` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `aspect`;
 
 -- Dumping structure for table 1test._weed
 CREATE TABLE IF NOT EXISTS `_weed` (

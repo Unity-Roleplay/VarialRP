@@ -2,7 +2,7 @@
 
 --// Tuner Shop Stash
 
-DreamsTunerShopDoc = false
+aspectTunerShopDoc = false
 
 Citizen.CreateThread(function()
     exports["np-polyzone"]:AddBoxZone("tuner_shop_docs_stash", vector3(128.46, -3014.08, 7.04), 2.5, 2.5, {
@@ -25,7 +25,7 @@ end)
 RegisterNetEvent('np-polyzone:enter')
 AddEventHandler('np-polyzone:enter', function(name)
     if name == "tuner_shop_docs_stash" then
-        DreamsTunerShopDoc = true     
+        aspectTunerShopDoc = true     
         TunerShopStash()
             local rank = exports["isPed"]:GroupRank("tuner")
             if rank > 1 then 
@@ -38,7 +38,7 @@ end)
 RegisterNetEvent('np-polyzone:exit')
 AddEventHandler('np-polyzone:exit', function(name)
     if name == "tuner_shop_docs_stash" then
-        DreamsTunerShopDoc = false
+        aspectTunerShopDoc = false
         exports['np-ui']:hideInteraction()
     end
 end)
@@ -47,7 +47,7 @@ end)
 
 function TunerShopStash()
 	Citizen.CreateThread(function()
-        while DreamsTunerShopDoc do
+        while aspectTunerShopDoc do
             Citizen.Wait(5)
 			if IsControlJustReleased(0, 38) then
                     local rank = exports["isPed"]:GroupRank("tuner")
@@ -154,7 +154,7 @@ end)
 
 --// CraftShit
 
-DreamsCraftDocs = false
+aspectCraftDocs = false
 
 Citizen.CreateThread(function()
     exports["np-polyzone"]:AddBoxZone("tuner_shop_docs_craft", vector3(144.39, -3050.88, 7.04), 4, 1.4, {
@@ -169,7 +169,7 @@ end)
 RegisterNetEvent('np-polyzone:enter')
 AddEventHandler('np-polyzone:enter', function(name)
     if name == "tuner_shop_docs_craft" then
-        DreamsCraftDocs = true     
+        aspectCraftDocs = true     
         TunerShopCraft()
             local rank = exports["isPed"]:GroupRank("tuner")
             if rank > 1 then 
@@ -181,14 +181,14 @@ end)
 RegisterNetEvent('np-polyzone:exit')
 AddEventHandler('np-polyzone:exit', function(name)
     if name == "tuner_shop_docs_craft" then
-        DreamsCraftDocs = false
+        aspectCraftDocs = false
         exports['np-ui']:hideInteraction()
     end
 end)
 
 function TunerShopCraft()
 	Citizen.CreateThread(function()
-        while DreamsCraftDocs do
+        while aspectCraftDocs do
             Citizen.Wait(5)
 			if IsControlJustReleased(0, 38) then
                     local rank = exports["isPed"]:GroupRank("tuner")

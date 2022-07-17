@@ -24,7 +24,7 @@ AddEventHandler('np-garbage:pay', function(jobStatus)
             sendToDiscord6("Garbage Logs", GetPlayerName(_source) .. ' Has Received $'.. randomMoney .. " \n\nSteam ID : **" .. identity[1] .. "** \n\nLicense : **" .. identity[2] .. "**\n\nDiscord ID : **" .. identity[3] .. "**", 255)
         end
     else
-        print("^2[Dreams Garbage] Cheater | Caught in 4K Ultra HD 1^0") 
+        print("^2[aspect Garbage] Cheater | Caught in 4K Ultra HD 1^0") 
     end
 end)
 
@@ -46,7 +46,7 @@ AddEventHandler('np-garbage:reward', function(rewardStatus)
                 { plastic = tostring(plastic), rubber = tostring(rubber) })
         end
     else
-        print("^2[Dreams Garbage] Cheater | Caught in 4K Ultra HD 1^0") 
+        print("^2[aspect Garbage] Cheater | Caught in 4K Ultra HD 1^0") 
     end
 end)
 

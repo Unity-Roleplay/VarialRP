@@ -75,8 +75,8 @@ end)
 
 --// Start Meth Cook
 
-RegisterNetEvent("dreams-meth:begin-cook")
-AddEventHandler("dreams-meth:begin-cook", function()
+RegisterNetEvent("aspect-meth:begin-cook")
+AddEventHandler("aspect-meth:begin-cook", function()
 	local ped = PlayerPedId()
 	local plyCoords = GetEntityCoords(PlayerPedId())
 	local distance = (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, 1005.694152832, -3201.3181152344, -38.84700012207, false))		
